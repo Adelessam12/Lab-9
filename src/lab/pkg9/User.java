@@ -16,7 +16,7 @@ public class User {
     private ArrayList<Post> posts; 
     private ArrayList<User> friends;
 
-    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline, Profile profile) {
+    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, Profile profile) {
 
 
     
@@ -25,7 +25,7 @@ public class User {
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
-        this.isOnline = isOnline;
+        this.isOnline = false;
 
         this.profile = profile;
         this.posts = new ArrayList<>();
