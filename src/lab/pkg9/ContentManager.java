@@ -1,48 +1,44 @@
 package lab.pkg9;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class ContentManager implements ContentCreatable {
     private ArrayList<Post> allPosts;
     private ArrayList<Story> allStories;
+    private ContentDatabase contentDatabase;
 
-    public ContentManager() {
+    public ContentManager(ContentDatabase contentDatabase) {
         this.allPosts = new ArrayList<>();
         this.allStories = new ArrayList<>();
+        this.contentDatabase = contentDatabase;
     }
 
     @Override
     public void createPost(String userId, String content, String imagePath) {
         String postId = generateUniqueId();
-        Post newPost = new Post(postId, userId, content, imagePath, new Date());
+        Post newPost = new Post(postId, userId, content, imagePath, new java.util.Date());
         allPosts.add(newPost);
-        System.out.println("Post created: " + newPost);
     }
 
     @Override
     public void createStory(String userId, String content, String imagePath) {
         String storyId = generateUniqueId();
-        Story newStory = new Story(storyId, userId, content, imagePath, new Date());
+        Story newStory = new Story(storyId, userId, content, imagePath, new java.util.Date());
         allStories.add(newStory);
-        System.out.println("Story created: " + newStory);
     }
 
-    public ArrayList<Post> getAllPosts() {
-        return allPosts;
+    public void saveContent() throws IOException {
+        contentDatabase.savePosts(allPosts);
+        contentDatabase.saveStories(allStories);
     }
 
-    public ArrayList<Story> getAllStories() {
-        return allStories;
+    public void loadContent() throws IOException {
+        allPosts = contentDatabase.loadPosts();
+        allStories = contentDatabase.loadStories();
     }
 
     private String generateUniqueId() {
         return "ID" + System.currentTimeMillis();
     }
-
-    public void removeExpiredStories() {
-        allStories.removeIf(Story::isExpired);
-    }
-
-
 }
