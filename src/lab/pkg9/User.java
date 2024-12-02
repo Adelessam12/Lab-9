@@ -1,4 +1,4 @@
-package lab.pkg9;
+package lab.pkg9.p1;
 
 import java.util.Date;
 
@@ -9,15 +9,15 @@ public class User {
     private String username;
     private String hashedPassword;
     private Date dateOfBirth;
-    private boolean isOnline;
+    private boolean isOnline=false;
 
-    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline) {
+    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
         this.userId = userId;
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
-        this.isOnline = isOnline;
+       
     }
 
     public String getUserId() {
