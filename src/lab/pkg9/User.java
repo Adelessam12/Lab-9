@@ -1,4 +1,4 @@
-package lab.pkg9.p1;
+package lab.pkg9;
 
 import java.util.Date;
 

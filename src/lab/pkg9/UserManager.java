@@ -1,4 +1,4 @@
-package lab.pkg9.p1;
+package lab.pkg9;
 
 import java.util.Date;
 
@@ -23,6 +23,7 @@ public class UserManager {
         return true;
     }
 
+  
     public User findUser(String userId) {
         for (User user : userDatabase.getUsers()) {
             if (user.getUserId().equals(userId)) {
