@@ -9,6 +9,6 @@ package lab.pkg9;
  * @author Dell
  */
 public interface ContentCreatable {
-    void createPost(String content, String imagePath);
-    void createStory(String content, String imagePath);
+    void createPost(String userId, String content, String imagePath);
+    void createStory(String userId, String content, String imagePath);
 }
