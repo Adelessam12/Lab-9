@@ -22,7 +22,6 @@ public class Post {
         this.timestamp = timestamp;
     }
 
-    // Getters and setters
     public String getPostId() {
         return postId;
     }
@@ -43,14 +42,5 @@ public class Post {
         return timestamp;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "postId='" + postId + '\'' +
-                ", authorId='" + authorId + '\'' +
-                ", content='" + content + '\'' +
-                ", imagePath='" + imagePath + '\'' +
-                ", timestamp=" + timestamp +
-                '}';
-    }
+
 }

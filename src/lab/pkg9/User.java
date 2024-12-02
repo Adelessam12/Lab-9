@@ -2,8 +2,6 @@ package lab.pkg9;
 
 import java.util.ArrayList;
 import java.util.Date;
-import lab.pkg9.Post;
-import lab.pkg9.Profile;
 
 public class User {
 
@@ -14,9 +12,9 @@ public class User {
     private Date dateOfBirth;
     private boolean isOnline;
 
-    private Profile profile; // Composition for profile details
-    private ArrayList<Post> posts; // User's posts
-    private ArrayList<User> friends; // Friend list
+    private Profile profile;
+    private ArrayList<Post> posts; 
+    private ArrayList<User> friends;
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline, Profile profile) {
 
@@ -34,7 +32,6 @@ public class User {
         this.friends = new ArrayList<>();
     }
 
-    // Getters and setters for all attributes
     public Profile getProfile() {
         return profile;
     }

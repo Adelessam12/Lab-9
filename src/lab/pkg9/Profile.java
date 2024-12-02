@@ -11,7 +11,6 @@ public class Profile {
         this.bio = bio;
     }
 
-    // Getters and setters
     public String getProfilePhotoPath() {
         return profilePhotoPath;
     }
