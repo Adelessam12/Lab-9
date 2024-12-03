@@ -4,14 +4,13 @@
  */
 package Frontend;
 
-import Frontend.PostPanel;
 import java.awt.Image;
 import java.io.File;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import lab.pkg9.Post;
-import javax.swing.JPanel;
+import lab.pkg9.ContentDatabase;
 
 /**
  *
@@ -44,6 +43,7 @@ public class update_profile extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         postsContainerPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,7 +64,7 @@ public class update_profile extends javax.swing.JFrame {
         profielphoto.setLayout(profielphotoLayout);
         profielphotoLayout.setHorizontalGroup(
             profielphotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 150, Short.MAX_VALUE)
+            .addGap(0, 218, Short.MAX_VALUE)
         );
         profielphotoLayout.setVerticalGroup(
             profielphotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,20 +86,23 @@ public class update_profile extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(74, 74, 74)
+                .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 707, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200))
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1010, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 15, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3});
@@ -108,20 +111,26 @@ public class update_profile extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(profielphoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(coverphotolabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
 
         pack();
@@ -156,25 +165,45 @@ public class update_profile extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 private void loadPosts() {
-    // Assuming you have a valid path
-    String imagePath1 = "path/to/image1.jpg";  // Replace with actual path for post 1
-String imagePath2 = "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-11 203617.png";
- 
+    // Open file chooser for cover photo and post image
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+    int returnValue = fileChooser.showOpenDialog(this);
+    
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+        // Get the selected file for the cover photo
+        File selectedFile = fileChooser.getSelectedFile();
         
-    // Create post objects
-    Post post1 = new Post("1", "author1", "This is the first post", imagePath1, new Date());
-    Post post2 = new Post("2", "author2", "Here is the second post", imagePath2, new Date());
+        // Set the cover photo image
+        ImageIcon coverPhoto = new ImageIcon(selectedFile.getAbsolutePath());
+        coverphotolabel.setIcon(new ImageIcon(coverPhoto.getImage().getScaledInstance(
+            coverphotolabel.getWidth(), coverphotolabel.getHeight(), Image.SCALE_SMOOTH)));
 
-    // Clear existing posts
-    postsContainerPanel.removeAll();
+        // Now, use the selected file path for the post image
+        String selectedFilePath = selectedFile.getAbsolutePath();
 
-    // Add posts to the container
-    postsContainerPanel.add(new PostPanel(post1.getContent(), post1.getImagePath()));
-    postsContainerPanel.add(new PostPanel(post2.getContent(), post2.getImagePath()));
+        // Create post objects with content and image paths
+        Post post1 = new Post("1", "author1", "This is the first post with text and an image", "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-24 002433.png", new Date());
+        String imagePath2 = "C:\\Users\\Dell\\Pictures\\Screenshots\\AnotherImage.png";  // Use another image for post 2
+        Post post3 = new Post("1", "author1", "This is the first post with text and an image", "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-24 002433.png", new Date());
+        Post post4 = new Post("1", "author1", "This is the first post with text and an image", "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-24 002433.png", new Date());
 
-    // Refresh the UI to show new posts
-    postsContainerPanel.revalidate();
-    postsContainerPanel.repaint();
+        // Create the second post with a different image path
+        Post post2 = new Post("2", "author2", "This is the second post with text and an image", imagePath2, new Date());
+
+        // Clear existing posts
+        postsContainerPanel.removeAll();
+
+        // Add PostPanel for each post (text first, then image)
+        postsContainerPanel.add(new PostPanel(post1.getContent(), post1.getImagePath()));
+             postsContainerPanel.add(new PostPanel(post2.getContent(), post2.getImagePath()));
+                 postsContainerPanel.add(new PostPanel(post3.getContent(), post3.getImagePath()));
+             postsContainerPanel.add(new PostPanel(post4.getContent(), post4.getImagePath()));
+
+        // Refresh the UI to show new posts
+        postsContainerPanel.revalidate();
+        postsContainerPanel.repaint();
+    }
 }
 
 
@@ -222,6 +251,7 @@ String imagePath2 = "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel postsContainerPanel;
     private javax.swing.JPanel profielphoto;
     // End of variables declaration//GEN-END:variables

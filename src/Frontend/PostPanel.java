@@ -5,46 +5,46 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import javax.swing.border.EmptyBorder;
 
 public class PostPanel extends JPanel {
-  private String content;
-    private String imagePath;
+ 
+
+
+         private final String content;
+    private final String imagePath;
 
     public PostPanel(String content, String imagePath) {
         this.content = content;
         this.imagePath = imagePath;
 
-        // Set BoxLayout to stack components vertically (image below text)
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        // Set GridLayout for side-by-side panels with a gap of 10 between them
+        setLayout(new GridLayout(1, 2, 10, 10));  // 1 row, 2 columns, 10px gap
 
-        // Add the text content panel first (transparent background)
-        add(createTextPanel());
+        // Create and add content panel (for text)
+        JPanel contentPanel = createContentPanel();
+        add(contentPanel);
 
-        // Add the image panel second (below the text)
+        // Create and add image panel (for image)
         JPanel imagePanel = createImagePanel();
-        if (imagePanel != null) {
-            add(imagePanel);  // Image panel added below the text
-        }
+        add(imagePanel);
     }
 
     /**
      * Creates a panel for displaying the text content of the post.
      */
-    private JPanel createTextPanel() {
-        JPanel textPanel = new JPanel(new BorderLayout());
-        JTextArea textArea = new JTextArea(content);
-        textArea.setEditable(false);  // Make text area non-editable
-        textArea.setLineWrap(true);  // Wrap long lines of text
-        textArea.setWrapStyleWord(true);  // Ensure word wrapping is consistent
+    private JPanel createContentPanel() {
+        JPanel contentPanel = new JPanel();
+        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));  // Text content layout vertically
 
-        // Make the background of the text area transparent
-        textArea.setBackground(new Color(0, 0, 0, 0)); // Fully transparent background
-        textArea.setForeground(Color.BLACK); // Set text color to black (or any color you want)
+        JLabel contentLabel = new JLabel("<html>" + content.replace("\n", "<br>") + "</html>");
+        contentLabel.setForeground(Color.BLACK);  // Set text color
+        contentLabel.setHorizontalAlignment(SwingConstants.LEFT);  // Align left
+        contentPanel.setOpaque(false); // Make the content panel transparent
+        contentLabel.setBorder(new EmptyBorder(0, 0, 0, 10));  // Add some padding to the right
 
-        // Add the text content to the text panel
-        textPanel.add(new JScrollPane(textArea), BorderLayout.CENTER);
-        textPanel.setOpaque(false); // Make the entire text panel transparent
-        return textPanel;
+        contentPanel.add(contentLabel);  // Add text label to content panel
+        return contentPanel;
     }
 
     /**
@@ -52,35 +52,28 @@ public class PostPanel extends JPanel {
      * Includes error handling for missing or invalid images.
      */
     private JPanel createImagePanel() {
-        if (imagePath != null && !imagePath.isEmpty()) {
+        JPanel imagePanel = new JPanel();
+        imagePanel.setLayout(new FlowLayout(FlowLayout.LEFT));  // Image layout inside image panel
+
+         
             try {
-                // Check if the file exists
                 File imgFile = new File(imagePath);
-                if (!imgFile.exists()) {
-                    System.err.println("Error: Image file not found at path: " + imagePath);
-                    return createErrorPanel("Image not found!");
+                if (imgFile.exists()) {
+                    ImageIcon imageIcon = new ImageIcon(imagePath);
+                    Image scaledImage = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                    JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+                    imagePanel.add(imageLabel);  
+                } else {
+                    imagePanel.add(createErrorPanel("Image not found!"));  
                 }
-
-                // Load and scale the image
-                ImageIcon imageIcon = new ImageIcon(imagePath);
-                Image scaledImage = imageIcon.getImage().getScaledInstance(300, 300, Image.SCALE_SMOOTH);
-                JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
-
-                // Add the image to a panel
-                JPanel imagePanel = new JPanel();
-                imagePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-                imagePanel.setOpaque(false); // Make the image panel transparent
-                imagePanel.add(imageLabel);
-                return imagePanel;
-
             } catch (Exception e) {
-                // Handle unexpected errors
-                System.err.println("Error loading image: " + e.getMessage());
                 e.printStackTrace();
-                return createErrorPanel("Failed to load image!");
+                imagePanel.add(createErrorPanel("Failed to load image!"));
             }
-        }
-        return null;
+         
+
+        imagePanel.setOpaque(false);  // Make the image panel transparent
+        return imagePanel;
     }
 
     /**
@@ -93,7 +86,7 @@ public class PostPanel extends JPanel {
         JLabel errorLabel = new JLabel(errorMessage);
         errorLabel.setForeground(Color.RED); // Display error message in red
         errorPanel.add(errorLabel);
-        errorPanel.setOpaque(false); // Make error panel transparent
+        errorPanel.setOpaque(false); // Transparent background
         return errorPanel;
     }
     /**

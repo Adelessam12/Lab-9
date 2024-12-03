@@ -19,7 +19,7 @@ public class Post {
         this.postId = postId;
         this.authorId = authorId;
         this.content = content;
-        this.imagePath = null;
+        this.imagePath = imagePath;
         this.timestamp = timestamp;
     }
 
@@ -37,7 +37,7 @@ public class Post {
     }
 
     public String getImagePath() {
-        return imagePath;
+        return this.imagePath;
     }
 
     public Date getTimestamp() {
