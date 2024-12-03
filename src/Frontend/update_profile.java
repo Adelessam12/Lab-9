@@ -4,6 +4,7 @@
  */
 package Frontend;
 
+import Frontend.PostPanel;
 import java.awt.Image;
 import java.io.File;
 import java.util.Date;
@@ -158,17 +159,11 @@ private void loadPosts() {
     // Assuming you have a valid path
     String imagePath1 = "path/to/image1.jpg";  // Replace with actual path for post 1
 String imagePath2 = "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-11 203617.png";
- JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
-    int returnValue = fileChooser.showOpenDialog(this);
-    if (returnValue == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
-        String path= selectedFile.getAbsolutePath();
-        ImageIcon coverPhoto = new ImageIcon(selectedFile.getAbsolutePath());
+ 
         
     // Create post objects
     Post post1 = new Post("1", "author1", "This is the first post", imagePath1, new Date());
-    Post post2 = new Post("2", "author2", "Here is the second post", path, new Date());
+    Post post2 = new Post("2", "author2", "Here is the second post", imagePath2, new Date());
 
     // Clear existing posts
     postsContainerPanel.removeAll();
@@ -181,7 +176,7 @@ String imagePath2 = "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-
     postsContainerPanel.revalidate();
     postsContainerPanel.repaint();
 }
-}
+
 
 
 
