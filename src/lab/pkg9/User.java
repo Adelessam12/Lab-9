@@ -39,6 +39,7 @@ public class User {
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline) {
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
+
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -46,6 +47,37 @@ public class User {
         this.dateOfBirth = dateOfBirth;
         this.isOnline = isOnline;
         isOnline = false;
+        profile = new Profile(null, null, null);
+        this.isOnline = false;
+        friendList = new ArrayList<>();
+        blockedList = new ArrayList<>();
+        this.posts = new ArrayList<>();
+        this.friends = new ArrayList<>();
+
+    }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public void addPost(Post post) {
+        this.posts.add(post);
+    }
+
+    public ArrayList<User> getFriends() {
+        return friends;
+    }
+
+    public void addFriend(User friend) {
+        this.friends.add(friend);
     }
 
     public String getUserId() {
