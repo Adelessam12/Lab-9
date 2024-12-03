@@ -1,5 +1,6 @@
 package lab.pkg9;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
@@ -10,6 +11,31 @@ public class User {
     private String hashedPassword;
     private Date dateOfBirth;
     private boolean isOnline;
+    public ArrayList<User> friendList = new ArrayList<>();
+    public ArrayList<User> blockedList = new ArrayList<>();
+    public static ArrayList<User> allUsers = new ArrayList<>();
+    private String sentFriendRequestStatus;
+    private String receivedFriendRequestStatus;
+    
+    public User(){
+        allUsers.add(this);
+    }
+
+    public String getSentFriendRequestStatus() {
+        return sentFriendRequestStatus;
+    }
+
+    public void setSentFriendRequestStatus(String sentFriendRequestStatus) {
+        this.sentFriendRequestStatus = sentFriendRequestStatus;
+    }
+
+    public String getReceivedFriendRequestStatus() {
+        return receivedFriendRequestStatus;
+    }
+
+    public void setReceivedFriendRequestStatus(String receivedFriendRequestStatus) {
+        this.receivedFriendRequestStatus = receivedFriendRequestStatus;
+    }
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline) {
         this.userId = userId;
