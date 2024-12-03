@@ -6,8 +6,11 @@ package Frontend;
 
 import java.awt.Image;
 import java.io.File;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import lab.pkg9.Post;
+import javax.swing.JPanel;
 
 /**
  *
@@ -32,26 +35,14 @@ public class update_profile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         coverphotolabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         profielphoto = new ProfilePanel();
         jButton4 = new javax.swing.JButton();
-        scrollPane2 = new java.awt.ScrollPane();
-        postsList = new java.awt.List();
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        jScrollPane1 = new javax.swing.JScrollPane();
+        postsContainerPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,11 +63,11 @@ public class update_profile extends javax.swing.JFrame {
         profielphoto.setLayout(profielphotoLayout);
         profielphotoLayout.setHorizontalGroup(
             profielphotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
         profielphotoLayout.setVerticalGroup(
             profielphotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 121, Short.MAX_VALUE)
+            .addGap(0, 150, Short.MAX_VALUE)
         );
 
         jButton4.setText("update cover photo");
@@ -86,29 +77,28 @@ public class update_profile extends javax.swing.JFrame {
             }
         });
 
-        scrollPane2.add(postsList);
+        postsContainerPanel.setLayout(new javax.swing.BoxLayout(postsContainerPanel, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane1.setViewportView(postsContainerPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                        .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 857, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 702, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jButton3});
@@ -117,22 +107,20 @@ public class update_profile extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 331, Short.MAX_VALUE))
-                    .addComponent(scrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,31 +155,35 @@ public class update_profile extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 private void loadPosts() {
-     postsList.add("Post 1: This is the first post.");
-    postsList.add("Post 2: Just another post.");
-    postsList.add("Post 3: Welcome to the platform!");
-      postsList.add("Post 1: This is the first post.");
-    postsList.add("Post 2: Just another post.");
-    postsList.add("Post 3: Welcome to the platform!");
+    // Assuming you have a valid path
+    String imagePath1 = "path/to/image1.jpg";  // Replace with actual path for post 1
+String imagePath2 = "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-11-11 203617.png";
+ JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+    int returnValue = fileChooser.showOpenDialog(this);
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+        File selectedFile = fileChooser.getSelectedFile();
+        String path= selectedFile.getAbsolutePath();
+        ImageIcon coverPhoto = new ImageIcon(selectedFile.getAbsolutePath());
+        
+    // Create post objects
+    Post post1 = new Post("1", "author1", "This is the first post", imagePath1, new Date());
+    Post post2 = new Post("2", "author2", "Here is the second post", path, new Date());
 
-      postsList.add("Post 1: This is the first post.");
-    postsList.add("Post 2: Just another post.");
-    postsList.add("Post 3: Welcome to the platform!");
+    // Clear existing posts
+    postsContainerPanel.removeAll();
 
-    postsList.add("Post 1: This is the first post.");
-    postsList.add("Post 2: Just another post.");
-    postsList.add("Post 3: Welcome to the platform!");
+    // Add posts to the container
+    postsContainerPanel.add(new PostPanel(post1.getContent(), post1.getImagePath()));
+    postsContainerPanel.add(new PostPanel(post2.getContent(), post2.getImagePath()));
 
-    postsList.add("Post 1: This is the first post.");
-    postsList.add("Post 2: Just another post.");
-    postsList.add("Post 3: Welcome to the platform!");
-
-      postsList.add("Post 1: This is the first post.");
-    postsList.add("Post 2: Just another post.");
-    postsList.add("Post 3: Welcome to the platform!");
-
-
+    // Refresh the UI to show new posts
+    postsContainerPanel.revalidate();
+    postsContainerPanel.repaint();
 }
+}
+
+
 
     /**
      * @param args the command line arguments
@@ -234,9 +226,8 @@ private void loadPosts() {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JPanel jPanel1;
-    private java.awt.List postsList;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel postsContainerPanel;
     private javax.swing.JPanel profielphoto;
-    private java.awt.ScrollPane scrollPane2;
     // End of variables declaration//GEN-END:variables
 }
