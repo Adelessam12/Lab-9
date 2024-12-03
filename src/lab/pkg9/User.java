@@ -9,7 +9,7 @@ public class User {
     private String username;
     private String hashedPassword;
     private Date dateOfBirth;
-    private boolean isOnline=false;
+    private boolean isOnline;
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
         this.userId = userId;
@@ -17,7 +17,7 @@ public class User {
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
-       
+        isOnline = false;
     }
 
     public String getUserId() {

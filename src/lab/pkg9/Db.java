@@ -1,14 +1,7 @@
 package lab.pkg9;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
@@ -16,15 +9,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Db {
+public final class Db {
 
-    private String filename;
-    private ArrayList<User> users = new ArrayList<>();
+    private final String filename;
+    private ArrayList<User> users;
 
     public Db(String filename) {
         this.filename = filename;
+        users = new ArrayList<>();
         loadUsersFromFile();
     }
 
@@ -32,27 +25,30 @@ public class Db {
         return users;
     }
 
-    public void saveUsersToFile() {
+    public boolean saveUsersToFile() {
         Gson gson = new Gson();
         try (FileWriter writer = new FileWriter(filename)) {
-            gson.toJson(users, writer); 
+            gson.toJson(users, writer);
             System.out.println("Users saved to file successfully.");
+            return true;
         } catch (IOException e) {
             System.err.println("Error saving users to file: " + e.getMessage());
+            return false;
         }
     }
 
-    public void loadUsersFromFile() {
+    public boolean loadUsersFromFile() {
         Gson gson = new Gson();
         users.clear();
-
         try (FileReader reader = new FileReader(filename)) {
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
-            users = gson.fromJson(reader, userListType); 
+            users = gson.fromJson(reader, userListType);
             System.out.println("Users loaded from file successfully.");
+            return true;
         } catch (IOException e) {
             System.err.println("Error loading users from file: " + e.getMessage());
+            return false;
         }
     }
 

@@ -1,5 +1,4 @@
 package lab.pkg9;
-
 import java.util.Date;
 
 public class UserManager {
@@ -33,26 +32,30 @@ public class UserManager {
         return null;
     }
 
-    public void addUser(User user) {
+    public boolean addUser(User user) {
         if (findUser(user.getUserId()) != null) {
             System.out.println("User with userId " + user.getUserId() + " already exists.");
+            return false;
         } else {
             String hashedPassword = userDatabase.hashPassword(user.getHashedPassword());
             user.setHashedPassword(hashedPassword);
             userDatabase.getUsers().add(user);
             userDatabase.saveUsersToFile();
             System.out.println("User added successfully.");
+            return true;
         }
     }
 
-    public void deleteUser(User user) {
+    public boolean deleteUser(User user) {
         User existingUser = findUser(user.getUserId());
         if (existingUser != null) {
             userDatabase.getUsers().remove(existingUser);
             userDatabase.saveUsersToFile();
             System.out.println("User deleted successfully.");
+            return true;
         } else {
             System.out.println("User with userId " + user.getUserId() + " not found.");
+            return false;
         }
     }
 
@@ -69,13 +72,15 @@ public class UserManager {
         return null;
     }
 
-    public void logout(User user) {
+    public boolean logout(User user) {
         if (user != null) {
             user.setIsOnline(false);
             userDatabase.saveUsersToFile();
             System.out.println("User logged out successfully.");
+            return true;
         } else {
             System.out.println("User not found.");
+            return false;
         }
     }
 
