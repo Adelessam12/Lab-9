@@ -12,7 +12,6 @@ import java.util.Map;
  * @author Mahmoud Waleed
  */
 public class Friend_Management {
-    Db db;
 
     Db db;
     

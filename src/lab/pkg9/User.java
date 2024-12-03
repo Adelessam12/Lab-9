@@ -2,6 +2,8 @@ package lab.pkg9;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class User {
 
@@ -15,12 +17,10 @@ public class User {
     public ArrayList<User> friendList;
     public ArrayList<User> blockedList;
     public ArrayList<Post> posts;
-    public ArrayList<User> friends;
-    private String sentFriendRequestStatus;
-    private String receivedFriendRequestStatus;
+    private Map<String, String> sentFriendRequestStatus;
+    private Map<String, String> receivedFriendRequestStatus;
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
-
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -32,24 +32,55 @@ public class User {
         friendList = new ArrayList<>();
         blockedList = new ArrayList<>();
         this.posts = new ArrayList<>();
-        this.friends = new ArrayList<>();
-
+        sentFriendRequestStatus = new HashMap<>();
+        receivedFriendRequestStatus = new HashMap<>();
     }
-    public String getSentFriendRequestStatus() {
+
+    public void addFriend(User friend){
+        friendList.add(friend);
+    }
+    
+    public void removeFriend(User friend){
+        friendList.remove(friend);
+    }
+    
+    public void addToBlocked(User friend){
+        friendList.add(friend);
+    }
+    
+    public ArrayList<User> getFriendList() {
+        return friendList;
+    }
+
+    public void setFriendList(ArrayList<User> friendList) {
+        this.friendList = friendList;
+    }
+
+    public ArrayList<User> getBlockedList() {
+        return blockedList;
+    }
+
+    public void setBlockedList(ArrayList<User> blockedList) {
+        this.blockedList = blockedList;
+    }
+
+    public Map<String, String> getSentFriendRequestStatus() {
         return sentFriendRequestStatus;
     }
 
-    public void setSentFriendRequestStatus(String sentFriendRequestStatus) {
+    public void setSentFriendRequestStatus(Map<String, String> sentFriendRequestStatus) {
         this.sentFriendRequestStatus = sentFriendRequestStatus;
     }
 
-    public String getReceivedFriendRequestStatus() {
+    public Map<String, String> getReceivedFriendRequestStatus() {
         return receivedFriendRequestStatus;
     }
 
-    public void setReceivedFriendRequestStatus(String receivedFriendRequestStatus) {
+    public void setReceivedFriendRequestStatus(Map<String, String> receivedFriendRequestStatus) {
         this.receivedFriendRequestStatus = receivedFriendRequestStatus;
     }
+    
+    
     public Profile getProfile() {
         return profile;
     }
@@ -64,14 +95,6 @@ public class User {
 
     public void addPost(Post post) {
         this.posts.add(post);
-    }
-
-    public ArrayList<User> getFriends() {
-        return friends;
-    }
-
-    public void addFriend(User friend) {
-        this.friends.add(friend);
     }
 
     public String getUserId() {
