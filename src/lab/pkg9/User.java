@@ -15,8 +15,8 @@ public class User {
     private final ArrayList<User> friendList;
     private final ArrayList<User> blockedList;
     private Profile profile;
-    private ArrayList<Post> posts;
-    private ArrayList<User> friends;
+    private final ArrayList<Post> posts;
+    private final ArrayList<User> friends;
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
 
