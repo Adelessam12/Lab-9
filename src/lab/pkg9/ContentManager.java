@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class ContentManager implements ContentCreatable {
     private ArrayList<Post> allPosts;
     private ArrayList<Story> allStories;
-    private ContentDatabase contentDatabase;
+    private final ContentDatabase contentDatabase;
 
     public ContentManager(ContentDatabase contentDatabase) {
         this.allPosts = new ArrayList<>();
