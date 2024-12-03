@@ -38,12 +38,14 @@ public class User {
     }
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline) {
+    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
         this.userId = userId;
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
         this.isOnline = isOnline;
+        isOnline = false;
     }
 
     public String getUserId() {
