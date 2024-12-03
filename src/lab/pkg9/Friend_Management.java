@@ -10,7 +10,13 @@ import java.util.ArrayList;
  *
  * @author Mahmoud Waleed
  */
-public class Friend_Management {    
+public class Friend_Management {
+    Db db;
+
+    public Friend_Management(Db db) {
+        this.db = db;
+    }
+    
     public void sendFriendRequest(User user, User friend){
         user.setSentFriendRequestStatus("Pending");
         friend.setReceivedFriendRequestStatus("Pending");
@@ -42,8 +48,8 @@ public class Friend_Management {
     
     public ArrayList<User> suggestions(User user){
         ArrayList<User> suggestions = new ArrayList<>();
-        for(User suggested: User.allUsers){
-            if(!User.allUsers.contains(user)&&!suggested.equals(user)){
+        for(User suggested: db.getUsers()){
+            if(!db.getUsers().contains(user)&&!suggested.equals(user)){
                 suggestions.add(user);
                 for(User commonFriend: user.friendList){
                     if(suggested.friendList.contains(commonFriend))

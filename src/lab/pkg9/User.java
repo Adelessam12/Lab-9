@@ -11,16 +11,30 @@ public class User {
     private String hashedPassword;
     private Date dateOfBirth;
     private boolean isOnline;
-    public ArrayList<User> friendList = new ArrayList<>();
-    public ArrayList<User> blockedList = new ArrayList<>();
-    public static ArrayList<User> allUsers = new ArrayList<>();
+    private Profile profile;
+    public ArrayList<User> friendList;
+    public ArrayList<User> blockedList;
+    public ArrayList<Post> posts;
+    public ArrayList<User> friends;
     private String sentFriendRequestStatus;
     private String receivedFriendRequestStatus;
-    
-    public User(){
-        allUsers.add(this);
-    }
 
+    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
+
+        this.userId = userId;
+        this.email = email;
+        this.username = username;
+        this.hashedPassword = hashedPassword;
+        this.dateOfBirth = dateOfBirth;
+        isOnline = false;
+        profile = new Profile(null, null, null);
+        this.isOnline = false;
+        friendList = new ArrayList<>();
+        blockedList = new ArrayList<>();
+        this.posts = new ArrayList<>();
+        this.friends = new ArrayList<>();
+
+    }
     public String getSentFriendRequestStatus() {
         return sentFriendRequestStatus;
     }
@@ -36,26 +50,6 @@ public class User {
     public void setReceivedFriendRequestStatus(String receivedFriendRequestStatus) {
         this.receivedFriendRequestStatus = receivedFriendRequestStatus;
     }
-
-    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline) {
-    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
-
-        this.userId = userId;
-        this.email = email;
-        this.username = username;
-        this.hashedPassword = hashedPassword;
-        this.dateOfBirth = dateOfBirth;
-        this.isOnline = isOnline;
-        isOnline = false;
-        profile = new Profile(null, null, null);
-        this.isOnline = false;
-        friendList = new ArrayList<>();
-        blockedList = new ArrayList<>();
-        this.posts = new ArrayList<>();
-        this.friends = new ArrayList<>();
-
-    }
-
     public Profile getProfile() {
         return profile;
     }
