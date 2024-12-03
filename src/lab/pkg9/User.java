@@ -12,24 +12,26 @@ public class User {
     private Date dateOfBirth;
     private boolean isOnline;
 
+    private final ArrayList<User> friendList;
+    private final ArrayList<User> blockedList;
     private Profile profile;
-    private ArrayList<Post> posts; 
+    private ArrayList<Post> posts;
     private ArrayList<User> friends;
 
-    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, Profile profile) {
+    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
 
-
-    
         this.userId = userId;
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
+        profile = new Profile(null, null, null);
         this.isOnline = false;
-
-        this.profile = profile;
+        friendList = new ArrayList<>();
+        blockedList = new ArrayList<>();
         this.posts = new ArrayList<>();
         this.friends = new ArrayList<>();
+
     }
 
     public Profile getProfile() {
@@ -55,8 +57,6 @@ public class User {
     public void addFriend(User friend) {
         this.friends.add(friend);
     }
-
-    
 
     public String getUserId() {
         return userId;
@@ -110,6 +110,5 @@ public class User {
     public String toString() {
         return "User{" + "userId=" + userId + ", email=" + email + ", username=" + username + ", hashedPassword=" + hashedPassword + ", dateOfBirth=" + dateOfBirth + ", isOnline=" + isOnline + '}';
     }
-
 
 }
