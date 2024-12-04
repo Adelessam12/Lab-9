@@ -21,8 +21,9 @@ public class ProfilePanel extends JPanel {
      */
    private BufferedImage profileImage;
 
-    public void setProfileImage(File file) {
-        try {
+    public void setProfileImage(String filepath) {
+        try {  setOpaque(false); 
+            File file = new File(filepath);
             profileImage = ImageIO.read(file);
             repaint(); // Repaint the panel to reflect the updated image
         } catch (Exception e) {

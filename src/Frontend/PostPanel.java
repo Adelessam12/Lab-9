@@ -19,7 +19,7 @@ public class PostPanel extends JPanel {
         this.imagePath = imagePath;
 
         // Set GridLayout for side-by-side panels with a gap of 10 between them
-        setLayout(new GridLayout(1, 2, 10, 10));  // 1 row, 2 columns, 10px gap
+        setLayout(new GridLayout(1, 2, 10,0));  // 1 row, 2 columns, 10px gap
 
         // Create and add content panel (for text)
         JPanel contentPanel = createContentPanel();
@@ -60,7 +60,7 @@ public class PostPanel extends JPanel {
                 File imgFile = new File(imagePath);
                 if (imgFile.exists()) {
                     ImageIcon imageIcon = new ImageIcon(imagePath);
-                    Image scaledImage = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                    Image scaledImage = imageIcon.getImage();
                     JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
                     imagePanel.add(imageLabel);  
                 } else {

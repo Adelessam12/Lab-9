@@ -11,12 +11,11 @@ public class User {
     private String hashedPassword;
     private Date dateOfBirth;
     private boolean isOnline;
-
+private  final ArrayList<Story> stories;
     private final ArrayList<User> friendList;
     private final ArrayList<User> blockedList;
     private Profile profile;
     private final ArrayList<Post> posts;
-    private final ArrayList<User> friends;
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
 
@@ -25,14 +24,33 @@ public class User {
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
-        profile = new Profile(null, null, null);
+        profile = new Profile( null);
         this.isOnline = false;
+        stories=new ArrayList<>();
         friendList = new ArrayList<>();
         blockedList = new ArrayList<>();
         this.posts = new ArrayList<>();
-        this.friends = new ArrayList<>();
 
     }
+
+    public ArrayList<Story> getStories() {
+        return stories;
+    }
+
+    public ArrayList<User> getFriendList() {
+        return friendList;
+    }
+
+    public ArrayList<User> getBlockedList() {
+        return blockedList;
+    }
+
+public void addFriend(User user) {
+    if (!friendList.contains(user)) {
+        friendList.add(user);
+        user.friendList.add(this);  // Add the current user to the friend's list
+    }
+}
 
     public Profile getProfile() {
         return profile;
@@ -49,15 +67,11 @@ public class User {
     public void addPost(Post post) {
         this.posts.add(post);
     }
-
-    public ArrayList<User> getFriends() {
-        return friends;
+    
+    public void addstory (Story story)
+    {
+        this.stories.add(story);
     }
-
-    public void addFriend(User friend) {
-        this.friends.add(friend);
-    }
-
     public String getUserId() {
         return userId;
     }

@@ -5,9 +5,9 @@ public class Profile {
     private String coverPhotoPath;
     private String bio;
 
-    public Profile(String profilePhotoPath, String coverPhotoPath, String bio) {
-        this.profilePhotoPath = profilePhotoPath;
-        this.coverPhotoPath = coverPhotoPath;
+    public Profile(String bio) {
+        this.profilePhotoPath = "C:\\Users\\Dell\\Desktop\\R (1).jpg";
+        this.coverPhotoPath = "C:\\Users\\Dell\\Desktop\\image-3@2x.jpg";
         this.bio = bio;
     }
 

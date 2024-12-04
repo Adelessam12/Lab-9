@@ -9,32 +9,44 @@ import java.awt.*;
 import java.io.File;
 
 public class FriendPanel extends JPanel {
-  
-    public FriendPanel(String username, String profileImagePath) {
+
+    public FriendPanel(String username, String profileImagePath, boolean Status) {
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0)); // Smaller horizontal and vertical gaps
 
         // Profile Image
         ProfilePanel profilePanel = new ProfilePanel();
-        profilePanel.setPreferredSize(new Dimension(100, 100)); // Smaller profile image
+        profilePanel.setPreferredSize(new Dimension(70, 70)); // Smaller profile image
         if (profileImagePath != null && !profileImagePath.isEmpty()) {
             File imgFile = new File(profileImagePath);
             if (imgFile.exists()) {
-                profilePanel.setProfileImage(imgFile);
+                profilePanel.setProfileImage(imgFile.getAbsolutePath());
             }
         }
         add(profilePanel);
+        JLabel statuslable;
+        if (Status) {
+            statuslable = new JLabel("  is online");
+        statuslable.setForeground(Color.GREEN);
+                    
+
+        } else {
+            statuslable = new JLabel("  is offline");
+                    statuslable.setForeground(Color.RED);
+
+        }
 
         // Username Label
         JLabel usernameLabel = new JLabel(username);
-        usernameLabel.setFont(new Font("Arial", Font.PLAIN,20)); // Smaller font size
+        usernameLabel.setFont(new Font("Arial", Font.PLAIN, 20)); // Smaller font size
+        statuslable.setFont(new Font("Arial", Font.PLAIN, 15)); // Smaller font size
+        
         add(usernameLabel);
+        
+        add(statuslable);
 
         // Reduce panel padding
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Smaller padding
     }
-
-
-
 
     /**
      * This method is called from within the constructor to initialize the form.
