@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/NewsFeedTest.java</file>
             <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/Post.java</file>
@@ -17,5 +18,8 @@
             <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/Profile.java</file>
             <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/Frontend/create_post.java</file>
         </group>
+=======
+        <group/>
+>>>>>>> Part_4_Friend_Management
     </open-files>
 </project-private>
