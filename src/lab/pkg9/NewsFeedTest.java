@@ -7,7 +7,6 @@ public class NewsFeedTest {
        // Create current timestamp
         Date currentTimestamp = new Date();
 
-        // Create a few dummy users
         User user1 = new User("john_doe", "john.doe@example.com", "John Doe", "hashedPassword123", currentTimestamp);
         User user2 = new User("jane_smith", "jane.smith@example.com", "Jane Smith", "hashedPassword456", currentTimestamp);
         User user3 = new User("alice_brown", "alice.brown@example.com", "Alice Brown", "hashedPassword789", currentTimestamp);

@@ -13,25 +13,28 @@ import lab.pkg9.ContentManager;
 
 /**
  *
- * @author Dell
+ * @author DELL
  */
-public class create_post extends javax.swing.JFrame {
+public class CreateStory extends javax.swing.JFrame {
+
     private final String userId;
     private String imagePath;
     private final ContentManager contentManager;
+
     /**
-     * Creates new form create_post
+     * Creates new form CreateStory
+     *
      * @param userId
      * @param contentManager
      */
 
-
-    public create_post(String userId, ContentManager contentManager) {
+    public CreateStory(String userId, ContentManager contentManager) {
         this.userId = userId;
         imagePath = null;
         this.contentManager = contentManager;
-        initComponents();       
+        
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,7 +85,7 @@ public class create_post extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(108, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +98,7 @@ public class create_post extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+                .addGap(37, 37, 37))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,21 +134,16 @@ public class create_post extends javax.swing.JFrame {
                 imagePath = file.getName();
                 ImageIcon coverPhoto = new ImageIcon(file.getAbsolutePath());
                 jLabel2.setIcon(new ImageIcon(coverPhoto.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH)));
-                
             }
         }
-
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
-        contentManager.createPost(userId, content, imagePath);
+        contentManager.createStory(userId, content, imagePath);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-
-
     
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
