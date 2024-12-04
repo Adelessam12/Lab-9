@@ -9,14 +9,14 @@ public class UserManager {
         this.userDatabase = userDatabase;
     }
 
-    public boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth) {
+    public boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth, boolean isOnline) {
         if (findUser(userId) != null) {
             System.out.println("User with userId " + userId + " already exists.");
             return false;
         }
 
         String hashedPassword = userDatabase.hashPassword(password);
-        User newUser = new User(userId, email, username, hashedPassword, dateOfBirth);
+        User newUser = new User(userId, email, username, hashedPassword, dateOfBirth, isOnline);
         addUser(newUser);
         System.out.println("User registered successfully.");
         return true;
@@ -104,10 +104,11 @@ public class Main {
         String username = "john_doe";
         String password = "securePassword123";
         Date dateOfBirth = new Date(1995 - 1900, 5, 15); // June 15, 1995
+        boolean isOnline = false;
 
         // Trace 1: Register a user
         System.out.println("---- Registering User ----");
-        boolean isRegistered = userManager.registerUser(userId, email, username, password, dateOfBirth);
+        boolean isRegistered = userManager.registerUser(userId, email, username, password, dateOfBirth, isOnline);
         System.out.println("Registration successful: " + isRegistered);
 
         // Trace 2: Find the user
@@ -132,7 +133,7 @@ public class Main {
 
         // Trace 5: Add another user directly
         System.out.println("---- Adding User Directly ----");
-        User anotherUser = new User("user456", "user456@example.com", "jane_doe", password, new Date(2000 - 1900, 3, 25));
+        User anotherUser = new User("user456", "user456@example.com", "jane_doe", password, new Date(2000 - 1900, 3, 25), false);
         userManager.addUser(anotherUser);
 
         // Trace 6: Delete a user

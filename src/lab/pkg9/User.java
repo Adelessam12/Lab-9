@@ -20,7 +20,7 @@ public class User {
     private Map<String, String> sentFriendRequestStatus;
     private Map<String, String> receivedFriendRequestStatus;
 
-    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
+    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline) {
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -45,7 +45,7 @@ public class User {
     }
     
     public void addToBlocked(User friend){
-        friendList.add(friend);
+        blockedList.add(friend);
     }
     
     public ArrayList<User> getFriendList() {
