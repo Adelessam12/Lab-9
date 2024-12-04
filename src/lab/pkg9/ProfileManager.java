@@ -14,6 +14,6 @@ public class ProfileManager {
     }
 
     public void updatePassword(User user, String newHashedPassword) {
-        user.se(newHashedPassword);
+        user.setHashedPassword(newHashedPassword);
     }
 }
