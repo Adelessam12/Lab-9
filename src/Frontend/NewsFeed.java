@@ -14,8 +14,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import lab.pkg9.ContentManager;
-import lab.pkg9.Db;
-import lab.pkg9.FriendManagement;
+import lab.pkg9.Database;
+import lab.pkg9.FriendshipService;
 import lab.pkg9.Friend_Management;
 import lab.pkg9.Post;
 import lab.pkg9.User;
@@ -32,11 +32,11 @@ public final class NewsFeed extends javax.swing.JFrame {
      *
      * @param user
      */
- Db database;
+ Database database;
  User user;
     ContentManager Cm;
     UserManager M;
-    public NewsFeed(User user,Db database, ContentManager Cm, UserManager M) {
+    public NewsFeed(User user,Database database, ContentManager Cm, UserManager M) {
            setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
         ImageIcon originalIcon =new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
@@ -304,7 +304,7 @@ fp.setVisible(true);
     
     public void loadSuggestions(){
       friendSuggestionspanel.removeAll();
-        FriendManagement FM= new FriendManagement(database);
+        FriendshipService FM= new FriendshipService(database);
         ArrayList<User> suggestions = FM.suggestions(user);
 
         for(User suggestion: suggestions){

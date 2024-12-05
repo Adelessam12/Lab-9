@@ -1,9 +1,7 @@
 package lab.pkg9;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.UUID;
 
 public final class User {
 
@@ -13,48 +11,60 @@ public final class User {
     private String hashedPassword;
     private final Date dateOfBirth;
     private boolean isOnline;
-    //new updates 
-    private final ArrayList<Story> stories;
-    private final ArrayList<Post> posts;
-    private final ArrayList<User> friendList;
-    private final ArrayList<User> blockedList;
     private Profile profile;
+    private final FriendRequestManagable friendRequestManager;
+    private final FriendManagable friendManager;
+    private final PostManagable postManager;
+    private final StoryManagable storyManager;
 
-    // two mab objects to store the id && satuts 
-    private Map<String, String> sentFriendRequestStatus;
-    private Map<User, String> receivedFriendRequestStatus;
-
-
-    public User(String email, String username, String hashedPassword, Date dateOfBirth) {
+    // Constructor
+    public User(
+        String email,
+        String username,
+        String hashedPassword,
+        Date dateOfBirth,
+        FriendRequestManagable friendRequestManager,
+        FriendManagable friendManager,
+        PostManagable postManager,
+        StoryManagable storyManager
+    ) {
         this.userId = generateUserId();
-
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
-        
-        profile = new Profile(null);
-
         this.isOnline = false;
-        stories = new ArrayList<>();
-        friendList = new ArrayList<>();
-        blockedList = new ArrayList<>();
-        this.posts = new ArrayList<>();
+        this.profile = new Profile(null);
 
-        sentFriendRequestStatus = new HashMap<>();
-        receivedFriendRequestStatus = new HashMap<>();
+        this.friendRequestManager = friendRequestManager;
+        this.friendManager = friendManager;
+        this.postManager = postManager;
+        this.storyManager = storyManager;
     }
 
-    public String generateUserId(){
-        return "User" + System.currentTimeMillis();
-    } 
+    public FriendManagable getFriendManager() {
+        return friendManager;
+    }
+
+    public PostManagable getPostManager() {
+        return postManager;
+    }
+
+    public StoryManagable getStoryManager() {
+        return storyManager;
+    }
+
+    public FriendRequestManagable getFriendRequestManagable() {
+        return friendRequestManager;
+    }
     
+    public String generateUserId() {
+        return "ID" + UUID.randomUUID();
+    }
 
     public void setProfile(Profile profile) {
         this.profile = profile;
- 
-    
- 
+
     }
 
     public void setIsOnline(boolean isOnline) {
@@ -64,66 +74,8 @@ public final class User {
     public void setHashedPassword(String hashedPassword) {
         this.hashedPassword = hashedPassword;
     }
-
-    public ArrayList<Story> getStories() {
-        return stories;
-    }
-
-    public void removeFriend(User friend) {
-        friendList.remove(friend);
-    }
-
-    public void addToBlocked(User friend) {
-        blockedList.add(friend);
-    }
-
-    public ArrayList<User> getFriendList() {
-        return friendList;
-    }
-
-    public ArrayList<User> getBlockedList() {
-        return blockedList;
-    }
-
-    public void addFriend(User user) {
-        if (!friendList.contains(user)) {
-            // The next two Lines ensures that A is friend to B and B is a friend to A
-            friendList.add(user);       // Add the user to the current user's friend list
-            user.friendList.add(this);  // Add the current user to the friend's list
-            // this keyword is refrence to the object who called add friend method 
-        }
-    }
-
-    public Map<String, String> getSentFriendRequestStatus() {
-        return sentFriendRequestStatus;
-    }
-
-    public void setSentFriendRequestStatus(Map<String, String> sentFriendRequestStatus) {
-        this.sentFriendRequestStatus = sentFriendRequestStatus;
-    }
-
-    public Map<User, String> getReceivedFriendRequestStatus() {
-        return receivedFriendRequestStatus;
-    }
-
-    public void setReceivedFriendRequestStatus(Map<User, String> receivedFriendRequestStatus) {
-        this.receivedFriendRequestStatus = receivedFriendRequestStatus;
-    }
-
     public Profile getProfile() {
         return profile;
-    }
-
-    public ArrayList<Post> getPosts() {
-        return posts;
-    }
-
-    public void addPost(Post post) {
-        this.posts.add(post);
-    }
-
-    public void addstory(Story story) {
-        this.stories.add(story);
     }
 
     public String getUserId() {

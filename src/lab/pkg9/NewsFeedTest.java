@@ -72,7 +72,7 @@ public class NewsFeedTest {
         user4.setProfile(profile);
 
         // Create NewsFeed for user1 and load dummy data
-        Db database= new Db("hello");
+        Database database= new Database("hello");
         ContentManager cm = new ContentManager(database);
         UserManager M= new UserManager(database);
         NewsFeed newsFeed = new NewsFeed(user1, database,cm, M);

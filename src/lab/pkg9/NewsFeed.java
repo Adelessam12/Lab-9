@@ -10,7 +10,7 @@ package lab.pkg9;
  */
 public class NewsFeed {
     public void displayFriendsList(User user){
-        for(User friend: user.getFriendList()){
+        for(User friend: user.getFriendManager().getFriendList()){
             System.out.println(friend.getUsername()+friend.isIsOnline());
         }
     }

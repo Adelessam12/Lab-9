@@ -8,7 +8,7 @@ import static java.awt.PageAttributes.MediaType.D;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import lab.pkg9.ContentManager;
-import lab.pkg9.Db;
+import lab.pkg9.Database;
 import lab.pkg9.Friend_Management;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
@@ -24,9 +24,9 @@ public class Login extends javax.swing.JFrame {
      */
     UserManager M;
     ContentManager CM;
-    Db D;
+    Database D;
     Friend_Management FM;
-    public Login(UserManager M, ContentManager CM , Db D, Friend_Management FM) {
+    public Login(UserManager M, ContentManager CM , Database D, Friend_Management FM) {
         this.D= D;
         this.CM=CM;
         this.M=M;

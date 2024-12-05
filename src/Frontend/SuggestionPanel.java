@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import lab.pkg9.FriendManagement;
+import lab.pkg9.FriendshipService;
 import lab.pkg9.User;
 
 /**
@@ -30,7 +30,7 @@ public class SuggestionPanel extends javax.swing.JPanel {
     public SuggestionPanel() {
         initComponents();
     }
-public SuggestionPanel(User sender, User reciever, String profileImagePath, FriendManagement Fm) {
+public SuggestionPanel(User sender, User reciever, String profileImagePath, FriendshipService Fm) {
 
     // Profile Image
     ProfilePanel profilePanel = new ProfilePanel();

@@ -11,12 +11,12 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public final class Db {
+public final class Database {
 
     private final String filename;
     private ArrayList<User> users;
 
-    public Db(String filename) {
+    public Database(String filename) {
         this.filename = filename;
         users = new ArrayList<>();
         loadUsersFromFile();

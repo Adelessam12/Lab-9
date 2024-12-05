@@ -1,16 +1,12 @@
 package lab.pkg9;
 
-import Frontend.Login;
-import Frontend.Register;
-import Frontend.Register;
-import static java.awt.PageAttributes.MediaType.D;
 import java.util.Date;
 
 public class UserManager {
 
-    private final Db userDatabase;
+    private final Database userDatabase;
 
-    public UserManager(Db userDatabase) {
+    public UserManager(Database userDatabase) {
         this.userDatabase = userDatabase;
     }
 

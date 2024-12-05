@@ -9,7 +9,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import lab.pkg9.ContentManager;
-import lab.pkg9.Db;
+import lab.pkg9.Database;
 import lab.pkg9.Friend_Management;
 import lab.pkg9.UserManager;
 
@@ -23,7 +23,7 @@ public class StartupPage extends javax.swing.JFrame {
      * Creates new form StartupPage
      */
     
-    private Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json");
+    private Database db = new Database("C:\\Users\\Dell\\Desktop\\database.json");
 
     private UserManager M = new UserManager(db);
     private ContentManager CM = new ContentManager(db);

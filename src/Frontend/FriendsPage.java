@@ -12,13 +12,13 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import lab.pkg9.Db;
-import lab.pkg9.FriendManagement;
+import lab.pkg9.Database;
+import lab.pkg9.FriendshipService;
 import lab.pkg9.User;
-import static lab.pkg9.FriendManagement.blockFriend;
-import static lab.pkg9.FriendManagement.acceptFriendRequest;
-import static lab.pkg9.FriendManagement.declineFriendRequest;
-import static lab.pkg9.FriendManagement.sendFriendRequest;
+import static lab.pkg9.FriendshipService.blockFriend;
+import static lab.pkg9.FriendshipService.acceptFriendRequest;
+import static lab.pkg9.FriendshipService.declineFriendRequest;
+import static lab.pkg9.FriendshipService.sendFriendRequest;
 /**
  *
  * @author Mahmoud Waleed
@@ -30,8 +30,8 @@ public class FriendsPage extends javax.swing.JFrame {
      */
    
     private final User user;
-    private final Db db;
-    public FriendsPage(User user, Db db) {
+    private final Database db;
+    public FriendsPage(User user, Database db) {
         initComponents();
         this.user = user;
         this.db = db;
@@ -296,7 +296,7 @@ public class FriendsPage extends javax.swing.JFrame {
     
     public void loadSuggestions(){
         friendSuggestionspanel.removeAll();
-        FriendManagement FM= new FriendManagement(db);
+        FriendshipService FM= new FriendshipService(db);
         ArrayList<User> suggestions = FM.suggestions(user);
         System.out.println(suggestions.get(0));
         for(User suggestion: suggestions){
