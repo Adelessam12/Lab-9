@@ -18,7 +18,7 @@ public class User {
     public ArrayList<User> blockedList;
     public ArrayList<Post> posts;
     private Map<String, String> sentFriendRequestStatus;
-    private Map<String, String> receivedFriendRequestStatus;
+    private Map<User, ArrayList<String>> receivedFriendRequestStatus;
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth, boolean isOnline) {
         this.userId = userId;
@@ -72,11 +72,11 @@ public class User {
         this.sentFriendRequestStatus = sentFriendRequestStatus;
     }
 
-    public Map<String, String> getReceivedFriendRequestStatus() {
+    public Map<User, ArrayList<String>> getReceivedFriendRequestStatus() {
         return receivedFriendRequestStatus;
     }
 
-    public void setReceivedFriendRequestStatus(Map<String, String> receivedFriendRequestStatus) {
+    public void setReceivedFriendRequestStatus(Map<User, ArrayList<String>> receivedFriendRequestStatus) {
         this.receivedFriendRequestStatus = receivedFriendRequestStatus;
     }
     

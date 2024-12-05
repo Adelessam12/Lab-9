@@ -27,7 +27,10 @@ public class FriendManagement {
 
     public static void setRecievedRequestStatus(User user, User friend, String status) {
         Map m = friend.getReceivedFriendRequestStatus();
-        m.put(user.getUsername(), status);
+        ArrayList<String> details = new ArrayList<>();
+        details.add(user.getUsername());
+        details.add(status);
+        m.put(user,details);
     }
 
     public static void sendFriendRequest(User user, User friend) {
@@ -36,10 +39,14 @@ public class FriendManagement {
     }
 
     public static void acceptFriendRequest(User user, User friend) {
+        for(User u: user.friendList){
+            if(u.equals(friend))
+                return;
+        }
         setSentRequestStatus(friend, user, "Accepted");
         setRecievedRequestStatus(friend, user,"Accepted");
         user.addFriend(friend);
-        friend.addFriend(user);
+        friend.addFriend(user); 
     }
 
     public static void declineFriendRequest(User user, User friend) {
@@ -77,7 +84,7 @@ public class FriendManagement {
         System.out.println(mah.getSentFriendRequestStatus());
         System.out.println(ahm.getReceivedFriendRequestStatus());
         System.out.println(ahm.getSentFriendRequestStatus()+"\n");
-        declineFriendRequest(ahm, mah);
+        acceptFriendRequest(ahm, mah);
         System.out.println(mah.getSentFriendRequestStatus());
         System.out.println(ahm.getReceivedFriendRequestStatus());
         System.out.println(mah.getReceivedFriendRequestStatus()+"\n");
@@ -90,6 +97,8 @@ public class FriendManagement {
         }
         Date dateOfBirth3 = new Date(1995 - 1900, 5, 15);
         User bro = new User("bro1","bro@","br0","12345",dateOfBirth3,false);
+        sendFriendRequest(bro, ahm);
+        System.out.println(ahm.getReceivedFriendRequestStatus());
         //System.out.println(suggestions(mah));
        // System.out.println(suggestions(ahm));
     }
