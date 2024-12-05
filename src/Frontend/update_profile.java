@@ -195,8 +195,14 @@ public class update_profile extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(19, 19, 19)
                                         .addComponent(jButton1)
@@ -207,14 +213,8 @@ public class update_profile extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton5))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(29, 29, 29)
-                                        .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(159, 159, 159))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
+                                        .addComponent(jButton5)))
+                                .addGap(159, 159, 159)))
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -448,7 +448,7 @@ public class update_profile extends javax.swing.JFrame {
         user7.setProfile(new Profile(null));
         user7.setIsOnline(true);
 
-        User user8 = new User("grace@example.com", "Grace", "hashedPassword", new Date());
+        User user8 = new User("grace@example.com", "hamdy", "hashedPassword", new Date());
         user8.setProfile(new Profile(null));
 
         User user9 = new User("henry@example.com", "Henry", "hashedPassword", new Date());
@@ -458,7 +458,7 @@ public class update_profile extends javax.swing.JFrame {
         user10.setProfile(new Profile(null));
 
         // Adding friends to the main user
-        user.addFriend(user);
+        
         user.addFriend(user3);
         user.addFriend(user4);
         user.addFriend(user5);
@@ -490,7 +490,7 @@ public class update_profile extends javax.swing.JFrame {
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(() -> {
-            User user = new User("grace@example.com", "Grace", "hashedPassword", new Date());
+            User user = new User("grace@example.com", "hamdy", "hashedPassword", new Date());
             user.setProfile(new Profile(null));
             new update_profile(user).setVisible(true);
         });

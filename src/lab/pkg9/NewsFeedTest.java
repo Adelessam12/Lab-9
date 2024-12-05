@@ -73,8 +73,9 @@ public class NewsFeedTest {
 
         // Create NewsFeed for user1 and load dummy data
         Db database= new Db("hello");
-        ContentManager cm = new ContentManager();
-        NewsFeed newsFeed = new NewsFeed(user1, database,cm);
+        ContentManager cm = new ContentManager(database);
+        UserManager M= new UserManager(database);
+        NewsFeed newsFeed = new NewsFeed(user1, database,cm, M);
 
         // Display the newsfeed window
         newsFeed.setVisible(true);

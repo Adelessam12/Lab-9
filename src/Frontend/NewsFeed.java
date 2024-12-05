@@ -15,6 +15,7 @@ import lab.pkg9.Db;
 import lab.pkg9.Friend_Management;
 import lab.pkg9.Post;
 import lab.pkg9.User;
+import lab.pkg9.UserManager;
 
 /**
  *
@@ -30,7 +31,8 @@ public final class NewsFeed extends javax.swing.JFrame {
  Db database;
  User user;
     ContentManager Cm;
-    public NewsFeed(User user,Db database, ContentManager Cm) {
+    UserManager M;
+    public NewsFeed(User user,Db database, ContentManager Cm, UserManager M) {
            setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
         ImageIcon originalIcon =new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
@@ -39,6 +41,7 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
         this.database=database;
         this.user=user;
         this.Cm=Cm;
+        this.M=M;
         loadnewsfeed(user,database);
     }
 
@@ -67,6 +70,7 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
         Profile_button = new javax.swing.JButton();
         create_content_button = new javax.swing.JButton();
         friend_managment_button = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,10 +123,31 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
             }
         });
 
+        ImageIcon originalIcon4 =new javax.swing.ImageIcon("C:\\Users\\Dell\\Desktop\\logout-vector-icon.jpg");
+        Image scaledImage4 = originalIcon4.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        jButton1.setIcon(new ImageIcon(scaledImage4));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(466, 466, 466)
+                .addComponent(Refresh_button)
+                .addGap(18, 18, 18)
+                .addComponent(Profile_button)
+                .addGap(18, 18, 18)
+                .addComponent(create_content_button)
+                .addGap(18, 18, 18)
+                .addComponent(friend_managment_button)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,16 +161,6 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 712, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(497, 497, 497)
-                .addComponent(Refresh_button)
-                .addGap(51, 51, 51)
-                .addComponent(Profile_button)
-                .addGap(36, 36, 36)
-                .addComponent(create_content_button)
-                .addGap(18, 18, 18)
-                .addComponent(friend_managment_button)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,14 +172,15 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 631, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Refresh_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
                     .addComponent(Profile_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(create_content_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(friend_managment_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(56, 56, 56))
+                    .addComponent(friend_managment_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(40, 40, 40))
         );
 
         pack();
@@ -211,6 +227,14 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
     private void friend_managment_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friend_managment_buttonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_friend_managment_buttonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            M.logout(user);
+            this.dispose();
+            StartupPage sp= new StartupPage();
+            sp.setVisible(true);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param user
@@ -322,6 +346,7 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
     private javax.swing.JPanel friendSuggestionspanel;
     private javax.swing.JButton friend_managment_button;
     private javax.swing.JPanel friendsContainerPanel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

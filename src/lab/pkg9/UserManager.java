@@ -1,5 +1,9 @@
 package lab.pkg9;
 
+import Frontend.Login;
+import Frontend.Register;
+import Frontend.Register;
+import static java.awt.PageAttributes.MediaType.D;
 import java.util.Date;
 
 public class UserManager {
@@ -59,9 +63,9 @@ public class UserManager {
         }
     }
 
-    public User login(String username, String password) {
+    public User login(String email, String password) {
         for (User user : userDatabase.getUsers()) {
-            if (user.getUsername().equals(username) && validatePassword(user.getHashedPassword(), password)) {
+            if (user.getEmail().equals(email) && validatePassword(user.getHashedPassword(), password)) {
                 user.setIsOnline(true);
                 userDatabase.saveUsersToFile();
                 System.out.println("User logged in successfully.");
@@ -147,26 +151,17 @@ public class UserManager {
         // Assuming you have already set up the database (Db) and user manager
         Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json"); 
         UserManager userManager = new UserManager(db);
-
-        User user1 = new User("user1@example.com", "user1", "password123", new Date(1995, 10, 15));
-        User user2 = new User("user2@example.com", "user2", "password456", new Date(1997, 5, 25));
-
-        Story story1 = new Story("story1", user1.getUserId(), "This is the first story.", "", new Date()); // user1 posts a story
-        Story story2 = new Story("story2", user2.getUserId(), "This is the second story.", "", new Date()); // user2 posts a story
-        user1.addstory(story1);
-        user2.addstory(story2);
-        Post post1 = new Post("post1", user1.getUserId(), "This is the first post.", "", new Date()); // user1 creates a post
-        Post post2 = new Post("post2", user2.getUserId(), "This is the second post.", "", new Date()); // user2 creates a post
-            user1.addPost(post1);
-            user2.addPost(post2);
-            
-        Profile profile1 = new Profile("Hello, I am user1. I love programming!"); // Bio for user1
-        Profile profile2 = new Profile("Hey, I am user2. I enjoy hiking and coding!"); // Bio for user2
-        user1.setProfile(profile1);
-            user2.setProfile(profile2);
-        userManager.addUser(user1);
-        userManager.addUser(user2);
-
+ContentManager ContentManager= new ContentManager(db);
+Friend_Management FM = new Friend_Management(db);
+      for(User user : db.getUsers())
+      {
+          System.out.println(user);
+      }
+            //Login l= new Login(userManager, ContentManager,db,FM);
+           // l.setVisible(true);
+            Register r = new Register(userManager);
+            r.setVisible(true);
+           
     }
    
 

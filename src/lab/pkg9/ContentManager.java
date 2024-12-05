@@ -5,8 +5,9 @@ import java.util.ArrayList;
 
 public class ContentManager implements ContentCreatable {
    
-
-    public ContentManager() {
+Db db;
+    public ContentManager(Db db) {
+        this.db = db;
       
     }
 
@@ -15,6 +16,7 @@ public class ContentManager implements ContentCreatable {
         String postId = generateUniqueId();
         Post newPost = new Post(postId, user.getUserId(), content, imagePath, new java.util.Date());
         user.addPost(newPost);
+        db.saveUsersToFile();
        
     }
 
@@ -23,6 +25,7 @@ public class ContentManager implements ContentCreatable {
         String storyId = generateUniqueId();
         Story newStory = new Story(storyId, user.getUserId(), content, imagePath, new java.util.Date());
         user.addstory(newStory);
+        db.saveUsersToFile();
     }
 
   
