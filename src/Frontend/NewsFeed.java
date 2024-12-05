@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import lab.pkg9.ContentManager;
 import lab.pkg9.Db;
+import lab.pkg9.FriendManagement;
 import lab.pkg9.Friend_Management;
 import lab.pkg9.Post;
 import lab.pkg9.User;
@@ -39,10 +40,11 @@ public final class NewsFeed extends javax.swing.JFrame {
 Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
 Profile_button.setIcon(new ImageIcon(scaledImage));
         this.database=database;
+        
         this.user=user;
         this.Cm=Cm;
         this.M=M;
-        loadnewsfeed(user,database);
+        loadnewsfeed();
     }
 
     public NewsFeed() throws HeadlessException {
@@ -87,7 +89,7 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
         jScrollPane3.setViewportView(friendsContainerPanel);
 
         friendSuggestionspanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Friend suggestions"));
-        friendSuggestionspanel.setLayout(new javax.swing.BoxLayout(friendSuggestionspanel, javax.swing.BoxLayout.X_AXIS));
+        friendSuggestionspanel.setLayout(new javax.swing.BoxLayout(friendSuggestionspanel, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane4.setViewportView(friendSuggestionspanel);
 
         ImageIcon originalIcon =new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\src\\R.png");
@@ -190,7 +192,7 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
         Storiescontainerpanel.removeAll();
         friendsContainerPanel.removeAll();
         Friendpostspanel.removeAll();
-        loadnewsfeed(user, database);
+        loadnewsfeed();
         
     }//GEN-LAST:event_Refresh_buttonActionPerformed
 
@@ -225,7 +227,9 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
     }//GEN-LAST:event_Profile_buttonActionPerformed
 
     private void friend_managment_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friend_managment_buttonActionPerformed
-        // TODO add your handling code here:
+
+FriendsPage fp = new FriendsPage(user, database);
+fp.setVisible(true);
     }//GEN-LAST:event_friend_managment_buttonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -239,11 +243,11 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
     /**
      * @param user
      */
-    public void loadnewsfeed(User user, Db database)
+    public void loadnewsfeed()
     {
         loadFriends(user);
         loadPosts(user);
-        loadSuggestions(user, database);
+        loadSuggestions();
         loadfriendstories(user);
     }
     public void loadPosts(User user) {
@@ -291,10 +295,11 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
         }
     }
     
-    public void loadSuggestions(User user, Db dataBase){
-        friendSuggestionspanel.removeAll();
-        Friend_Management friendManage = new Friend_Management(dataBase);
-        ArrayList<User> suggestions = friendManage.suggestions(user);
+    public void loadSuggestions(){
+      friendSuggestionspanel.removeAll();
+        FriendManagement FM= new FriendManagement(database);
+        ArrayList<User> suggestions = FM.suggestions(user);
+        System.out.println(suggestions.get(0));
         for(User suggestion: suggestions){
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
             SuggestionPanel suggestionPanel = new SuggestionPanel(suggestion.getUsername(), profileImagePath);

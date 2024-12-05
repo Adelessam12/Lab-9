@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class FriendManagement {
 
-    static Db db;
+     private Db db;
 
     public FriendManagement(Db db) {
         this.db = db;
@@ -60,7 +60,7 @@ public class FriendManagement {
         user.addToBlocked(friend);
     }
 
-    public static ArrayList<User> suggestions(User user) {
+    public  ArrayList<User> suggestions(User user) {
         ArrayList<User> suggestions = new ArrayList<>();
 
         for (User suggested : db.getUsers()) {

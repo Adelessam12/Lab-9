@@ -39,7 +39,7 @@ public class FriendsPage extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         friendsContainer.setLayout(new BoxLayout(friendsContainer, BoxLayout.Y_AXIS));
         requestsContainer.setLayout(new BoxLayout(requestsContainer, BoxLayout.Y_AXIS));
-        //loadSuggestions();
+        loadSuggestions();
     }
 
     /**
@@ -294,7 +294,9 @@ public class FriendsPage extends javax.swing.JFrame {
     
     public void loadSuggestions(){
         friendSuggestionspanel.removeAll();
-        ArrayList<User> suggestions = FriendManagement.suggestions(user);
+        FriendManagement FM= new FriendManagement(db);
+        ArrayList<User> suggestions = FM.suggestions(user);
+        System.out.println(suggestions.get(0));
         for(User suggestion: suggestions){
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
             SuggestionPanel suggestionPanel = new SuggestionPanel(suggestion.getUsername(), profileImagePath);
