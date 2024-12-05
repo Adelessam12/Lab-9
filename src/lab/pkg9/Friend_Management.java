@@ -5,6 +5,7 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.Map;
 
 /**
@@ -58,19 +59,21 @@ public class Friend_Management {
     }
 
     public ArrayList<User> suggestions(User user) {
-        ArrayList<User> suggestions = new ArrayList<>();
-        for (User suggested : db.getUsers()) {
-            if (!suggested.equals(user) && !user.getFriendList().contains(suggested) && !user.getBlockedList().contains(suggested)) {
-                suggestions.add(suggested);
-                for (User commonFriend : user.getFriendList()) {
-                    if (suggested.getFriendList().contains(commonFriend)) {
-                        System.out.println("Has mutual friends");
-                    }
+    ArrayList<User> suggestions = new ArrayList<>();
+    
+    for (User suggested : db.getUsers()) {
+        if (!suggested.equals(user) && !user.getFriendList().contains(suggested) && !user.getBlockedList().contains(suggested)) {
+           for (User commonFriend : user.getFriendList()) {
+                if (suggested.getFriendList().contains(commonFriend)) {
+                    suggestions.add(suggested);
                 }
-
             }
         }
-        return suggestions;
     }
+    ArrayList<User> uniqueSuggestions = new ArrayList<>(new LinkedHashSet<>(suggestions));
+    
+    return uniqueSuggestions;
+}
+
 
 }

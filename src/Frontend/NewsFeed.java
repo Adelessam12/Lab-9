@@ -7,6 +7,8 @@ package Frontend;
 import java.awt.HeadlessException;
 import java.util.ArrayList;
 import java.util.Collections;
+import lab.pkg9.Db;
+import lab.pkg9.Friend_Management;
 import lab.pkg9.Post;
 import lab.pkg9.User;
 
@@ -18,17 +20,18 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     /**
      * Creates new form NewsFeed
+     *
      * @param user
      */
-    
     public NewsFeed(User user) {
-       initComponents();
-            loadPosts(user);
-            loadFriends(user);
-            loadfriendstories(user);
+        initComponents();
+        loadPosts(user);
+        loadFriends(user);
+        loadfriendstories(user);
     }
 
     public NewsFeed() throws HeadlessException {
+
     }
 
     /**
@@ -109,22 +112,18 @@ public final class NewsFeed extends javax.swing.JFrame {
      * @param user
      */
     public void loadPosts(User user) {
-        ArrayList<Post> allfriendsposts= new ArrayList<>();
-for(User friend: user.getFriendList())
-   for(Post post :friend.getPosts())
-   {
-      allfriendsposts.add(post);
-   }
-         Collections.sort(allfriendsposts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
-         
-  
-       
+        ArrayList<Post> allfriendsposts = new ArrayList<>();
+        for (User friend : user.getFriendList()) {
+            for (Post post : friend.getPosts()) {
+                allfriendsposts.add(post);
+            }
+        }
+        Collections.sort(allfriendsposts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
 
         // Add PostPanel for each post (text first, then image)
-       for (Post post: allfriendsposts)
-       {
-           Friendpostspanel.add(new PostPanel(post.getContent(),post.getImagePath()));
-       }
+        for (Post post : allfriendsposts) {
+            Friendpostspanel.add(new PostPanel(post.getContent(), post.getImagePath()));
+        }
 
         // Refresh the UI to show new posts
         Friendpostspanel.revalidate();
@@ -132,29 +131,43 @@ for(User friend: user.getFriendList())
     }
 
     public void loadFriends(User user) {
-    friendsContainerPanel.removeAll();
+        friendsContainerPanel.removeAll();
 
-    ArrayList<User> friends = user.getFriendList();
-    for (User friend : friends) {
-        String username = friend.getUsername();
-        String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
+        ArrayList<User> friends = user.getFriendList();
+        for (User friend : friends) {
+            String username = friend.getUsername();
+            String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
 
-        FriendPanel friendPanel = new FriendPanel(username, profileImagePath,friend.isIsOnline());
-        friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));  // Consistent size for each friend panel
+            FriendPanel friendPanel = new FriendPanel(username, profileImagePath, friend.isIsOnline());
+            friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));  // Consistent size for each friend panel
 
-        friendsContainerPanel.add(friendPanel);
+            friendsContainerPanel.add(friendPanel);
+        }
+
+        friendsContainerPanel.revalidate();
+        friendsContainerPanel.repaint();
     }
 
-    friendsContainerPanel.revalidate();
-    friendsContainerPanel.repaint();
-}
-public void loadfriendstories(User user) {
-    for (User friend : user.getFriendList()) {
-        
-        StoryPanel storyPanel = new StoryPanel(friend);
-        Storiescontainerpanel.add(storyPanel);
+    public void loadfriendstories(User user) {
+        for (User friend : user.getFriendList()) {
+
+            StoryPanel storyPanel = new StoryPanel(friend);
+            Storiescontainerpanel.add(storyPanel);
+        }
     }
-}
+    
+    public void loadSuggestions(User user, Db dataBase){
+        Friend_Management friendManage = new Friend_Management(dataBase);
+        ArrayList<User> suggestions = friendManage.suggestions(user);
+        for(User suggestion: suggestions){
+            String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
+            FriendPanel friendPanel = new FriendPanel(suggestion.getUsername(), profileImagePath, suggestion.isIsOnline());
+            friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));
+            friendSuggestionspanel.add(friendPanel);
+        }
+        friendSuggestionspanel.revalidate();
+        friendSuggestionspanel.repaint();
+    }
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
