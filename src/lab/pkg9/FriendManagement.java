@@ -29,10 +29,7 @@ public class FriendManagement {
 
     public static void setRecievedRequestStatus(User user, User friend, String status) {
         Map m = friend.getReceivedFriendRequestStatus();
-        ArrayList<String> details = new ArrayList<>();
-        details.add(user.getUsername());
-        details.add(status);
-        m.put(user, details);
+        m.put(user, status);
     }
 
     public static void sendFriendRequest(User user, User friend) {

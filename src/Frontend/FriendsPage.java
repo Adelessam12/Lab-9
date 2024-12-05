@@ -223,16 +223,16 @@ public class FriendsPage extends javax.swing.JFrame {
 
   //add friend requests to the UI
     if (user.getReceivedFriendRequestStatus()!= null && !user.getReceivedFriendRequestStatus().isEmpty()) {
-        for (Map.Entry<User, ArrayList<String>> user1 : user.getReceivedFriendRequestStatus().entrySet()) {
-            if(user1.getValue().get(1).contains("Pending")){
-                System.out.println(user1.getValue().get(1));
+        for (Map.Entry<User, String> user1 : user.getReceivedFriendRequestStatus().entrySet()) {
+            if(user1.getValue().contains("Pending")){
+                System.out.println(user1.getValue());
                 System.out.println(user.getReceivedFriendRequestStatus());
             
             JPanel entryPanel = new JPanel();
             entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
             
             // Create the label dynamically for each friend
-            JLabel newLabel = new JLabel(user1.getValue().get(0)+ " "+user1.getValue().get(1)); 
+            JLabel newLabel = new JLabel(user1.getKey().getUsername()+ " "+user1.getValue()); 
             JButton accept = new JButton("Accept"); 
             JButton decline = new JButton("Delete"); 
             
