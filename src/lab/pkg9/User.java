@@ -4,30 +4,25 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import lab.pkg9.Post;
-import lab.pkg9.Profile;
-import lab.pkg9.Story;
 
 public class User {
 
     private final String userId;
     private final String email;
     private final String username;
-    private  String hashedPassword;
+    private String hashedPassword;
     private final Date dateOfBirth;
-    private  boolean isOnline;
-   //new updates 
-private  final ArrayList<Story> stories;
-  private final ArrayList<Post> posts;
+    private boolean isOnline;
+    //new updates 
+    private final ArrayList<Story> stories;
+    private final ArrayList<Post> posts;
     private final ArrayList<User> friendList;
     private final ArrayList<User> blockedList;
-    private  Profile profile;
-   
+    private Profile profile;
 
-  // two mab objects to store the id && satuts 
+    // two mab objects to store the id && satuts 
     private Map<String, String> sentFriendRequestStatus;
     private Map<String, String> receivedFriendRequestStatus;
-
 
     public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
         this.userId = userId;
@@ -36,12 +31,10 @@ private  final ArrayList<Story> stories;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
 
-        profile = new Profile( null);
-
-    
+        profile = new Profile(null);
 
         this.isOnline = false;
-        stories=new ArrayList<>();
+        stories = new ArrayList<>();
         friendList = new ArrayList<>();
         blockedList = new ArrayList<>();
         this.posts = new ArrayList<>();
@@ -66,35 +59,30 @@ private  final ArrayList<Story> stories;
         return stories;
     }
 
- 
-    public void removeFriend(User friend){
+    public void removeFriend(User friend) {
         friendList.remove(friend);
     }
-    
-    public void addToBlocked(User friend){
-        friendList.add(friend);
+
+    public void addToBlocked(User friend) {
+        blockedList.add(friend);
     }
-    
 
     public ArrayList<User> getFriendList() {
         return friendList;
     }
 
-
-
     public ArrayList<User> getBlockedList() {
         return blockedList;
     }
 
-public void addFriend(User user) {
-    if (!friendList.contains(user)) {
-        // The next two Lines ensures that A is friend to B and B is a friend to A
-        friendList.add(user);       // Add the user to the current user's friend list
-        user.friendList.add(this);  // Add the current user to the friend's list
-        // this keyword is refrence to the object who called add friend method 
+    public void addFriend(User user) {
+        if (!friendList.contains(user)) {
+            // The next two Lines ensures that A is friend to B and B is a friend to A
+            friendList.add(user);       // Add the user to the current user's friend list
+            user.friendList.add(this);  // Add the current user to the friend's list
+            // this keyword is refrence to the object who called add friend method 
+        }
     }
-}
-
 
     public Map<String, String> getSentFriendRequestStatus() {
         return sentFriendRequestStatus;
@@ -111,12 +99,10 @@ public void addFriend(User user) {
     public void setReceivedFriendRequestStatus(Map<String, String> receivedFriendRequestStatus) {
         this.receivedFriendRequestStatus = receivedFriendRequestStatus;
     }
-    
 
     public Profile getProfile() {
         return profile;
     }
-
 
     public ArrayList<Post> getPosts() {
         return posts;
@@ -126,9 +112,7 @@ public void addFriend(User user) {
         this.posts.add(post);
     }
 
-    
-    public void addstory (Story story)
-    {
+    public void addstory(Story story) {
         this.stories.add(story);
     }
 
@@ -136,33 +120,26 @@ public void addFriend(User user) {
         return userId;
     }
 
-
     public String getEmail() {
         return email;
     }
-
-
 
     public String getUsername() {
         return username;
     }
 
-  
     public String getHashedPassword() {
         return hashedPassword;
     }
-
 
     public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-  
     public boolean isIsOnline() {
         return isOnline;
     }
 
-  
     @Override
     public String toString() {
         return "User{" + "userId=" + userId + ", email=" + email + ", username=" + username + ", hashedPassword=" + hashedPassword + ", dateOfBirth=" + dateOfBirth + ", isOnline=" + isOnline + '}';

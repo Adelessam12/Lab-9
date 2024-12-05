@@ -63,9 +63,7 @@ public class PostPanel extends JPanel {
                     Image scaledImage = imageIcon.getImage();
                     JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
                     imagePanel.add(imageLabel);  
-                } else {
-                    imagePanel.add(createErrorPanel("Image not found!"));  
-                }
+                } 
             } catch (Exception e) {
                 e.printStackTrace();
                 imagePanel.add(createErrorPanel("Failed to load image!"));

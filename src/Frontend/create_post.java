@@ -10,13 +10,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import lab.pkg9.ContentManager;
+import lab.pkg9.User;
 
 /**
  *
  * @author Dell
  */
 public class create_post extends javax.swing.JFrame {
-    private final String userId;
+    private final User user;
     private String imagePath;
     private final ContentManager contentManager;
     /**
@@ -26,8 +27,8 @@ public class create_post extends javax.swing.JFrame {
      */
 
 
-    public create_post(String userId, ContentManager contentManager) {
-        this.userId = userId;
+    public create_post(User user, ContentManager contentManager) {
+        this.user = user;
         imagePath = null;
         this.contentManager = contentManager;
         initComponents();       
@@ -139,7 +140,7 @@ public class create_post extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
-        contentManager.createPost(userId, content, imagePath);
+        contentManager.createPost(user, content, imagePath);
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

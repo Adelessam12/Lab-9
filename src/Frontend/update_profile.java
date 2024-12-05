@@ -29,26 +29,20 @@ import lab.pkg9.User;
  * @author Dell
  */
 public class update_profile extends javax.swing.JFrame {
+
     /**
      * Creates new form update_profile
      */
-   
-
-  public update_profile() {
-    setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
-   
-      initComponents();   
-    
-    
-    bioTextPane.setEditable(false);
-    jLabel1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-    User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-    user.setProfile(new Profile("hello i am very delighted to announce "));
-      loaduser(user);
-      
-   
-}
-
+User user;
+    public update_profile(User user) {
+        setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
+        initComponents();
+        bioTextPane.setEditable(false);
+        jLabel1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
+        
+this.user=user;
+        loaduser(user);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +68,7 @@ public class update_profile extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         coverphotolabel = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -139,6 +134,13 @@ public class update_profile extends javax.swing.JFrame {
 
         jLabel3.setText("Friends:");
 
+        jButton5.setText("return to newsfeed");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -164,13 +166,18 @@ public class update_profile extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(74, 74, 74)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(16, 16, 16)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(73, 73, 73)
                         .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -198,7 +205,9 @@ public class update_profile extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton5))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(29, 29, 29)
                                         .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -225,136 +234,139 @@ public class update_profile extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
- 
-    JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
-    int returnValue = fileChooser.showOpenDialog(this);
-    if (returnValue == JFileChooser.APPROVE_OPTION) {
-        File selectedFile = fileChooser.getSelectedFile();
-        String path = selectedFile.getAbsolutePath();
-        ProfilePanel profilePanel = (ProfilePanel) profielphoto;
-        profilePanel.setProfileImage(path);
-    }
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+        int returnValue = fileChooser.showOpenDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String path = selectedFile.getAbsolutePath();
+            ProfilePanel profilePanel = (ProfilePanel) profielphoto;
+            profilePanel.setProfileImage(path);
+        }
 
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-     
-JFileChooser fileChooser = new JFileChooser();
-fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
-int returnValue = fileChooser.showOpenDialog(this);
-if (returnValue == JFileChooser.APPROVE_OPTION) {
-    File selectedFile = fileChooser.getSelectedFile();
-    
-    // Load the image from the selected file
-    ImageIcon coverPhoto = new ImageIcon(selectedFile.getAbsolutePath());
-    
-    // Scale the image to the specific size (945x309)
-    Image scaledImage = coverPhoto.getImage().getScaledInstance(945, 309, Image.SCALE_SMOOTH);
-    
-    // Ensure the label size is fixed and matches the desired image size
-    coverphotolabel.setPreferredSize(new Dimension(945, 309));  // Set preferred size for label
-    coverphotolabel.setIcon(new ImageIcon(scaledImage));  // Set scaled image as the icon
-    coverphotolabel.revalidate();  // Revalidate the label to apply the new preferred size
-}
+
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+        int returnValue = fileChooser.showOpenDialog(this);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+
+            // Load the image from the selected file
+            ImageIcon coverPhoto = new ImageIcon(selectedFile.getAbsolutePath());
+
+            // Scale the image to the specific size (945x309)
+            Image scaledImage = coverPhoto.getImage().getScaledInstance(945, 309, Image.SCALE_SMOOTH);
+
+            // Ensure the label size is fixed and matches the desired image size
+            coverphotolabel.setPreferredSize(new Dimension(945, 309));  // Set preferred size for label
+            coverphotolabel.setIcon(new ImageIcon(scaledImage));  // Set scaled image as the icon
+            coverphotolabel.revalidate();  // Revalidate the label to apply the new preferred size
+        }
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
- 
-         User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-    user.setProfile(new Profile("hello i am very delighted to announce "));
+
+        User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        user.setProfile(new Profile("hello i am very delighted to announce "));
         JDialog dialog = new JDialog(this, "Update Bio", true);
-    dialog.setLayout(new BorderLayout());
-    dialog.setSize(400, 150);
-    dialog.setLocationRelativeTo(this);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(400, 150);
+        dialog.setLocationRelativeTo(this);
 
-    JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-    JLabel bioLabel = new JLabel("New Bio:");
-    JTextField bioTextField = new JTextField(30); 
-    inputPanel.add(bioLabel);
-    inputPanel.add(bioTextField);
+        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        JLabel bioLabel = new JLabel("New Bio:");
+        JTextField bioTextField = new JTextField(30);
+        inputPanel.add(bioLabel);
+        inputPanel.add(bioTextField);
 
-    dialog.add(inputPanel, BorderLayout.CENTER);
+        dialog.add(inputPanel, BorderLayout.CENTER);
 
-    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-    JButton saveButton = new JButton("Save");
-    JButton cancelButton = new JButton("Cancel");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        JButton saveButton = new JButton("Save");
+        JButton cancelButton = new JButton("Cancel");
 
-    saveButton.addActionListener(e -> {
-        String newBio = bioTextField.getText().trim();
-        if (!newBio.isEmpty()) {
-            user.getProfile().setBio(newBio); 
-            loadBio(user);
-            dialog.dispose(); 
-        } else {
-            JOptionPane.showMessageDialog(dialog, "Bio cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    });
+        saveButton.addActionListener(e -> {
+            String newBio = bioTextField.getText().trim();
+            if (!newBio.isEmpty()) {
+                user.getProfile().setBio(newBio);
+                loadBio(user);
+                dialog.dispose();
+            } else {
+                JOptionPane.showMessageDialog(dialog, "Bio cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
+        cancelButton.addActionListener(e -> dialog.dispose());
 
-    cancelButton.addActionListener(e -> dialog.dispose());
+        buttonPanel.add(saveButton);
+        buttonPanel.add(cancelButton);
 
-    buttonPanel.add(saveButton);
-    buttonPanel.add(cancelButton);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
 
-    dialog.add(buttonPanel, BorderLayout.SOUTH);
-
-    dialog.setVisible(true);
+        dialog.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-    user.setProfile(new Profile("hello i am very delighted to announce "));
+        User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        user.setProfile(new Profile("hello i am very delighted to announce "));
         JDialog dialog = new JDialog(this, "Update Password", true);
- 
-    dialog.setLayout(new BorderLayout());
-    dialog.setSize(400, 150);
-    dialog.setLocationRelativeTo(this);
 
-    // Input Panel with Label and JPasswordField
-    JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-    JLabel passwordLabel = new JLabel("New Password:");
-    JPasswordField passwordField = new JPasswordField(20); // Password field with masking
-    inputPanel.add(passwordLabel);
-    inputPanel.add(passwordField);
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(400, 150);
+        dialog.setLocationRelativeTo(this);
 
-    dialog.add(inputPanel, BorderLayout.CENTER);
+        // Input Panel with Label and JPasswordField
+        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        JLabel passwordLabel = new JLabel("New Password:");
+        JPasswordField passwordField = new JPasswordField(20); // Password field with masking
+        inputPanel.add(passwordLabel);
+        inputPanel.add(passwordField);
 
-    // Buttons
-    JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
-    JButton saveButton = new JButton("Save");
-    JButton cancelButton = new JButton("Cancel");
+        dialog.add(inputPanel, BorderLayout.CENTER);
 
-    // Save button action
-    saveButton.addActionListener(e -> {
-        char[] newPassword = passwordField.getPassword(); // Get password as a char array
-        String password = new String(newPassword).trim(); // Convert to String and trim
+        // Buttons
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        JButton saveButton = new JButton("Save");
+        JButton cancelButton = new JButton("Cancel");
 
-        if (!password.isEmpty()) {
-            System.out.println(user.getHashedPassword());;
-            user.setHashedPassword(password); // Update password using setter
-            System.out.println(user.getHashedPassword());
-            JOptionPane.showMessageDialog(dialog, "Password updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            dialog.dispose(); // Close the dialog
-        } else {
-            JOptionPane.showMessageDialog(dialog, "Password cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    });
+        // Save button action
+        saveButton.addActionListener(e -> {
+            char[] newPassword = passwordField.getPassword(); // Get password as a char array
+            String password = new String(newPassword).trim(); // Convert to String and trim
 
-    // Cancel button action
-    cancelButton.addActionListener(e -> dialog.dispose());
+            if (!password.isEmpty()) {
+                System.out.println(user.getHashedPassword());;
+                user.setHashedPassword(password); // Update password using setter
+                System.out.println(user.getHashedPassword());
+                JOptionPane.showMessageDialog(dialog, "Password updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                dialog.dispose(); // Close the dialog
+            } else {
+                JOptionPane.showMessageDialog(dialog, "Password cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
 
-    buttonPanel.add(saveButton);
-    buttonPanel.add(cancelButton);
+        // Cancel button action
+        cancelButton.addActionListener(e -> dialog.dispose());
 
-    dialog.add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.add(saveButton);
+        buttonPanel.add(cancelButton);
 
-    // Show the dialog
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+
+        // Show the dialog
     dialog.setVisible(true);    }//GEN-LAST:event_jButton1ActionPerformed
-private void loadPosts() {
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+    private void loadPosts() {
 
         Post post1 = new Post("1", "author1", "This is the first post with text and an image", "C:\\Users\\Dell\\Desktop\\OIP.jpg", new Date());
         String imagePath2 = "C:\\Users\\Dell\\Desktop\\OIP.jpg";  // Use another image for post 2
@@ -369,114 +381,114 @@ private void loadPosts() {
 
         // Add PostPanel for each post (text first, then image)
         postsContainerPanel.add(new PostPanel(post1.getContent(), post1.getImagePath()));
-             postsContainerPanel.add(new PostPanel(post2.getContent(), post2.getImagePath()));
-                 postsContainerPanel.add(new PostPanel(post3.getContent(), post3.getImagePath()));
-             postsContainerPanel.add(new PostPanel(post4.getContent(), post4.getImagePath()));
+        postsContainerPanel.add(new PostPanel(post2.getContent(), post2.getImagePath()));
+        postsContainerPanel.add(new PostPanel(post3.getContent(), post3.getImagePath()));
+        postsContainerPanel.add(new PostPanel(post4.getContent(), post4.getImagePath()));
 
         // Refresh the UI to show new posts
         postsContainerPanel.revalidate();
         postsContainerPanel.repaint();
     }
 
+    private void loadFriends(User user) {
+        friendsContainerPanel.removeAll();
 
-private void loadFriends(User user) {
-    friendsContainerPanel.removeAll();
+        ArrayList<User> friends = user.getFriendList();
+        for (User friend : friends) {
+            String username = friend.getUsername();
+            String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
 
-    ArrayList<User> friends = user.getFriendList();
-    for (User friend : friends) {
-        String username = friend.getUsername();
-        String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
+            FriendPanel friendPanel = new FriendPanel(username, profileImagePath, friend.isIsOnline());
+            friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));  // Consistent size for each friend panel
 
-        FriendPanel friendPanel = new FriendPanel(username, profileImagePath,friend.isIsOnline());
-        friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));  // Consistent size for each friend panel
+            friendsContainerPanel.add(friendPanel);
+        }
 
-        friendsContainerPanel.add(friendPanel);
+        friendsContainerPanel.revalidate();
+        friendsContainerPanel.repaint();
     }
 
-    friendsContainerPanel.revalidate();
-    friendsContainerPanel.repaint();
-}
-public void loaduser(User user)
-{       loadprofile(user);
-    loadPosts();
-    loadSampleFriends();
-    loadBio(user);
-  
-    
-}
-public void loadprofile(User user){
-    ProfilePanel profilePanel = (ProfilePanel) profielphoto;
+    public void loaduser(User user) {
+        loadprofile(user);
+        loadPosts();
+        loadSampleFriends();
+        loadBio(user);
+
+    }
+
+    public void loadprofile(User user) {
+        ProfilePanel profilePanel = (ProfilePanel) profielphoto;
         profilePanel.setProfileImage(user.getProfile().getProfilePhotoPath());
         coverphotolabel.setIcon(new ImageIcon(user.getProfile().getCoverPhotoPath()));
-       
-   
-    
-}
-private void loadSampleFriends() {
-    // Main user
-    User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-    user.setProfile(new Profile( null));
 
-    // Create 10 friends
-    User user2 = new User("2", "alice@example.com", "Alice", "hashedPassword", new Date());
-    user2.setProfile(new Profile( null));
-    
-    User user3 = new User("3", "bob@example.com", "Bob", "hashedPassword", new Date());
-    user3.setProfile(new Profile( null));
+    }
 
-    User user4 = new User("4", "carol@example.com", "Carol", "hashedPassword", new Date());
-    user4.setProfile(new Profile( null));
-    
-    User user5 = new User("5", "dave@example.com", "Dave", "hashedPassword", new Date());
-    user5.setProfile( new Profile( null));
-    
-    User user6 = new User("6", "eve@example.com", "Eve", "hashedPassword", new Date());
-    user6.setProfile(new Profile( null));
-    
-    User user7 = new User("7", "frank@example.com", "Frank", "hashedPassword", new Date());
-    user7.setProfile(new Profile( null));
-    user7.setIsOnline(true);
-    
-    User user8 = new User("8", "grace@example.com", "Grace", "hashedPassword", new Date());
-    user8.setProfile(new Profile( null));
+    private void loadSampleFriends() {
+        // Main user
+        User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        user.setProfile(new Profile(null));
 
-    User user9 = new User("9", "henry@example.com", "Henry", "hashedPassword", new Date());
-    user9.setProfile(new Profile( null));
+        // Create 10 friends
+        User user2 = new User("2", "alice@example.com", "Alice", "hashedPassword", new Date());
+        user2.setProfile(new Profile(null));
 
-    User user10 = new User("10", "irene@example.com", "Irene", "hashedPassword", new Date());
-    user10.setProfile(new Profile( null));
-    
-    // Adding friends to the main user
-    user.addFriend(user);
-    user.addFriend(user3);
-    user.addFriend(user4);
-    user.addFriend(user5);
-    user.addFriend(user6);
-    user.addFriend(user7);
-    user.addFriend(user8);
-    user.addFriend(user9);
-    user.addFriend(user10);
+        User user3 = new User("3", "bob@example.com", "Bob", "hashedPassword", new Date());
+        user3.setProfile(new Profile(null));
 
-    // Call the method to load friends
-    loadFriends(user);
-}
-private void loadBio(User user) {
-    // Get the bio from the user's profile
-    String bio = user.getProfile().getBio();
+        User user4 = new User("4", "carol@example.com", "Carol", "hashedPassword", new Date());
+        user4.setProfile(new Profile(null));
 
-    // Set the bio text into the JTextPane
-    bioTextPane.setText(bio);
-    bioTextPane.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-}
+        User user5 = new User("5", "dave@example.com", "Dave", "hashedPassword", new Date());
+        user5.setProfile(new Profile(null));
 
+        User user6 = new User("6", "eve@example.com", "Eve", "hashedPassword", new Date());
+        user6.setProfile(new Profile(null));
 
+        User user7 = new User("7", "frank@example.com", "Frank", "hashedPassword", new Date());
+        user7.setProfile(new Profile(null));
+        user7.setIsOnline(true);
+
+        User user8 = new User("8", "grace@example.com", "Grace", "hashedPassword", new Date());
+        user8.setProfile(new Profile(null));
+
+        User user9 = new User("9", "henry@example.com", "Henry", "hashedPassword", new Date());
+        user9.setProfile(new Profile(null));
+
+        User user10 = new User("10", "irene@example.com", "Irene", "hashedPassword", new Date());
+        user10.setProfile(new Profile(null));
+
+        // Adding friends to the main user
+        user.addFriend(user);
+        user.addFriend(user3);
+        user.addFriend(user4);
+        user.addFriend(user5);
+        user.addFriend(user6);
+        user.addFriend(user7);
+        user.addFriend(user8);
+        user.addFriend(user9);
+        user.addFriend(user10);
+
+        // Call the method to load friends
+        loadFriends(user);
+    }
+
+    private void loadBio(User user) {
+        // Get the bio from the user's profile
+        String bio = user.getProfile().getBio();
+
+        // Set the bio text into the JTextPane
+        bioTextPane.setText(bio);
+        bioTextPane.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
+    }
+
+    public update_profile() {
+    }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-       
-        
+
         java.awt.EventQueue.invokeLater(() -> {
             new update_profile().setVisible(true);
         });
@@ -490,6 +502,7 @@ private void loadBio(User user) {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
