@@ -19,7 +19,7 @@ public class StartupPage extends javax.swing.JFrame {
     /**
      * Creates new form StartupPage
      */
-    private Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json");
+    private Db db = new Db("C:\\Users\\Mahmoud Waleed\\Downloads\\database.json");
     private UserManager M = new UserManager(db);
     private ContentManager CM = new ContentManager(db);
 

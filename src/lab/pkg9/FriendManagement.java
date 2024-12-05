@@ -64,7 +64,7 @@ public class FriendManagement {
         ArrayList<User> suggestions = new ArrayList<>();
 
         for (User suggested : db.getUsers()) {
-            if (!suggested.equals(user) && !user.getFriendList().contains(suggested) && !user.getBlockedList().contains(suggested)) {
+            if (!suggested.equals(user) && !user.getFriendList().contains(suggested) && !user.getBlockedList().contains(suggested)&&!user.getSentFriendRequestStatus().containsValue("Pending")) {
                 for (User commonFriend : user.getFriendList()) {
                     if (suggested.getFriendList().contains(commonFriend)) {
                         suggestions.add(suggested);

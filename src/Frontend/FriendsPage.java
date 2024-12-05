@@ -4,6 +4,7 @@
  */
 package Frontend;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -40,6 +41,7 @@ public class FriendsPage extends javax.swing.JFrame {
         friendsContainer.setLayout(new BoxLayout(friendsContainer, BoxLayout.Y_AXIS));
         requestsContainer.setLayout(new BoxLayout(requestsContainer, BoxLayout.Y_AXIS));
         loadSuggestions();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     /**
@@ -301,7 +303,19 @@ public class FriendsPage extends javax.swing.JFrame {
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
             SuggestionPanel suggestionPanel = new SuggestionPanel(suggestion.getUsername(), profileImagePath);
             suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
+            JButton add = new JButton("Add Friend");
+            suggestionPanel.add(add);
             friendSuggestionspanel.add(suggestionPanel);
+             add.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    sendFriendRequest(user, suggestion);
+                    System.out.println(user.getSentFriendRequestStatus());
+                    suggestionPanel.remove(add);
+                    suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+                    friendSuggestionspanel.revalidate();
+                    friendSuggestionspanel.repaint();
+                }
+                });
         }
         friendSuggestionspanel.revalidate();
         friendSuggestionspanel.repaint();
