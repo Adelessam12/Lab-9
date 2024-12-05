@@ -65,14 +65,16 @@ public class NewsFeedTest {
         user4.addstory(story7);
 
         // Set profiles for users
-        Profile profile = new Profile("path/to/profile_image.jpg");
+        Profile profile = new Profile("my bio");
         user1.setProfile(profile);
         user2.setProfile(profile);
         user3.setProfile(profile);
         user4.setProfile(profile);
 
         // Create NewsFeed for user1 and load dummy data
-        NewsFeed newsFeed = new NewsFeed(user1);
+        Db database= new Db("hello");
+        ContentManager cm = new ContentManager();
+        NewsFeed newsFeed = new NewsFeed(user1, database,cm);
 
         // Display the newsfeed window
         newsFeed.setVisible(true);
