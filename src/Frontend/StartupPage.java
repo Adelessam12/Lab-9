@@ -24,6 +24,7 @@ public class StartupPage extends javax.swing.JFrame {
      */
     
     private Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json");
+
     private UserManager M = new UserManager(db);
     private ContentManager CM = new ContentManager(db);
 
