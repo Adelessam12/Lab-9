@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManagable.java</file>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManagement.java</file>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManagable.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/User.java</file>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendStatus.java</file>
-            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Database.java</file>
         </group>
     </open-files>
 </project-private>
