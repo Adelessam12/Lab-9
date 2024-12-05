@@ -17,7 +17,7 @@ public class UserManager {
         }
 
         String hashedPassword = userDatabase.hashPassword(password);
-        User newUser = new User(userId, email, username, hashedPassword, dateOfBirth);
+        User newUser = new User(email, username, hashedPassword, dateOfBirth);
         addUser(newUser);
         System.out.println("User registered successfully.");
         return true;
@@ -148,8 +148,8 @@ public class UserManager {
         Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json"); 
         UserManager userManager = new UserManager(db);
 
-        User user1 = new User("1", "user1@example.com", "user1", "password123", new Date(1995, 10, 15));
-        User user2 = new User("2", "user2@example.com", "user2", "password456", new Date(1997, 5, 25));
+        User user1 = new User("user1@example.com", "user1", "password123", new Date(1995, 10, 15));
+        User user2 = new User("user2@example.com", "user2", "password456", new Date(1997, 5, 25));
 
         Story story1 = new Story("story1", user1.getUserId(), "This is the first story.", "", new Date()); // user1 posts a story
         Story story2 = new Story("story2", user2.getUserId(), "This is the second story.", "", new Date()); // user2 posts a story

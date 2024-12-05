@@ -33,15 +33,15 @@ public class update_profile extends javax.swing.JFrame {
     /**
      * Creates new form update_profile
      */
-User user;
+    User user;
+
     public update_profile(User user) {
         setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
         bioTextPane.setEditable(false);
         jLabel1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-        
-this.user=user;
-        loaduser(user);
+        this.user = user;
+        loaduser();
     }
 
     /**
@@ -272,8 +272,8 @@ this.user=user;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-        user.setProfile(new Profile("hello i am very delighted to announce "));
+        User user1 = new User("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        user1.setProfile(new Profile("hello i am very delighted to announce "));
         JDialog dialog = new JDialog(this, "Update Bio", true);
         dialog.setLayout(new BorderLayout());
         dialog.setSize(400, 150);
@@ -295,7 +295,7 @@ this.user=user;
             String newBio = bioTextField.getText().trim();
             if (!newBio.isEmpty()) {
                 user.getProfile().setBio(newBio);
-                loadBio(user);
+                loadBio();
                 dialog.dispose();
             } else {
                 JOptionPane.showMessageDialog(dialog, "Bio cannot be empty!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -314,8 +314,8 @@ this.user=user;
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-        user.setProfile(new Profile("hello i am very delighted to announce "));
+        User user1 = new User("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        user1.setProfile(new Profile("hello i am very delighted to announce "));
         JDialog dialog = new JDialog(this, "Update Password", true);
 
         dialog.setLayout(new BorderLayout());
@@ -342,7 +342,7 @@ this.user=user;
             String password = new String(newPassword).trim(); // Convert to String and trim
 
             if (!password.isEmpty()) {
-                System.out.println(user.getHashedPassword());;
+                System.out.println(user.getHashedPassword());
                 user.setHashedPassword(password); // Update password using setter
                 System.out.println(user.getHashedPassword());
                 JOptionPane.showMessageDialog(dialog, "Password updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -364,7 +364,7 @@ this.user=user;
     dialog.setVisible(true);    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-this.dispose();
+        this.dispose();
     }//GEN-LAST:event_jButton5ActionPerformed
     private void loadPosts() {
 
@@ -408,15 +408,15 @@ this.dispose();
         friendsContainerPanel.repaint();
     }
 
-    public void loaduser(User user) {
-        loadprofile(user);
+    public final void loaduser() {
+        loadprofile();
         loadPosts();
         loadSampleFriends();
-        loadBio(user);
+        loadBio();
 
     }
 
-    public void loadprofile(User user) {
+    public void loadprofile() {
         ProfilePanel profilePanel = (ProfilePanel) profielphoto;
         profilePanel.setProfileImage(user.getProfile().getProfilePhotoPath());
         coverphotolabel.setIcon(new ImageIcon(user.getProfile().getCoverPhotoPath()));
@@ -425,36 +425,36 @@ this.dispose();
 
     private void loadSampleFriends() {
         // Main user
-        User user = new User("1", "john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-        user.setProfile(new Profile(null));
+        User user1 = new User("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        user1.setProfile(new Profile(null));
 
         // Create 10 friends
-        User user2 = new User("2", "alice@example.com", "Alice", "hashedPassword", new Date());
+        User user2 = new User("alice@example.com", "Alice", "hashedPassword", new Date());
         user2.setProfile(new Profile(null));
 
-        User user3 = new User("3", "bob@example.com", "Bob", "hashedPassword", new Date());
+        User user3 = new User("bob@example.com", "Bob", "hashedPassword", new Date());
         user3.setProfile(new Profile(null));
 
-        User user4 = new User("4", "carol@example.com", "Carol", "hashedPassword", new Date());
+        User user4 = new User("carol@example.com", "Carol", "hashedPassword", new Date());
         user4.setProfile(new Profile(null));
 
-        User user5 = new User("5", "dave@example.com", "Dave", "hashedPassword", new Date());
+        User user5 = new User("dave@example.com", "Dave", "hashedPassword", new Date());
         user5.setProfile(new Profile(null));
 
-        User user6 = new User("6", "eve@example.com", "Eve", "hashedPassword", new Date());
+        User user6 = new User("eve@example.com", "Eve", "hashedPassword", new Date());
         user6.setProfile(new Profile(null));
 
-        User user7 = new User("7", "frank@example.com", "Frank", "hashedPassword", new Date());
+        User user7 = new User("frank@example.com", "Frank", "hashedPassword", new Date());
         user7.setProfile(new Profile(null));
         user7.setIsOnline(true);
 
-        User user8 = new User("8", "grace@example.com", "Grace", "hashedPassword", new Date());
+        User user8 = new User("grace@example.com", "Grace", "hashedPassword", new Date());
         user8.setProfile(new Profile(null));
 
-        User user9 = new User("9", "henry@example.com", "Henry", "hashedPassword", new Date());
+        User user9 = new User("henry@example.com", "Henry", "hashedPassword", new Date());
         user9.setProfile(new Profile(null));
 
-        User user10 = new User("10", "irene@example.com", "Irene", "hashedPassword", new Date());
+        User user10 = new User("irene@example.com", "Irene", "hashedPassword", new Date());
         user10.setProfile(new Profile(null));
 
         // Adding friends to the main user
@@ -472,7 +472,7 @@ this.dispose();
         loadFriends(user);
     }
 
-    private void loadBio(User user) {
+    private void loadBio() {
         // Get the bio from the user's profile
         String bio = user.getProfile().getBio();
 
@@ -488,9 +488,11 @@ this.dispose();
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-
+        
         java.awt.EventQueue.invokeLater(() -> {
-            new update_profile().setVisible(true);
+            User user = new User("grace@example.com", "Grace", "hashedPassword", new Date());
+            user.setProfile(new Profile(null));
+            new update_profile(user).setVisible(true);
         });
     }
 

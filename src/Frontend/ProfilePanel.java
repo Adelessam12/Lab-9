@@ -7,6 +7,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
@@ -26,8 +27,7 @@ public class ProfilePanel extends JPanel {
             File file = new File(filepath);
             profileImage = ImageIO.read(file);
             repaint(); // Repaint the panel to reflect the updated image
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException e) {
         }
     }
 

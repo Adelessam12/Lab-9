@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User {
+public final class User {
 
     private final String userId;
     private final String email;
@@ -24,13 +24,13 @@ public class User {
     private Map<String, String> sentFriendRequestStatus;
     private Map<String, String> receivedFriendRequestStatus;
 
-    public User(String userId, String email, String username, String hashedPassword, Date dateOfBirth) {
-        this.userId = userId;
+    public User(String email, String username, String hashedPassword, Date dateOfBirth) {
+        this.userId = generateUserId();
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
-
+        
         profile = new Profile(null);
 
         this.isOnline = false;
@@ -43,6 +43,10 @@ public class User {
         receivedFriendRequestStatus = new HashMap<>();
     }
 
+    public String generateUserId(){
+        return "User" + System.currentTimeMillis();
+    } 
+    
     public void setProfile(Profile profile) {
         this.profile = profile;
     }

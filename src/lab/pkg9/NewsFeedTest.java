@@ -7,10 +7,10 @@ public class NewsFeedTest {
        // Create current timestamp
         Date currentTimestamp = new Date();
 
-        User user1 = new User("john_doe", "john.doe@example.com", "John Doe", "hashedPassword123", currentTimestamp);
-        User user2 = new User("jane_smith", "jane.smith@example.com", "Jane Smith", "hashedPassword456", currentTimestamp);
-        User user3 = new User("alice_brown", "alice.brown@example.com", "Alice Brown", "hashedPassword789", currentTimestamp);
-        User user4 = new User("bob_jones", "bob.jones@example.com", "Bob Jones", "hashedPassword101", currentTimestamp);
+        User user1 = new User("john.doe@example.com", "John Doe", "hashedPassword123", currentTimestamp);
+        User user2 = new User("jane.smith@example.com", "Jane Smith", "hashedPassword456", currentTimestamp);
+        User user3 = new User("alice.brown@example.com", "Alice Brown", "hashedPassword789", currentTimestamp);
+        User user4 = new User("bob.jones@example.com", "Bob Jones", "hashedPassword101", currentTimestamp);
 
         // Create and add posts to user1
         Post post1 = new Post("post1", "john_doe", "Hello, this is my first post!", "path/to/image1.jpg", currentTimestamp);
