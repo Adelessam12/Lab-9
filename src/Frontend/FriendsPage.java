@@ -11,6 +11,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import lab.pkg9.Db;
+import lab.pkg9.FriendManagement;
 import lab.pkg9.User;
 import static lab.pkg9.FriendManagement.blockFriend;
 import static lab.pkg9.FriendManagement.acceptFriendRequest;
@@ -25,26 +27,19 @@ public class FriendsPage extends javax.swing.JFrame {
     /**
      * Creates new form FriendsPage
      */
-    private User mah;
-    private User ahm;
-    private User bro;
-    public FriendsPage() {
+   
+    private final User user;
+    private final Db db;
+    public FriendsPage(User user, Db db) {
         initComponents();
+        this.user = user;
+        this.db = db;
         scrollFriends.setVisible(false);
         scrollRequests.setVisible(false);
         setLocationRelativeTo(null);
         friendsContainer.setLayout(new BoxLayout(friendsContainer, BoxLayout.Y_AXIS));
         requestsContainer.setLayout(new BoxLayout(requestsContainer, BoxLayout.Y_AXIS));
-            // Create Users and send requests (for demonstration)
-        Date dateOfBirth1 = new Date(1995 - 1900, 5, 15); 
-        mah = new User("Mah1", "mah@", "Mah", "123", dateOfBirth1, false);
-        Date dateOfBirth2 = new Date(1995 - 1900, 5, 15);
-        ahm = new User("Ahm1", "ahm@", "Ahm", "1234", dateOfBirth2, false);
-        bro = new User("bro1","bro@","nigga","12345",dateOfBirth2,false);
-        sendFriendRequest(mah, ahm);
-        sendFriendRequest(bro, ahm);
-        sendFriendRequest(mah,bro);
-
+        //loadSuggestions();
     }
 
     /**
@@ -61,7 +56,7 @@ public class FriendsPage extends javax.swing.JFrame {
         scrollFriends = new javax.swing.JScrollPane();
         friendsContainer = new javax.swing.JPanel();
         scrollSuggestions = new javax.swing.JScrollPane();
-        suggestionsContainer = new javax.swing.JPanel();
+        friendSuggestionspanel = new javax.swing.JPanel();
         friends = new javax.swing.JButton();
         requestActivity = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -76,21 +71,10 @@ public class FriendsPage extends javax.swing.JFrame {
 
         scrollSuggestions.setMaximumSize(new java.awt.Dimension(469, 225));
 
-        suggestionsContainer.setMaximumSize(new java.awt.Dimension(467, 223));
-        suggestionsContainer.setMinimumSize(new java.awt.Dimension(467, 223));
-
-        javax.swing.GroupLayout suggestionsContainerLayout = new javax.swing.GroupLayout(suggestionsContainer);
-        suggestionsContainer.setLayout(suggestionsContainerLayout);
-        suggestionsContainerLayout.setHorizontalGroup(
-            suggestionsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 467, Short.MAX_VALUE)
-        );
-        suggestionsContainerLayout.setVerticalGroup(
-            suggestionsContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 223, Short.MAX_VALUE)
-        );
-
-        scrollSuggestions.setViewportView(suggestionsContainer);
+        friendSuggestionspanel.setMaximumSize(new java.awt.Dimension(467, 223));
+        friendSuggestionspanel.setMinimumSize(new java.awt.Dimension(467, 223));
+        friendSuggestionspanel.setLayout(new javax.swing.BoxLayout(friendSuggestionspanel, javax.swing.BoxLayout.Y_AXIS));
+        scrollSuggestions.setViewportView(friendSuggestionspanel);
 
         friends.setText("Show Friends");
         friends.addActionListener(new java.awt.event.ActionListener() {
@@ -120,9 +104,9 @@ public class FriendsPage extends javax.swing.JFrame {
                     .addComponent(scrollFriends, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
+                        .addGap(106, 106, 106)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))
+                        .addGap(94, 94, 94))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollSuggestions, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,25 +119,20 @@ public class FriendsPage extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(friends, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(requestActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(requestActivity, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(friends, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollSuggestions, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(139, 139, 139))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(scrollRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(scrollFriends))
-                        .addGap(48, 48, 48))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 2, Short.MAX_VALUE)
+                        .addComponent(scrollRequests, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(scrollFriends, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrollSuggestions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -173,11 +152,11 @@ public class FriendsPage extends javax.swing.JFrame {
 
 
        // friends to the UI
-        if (mah.getFriendList() != null && !mah.getFriendList().isEmpty()) {
-            for (User user : mah.getFriendList()) {
+        if (user.getFriendList() != null && !user.getFriendList().isEmpty()) {
+            for (User user1: user.getFriendList()) {
                 JPanel entryPanel = new JPanel();
                 entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
-                JLabel newLabel = new JLabel(user.getUsername()); // Show the friend's username
+                JLabel newLabel = new JLabel(user1.getUsername()); // Show the friend's username
                 JButton remove = new JButton("Remove");
                 JButton block = new JButton("  Block  ");
 
@@ -188,7 +167,7 @@ public class FriendsPage extends javax.swing.JFrame {
                 remove.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    mah.removeFriend(user);
+                    user.removeFriend(user1);
                     entryPanel.remove(remove);
                     entryPanel.remove(block);
                     newLabel.setText("Removed");
@@ -197,7 +176,7 @@ public class FriendsPage extends javax.swing.JFrame {
                   block.addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    blockFriend(mah, user);
+                    blockFriend(user, user1);
                     entryPanel.remove(remove);
                     entryPanel.remove(block);
                     newLabel.setText("Blcoked");
@@ -243,17 +222,17 @@ public class FriendsPage extends javax.swing.JFrame {
    
 
   //add friend requests to the UI
-    if (ahm.getReceivedFriendRequestStatus()!= null && !ahm.getReceivedFriendRequestStatus().isEmpty()) {
-        for (Map.Entry<User, ArrayList<String>> user : ahm.getReceivedFriendRequestStatus().entrySet()) {
-            if(user.getValue().get(1).contains("Pending")){
-                System.out.println(user.getValue().get(1));
-                System.out.println(ahm.getReceivedFriendRequestStatus());
+    if (user.getReceivedFriendRequestStatus()!= null && !user.getReceivedFriendRequestStatus().isEmpty()) {
+        for (Map.Entry<User, ArrayList<String>> user1 : user.getReceivedFriendRequestStatus().entrySet()) {
+            if(user1.getValue().get(1).contains("Pending")){
+                System.out.println(user1.getValue().get(1));
+                System.out.println(user.getReceivedFriendRequestStatus());
             
             JPanel entryPanel = new JPanel();
             entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
             
             // Create the label dynamically for each friend
-            JLabel newLabel = new JLabel(user.getValue().get(0)+ " "+user.getValue().get(1)); 
+            JLabel newLabel = new JLabel(user1.getValue().get(0)+ " "+user1.getValue().get(1)); 
             JButton accept = new JButton("Accept"); 
             JButton decline = new JButton("Delete"); 
             
@@ -264,7 +243,7 @@ public class FriendsPage extends javax.swing.JFrame {
             
               accept.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    acceptFriendRequest(ahm, user.getKey());
+                    acceptFriendRequest(user, user1.getKey());
                     //System.out.println(user.getValue().get(1));
                     entryPanel.remove(accept);
                     entryPanel.remove(decline);
@@ -275,7 +254,7 @@ public class FriendsPage extends javax.swing.JFrame {
               
               decline.addActionListener(new java.awt.event.ActionListener() {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
-                    declineFriendRequest(ahm, user.getKey());
+                    declineFriendRequest(user, user1.getKey());
                     entryPanel.remove(accept);
                     entryPanel.remove(decline);
                     newLabel.setText("Deleted");
@@ -312,43 +291,22 @@ public class FriendsPage extends javax.swing.JFrame {
     }
 
     }//GEN-LAST:event_requestActivityActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FriendsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FriendsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FriendsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FriendsPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    
+    public void loadSuggestions(){
+        friendSuggestionspanel.removeAll();
+        ArrayList<User> suggestions = FriendManagement.suggestions(user);
+        for(User suggestion: suggestions){
+            String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
+            SuggestionPanel suggestionPanel = new SuggestionPanel(suggestion.getUsername(), profileImagePath);
+            suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
+            friendSuggestionspanel.add(suggestionPanel);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new FriendsPage().setVisible(true);
-            }
-        });
+        friendSuggestionspanel.revalidate();
+        friendSuggestionspanel.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel friendSuggestionspanel;
     private javax.swing.JButton friends;
     private javax.swing.JPanel friendsContainer;
     private javax.swing.JLabel jLabel1;
@@ -357,6 +315,5 @@ public class FriendsPage extends javax.swing.JFrame {
     private javax.swing.JScrollPane scrollFriends;
     private javax.swing.JScrollPane scrollRequests;
     private javax.swing.JScrollPane scrollSuggestions;
-    private javax.swing.JPanel suggestionsContainer;
     // End of variables declaration//GEN-END:variables
 }
