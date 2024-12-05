@@ -368,29 +368,17 @@ public class update_profile extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
     private void loadPosts() {
 
-        Post post1 = new Post("1", "author1", "This is the first post with text and an image", "C:\\Users\\Dell\\Desktop\\OIP.jpg", new Date());
-        String imagePath2 = "C:\\Users\\Dell\\Desktop\\OIP.jpg";  // Use another image for post 2
-        Post post3 = new Post("1", "author1", "This is the first post with text and an image", "C:\\Users\\Dell\\Desktop\\OIP.jpg", new Date());
-        Post post4 = new Post("1", "author1", "This is the first post with text and an image", "C:\\Users\\Dell\\Desktop\\OIP.jpg", new Date());
-
-        // Create the second post with a different image path
-        Post post2 = new Post("2", "author2", "This is the second post with text and an image", imagePath2, new Date());
-
-        // Clear existing posts
+   
         postsContainerPanel.removeAll();
 
-        // Add PostPanel for each post (text first, then image)
-        postsContainerPanel.add(new PostPanel(post1.getContent(), post1.getImagePath()));
-        postsContainerPanel.add(new PostPanel(post2.getContent(), post2.getImagePath()));
-        postsContainerPanel.add(new PostPanel(post3.getContent(), post3.getImagePath()));
-        postsContainerPanel.add(new PostPanel(post4.getContent(), post4.getImagePath()));
-
+       for(Post post :user.getPosts())
+           postsContainerPanel.add(new PostPanel(post.getContent(), post.getImagePath()));
         // Refresh the UI to show new posts
         postsContainerPanel.revalidate();
         postsContainerPanel.repaint();
     }
 
-    private void loadFriends(User user) {
+    private void loadFriends() {
         friendsContainerPanel.removeAll();
 
         ArrayList<User> friends = user.getFriendList();
@@ -411,7 +399,7 @@ public class update_profile extends javax.swing.JFrame {
     public final void loaduser() {
         loadprofile();
         loadPosts();
-        loadSampleFriends();
+        loadFriends();
         loadBio();
 
     }
@@ -423,54 +411,7 @@ public class update_profile extends javax.swing.JFrame {
 
     }
 
-    private void loadSampleFriends() {
-        // Main user
-        User user1 = new User("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
-        user1.setProfile(new Profile(null));
 
-        // Create 10 friends
-        User user2 = new User("alice@example.com", "Alice", "hashedPassword", new Date());
-        user2.setProfile(new Profile(null));
-
-        User user3 = new User("bob@example.com", "Bob", "hashedPassword", new Date());
-        user3.setProfile(new Profile(null));
-
-        User user4 = new User("carol@example.com", "Carol", "hashedPassword", new Date());
-        user4.setProfile(new Profile(null));
-
-        User user5 = new User("dave@example.com", "Dave", "hashedPassword", new Date());
-        user5.setProfile(new Profile(null));
-
-        User user6 = new User("eve@example.com", "Eve", "hashedPassword", new Date());
-        user6.setProfile(new Profile(null));
-
-        User user7 = new User("frank@example.com", "Frank", "hashedPassword", new Date());
-        user7.setProfile(new Profile(null));
-        user7.setIsOnline(true);
-
-        User user8 = new User("grace@example.com", "hamdy", "hashedPassword", new Date());
-        user8.setProfile(new Profile(null));
-
-        User user9 = new User("henry@example.com", "Henry", "hashedPassword", new Date());
-        user9.setProfile(new Profile(null));
-
-        User user10 = new User("irene@example.com", "Irene", "hashedPassword", new Date());
-        user10.setProfile(new Profile(null));
-
-        // Adding friends to the main user
-        
-        user.addFriend(user3);
-        user.addFriend(user4);
-        user.addFriend(user5);
-        user.addFriend(user6);
-        user.addFriend(user7);
-        user.addFriend(user8);
-        user.addFriend(user9);
-        user.addFriend(user10);
-
-        // Call the method to load friends
-        loadFriends(user);
-    }
 
     private void loadBio() {
         // Get the bio from the user's profile

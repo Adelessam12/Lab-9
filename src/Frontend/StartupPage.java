@@ -4,7 +4,10 @@
  */
 package Frontend;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import lab.pkg9.ContentManager;
 import lab.pkg9.Db;
 import lab.pkg9.Friend_Management;
@@ -19,6 +22,7 @@ public class StartupPage extends javax.swing.JFrame {
     /**
      * Creates new form StartupPage
      */
+    
     private Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json");
     private UserManager M = new UserManager(db);
     private ContentManager CM = new ContentManager(db);
@@ -26,8 +30,15 @@ public class StartupPage extends javax.swing.JFrame {
     private Friend_Management FM = new Friend_Management(db);
 
     public StartupPage() {
-
+           setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
+        jLabel1.setFont(new Font("Arial", Font.PLAIN, 50)); // Smaller font size
+         jButton1.setPreferredSize(new Dimension(150, 50)); // Set the size of the button
+        jButton1.setMinimumSize(new Dimension(150, 50)); // Prevent the button from shrinking
+        jButton1.setMaximumSize(new Dimension(150, 50));
+         jButton2.setPreferredSize(new Dimension(150, 50)); // Set the size of the button
+        jButton2.setMinimumSize(new Dimension(150, 50)); // Prevent the button from shrinking
+        jButton2.setMaximumSize(new Dimension(150, 50));
 
     }
 
@@ -39,12 +50,14 @@ public class StartupPage extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jButton1.setText("Register");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -52,6 +65,12 @@ public class StartupPage extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(93, 1, 253, 360);
+        getContentPane().add(jButton1, gridBagConstraints);
 
         jButton2.setText("Login");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -59,34 +78,22 @@ public class StartupPage extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(93, 327, 253, 0);
+        getContentPane().add(jButton2, gridBagConstraints);
 
         jLabel1.setText("Connect Hub");
         jLabel1.setMaximumSize(new java.awt.Dimension(100, 100));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jButton2)
-                        .addComponent(jButton1)))
-                .addContainerGap(137, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(31, 31, 31)
-                .addComponent(jButton1)
-                .addGap(85, 85, 85))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(52, 390, 0, 0);
+        getContentPane().add(jLabel1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

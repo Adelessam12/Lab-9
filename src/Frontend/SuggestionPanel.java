@@ -4,12 +4,19 @@
  */
 package Frontend;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.io.File;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import lab.pkg9.FriendManagement;
+import lab.pkg9.User;
 
 /**
  *
@@ -23,30 +30,50 @@ public class SuggestionPanel extends javax.swing.JPanel {
     public SuggestionPanel() {
         initComponents();
     }
-    public SuggestionPanel(String username, String profileImagePath) {
-        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0)); // Smaller horizontal and vertical gaps
+public SuggestionPanel(User sender, User reciever, String profileImagePath, FriendManagement Fm) {
 
-        // Profile Image
-        ProfilePanel profilePanel = new ProfilePanel();
-        profilePanel.setPreferredSize(new Dimension(70, 70)); // Smaller profile image
-        if (profileImagePath != null && !profileImagePath.isEmpty()) {
-            File imgFile = new File(profileImagePath);
-            if (imgFile.exists()) {
-                profilePanel.setProfileImage(imgFile.getAbsolutePath());
-            }
+    // Profile Image
+    ProfilePanel profilePanel = new ProfilePanel();
+    profilePanel.setPreferredSize(new Dimension(70, 70)); // Profile image size
+    if (profileImagePath != null && !profileImagePath.isEmpty()) {
+        File imgFile = new File(profileImagePath);
+        if (imgFile.exists()) {
+            profilePanel.setProfileImage(imgFile.getAbsolutePath());
         }
-        add(profilePanel);
-        
-        // Username Label
-        JLabel usernameLabel = new JLabel(username);
-        usernameLabel.setFont(new Font("Arial", Font.PLAIN, 20)); // Smaller font size
-        
-        
-        add(usernameLabel);
-
-        // Reduce panel padding
-        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Smaller padding
     }
+    add(profilePanel);
+
+    // Panel for username and button
+    JPanel detailsPanel = new JPanel();
+    detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS)); // Vertical alignment
+    detailsPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0)); // Padding around text
+
+    // Username Label
+    String firstname = reciever.getUsername().split(" ")[0];
+    JLabel usernameLabel = new JLabel(firstname);
+    usernameLabel.setFont(new Font("Arial", Font.PLAIN, 15)); // Font size
+    usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left
+    detailsPanel.add(usernameLabel);
+
+    // "Send Friend Request" Button
+    JButton friendRequestButton = new JButton("Send Request");
+friendRequestButton.setFont(new Font("Arial", Font.PLAIN, 12)); // Font size
+friendRequestButton.setPreferredSize(new Dimension(110, 30)); // Set button size
+
+
+    friendRequestButton.addActionListener(e -> {
+        Fm.sendFriendRequest(sender, reciever);
+    });
+    detailsPanel.add(friendRequestButton);
+
+    add(detailsPanel);
+
+   
+    // Reduce panel padding
+    setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+}
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.

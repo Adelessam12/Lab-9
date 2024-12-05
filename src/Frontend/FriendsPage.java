@@ -299,7 +299,7 @@ public class FriendsPage extends javax.swing.JFrame {
         System.out.println(suggestions.get(0));
         for(User suggestion: suggestions){
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-            SuggestionPanel suggestionPanel = new SuggestionPanel(suggestion.getUsername(), profileImagePath);
+            SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, FM);
             suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
             friendSuggestionspanel.add(suggestionPanel);
         }
