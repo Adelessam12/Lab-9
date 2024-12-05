@@ -16,15 +16,15 @@ public class User {
     private  String hashedPassword;
     private final Date dateOfBirth;
     private  boolean isOnline;
-
+   //new updates 
 private  final ArrayList<Story> stories;
+  private final ArrayList<Post> posts;
     private final ArrayList<User> friendList;
     private final ArrayList<User> blockedList;
     private  Profile profile;
-    private final ArrayList<Post> posts;
+   
 
-
-
+  // two mab objects to store the id && satuts 
     private Map<String, String> sentFriendRequestStatus;
     private Map<String, String> receivedFriendRequestStatus;
 
@@ -46,7 +46,7 @@ private  final ArrayList<Story> stories;
         blockedList = new ArrayList<>();
         this.posts = new ArrayList<>();
 
-sentFriendRequestStatus = new HashMap<>();
+        sentFriendRequestStatus = new HashMap<>();
         receivedFriendRequestStatus = new HashMap<>();
     }
 
@@ -88,8 +88,10 @@ sentFriendRequestStatus = new HashMap<>();
 
 public void addFriend(User user) {
     if (!friendList.contains(user)) {
-        friendList.add(user);
+        // The next two Lines ensures that A is friend to B and B is a friend to A
+        friendList.add(user);       // Add the user to the current user's friend list
         user.friendList.add(this);  // Add the current user to the friend's list
+        // this keyword is refrence to the object who called add friend method 
     }
 }
 

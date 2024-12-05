@@ -3,12 +3,14 @@ package lab.pkg9;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 
 public final class Db {
 
@@ -25,8 +27,8 @@ public final class Db {
         return users;
     }
 
-    public boolean saveUsersToFile() {
-        Gson gson = new Gson();
+   public boolean saveUsersToFile() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Enable pretty printing for readability
         try (FileWriter writer = new FileWriter(filename)) {
             gson.toJson(users, writer);
             System.out.println("Users saved to file successfully.");
@@ -39,7 +41,6 @@ public final class Db {
 
     public boolean loadUsersFromFile() {
         Gson gson = new Gson();
-        users.clear();
         try (FileReader reader = new FileReader(filename)) {
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
@@ -65,5 +66,5 @@ public final class Db {
             throw new RuntimeException("Error hashing password", e);
         }
     }
-
+   
 }

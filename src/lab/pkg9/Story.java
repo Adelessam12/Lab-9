@@ -5,9 +5,9 @@ import java.util.Date;
 public class Story {
     private final String storyId;
     private final String authorId;
-    private final String content;
-    private final String imagePath;
-    private final Date timestamp;
+    private final String content; //text content 
+    private final String imagePath; //image content 
+    private final Date timestamp;  
     private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000; 
 
     public Story(String storyId, String authorId, String content, String imagePath, Date timestamp) {

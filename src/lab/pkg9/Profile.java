@@ -6,8 +6,8 @@ public class Profile {
     private String bio;
 
     public Profile(String bio) {
-        this.profilePhotoPath = "C:\\Users\\Dell\\Desktop\\R (1).jpg";
-        this.coverPhotoPath = "C:\\Users\\Dell\\Desktop\\image-3@2x.jpg";
+        this.profilePhotoPath = null;
+        this.coverPhotoPath = null;
         this.bio = bio;
     }
 

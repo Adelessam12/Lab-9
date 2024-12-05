@@ -1,4 +1,5 @@
 package lab.pkg9;
+
 import java.util.Date;
 
 public class UserManager {
@@ -22,7 +23,6 @@ public class UserManager {
         return true;
     }
 
-  
     public User findUser(String userId) {
         for (User user : userDatabase.getUsers()) {
             if (user.getUserId().equals(userId)) {
@@ -88,63 +88,84 @@ public class UserManager {
         return hashedPassword.equals(userDatabase.hashPassword(password));
     }
 
-  
-
-
-
-public class Main {
+//public class Main {
+//    public static void main(String[] args) {
+//        // Initialize the database and user manager
+//        Db db = new Db("C:\\Users\\user\\Downloads\\User.json");
+//        UserManager userManager = new UserManager(db);
+//
+//        // Define user details
+//        String userId = "user123";
+//        String email = "user123@example.com";
+//        String username = "john_doe";
+//        String password = "securePassword123";
+//        Date dateOfBirth = new Date(1995 - 1900, 5, 15); // June 15, 1995
+//
+//        // Trace 1: Register a user
+//        System.out.println("---- Registering User ----");
+//        boolean isRegistered = userManager.registerUser(userId, email, username, password, dateOfBirth);
+//        System.out.println("Registration successful: " + isRegistered);
+//
+//        // Trace 2: Find the user
+//        System.out.println("---- Finding User ----");
+//        User foundUser = userManager.findUser(userId);
+//        if (foundUser != null) {
+//            System.out.println("User found: " + foundUser.getUsername());
+//        } else {
+//            System.out.println("User not found.");
+//        }
+//
+//        // Trace 3: Log in the user
+//        System.out.println("---- Logging in User ----");
+//        User loggedInUser = userManager.login(username, password);
+//        if (loggedInUser != null) {
+//            System.out.println("User logged in: " + loggedInUser.getUsername());
+//        }
+//
+//        // Trace 4: Log out the user
+//        System.out.println("---- Logging out User ----");
+//        userManager.logout(loggedInUser);
+//
+//        // Trace 5: Add another user directly
+//        System.out.println("---- Adding User Directly ----");
+//        User anotherUser = new User("user456", "user456@example.com", "jane_doe", password, new Date(2000 - 1900, 3, 25));
+//        userManager.addUser(anotherUser);
+//
+//        // Trace 6: Delete a user
+//        System.out.println("---- Deleting User ----");
+//        userManager.deleteUser(anotherUser);
+//
+//        // Final state
+//        System.out.println("---- Final State of Users in Database ----");
+//        for (User user : db.getUsers()) {
+//            System.out.println("UserId: " + user.getUserId() + ", Username: " + user.getUsername());
+//        }
+//    }
+//}
+    // ____________Trace code for save and load from the jason file_______________________
+//        public static void main(String[] args) {
+//        // Assuming you have already set up the database (Db) and user manager
+//        Db db = new Db("C:\\Users\\user\\Downloads\\Test.json"); // Initialize your database (make sure it's loading the data correctly)
+//        UserManager userManager = new UserManager(db);
+//
+//        User user1 = new User("1", "user1@example.com", "user1", "password123", new Date(1995, 10, 15));
+//        User user2 = new User("2", "user2@example.com", "user2", "password456", new Date(1997, 5, 25));
+//
+//        Story story1 = new Story("story1", user1.getUserId(), "This is the first story.", "", new Date()); // user1 posts a story
+//        Story story2 = new Story("story2", user2.getUserId(), "This is the second story.", "", new Date()); // user2 posts a story
+//        user1.addstory(story1);
+//        user2.addstory(story2);
+//        Post post1 = new Post("post1", user1.getUserId(), "This is the first post.", "", new Date()); // user1 creates a post
+//        Post post2 = new Post("post2", user2.getUserId(), "This is the second post.", "", new Date()); // user2 creates a post
+//
+//        Profile profile1 = new Profile("Hello, I'm user1. I love programming!"); // Bio for user1
+//        Profile profile2 = new Profile("Hey, I'm user2. I enjoy hiking and coding!"); // Bio for user2
+//        userManager.addUser(user1);
+//        userManager.addUser(user2);
+//
+//    }
     public static void main(String[] args) {
-        // Initialize the database and user manager
-        Db db = new Db("C:\\Users\\user\\Downloads\\User.json");
-        UserManager userManager = new UserManager(db);
-
-        // Define user details
-        String userId = "user123";
-        String email = "user123@example.com";
-        String username = "john_doe";
-        String password = "securePassword123";
-        Date dateOfBirth = new Date(1995 - 1900, 5, 15); // June 15, 1995
-
-        // Trace 1: Register a user
-        System.out.println("---- Registering User ----");
-        boolean isRegistered = userManager.registerUser(userId, email, username, password, dateOfBirth);
-        System.out.println("Registration successful: " + isRegistered);
-
-        // Trace 2: Find the user
-        System.out.println("---- Finding User ----");
-        User foundUser = userManager.findUser(userId);
-        if (foundUser != null) {
-            System.out.println("User found: " + foundUser.getUsername());
-        } else {
-            System.out.println("User not found.");
-        }
-
-        // Trace 3: Log in the user
-        System.out.println("---- Logging in User ----");
-        User loggedInUser = userManager.login(username, password);
-        if (loggedInUser != null) {
-            System.out.println("User logged in: " + loggedInUser.getUsername());
-        }
-
-        // Trace 4: Log out the user
-        System.out.println("---- Logging out User ----");
-        userManager.logout(loggedInUser);
-
-        // Trace 5: Add another user directly
-        System.out.println("---- Adding User Directly ----");
-        User anotherUser = new User("user456", "user456@example.com", "jane_doe", password, new Date(2000 - 1900, 3, 25));
-        userManager.addUser(anotherUser);
-
-        // Trace 6: Delete a user
-        System.out.println("---- Deleting User ----");
-        userManager.deleteUser(anotherUser);
-
-        // Final state
-        System.out.println("---- Final State of Users in Database ----");
-        for (User user : db.getUsers()) {
-            System.out.println("UserId: " + user.getUserId() + ", Username: " + user.getUsername());
-        }
+        
     }
-}
 
 }
