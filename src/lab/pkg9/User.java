@@ -22,10 +22,12 @@ public final class User {
 
     // two mab objects to store the id && satuts 
     private Map<String, String> sentFriendRequestStatus;
-    private Map<String, String> receivedFriendRequestStatus;
+    private Map<User, String> receivedFriendRequestStatus;
+
 
     public User(String email, String username, String hashedPassword, Date dateOfBirth) {
         this.userId = generateUserId();
+
         this.email = email;
         this.username = username;
         this.hashedPassword = hashedPassword;
@@ -47,8 +49,12 @@ public final class User {
         return "User" + System.currentTimeMillis();
     } 
     
+
     public void setProfile(Profile profile) {
         this.profile = profile;
+ 
+    
+ 
     }
 
     public void setIsOnline(boolean isOnline) {
@@ -96,11 +102,11 @@ public final class User {
         this.sentFriendRequestStatus = sentFriendRequestStatus;
     }
 
-    public Map<String, String> getReceivedFriendRequestStatus() {
+    public Map<User, String> getReceivedFriendRequestStatus() {
         return receivedFriendRequestStatus;
     }
 
-    public void setReceivedFriendRequestStatus(Map<String, String> receivedFriendRequestStatus) {
+    public void setReceivedFriendRequestStatus(Map<User, String> receivedFriendRequestStatus) {
         this.receivedFriendRequestStatus = receivedFriendRequestStatus;
     }
 

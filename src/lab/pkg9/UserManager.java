@@ -14,7 +14,7 @@ public class UserManager {
         this.userDatabase = userDatabase;
     }
 
-    public boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth) {
+    public boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth, boolean isOnline) {
         if (findUser(userId) != null) {
             System.out.println("User with userId " + userId + " already exists.");
             return false;
@@ -148,20 +148,8 @@ public class UserManager {
 //}
     
         public static void main(String[] args) {
-        // Assuming you have already set up the database (Db) and user manager
-        Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json"); 
-        UserManager userManager = new UserManager(db);
-ContentManager ContentManager= new ContentManager(db);
-Friend_Management FM = new Friend_Management(db);
-      for(User user : db.getUsers())
-      {
-          System.out.println(user);
-      }
-            //Login l= new Login(userManager, ContentManager,db,FM);
-           // l.setVisible(true);
-            Register r = new Register(userManager);
-            r.setVisible(true);
-           
+       
+
     }
    
 
