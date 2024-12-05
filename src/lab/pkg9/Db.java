@@ -39,20 +39,22 @@ public final class Db {
         }
     }
 
-    public boolean loadUsersFromFile() {
-        Gson gson = new Gson();
-        try (FileReader reader = new FileReader(filename)) {
-            Type userListType = new TypeToken<ArrayList<User>>() {
-            }.getType();
-            users = gson.fromJson(reader, userListType);
-            System.out.println("Users loaded from file successfully.");
-            return true;
-        } catch (IOException e) {
-            System.err.println("Error loading users from file: " + e.getMessage());
-            return false;
+  public boolean loadUsersFromFile() {
+    Gson gson = new Gson();
+    try (FileReader reader = new FileReader(filename)) {
+        Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+        users = gson.fromJson(reader, userListType);
+        if (users == null) {
+            users = new ArrayList<>(); // Ensure the list is not null
         }
+        System.out.println("Users loaded from file successfully.");
+        return true;
+    } catch (IOException e) {
+        System.err.println("Error loading users from file: " + e.getMessage());
+        users = new ArrayList<>(); // Initialize an empty list if loading fails
+        return false;
     }
-
+}
     String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");

@@ -142,30 +142,32 @@ public class UserManager {
 //        }
 //    }
 //}
-    // ____________Trace code for save and load from the jason file_______________________
-//        public static void main(String[] args) {
-//        // Assuming you have already set up the database (Db) and user manager
-//        Db db = new Db("C:\\Users\\user\\Downloads\\Test.json"); // Initialize your database (make sure it's loading the data correctly)
-//        UserManager userManager = new UserManager(db);
-//
-//        User user1 = new User("1", "user1@example.com", "user1", "password123", new Date(1995, 10, 15));
-//        User user2 = new User("2", "user2@example.com", "user2", "password456", new Date(1997, 5, 25));
-//
-//        Story story1 = new Story("story1", user1.getUserId(), "This is the first story.", "", new Date()); // user1 posts a story
-//        Story story2 = new Story("story2", user2.getUserId(), "This is the second story.", "", new Date()); // user2 posts a story
-//        user1.addstory(story1);
-//        user2.addstory(story2);
-//        Post post1 = new Post("post1", user1.getUserId(), "This is the first post.", "", new Date()); // user1 creates a post
-//        Post post2 = new Post("post2", user2.getUserId(), "This is the second post.", "", new Date()); // user2 creates a post
-//
-//        Profile profile1 = new Profile("Hello, I'm user1. I love programming!"); // Bio for user1
-//        Profile profile2 = new Profile("Hey, I'm user2. I enjoy hiking and coding!"); // Bio for user2
-//        userManager.addUser(user1);
-//        userManager.addUser(user2);
-//
-//    }
-    public static void main(String[] args) {
-        
+    
+        public static void main(String[] args) {
+        // Assuming you have already set up the database (Db) and user manager
+        Db db = new Db("C:\\Users\\Dell\\Desktop\\database.json"); 
+        UserManager userManager = new UserManager(db);
+
+        User user1 = new User("1", "user1@example.com", "user1", "password123", new Date(1995, 10, 15));
+        User user2 = new User("2", "user2@example.com", "user2", "password456", new Date(1997, 5, 25));
+
+        Story story1 = new Story("story1", user1.getUserId(), "This is the first story.", "", new Date()); // user1 posts a story
+        Story story2 = new Story("story2", user2.getUserId(), "This is the second story.", "", new Date()); // user2 posts a story
+        user1.addstory(story1);
+        user2.addstory(story2);
+        Post post1 = new Post("post1", user1.getUserId(), "This is the first post.", "", new Date()); // user1 creates a post
+        Post post2 = new Post("post2", user2.getUserId(), "This is the second post.", "", new Date()); // user2 creates a post
+            user1.addPost(post1);
+            user2.addPost(post2);
+            
+        Profile profile1 = new Profile("Hello, I am user1. I love programming!"); // Bio for user1
+        Profile profile2 = new Profile("Hey, I am user2. I enjoy hiking and coding!"); // Bio for user2
+        user1.setProfile(profile1);
+            user2.setProfile(profile2);
+        userManager.addUser(user1);
+        userManager.addUser(user2);
+
     }
+   
 
 }
