@@ -157,13 +157,14 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
     
     public void loadSuggestions(User user, Db dataBase){
+        friendSuggestionspanel.removeAll();
         Friend_Management friendManage = new Friend_Management(dataBase);
         ArrayList<User> suggestions = friendManage.suggestions(user);
         for(User suggestion: suggestions){
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-            FriendPanel friendPanel = new FriendPanel(suggestion.getUsername(), profileImagePath, suggestion.isIsOnline());
-            friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));
-            friendSuggestionspanel.add(friendPanel);
+            SuggestionPanel suggestionPanel = new SuggestionPanel(suggestion.getUsername(), profileImagePath);
+            suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
+            friendSuggestionspanel.add(suggestionPanel);
         }
         friendSuggestionspanel.revalidate();
         friendSuggestionspanel.repaint();

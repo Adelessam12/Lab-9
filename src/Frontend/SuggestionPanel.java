@@ -4,6 +4,14 @@
  */
 package Frontend;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.io.File;
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+
 /**
  *
  * @author DELL
@@ -15,6 +23,30 @@ public class SuggestionPanel extends javax.swing.JPanel {
      */
     public SuggestionPanel() {
         initComponents();
+    }
+    public SuggestionPanel(String username, String profileImagePath) {
+        setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0)); // Smaller horizontal and vertical gaps
+
+        // Profile Image
+        ProfilePanel profilePanel = new ProfilePanel();
+        profilePanel.setPreferredSize(new Dimension(70, 70)); // Smaller profile image
+        if (profileImagePath != null && !profileImagePath.isEmpty()) {
+            File imgFile = new File(profileImagePath);
+            if (imgFile.exists()) {
+                profilePanel.setProfileImage(imgFile.getAbsolutePath());
+            }
+        }
+        add(profilePanel);
+        
+        // Username Label
+        JLabel usernameLabel = new JLabel(username);
+        usernameLabel.setFont(new Font("Arial", Font.PLAIN, 20)); // Smaller font size
+        
+        
+        add(usernameLabel);
+
+        // Reduce panel padding
+        setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Smaller padding
     }
 
     /**
