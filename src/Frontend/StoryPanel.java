@@ -27,10 +27,11 @@ public class StoryPanel extends JPanel {
         add(profilePanel, gbc);  // Add the profile image panel to the top of the grid
 
         // Create button to show friend's stories
-        button = new JButton("See " + friend.getUsername() + " stories");
-        button.setPreferredSize(new Dimension(200, 50)); // Set the size of the button
-        button.setMinimumSize(new Dimension(200, 50)); // Prevent the button from shrinking
-        button.setMaximumSize(new Dimension(200, 50)); // Prevent the button from expanding
+        String firstname=friend.getUsername().split(" ")[0];
+        button = new JButton("See " + firstname + " stories");
+        button.setPreferredSize(new Dimension(150, 25)); // Set the size of the button
+        button.setMinimumSize(new Dimension(150, 25)); // Prevent the button from shrinking
+        button.setMaximumSize(new Dimension(150, 25)); // Prevent the button from expanding
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
