@@ -45,8 +45,8 @@ public class FriendshipService implements FriendshipServiceInterface {
 
     @Override
     public void declineFriendRequest(User friend) {
-        user.getFriendRequestManagable().setSentRequestStatus(user, "Declined");
-        user.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Declined");
+        friend.getFriendRequestManagable().setSentRequestStatus(user, "Declined");
+        user.getFriendRequestManagable().setReceivedRequestStatus(friend, user, "Declined");
     }
 
     @Override
