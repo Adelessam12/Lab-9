@@ -224,18 +224,18 @@ public class FriendsPage extends javax.swing.JFrame {
 
   //add friend requests to the UI
     if (user.getFriendRequestManagable().getReceivedFriendRequests()!= null && !user.getFriendRequestManagable().getReceivedFriendRequests().isEmpty()) {
-        for (Map.Entry<User, String> user1 : user.getFriendRequestManagable().getReceivedFriendRequests().entrySet()) {
+        for (Map.Entry<String, String> user1 : user.getFriendRequestManagable().getReceivedFriendRequests().entrySet()) {
             if(user1.getValue().contains("Pending")){
            //     System.out.println(user1.getValue());
                 System.out.println(user.getFriendRequestManagable().getReceivedFriendRequests());
                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                System.out.println(user1.getKey().getFriendRequestManagable().getReceivedFriendRequests());
+                //System.out.println(user1.getKey().getFriendRequestManagable().getReceivedFriendRequests());
             
             JPanel entryPanel = new JPanel();
             entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
             
             // Create the label dynamically for each friend
-            JLabel newLabel = new JLabel(user1.getKey().getUsername()+ " "+user1.getValue()); 
+            JLabel newLabel = new JLabel(UserManager.findUser(user1.getKey()).getUsername() + " "+user1.getValue()); 
             JButton accept = new JButton("Accept"); 
             JButton decline = new JButton("Delete"); 
             
@@ -245,7 +245,7 @@ public class FriendsPage extends javax.swing.JFrame {
             entryPanel.add(decline);
             
               accept.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                 friendService.acceptFriendRequest(user1.getKey());
+                 friendService.acceptFriendRequest(UserManager.findUser(user1.getKey()));
                   //System.out.println(user.getValue().get(1));
                   entryPanel.remove(accept);
                   entryPanel.remove(decline);
@@ -254,7 +254,7 @@ public class FriendsPage extends javax.swing.JFrame {
                 });
               
               decline.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                  friendService.declineFriendRequest(user1.getKey());
+                  friendService.declineFriendRequest(UserManager.findUser(user1.getKey()));
                   entryPanel.remove(accept);
                   entryPanel.remove(decline);
                   newLabel.setText("Deleted");
@@ -305,6 +305,7 @@ public class FriendsPage extends javax.swing.JFrame {
             friendSuggestionspanel.add(suggestionPanel);
              add.addActionListener((java.awt.event.ActionEvent evt) -> {
                  friendService.sendFriendRequest(suggestion);
+                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
                  db.saveUsersToFile();
                  suggestionPanel.remove(add);
                  suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));

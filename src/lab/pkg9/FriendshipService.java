@@ -82,7 +82,7 @@ public class FriendshipService implements FriendshipServiceInterface {
         return !user.equals(suggested)
                 && !user.getFriendManager().isFriend(user, suggested)
                 && !user.getFriendManager().isBlocked(user, suggested)
-                && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggested);
+                && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggested.getUserId());
     }
 
     //method to check for common friends
@@ -98,35 +98,4 @@ public class FriendshipService implements FriendshipServiceInterface {
         }
         return false;
     }
-
-//    public static void main(String[] args) {
-//        Date dateOfBirth1 = new Date(1995 - 1900, 5, 15);
-//        User mah = new User("Mah1", "mah@", "Mah", "123", dateOfBirth1, false);
-//        Date dateOfBirth2 = new Date(1995 - 1900, 5, 15);
-//        User ahm = new User("Ahm1", "ahm@", "Ahm", "1234", dateOfBirth2, false);
-//        sendFriendRequest(ahm, mah);
-//        
-//        System.out.println(mah.getSentFriendRequestStatus());
-//        System.out.println(ahm.getReceivedFriendRequestStatus());
-//        System.out.println(ahm.getSentFriendRequestStatus() + "\n");
-//        //acceptFriendRequest(ahm, mah);
-//        System.out.println(mah.getSentFriendRequestStatus());
-//        System.out.println(ahm.getReceivedFriendRequestStatus());
-//        System.out.println(mah.getReceivedFriendRequestStatus() + "\n");
-//        //blockFriend(mah, ahm);
-//        try {
-//            System.out.println(mah.getFriendList().get(0));
-//        } catch (Exception e) {
-//            System.out.println("nothing");
-//        }
-//        Date dateOfBirth3 = new Date(1995 - 1900, 5, 15);
-//        User bro = new User("bro1", "bro@", "br0", "12345", dateOfBirth3, false);
-//        sendFriendRequest(bro, ahm);
-//        System.out.println(ahm.getReceivedFriendRequestStatus());
-//        //System.out.println(suggestions(mah));
-//        // System.out.println(suggestions(ahm));       
-//        FriendsPage f = new FriendsPage(mah, db);
-//        f.setVisible(true);
-//    }
-//   }
 }
