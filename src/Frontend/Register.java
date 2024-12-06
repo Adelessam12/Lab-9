@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import lab.pkg9.Database;
 import lab.pkg9.User;
 import lab.pkg9.UserFactory;
 import lab.pkg9.UserManager;
@@ -18,9 +19,9 @@ import lab.pkg9.UserManager;
  * @author Dell
  */
 public class Register extends javax.swing.JFrame {
-
-    public Register( ) {
-      
+Database db;
+    public Register(Database db ) {
+      this.db = db;
        setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
         
@@ -181,7 +182,18 @@ public class Register extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid date format. Please use yyyy-MM-dd.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-
+ boolean emailExists = false;
+    for (User user : db.getUsers()) {
+        if (user.getEmail().equals(email)) {
+            emailExists = true;
+            break;
+        }
+    }
+    
+    if (emailExists) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Email is already registered.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
         // Check if password matches confirm password
         if (!password.equals(confirmPassword)) {
             javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
