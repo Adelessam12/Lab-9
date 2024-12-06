@@ -52,7 +52,6 @@ public class FriendshipService implements FriendshipServiceInterface {
 
     @Override
     public void blockFriend(User user, User friend) {
-        friendManager.removeFriend(user, friend);
         friendManager.blockUser(user, friend);
     }
 

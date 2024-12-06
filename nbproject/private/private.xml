@@ -2,6 +2,30 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendRequestManagable.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendManager.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/Post.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/UserManager.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendManagableCreator.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/UserStorage.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendshipServiceInterface.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendshipService.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FileUserStorage.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendRequestManagableCreator.java</file>
+            <file>file:/C:/programming%202/connectHub/src/Frontend/StartupPage.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/User.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendRequestManager.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/UserFactory.java</file>
+            <file>file:/C:/programming%202/connectHub/src/Frontend/FriendsPage.java</file>
+            <file>file:/C:/programming%202/connectHub/src/Frontend/FriendPanel.java</file>
+            <file>file:/C:/programming%202/connectHub/src/Frontend/ProfilePanel.java</file>
+            <file>file:/C:/programming%202/connectHub/src/Frontend/PostPanel.java</file>
+            <file>file:/C:/programming%202/connectHub/src/Frontend/create_post.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/Lab9.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendManagable.java</file>
+            <file>file:/C:/programming%202/connectHub/src/Frontend/update_profile.java</file>
+            <file>file:/C:/programming%202/connectHub/src/lab/pkg9/Story.java</file>
+        </group>
     </open-files>
 </project-private>
