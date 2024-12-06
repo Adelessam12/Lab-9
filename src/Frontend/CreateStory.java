@@ -143,6 +143,7 @@ public class CreateStory extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
         contentManager.createStory(user, content, imagePath);
+        dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     

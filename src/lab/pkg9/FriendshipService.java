@@ -11,8 +11,8 @@ import java.util.LinkedHashSet;
  *
  * @author Mahmoud Waleed + Ahmed Alaa
  */
-public class FriendshipService implements FriendshipServiceInterface{
-   
+public class FriendshipService implements FriendshipServiceInterface {
+
     private final Database db;
     private final FriendManagable friendManager;
     private final FriendRequestManagable friendRequestManager;
@@ -25,7 +25,7 @@ public class FriendshipService implements FriendshipServiceInterface{
 
     @Override
     public void sendFriendRequest(User user, User friend) {
-        friendRequestManager.setSentRequestStatus( friend, "Pending");
+        friendRequestManager.setSentRequestStatus(friend, "Pending");
         friendRequestManager.setReceivedRequestStatus(friend, user, "Pending");
     }
 
@@ -37,7 +37,7 @@ public class FriendshipService implements FriendshipServiceInterface{
         }
 
         // Set friend request status to Accepted
-        friendRequestManager.setSentRequestStatus( user, "Accepted");
+        friendRequestManager.setSentRequestStatus(user, "Accepted");
         friendRequestManager.setReceivedRequestStatus(user, friend, "Accepted");
 
         // Add to each other's friend list
@@ -46,7 +46,7 @@ public class FriendshipService implements FriendshipServiceInterface{
 
     @Override
     public void declineFriendRequest(User user, User friend) {
-        friendRequestManager.setSentRequestStatus( user, "Declined");
+        friendRequestManager.setSentRequestStatus(user, "Declined");
         friendRequestManager.setReceivedRequestStatus(user, friend, "Declined");
     }
 
@@ -68,6 +68,9 @@ public class FriendshipService implements FriendshipServiceInterface{
                     suggestions.add(suggested);
                 }
             }
+        }
+        for (User suggested : db.getUsers()) {
+            suggestions.add(suggested);
         }
         // Remove duplicate suggestions
         return new ArrayList<>(new LinkedHashSet<>(suggestions));

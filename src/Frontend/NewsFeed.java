@@ -5,18 +5,15 @@
 package Frontend;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import lab.pkg9.ContentManager;
 import lab.pkg9.Database;
 import lab.pkg9.FriendshipService;
-import lab.pkg9.Friend_Management;
 import lab.pkg9.Post;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
@@ -32,21 +29,22 @@ public final class NewsFeed extends javax.swing.JFrame {
      *
      * @param user
      */
- Database database;
- User user;
+    Database database;
+    User user;
     ContentManager Cm;
     UserManager M;
-    public NewsFeed(User user,Database database, ContentManager Cm, UserManager M) {
-           setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
+
+    public NewsFeed(User user, Database database, ContentManager Cm, UserManager M) {
+        //setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
-        ImageIcon originalIcon =new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
-Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-Profile_button.setIcon(new ImageIcon(scaledImage));
-        this.database=database;
-        
-        this.user=user;
-        this.Cm=Cm;
-        this.M=M;
+        ImageIcon originalIcon = new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
+        Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        Profile_button.setIcon(new ImageIcon(scaledImage));
+        this.database = database;
+
+        this.user = user;
+        this.Cm = Cm;
+        this.M = M;
         loadnewsfeed();
     }
 
@@ -200,67 +198,64 @@ Profile_button.setIcon(new ImageIcon(scaledImage));
         friendsContainerPanel.removeAll();
         Friendpostspanel.removeAll();
         loadnewsfeed();
-        
+
     }//GEN-LAST:event_Refresh_buttonActionPerformed
 
     private void create_content_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_content_buttonActionPerformed
-  // Create a dialog
-    int choice = javax.swing.JOptionPane.showOptionDialog(
-        this, 
-        "What would you like to create?", 
-        "Choose Action", 
-        javax.swing.JOptionPane.YES_NO_OPTION, 
-        javax.swing.JOptionPane.QUESTION_MESSAGE, 
-        null, 
-        new String[]{"Create Post", "Create Story"}, 
-        "Create Post"
-    );
+        // Create a dialog
+        int choice = javax.swing.JOptionPane.showOptionDialog(
+                this,
+                "What would you like to create?",
+                "Choose Action",
+                javax.swing.JOptionPane.YES_NO_OPTION,
+                javax.swing.JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"Create Post", "Create Story"},
+                "Create Post"
+        );
 
-    // Handle user choice
-    if (choice == javax.swing.JOptionPane.YES_OPTION) {
-        // Open CreatePost JFrame
-        create_post postFrame = new create_post(user,Cm);
-        postFrame.setVisible(true);
-    } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
-        // Open CreateStory JFrame
-        CreateStory storyFrame = new CreateStory(user,Cm);
-        storyFrame.setVisible(true);
-    }
+        // Handle user choice
+        if (choice == javax.swing.JOptionPane.YES_OPTION) {
+            // Open CreatePost JFrame
+            create_post postFrame = new create_post(user, Cm);
+            postFrame.setVisible(true);
+        } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
+            // Open CreateStory JFrame
+            CreateStory storyFrame = new CreateStory(user, Cm);
+            storyFrame.setVisible(true);
+        }
     }//GEN-LAST:event_create_content_buttonActionPerformed
 
     private void Profile_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Profile_buttonActionPerformed
-        update_profile up=new update_profile(this.user);
+        update_profile up = new update_profile(this.user);
         up.setVisible(true);
     }//GEN-LAST:event_Profile_buttonActionPerformed
 
     private void friend_managment_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friend_managment_buttonActionPerformed
 
-FriendsPage fp = new FriendsPage(user, database);
-fp.setVisible(true);
+        FriendsPage fp = new FriendsPage(user, database);
+        fp.setVisible(true);
     }//GEN-LAST:event_friend_managment_buttonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            M.logout(user);
-            this.dispose();
-            StartupPage sp= new StartupPage();
-            sp.setVisible(true);
+        M.logout(user);
+        this.dispose();
+        StartupPage sp = new StartupPage();
+        sp.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    /**
-     * @param user
-     */
-    public void loadnewsfeed()
-    {
-        loadFriends(user);
-        loadPosts(user);
+    public void loadnewsfeed() {
+        loadFriends();
+        loadPosts();
         loadSuggestions();
-        loadfriendstories(user);
+        loadfriendstories();
     }
-    public void loadPosts(User user) {
+
+    public void loadPosts() {
         ArrayList<Post> allfriendsposts = new ArrayList<>();
-        for (User friend : user.getFriendList()) {
-            for (Post post : friend.getPosts()) {
+        for (User friend : user.getFriendManager().getFriendList()) {
+            for (Post post : friend.getPostManager().getPosts()) {
                 allfriendsposts.add(post);
             }
         }
@@ -276,10 +271,9 @@ fp.setVisible(true);
         Friendpostspanel.repaint();
     }
 
-    public void loadFriends(User user) {
+    public void loadFriends() {
         friendsContainerPanel.removeAll();
-
-        ArrayList<User> friends = user.getFriendList();
+        ArrayList<User> friends = user.getFriendManager().getFriendList();
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
@@ -289,66 +283,33 @@ fp.setVisible(true);
 
             friendsContainerPanel.add(friendPanel);
         }
-
         friendsContainerPanel.revalidate();
         friendsContainerPanel.repaint();
     }
 
-    public void loadfriendstories(User user) {
-        for (User friend : user.getFriendList()) {
+    public void loadfriendstories() {
+        for (User friend : user.getFriendManager().getFriendList()) {
 
             StoryPanel storyPanel = new StoryPanel(friend);
             Storiescontainerpanel.add(storyPanel);
         }
     }
-    
-    public void loadSuggestions(){
-      friendSuggestionspanel.removeAll();
-        FriendshipService FM= new FriendshipService(database);
+
+    public void loadSuggestions() {
+        friendSuggestionspanel.removeAll();
+        FriendshipService FM = new FriendshipService(database, user.getFriendManager(), user.getFriendRequestManagable());
         ArrayList<User> suggestions = FM.suggestions(user);
 
-        for(User suggestion: suggestions){
+        for (User suggestion : suggestions) {
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
             SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, FM);
-            
-           suggestionPanel.setPreferredSize(new Dimension(200, 100));
+
+            suggestionPanel.setPreferredSize(new Dimension(200, 100));
             friendSuggestionspanel.add(suggestionPanel);
-        
-         }
+
+        }
         friendSuggestionspanel.revalidate();
         friendSuggestionspanel.repaint();
-    }
-
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewsFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewsFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewsFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewsFeed.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewsFeed().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

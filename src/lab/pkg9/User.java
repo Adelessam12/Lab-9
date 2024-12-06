@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.UUID;
 
 public final class User {
-
     private final String userId;
     private final String email;
     private final String username;
@@ -35,7 +34,6 @@ public final class User {
         this.dateOfBirth = dateOfBirth;
         this.isOnline = false;
         this.profile = new Profile(null);
-
         this.friendRequestManager = friendRequestManager;
         this.friendManager = friendManager;
         this.postManager = postManager;

@@ -56,7 +56,7 @@ public class StoryPanel extends JPanel {
     storiesPanel.setLayout(new BoxLayout(storiesPanel, BoxLayout.Y_AXIS));
 
     // Add each story to the panel using PostPanel
-    List<Story> stories = friend.getStories();
+    List<Story> stories = friend.getStoryManager().getStories();
     for (Story story : stories) {
         // Create a PostPanel for each story
         // You may want to adjust the parameters to match your Story model

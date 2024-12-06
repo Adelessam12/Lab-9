@@ -6,12 +6,13 @@ package Frontend;
 
 import java.awt.Dimension;
 import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import lab.pkg9.ContentManager;
 import lab.pkg9.Database;
-import lab.pkg9.Friend_Management;
+import lab.pkg9.FileUserStorage;
+import lab.pkg9.PasswordHasher;
+import lab.pkg9.SHA256PasswordHasher;
 import lab.pkg9.UserManager;
+import lab.pkg9.UserStorage;
 
 /**
  *
@@ -22,25 +23,21 @@ public class StartupPage extends javax.swing.JFrame {
     /**
      * Creates new form StartupPage
      */
-    
-    private Database db = new Database("C:\\Users\\Dell\\Desktop\\database.json");
-
-    private UserManager M = new UserManager(db);
-    private ContentManager CM = new ContentManager(db);
-
-    private Friend_Management FM = new Friend_Management(db);
+    private final UserStorage userStorage = new FileUserStorage("C:\\Users\\Dell\\Desktop\\database.json");
+    private final PasswordHasher passwordHasher = new SHA256PasswordHasher();
+    private final Database db = new Database(userStorage, passwordHasher);
+    private final UserManager M = new UserManager(db);
+    private final ContentManager CM = new ContentManager(db);
 
     public StartupPage() {
-           setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
         jLabel1.setFont(new Font("Arial", Font.PLAIN, 50)); // Smaller font size
-         jButton1.setPreferredSize(new Dimension(150, 50)); // Set the size of the button
+        jButton1.setPreferredSize(new Dimension(150, 50)); // Set the size of the button
         jButton1.setMinimumSize(new Dimension(150, 50)); // Prevent the button from shrinking
         jButton1.setMaximumSize(new Dimension(150, 50));
-         jButton2.setPreferredSize(new Dimension(150, 50)); // Set the size of the button
+        jButton2.setPreferredSize(new Dimension(150, 50)); // Set the size of the button
         jButton2.setMinimumSize(new Dimension(150, 50)); // Prevent the button from shrinking
         jButton2.setMaximumSize(new Dimension(150, 50));
-
     }
 
     /**
@@ -102,7 +99,7 @@ public class StartupPage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
 
-        Login l = new Login(M, CM, db, FM);
+        Login l = new Login(M, CM, db);
         l.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed

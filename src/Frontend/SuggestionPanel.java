@@ -6,7 +6,6 @@ package Frontend;
 
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.io.File;
 import javax.swing.BorderFactory;
@@ -14,8 +13,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import lab.pkg9.FriendshipService;
+import lab.pkg9.FriendshipServiceInterface;
 import lab.pkg9.User;
 
 /**
@@ -30,7 +28,7 @@ public class SuggestionPanel extends javax.swing.JPanel {
     public SuggestionPanel() {
         initComponents();
     }
-public SuggestionPanel(User sender, User reciever, String profileImagePath, FriendshipService Fm) {
+public SuggestionPanel(User sender, User reciever, String profileImagePath, FriendshipServiceInterface Fm) {
 
     // Profile Image
     ProfilePanel profilePanel = new ProfilePanel();

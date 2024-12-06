@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 //manages the lower-level details of friendships.
 public class FriendManager implements FriendManagable{
-
+    
     private final ArrayList<User> friendList;
     private final ArrayList<User> blockedList;
 
@@ -32,6 +32,7 @@ public class FriendManager implements FriendManagable{
     }
 
     // Remove a friend
+    @Override
     public void removeFriend(User user, User friend) {
         if (isFriend(user, friend)) {
             friendList.remove(friend);

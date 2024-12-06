@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import lab.pkg9.Post;
 import lab.pkg9.Profile;
 import lab.pkg9.User;
+import lab.pkg9.UserFactory;
 
 /**
  *
@@ -36,7 +37,7 @@ public class update_profile extends javax.swing.JFrame {
     User user;
 
     public update_profile(User user) {
-        setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
+        //setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
         bioTextPane.setEditable(false);
         jLabel1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
@@ -272,7 +273,7 @@ public class update_profile extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        User user1 = new User("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        User user1 = UserFactory.createUser("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
         user1.setProfile(new Profile("hello i am very delighted to announce "));
         JDialog dialog = new JDialog(this, "Update Bio", true);
         dialog.setLayout(new BorderLayout());
@@ -314,7 +315,7 @@ public class update_profile extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        User user1 = new User("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
+        User user1 = UserFactory.createUser("john.doe@example.com", "JohnDoe", "hashedPassword", new Date());
         user1.setProfile(new Profile("hello i am very delighted to announce "));
         JDialog dialog = new JDialog(this, "Update Password", true);
 
@@ -368,11 +369,11 @@ public class update_profile extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
     private void loadPosts() {
 
-   
         postsContainerPanel.removeAll();
 
-       for(Post post :user.getPosts())
-           postsContainerPanel.add(new PostPanel(post.getContent(), post.getImagePath()));
+        for (Post post : user.getPostManager().getPosts()) {
+            postsContainerPanel.add(new PostPanel(post.getContent(), post.getImagePath()));
+        }
         // Refresh the UI to show new posts
         postsContainerPanel.revalidate();
         postsContainerPanel.repaint();
@@ -381,7 +382,7 @@ public class update_profile extends javax.swing.JFrame {
     private void loadFriends() {
         friendsContainerPanel.removeAll();
 
-        ArrayList<User> friends = user.getFriendList();
+        ArrayList<User> friends = user.getFriendManager().getFriendList();
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
@@ -411,8 +412,6 @@ public class update_profile extends javax.swing.JFrame {
 
     }
 
-
-
     private void loadBio() {
         // Get the bio from the user's profile
         String bio = user.getProfile().getBio();
@@ -420,21 +419,6 @@ public class update_profile extends javax.swing.JFrame {
         // Set the bio text into the JTextPane
         bioTextPane.setText(bio);
         bioTextPane.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-    }
-
-    public update_profile() {
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        
-        java.awt.EventQueue.invokeLater(() -> {
-            User user = new User("grace@example.com", "hamdy", "hashedPassword", new Date());
-            user.setProfile(new Profile(null));
-            new update_profile(user).setVisible(true);
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

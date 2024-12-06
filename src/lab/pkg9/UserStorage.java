@@ -11,6 +11,6 @@ import java.util.ArrayList;
  * @author DELL
  */
 public interface UserStorage {
-    boolean saveUsers(ArrayList<User> users);
-    ArrayList<User> loadUsers();
+    public boolean saveUsersToJson(ArrayList<User> users);
+   public ArrayList<User> loadUsersFromJson() ;
 }

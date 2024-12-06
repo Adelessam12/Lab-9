@@ -1,55 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package lab.pkg9;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import com.google.gson.reflect.TypeToken;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
-/**
- *
- * @author DELL
- */
 public class FileUserStorage implements UserStorage {
+
     private final String filename;
+    private Gson gson;
 
     public FileUserStorage(String filename) {
         this.filename = filename;
+
+        // Create a Gson instance with custom InstanceCreators
+        this.gson = new GsonBuilder()
+            .registerTypeAdapter(FriendRequestManagable.class, new FriendRequestManagableCreator())
+            .registerTypeAdapter(FriendManagable.class, new FriendManagableCreator())
+            .registerTypeAdapter(PostManagable.class, new PostManagableCreator())
+            .registerTypeAdapter(StoryManagable.class, new StoryManagableCreator())
+            .create();
     }
 
+    // Save users to JSON file
     @Override
-    public boolean saveUsers(ArrayList<User> users) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(filename)) {
+    public boolean saveUsersToJson(ArrayList<User> users) {
+        try (Writer writer = new FileWriter(filename)) {
             gson.toJson(users, writer);
-            System.out.println("Users saved to file successfully.");
             return true;
         } catch (IOException e) {
-            System.err.println("Error saving users to file: " + e.getMessage());
+            e.printStackTrace();
             return false;
         }
     }
 
+    // Load users from JSON file
     @Override
-    public ArrayList<User> loadUsers() {
-        Gson gson = new Gson();
-        try (FileReader reader = new FileReader(filename)) {
+    public ArrayList<User> loadUsersFromJson() {
+        try (Reader reader = new FileReader(filename)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
-            ArrayList<User> users = gson.fromJson(reader, userListType);
-            if (users == null) {
-                users = new ArrayList<>();
-            }
-            System.out.println("Users loaded from file successfully.");
-            return users;
+            return gson.fromJson(reader, userListType);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found. Returning an empty list.");
+            return new ArrayList<>();
         } catch (IOException e) {
-            System.err.println("Error loading users from file: " + e.getMessage());
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }

@@ -17,34 +17,60 @@ public class UserManager {
         }
 
         String hashedPassword = userDatabase.hashPassword(password);
-        User newUser = new User(email, username, hashedPassword, dateOfBirth);
+        User newUser =  UserFactory.createUser(email, username, hashedPassword, dateOfBirth);
         addUser(newUser);
         System.out.println("User registered successfully.");
         return true;
     }
 
-    public User findUser(String userId) {
-        for (User user : userDatabase.getUsers()) {
-            if (user.getUserId().equals(userId)) {
-                return user;
-            }
-        }
+public User findUser(String userId) {
+    if (userId == null || userDatabase.getUsers() == null) {
+        System.out.println("User database is null or userId is invalid.");
         return null;
     }
 
-    public boolean addUser(User user) {
-        if (findUser(user.getUserId()) != null) {
-            System.out.println("User with userId " + user.getUserId() + " already exists.");
-            return false;
-        } else {
-            String hashedPassword = userDatabase.hashPassword(user.getHashedPassword());
-            user.setHashedPassword(hashedPassword);
-            userDatabase.getUsers().add(user);
-            userDatabase.saveUsersToFile();
-            System.out.println("User added successfully.");
-            return true;
+    for (User user : userDatabase.getUsers()) {
+        if (user.getUserId().equals(userId)) {
+            return user;
         }
     }
+    return null;  // Return null if user is not found
+}
+
+public boolean addUser(User user) {
+    if (user == null) {
+        System.out.println("User cannot be null.");
+        return false;
+    }
+
+    if (findUser(user.getUserId()) != null) {
+        System.out.println("User with userId " + user.getUserId() + " already exists.");
+        return false;
+    } else {
+        try {
+            String hashedPassword = userDatabase.hashPassword(user.getHashedPassword());
+            if (hashedPassword == null) {
+                System.out.println("Failed to hash password.");
+                return false;
+            }
+            user.setHashedPassword(hashedPassword);
+            userDatabase.getUsers().add(user);
+            boolean saved = userDatabase.saveUsersToFile();
+            if (saved) {
+                System.out.println("User added successfully.");
+                return true;
+            } else {
+                System.out.println("Error saving user to file.");
+                return false;
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while adding the user: " + e.getMessage());
+            e.printStackTrace();  // Optional: to log full stack trace for debugging
+            return false;
+        }
+    }
+}
+
 
     public boolean deleteUser(User user) {
         User existingUser = findUser(user.getUserId());
