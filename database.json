@@ -1,1 +1,54 @@
-[{"userId":"IDd14f50d4-3b8f-42ff-b27e-e5bfe799a0e5","email":"111","username":"111","hashedPassword":"f6e0a1e2ac41945a9aa7ff8a8aaa0cebc12a3bcc981a929ad5cf810a090e11ae","dateOfBirth":"Nov 11, 1111, 12:00:00 AM","isOnline":true,"profile":{"profilePhotoPath":"R (1).jpg","coverPhotoPath":"image-3@2x.jpg"},"friendRequestManager":{"sentFriendRequests":{},"receivedFriendRequests":{}},"friendManager":{"friendList":[],"blockedList":[]},"postManager":{"posts":[]},"storyManager":{"stories":[]}},{"userId":"ID49245243-4091-495b-8018-d3276581dede","email":"222","username":"222","hashedPassword":"9b871512327c09ce91dd649b3f96a63b7408ef267c8cc5710114e629730cb61f","dateOfBirth":"Dec 22, 2222, 12:00:00 AM","isOnline":false,"profile":{"profilePhotoPath":"R (1).jpg","coverPhotoPath":"image-3@2x.jpg"},"friendRequestManager":{"sentFriendRequests":{},"receivedFriendRequests":{}},"friendManager":{"friendList":[],"blockedList":[]},"postManager":{"posts":[]},"storyManager":{"stories":[]}}]
+[
+  {
+    "userId": "ID72a3edbe-1b4b-4af7-a5cd-f24a77c1054d",
+    "email": "1",
+    "username": "1",
+    "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
+    "isOnline": true,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "posts": []
+    },
+    "storyManager": {
+      "stories": []
+    }
+  },
+  {
+    "userId": "IDe11afbd4-1176-4fc1-af2d-2711e12f817f",
+    "email": "2",
+    "username": "2",
+    "hashedPassword": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+    "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "posts": []
+    },
+    "storyManager": {
+      "stories": []
+    }
+  }
+]

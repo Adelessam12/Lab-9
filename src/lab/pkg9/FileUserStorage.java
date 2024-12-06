@@ -26,10 +26,13 @@ public class FileUserStorage implements UserStorage {
     // Save users to JSON file
     @Override
     public boolean saveUsersToJson(ArrayList<User> users) {
-        try (Writer writer = new FileWriter(filename)) {
-            gson.toJson(users, writer);
+        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create(); // Create a Gson instance with pretty-printing
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            String json = prettyGson.toJson(users); // Convert the entire list to a JSON array
+            writer.write(json);                    // Write the JSON array to the file
             return true;
         } catch (IOException e) {
+            System.out.println("Error saving users: " + e.getMessage());
             return false;
         }
     }
@@ -37,16 +40,17 @@ public class FileUserStorage implements UserStorage {
     // Load users from JSON file
     @Override
     public ArrayList<User> loadUsersFromJson() {
-
         try (Reader reader = new FileReader(filename)) {
             Type userListType = new TypeToken<ArrayList<User>>() {
             }.getType();
-            return gson.fromJson(reader, userListType);
+            return gson.fromJson(reader, userListType); // Deserialize JSON array
         } catch (FileNotFoundException e) {
             System.out.println("File not found. Returning an empty list.");
             return new ArrayList<>();
         } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
             return new ArrayList<>();
         }
     }
+
 }

@@ -6,11 +6,10 @@ package lab.pkg9;
 
 import com.google.gson.InstanceCreator;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 public class FriendManagableCreator implements InstanceCreator<FriendManagable> {
     @Override
     public FriendManagable createInstance(Type type) {
-        return new FriendManager();
+        return new FriendManager(new FriendRequestManager());
     }
 }
