@@ -15,6 +15,6 @@ import java.util.ArrayList;
 public class StoryManagableCreator implements InstanceCreator<StoryManagable> {
     @Override
     public StoryManagable createInstance(Type type) {
-        return new StoryManager(new ArrayList<>());
+        return new StoryManager();
     }
 }

@@ -4,10 +4,7 @@
  */
 package lab.pkg9;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -21,19 +18,12 @@ public class UserFactory {
             String hashedPassword,
             Date dateOfBirth
     ) {
-        // Hash the password before passing it to the User constructor
-      
-        // Create the manager instances (or pass in existing ones)
-        Map<String, String> sentFriendRequests = new HashMap<>();
-        Map<User, String> receivedFriendRequests = new HashMap<>();
-        ArrayList<String> friendList = new ArrayList<>();
-        ArrayList<String> blockedList = new ArrayList<>();
-        ArrayList<Post> posts = new ArrayList<>();
-        ArrayList<Story> stories = new ArrayList<>();
-        FriendRequestManagable friendRequestManager = new FriendRequestManager(sentFriendRequests, receivedFriendRequests);
-        FriendManagable friendManager = new FriendManager(friendList, blockedList);
-        PostManagable postManager = new PostManager(posts);
-        StoryManagable storyManager = new StoryManager(stories);
+        // Hash the password before passing it to the User constructor     
+        // Create the manager instances (or pass in existing ones)               
+        FriendRequestManagable friendRequestManager = new FriendRequestManager();
+        FriendManagable friendManager = new FriendManager();
+        PostManagable postManager = new PostManager();
+        StoryManagable storyManager = new StoryManager();
         // Create and return the User instance
         return new User(email, username, hashedPassword, dateOfBirth, friendRequestManager, friendManager, postManager, storyManager);
     }

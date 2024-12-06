@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public class FriendManagableCreator implements InstanceCreator<FriendManagable> {
     @Override
     public FriendManagable createInstance(Type type) {
-        return new FriendManager(new ArrayList<>(), new ArrayList<>());
+        return new FriendManager();
     }
 }

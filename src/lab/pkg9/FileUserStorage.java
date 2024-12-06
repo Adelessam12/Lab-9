@@ -32,7 +32,6 @@ public class FileUserStorage implements UserStorage {
             gson.toJson(users, writer);
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -48,7 +47,6 @@ public class FileUserStorage implements UserStorage {
             System.out.println("File not found. Returning an empty list.");
             return new ArrayList<>();
         } catch (IOException e) {
-            e.printStackTrace();
             return new ArrayList<>();
         }
     }

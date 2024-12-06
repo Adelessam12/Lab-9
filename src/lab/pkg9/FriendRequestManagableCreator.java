@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class FriendRequestManagableCreator implements InstanceCreator<FriendRequestManagable> {
     @Override
     public FriendRequestManagable createInstance(Type type) {
-        return new FriendRequestManager(new HashMap<>(), new HashMap<>());
+        return new FriendRequestManager();
     }
 }
 
