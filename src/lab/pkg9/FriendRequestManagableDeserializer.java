@@ -25,4 +25,3 @@ public class FriendRequestManagableDeserializer implements JsonDeserializer<Frie
         return manager;
     }
 }
-  
