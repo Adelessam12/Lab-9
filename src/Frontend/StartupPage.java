@@ -23,7 +23,7 @@ public class StartupPage extends javax.swing.JFrame {
     /**
      * Creates new form StartupPage
      */
-    private final UserStorage userStorage = new FileUserStorage("C:\\Users\\Dell\\Desktop\\database.json");
+    private final UserStorage userStorage = new FileUserStorage("database.json");
     private final PasswordHasher passwordHasher = new SHA256PasswordHasher();
     private final Database db = new Database(userStorage, passwordHasher);
 

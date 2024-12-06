@@ -36,11 +36,11 @@ public final class NewsFeed extends javax.swing.JFrame {
     ContentManager Cm;
 
     public NewsFeed(User user, Database database, ContentManager Cm) {
-        setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
+        setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
-        ImageIcon originalIcon =new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
-Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-profile.setIcon(new ImageIcon(scaledImage));
+        ImageIcon originalIcon = new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
+        Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        profile.setIcon(new ImageIcon(scaledImage));
         this.database = database;
 
         this.user = user;
@@ -93,7 +93,7 @@ profile.setIcon(new ImageIcon(scaledImage));
         friendSuggestionspanel.setLayout(new javax.swing.BoxLayout(friendSuggestionspanel, javax.swing.BoxLayout.LINE_AXIS));
         jScrollPane4.setViewportView(friendSuggestionspanel);
 
-        ImageIcon originalIcon =new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\src\\R.png");
+        ImageIcon originalIcon =new javax.swing.ImageIcon("R.png");
         Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         Refresh_button.setIcon(new ImageIcon(scaledImage));
         Refresh_button.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +108,7 @@ profile.setIcon(new ImageIcon(scaledImage));
             }
         });
 
-        ImageIcon originalIcon2 =new javax.swing.ImageIcon("C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\src\\OIP.jpeg");
+        ImageIcon originalIcon2 =new javax.swing.ImageIcon("OIP.jpeg");
         Image scaledImage2 = originalIcon2.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         create_content_button.setIcon(new ImageIcon(scaledImage2));
         create_content_button.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +117,7 @@ profile.setIcon(new ImageIcon(scaledImage));
             }
         });
 
-        ImageIcon originalIcon5 =new javax.swing.ImageIcon("C:\\Users\\Dell\\Desktop\\OIP.jpeg");
+        ImageIcon originalIcon5 =new javax.swing.ImageIcon("OIP.jpeg");
         Image scaledImage5 = originalIcon5.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         friend_managment_button.setIcon(new ImageIcon(scaledImage5));
         friend_managment_button.addActionListener(new java.awt.event.ActionListener() {
@@ -126,7 +126,7 @@ profile.setIcon(new ImageIcon(scaledImage));
             }
         });
 
-        ImageIcon originalIcon4 =new javax.swing.ImageIcon("C:\\Users\\Dell\\Desktop\\logout-vector-icon.jpg");
+        ImageIcon originalIcon4 =new javax.swing.ImageIcon("logout-vector-icon.jpg");
         Image scaledImage4 = originalIcon4.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         jButton1.setIcon(new ImageIcon(scaledImage4));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -192,18 +192,18 @@ profile.setIcon(new ImageIcon(scaledImage));
     }// </editor-fold>//GEN-END:initComponents
 
     private void Refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_buttonActionPerformed
-    Storiescontainerpanel.removeAll();
+        Storiescontainerpanel.removeAll();
         friendsContainerPanel.removeAll();
         Friendpostspanel.removeAll();
         loadnewsfeed();
     }//GEN-LAST:event_Refresh_buttonActionPerformed
 
     private void profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileActionPerformed
-update_profile up = new update_profile(this.user, database);
+        update_profile up = new update_profile(this.user, database);
         up.setVisible(true);        up.setVisible(true);        up.setVisible(true);    }//GEN-LAST:event_profileActionPerformed
 
     private void create_content_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_content_buttonActionPerformed
-     // Create a dialog
+        // Create a dialog
         int choice = javax.swing.JOptionPane.showOptionDialog(
                 this,
                 "What would you like to create?",
@@ -233,7 +233,7 @@ update_profile up = new update_profile(this.user, database);
     }//GEN-LAST:event_friend_managment_buttonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    UserManager.logout(user);
+        UserManager.logout(user);
         this.dispose();
         StartupPage sp = new StartupPage();
         sp.setVisible(true);
@@ -248,11 +248,10 @@ update_profile up = new update_profile(this.user, database);
 
     public void loadPosts() {
         ArrayList<Post> allfriendsposts = new ArrayList<>();
-          ArrayList<User> friends= new ArrayList<>();
-       for(String friendid : user.getFriendManager().getFriendList())
-       {
-           friends.add(UserManager.findUser(friendid));
-       }
+        ArrayList<User> friends = new ArrayList<>();
+        for (String friendid : user.getFriendManager().getFriendList()) {
+            friends.add(UserManager.findUser(friendid));
+        }
         for (User friend : friends) {
             for (Post post : friend.getPostManager().getPosts()) {
                 allfriendsposts.add(post);
@@ -272,12 +271,11 @@ update_profile up = new update_profile(this.user, database);
 
     public void loadFriends() {
         friendsContainerPanel.removeAll();
-            ArrayList<Post> allfriendsposts = new ArrayList<>();
-          ArrayList<User> friends= new ArrayList<>();
-       for(String friendid : user.getFriendManager().getFriendList())
-       {
-           friends.add(UserManager.findUser(friendid));
-       }
+        ArrayList<Post> allfriendsposts = new ArrayList<>();
+        ArrayList<User> friends = new ArrayList<>();
+        for (String friendid : user.getFriendManager().getFriendList()) {
+            friends.add(UserManager.findUser(friendid));
+        }
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
@@ -292,12 +290,11 @@ update_profile up = new update_profile(this.user, database);
     }
 
     public void loadfriendstories() {
-            ArrayList<Post> allfriendsposts = new ArrayList<>();
-          ArrayList<User> friends= new ArrayList<>();
-       for(String friendid : user.getFriendManager().getFriendList())
-       {
-           friends.add(UserManager.findUser(friendid));
-       }
+        ArrayList<Post> allfriendsposts = new ArrayList<>();
+        ArrayList<User> friends = new ArrayList<>();
+        for (String friendid : user.getFriendManager().getFriendList()) {
+            friends.add(UserManager.findUser(friendid));
+        }
         for (User friend : friends) {
 
             StoryPanel storyPanel = new StoryPanel(friend);
@@ -307,7 +304,7 @@ update_profile up = new update_profile(this.user, database);
 
     public void loadSuggestions() {
         friendSuggestionspanel.removeAll();
-        FriendshipService FM = new FriendshipService(database,user);
+        FriendshipService FM = new FriendshipService(database, user);
         ArrayList<User> suggestions = FM.suggestions(user);
 
         for (User suggestion : suggestions) {
@@ -319,13 +316,13 @@ update_profile up = new update_profile(this.user, database);
             JButton add = new JButton("Add Friend");
             suggestionPanel.add(add);
             friendSuggestionspanel.add(suggestionPanel);
-             add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                 FM.sendFriendRequest(user, suggestion);
-                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                 suggestionPanel.remove(add);
-                 suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
-                 friendSuggestionspanel.revalidate();
-                 friendSuggestionspanel.repaint();
+            add.addActionListener((java.awt.event.ActionEvent evt) -> {
+                FM.sendFriendRequest(user, suggestion);
+                System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                suggestionPanel.remove(add);
+                suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+                friendSuggestionspanel.revalidate();
+                friendSuggestionspanel.repaint();
             });
 
         }

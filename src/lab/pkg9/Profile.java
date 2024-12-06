@@ -6,8 +6,10 @@ public class Profile {
     private String bio;
 
     public Profile(String bio) {
-        this.profilePhotoPath = "C:\\Users\\Dell\\Desktop\\R (1).jpg" ;
-        this.coverPhotoPath = "C:\\Users\\Dell\\Desktop\\image-3@2x.jpg";
+        this.profilePhotoPath = "R (1).jpg" ;
+        this.coverPhotoPath = "image-3@2x.jpg";
+        System.out.println(profilePhotoPath);
+        System.out.println(coverPhotoPath);
         this.bio = bio;
     }
 
