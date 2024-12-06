@@ -6,7 +6,6 @@ package lab.pkg9;
 
 import com.google.gson.InstanceCreator;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 /**
  *
@@ -15,6 +14,6 @@ import java.util.ArrayList;
 public class PostManagableCreator implements InstanceCreator<PostManagable> {
     @Override
     public PostManagable createInstance(Type type) {
-        return new PostManager(new ArrayList<>());
+        return new PostManager();
     }
 }

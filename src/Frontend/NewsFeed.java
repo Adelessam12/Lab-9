@@ -5,11 +5,13 @@
 package Frontend;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import lab.pkg9.ContentManager;
 import lab.pkg9.Database;
@@ -314,6 +316,17 @@ update_profile up = new update_profile(this.user, database);
 
             suggestionPanel.setPreferredSize(new Dimension(200, 100));
             friendSuggestionspanel.add(suggestionPanel);
+            JButton add = new JButton("Add Friend");
+            suggestionPanel.add(add);
+            friendSuggestionspanel.add(suggestionPanel);
+             add.addActionListener((java.awt.event.ActionEvent evt) -> {
+                 FM.sendFriendRequest(user, suggestion);
+                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                 suggestionPanel.remove(add);
+                 suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+                 friendSuggestionspanel.revalidate();
+                 friendSuggestionspanel.repaint();
+            });
 
         }
         friendSuggestionspanel.revalidate();

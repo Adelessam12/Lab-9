@@ -303,7 +303,10 @@ public class FriendsPage extends javax.swing.JFrame {
             friendSuggestionspanel.add(suggestionPanel);
              add.addActionListener((java.awt.event.ActionEvent evt) -> {
                  friendService.sendFriendRequest(user, suggestion);
-              //   System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                 System.out.println(user.getFriendRequestManagable().getReceivedFriendRequests());
+                 System.out.println(suggestion.getFriendRequestManagable().getSentFriendRequests());
+                 System.out.println(suggestion.getFriendRequestManagable().getReceivedFriendRequests());
                  suggestionPanel.remove(add);
                  suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
                  friendSuggestionspanel.revalidate();

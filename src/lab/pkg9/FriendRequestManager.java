@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package lab.pkg9;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -10,15 +11,15 @@ import java.util.Map;
  * @author DELL
  */
 public class FriendRequestManager implements FriendRequestManagable{ //manages request statuses.
-
+    
     private final Map<String, String> sentFriendRequests;
     private final Map<User, String> receivedFriendRequests;
 
-    public FriendRequestManager(Map<String, String> sentFriendRequests, Map<User, String> receivedFriendRequests) {
-        this.sentFriendRequests = sentFriendRequests;
-        this.receivedFriendRequests = receivedFriendRequests;
+    public FriendRequestManager() {
+        sentFriendRequests = new HashMap<>();
+        receivedFriendRequests = new HashMap<>();
     }
-  
+    
     @Override
     public void setSentRequestStatus(User friend, String status) {
         sentFriendRequests.put(friend.getUsername(), status);

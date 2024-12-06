@@ -9,16 +9,17 @@ import java.util.LinkedHashSet;
 
 /**
  *
- * @author Mahmoud Waleed + Ahmed Alaa
+ * @author Mahmoud Waleed + Ahmed Alaa+Adel Essam
+ *
  */
 public class FriendshipService implements FriendshipServiceInterface {
 
     private final Database db;
-        private     User user;
+    private final User user;
 
-    public FriendshipService(Database db,User user) {
+    public FriendshipService(Database db, User user) {
         this.db = db;
-            this.user=user;
+        this.user = user;
     }
 
     @Override
@@ -35,8 +36,8 @@ public class FriendshipService implements FriendshipServiceInterface {
         }
 
         // Set friend request status to Accepted
-         user.getFriendRequestManagable().setSentRequestStatus(user, "Accepted");
-         user.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Accepted");
+        user.getFriendRequestManagable().setSentRequestStatus(user, "Accepted");
+        user.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Accepted");
 
         // Add to each other's friend list
         user.getFriendManager().addFriend(user, friend);
@@ -44,8 +45,8 @@ public class FriendshipService implements FriendshipServiceInterface {
 
     @Override
     public void declineFriendRequest(User user, User friend) {
-         user.getFriendRequestManagable().setSentRequestStatus(user, "Declined");
-         user.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Declined");
+        user.getFriendRequestManagable().setSentRequestStatus(user, "Declined");
+        user.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Declined");
     }
 
     @Override
@@ -58,18 +59,19 @@ public class FriendshipService implements FriendshipServiceInterface {
         ArrayList<User> suggestions = new ArrayList<>();
 
         for (User suggested : db.getUsers()) {
-             if(!user.equals(suggested)&& canBeSuggested(user, suggested)&&hasCommonFriends(suggested))
-            {
-                
-               {
-                    if(!user.equals(suggested))
-                    suggestions.add(suggested);
+            if (!user.equals(suggested) && canBeSuggested(user, suggested) && hasCommonFriends(suggested)) {
+
+                {
+                    if (!user.equals(suggested)) {
+                        suggestions.add(suggested);
+                    }
                 }
             }
         }
         for (User suggested : db.getUsers()) {
-             if(!user.equals(suggested))
-            suggestions.add(suggested);
+            if (!user.equals(suggested)) {
+                suggestions.add(suggested);
+            }
         }
         // Remove duplicate suggestions
         return new ArrayList<>(new LinkedHashSet<>(suggestions));
@@ -80,16 +82,15 @@ public class FriendshipService implements FriendshipServiceInterface {
         return !user.equals(suggested)
                 && !user.getFriendManager().isFriend(user, suggested)
                 && !user.getFriendManager().isBlocked(user, suggested)
-                && ! user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggested.getUsername());
+                && !user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggested.getUsername());
     }
 
     //method to check for common friends
     private boolean hasCommonFriends(User suggested) {
-        ArrayList<User> friends= new ArrayList<>();
-       for(String friendId : user.getFriendManager().getFriendList())
-       {
-           friends.add(UserManager.findUser(friendId));
-       }
+        ArrayList<User> friends = new ArrayList<>();
+        for (String friendId : user.getFriendManager().getFriendList()) {
+            friends.add(UserManager.findUser(friendId));
+        }
         for (User friend : friends) {
             if (user.getFriendManager().isFriend(suggested, friend)) {
                 return true;

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class StoryManager implements StoryManagable{
     private final ArrayList<Story> stories;
 
-    public StoryManager(ArrayList<Story> stories) {
-        this.stories = stories;
+    public StoryManager() {
+        stories = new ArrayList<>();
     }
 
     @Override

@@ -10,26 +10,26 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-public class PostManager implements PostManagable{
+public class PostManager implements PostManagable {
 
     private final ArrayList<Post> posts;
 
-    public PostManager(ArrayList<Post> posts) {
-        this.posts = posts;
+    public PostManager() {
+        posts = new ArrayList<>();
     }
 
     @Override
     public void addPost(Post post) {
         posts.add(post);
     }
+
     @Override
-     public void removePost(Post post) {
+    public void removePost(Post post) {
         posts.remove(post);
     }
-     
+
     @Override
     public ArrayList<Post> getPosts() {
         return posts;
     }
 }
-
