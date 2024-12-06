@@ -40,6 +40,7 @@ public class FileUserStorage implements UserStorage {
     // Load users from JSON file
     @Override
     public ArrayList<User> loadUsersFromJson() {
+        
         try (Reader reader = new FileReader(filename)) {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             return gson.fromJson(reader, userListType);

@@ -9,7 +9,8 @@ import java.util.LinkedHashSet;
 
 /**
  *
- * @author Mahmoud Waleed + Ahmed Alaa
+ * @author Mahmoud Waleed + Ahmed Alaa+Adel Essam
+ * 
  */
 public class FriendshipService implements FriendshipServiceInterface {
 
