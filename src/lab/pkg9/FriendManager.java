@@ -5,6 +5,7 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  *
@@ -54,6 +55,9 @@ public class FriendManager implements FriendManagable {
         if (isFriend(user, friend)) {
             friendList.remove(friend.getUserId());
             friend.getFriendManager().removeFriend(friend, user);
+            user.getFriendRequestManagable().getSentFriendRequests().remove(friend.getUsername());
+             Map<String, String> receivedRequests = friend.getFriendRequestManagable().getReceivedFriendRequests();
+        receivedRequests.remove(user.getUserId());
         }
 
     }
