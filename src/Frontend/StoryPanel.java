@@ -58,10 +58,11 @@ public class StoryPanel extends JPanel {
     // Add each story to the panel using PostPanel
     List<Story> stories = friend.getStoryManager().getStories();
     for (Story story : stories) {
-        // Create a PostPanel for each story
-        // You may want to adjust the parameters to match your Story model
+        if(story.isExpired()){
+        friend.getStoryManager().removeStory(story);}
+        else{
         PostPanel postPanel = new PostPanel(story.getContent(), story.getImagePath());
-        storiesPanel.add(postPanel);
+        storiesPanel.add(postPanel);}
     }
 
     // Add stories panel inside a JScrollPane for scrolling

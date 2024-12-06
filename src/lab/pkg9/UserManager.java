@@ -1,78 +1,100 @@
 package lab.pkg9;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UserManager {
 
-    private final Database userDatabase;
+    private static Database userDatabase ;
 
-    public UserManager(Database userDatabase) {
-        this.userDatabase = userDatabase;
+    // Static method to initialize the database
+    public static void initializeDatabase(Database db) {
+        userDatabase = db;
     }
 
-    public boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth, boolean isOnline) {
+    public static boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth, boolean isOnline) {
+        if (userDatabase == null) {
+            System.out.println("Database not initialized.");
+            return false;
+        }
+
         if (findUser(userId) != null) {
             System.out.println("User with userId " + userId + " already exists.");
             return false;
         }
 
         String hashedPassword = userDatabase.hashPassword(password);
-        User newUser =  UserFactory.createUser(email, username, hashedPassword, dateOfBirth);
+        User newUser = UserFactory.createUser(email, username, hashedPassword, dateOfBirth);
         addUser(newUser);
         System.out.println("User registered successfully.");
         return true;
     }
 
-public User findUser(String userId) {
-    if (userId == null || userDatabase.getUsers() == null) {
-        System.out.println("User database is null or userId is invalid.");
-        return null;
-    }
-
-    for (User user : userDatabase.getUsers()) {
-        if (user.getUserId().equals(userId)) {
-            return user;
+    public static User findUser(String userId) {
+        if (userDatabase == null || userId == null || userDatabase.getUsers() == null) {
+            System.out.println("User database is null or userId is invalid.");
+            return null;
         }
-    }
-    return null;  // Return null if user is not found
-}
 
-public boolean addUser(User user) {
-    if (user == null) {
-        System.out.println("User cannot be null.");
-        return false;
+        for (User user : userDatabase.getUsers()) {
+            if (user.getUserId().equals(userId)) {
+                System.out.println(user);
+                return user;
+            }
+        }
+        return null; // Return null if user is not found
     }
 
-    if (findUser(user.getUserId()) != null) {
-        System.out.println("User with userId " + user.getUserId() + " already exists.");
-        return false;
-    } else {
-        try {
-            String hashedPassword = userDatabase.hashPassword(user.getHashedPassword());
-            if (hashedPassword == null) {
-                System.out.println("Failed to hash password.");
-                return false;
-            }
-            user.setHashedPassword(hashedPassword);
-            userDatabase.getUsers().add(user);
-            boolean saved = userDatabase.saveUsersToFile();
-            if (saved) {
-                System.out.println("User added successfully.");
-                return true;
-            } else {
-                System.out.println("Error saving user to file.");
-                return false;
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred while adding the user: " + e.getMessage());
-            e.printStackTrace();  // Optional: to log full stack trace for debugging
+    public static boolean addUser(User user) {
+        if (userDatabase == null) {
+            System.out.println("Database not initialized.");
             return false;
         }
+
+        if (user == null) {
+            System.out.println("User cannot be null.");
+            return false;
+        }
+
+        if (userDatabase.getUsers() == null) {
+            userDatabase.users = new ArrayList<>();
+            userDatabase.users.add(user);
+            userDatabase.saveUsersToFile();
+        } else if (findUser(user.getUserId()) != null) {
+            System.out.println("User with userId " + user.getUserId() + " already exists.");
+            return false;
+        } else {
+            try {
+              String hashedPassword= user.getHashedPassword() ;
+                if (hashedPassword == null) {
+                    System.out.println("Failed to hash password.");
+                    return false;
+                }
+                user.setHashedPassword(hashedPassword);
+                userDatabase.getUsers().add(user);
+                boolean saved = userDatabase.saveUsersToFile();
+                if (saved) {
+                    System.out.println("User added successfully.");
+                    return true;
+                } else {
+                    System.out.println("Error saving user to file.");
+                    return false;
+                }
+            } catch (Exception e) {
+                System.out.println("An error occurred while adding the user: " + e.getMessage());
+                e.printStackTrace(); // Optional: to log full stack trace for debugging
+                return false;
+            }
+        }
+        return true;
     }
-}
 
+    public static boolean deleteUser(User user) {
+        if (userDatabase == null) {
+            System.out.println("Database not initialized.");
+            return false;
+        }
 
-    public boolean deleteUser(User user) {
         User existingUser = findUser(user.getUserId());
         if (existingUser != null) {
             userDatabase.getUsers().remove(existingUser);
@@ -85,20 +107,32 @@ public boolean addUser(User user) {
         }
     }
 
-    public User login(String email, String password) {
-        for (User user : userDatabase.getUsers()) {
-            if (user.getEmail().equals(email) && validatePassword(user.getHashedPassword(), password)) {
-                user.setIsOnline(true);
-                userDatabase.saveUsersToFile();
-                System.out.println("User logged in successfully.");
-                return user;
-            }
-        }
-        System.out.println("Invalid username or password.");
+  public static User login(String email, String password) {
+    if (userDatabase == null) {
+        System.out.println("Database not initialized.");
         return null;
     }
 
-    public boolean logout(User user) {
+    // Iterate over users to find the user with the given email
+    for (User user : userDatabase.getUsers()) {
+        // Check if email matches and the password is valid
+        if (user.getEmail().equals(email) && validatePassword(user.getHashedPassword(), password)) {
+            user.setIsOnline(true);  // Set the user to online
+            userDatabase.saveUsersToFile();  // Save the updated users to the file
+            System.out.println("User logged in successfully.");
+            return user;
+        }
+    }
+    System.out.println("Invalid email or password.");
+    return null;  // Return null if no matching user is found
+}
+
+    public static boolean logout(User user) {
+        if (userDatabase == null) {
+            System.out.println("Database not initialized.");
+            return false;
+        }
+
         if (user != null) {
             user.setIsOnline(false);
             userDatabase.saveUsersToFile();
@@ -110,69 +144,11 @@ public boolean addUser(User user) {
         }
     }
 
-    private boolean validatePassword(String hashedPassword, String password) {
-        return hashedPassword.equals(userDatabase.hashPassword(password));
-    }
-
-//public class Main {
-//    public static void main(String[] args) {
-//        // Initialize the database and user manager
-//        Db db = new Db("C:\\Users\\user\\Downloads\\User.json");
-//        UserManager userManager = new UserManager(db);
-//
-//        // Define user details
-//        String userId = "user123";
-//        String email = "user123@example.com";
-//        String username = "john_doe";
-//        String password = "securePassword123";
-//        Date dateOfBirth = new Date(1995 - 1900, 5, 15); // June 15, 1995
-//
-//        // Trace 1: Register a user
-//        System.out.println("---- Registering User ----");
-//        boolean isRegistered = userManager.registerUser(userId, email, username, password, dateOfBirth);
-//        System.out.println("Registration successful: " + isRegistered);
-//
-//        // Trace 2: Find the user
-//        System.out.println("---- Finding User ----");
-//        User foundUser = userManager.findUser(userId);
-//        if (foundUser != null) {
-//            System.out.println("User found: " + foundUser.getUsername());
-//        } else {
-//            System.out.println("User not found.");
-//        }
-//
-//        // Trace 3: Log in the user
-//        System.out.println("---- Logging in User ----");
-//        User loggedInUser = userManager.login(username, password);
-//        if (loggedInUser != null) {
-//            System.out.println("User logged in: " + loggedInUser.getUsername());
-//        }
-//
-//        // Trace 4: Log out the user
-//        System.out.println("---- Logging out User ----");
-//        userManager.logout(loggedInUser);
-//
-//        // Trace 5: Add another user directly
-//        System.out.println("---- Adding User Directly ----");
-//        User anotherUser = new User("user456", "user456@example.com", "jane_doe", password, new Date(2000 - 1900, 3, 25));
-//        userManager.addUser(anotherUser);
-//
-//        // Trace 6: Delete a user
-//        System.out.println("---- Deleting User ----");
-//        userManager.deleteUser(anotherUser);
-//
-//        // Final state
-//        System.out.println("---- Final State of Users in Database ----");
-//        for (User user : db.getUsers()) {
-//            System.out.println("UserId: " + user.getUserId() + ", Username: " + user.getUsername());
-//        }
-//    }
-//}
-    
-        public static void main(String[] args) {
-       
-
-    }
+  private static boolean validatePassword(String hashedPassword, String password) {
+    // Hash the entered password and compare it with the stored hashed password
+    String hashedInputPassword = userDatabase.hashPassword(password);
+    System.out.println("Hashed input password: " + hashedInputPassword + "   Stored hashed password: " + hashedPassword);
+    return hashedPassword.equals(hashedInputPassword);  // Return true if passwords match
+}
    
-
 }

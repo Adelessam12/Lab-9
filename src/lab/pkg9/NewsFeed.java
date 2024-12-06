@@ -4,13 +4,20 @@
  */
 package lab.pkg9;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Mahmoud Waleed
  */
 public class NewsFeed {
     public void displayFriendsList(User user){
-        for(User friend: user.getFriendManager().getFriendList()){
+          ArrayList<User> friends= new ArrayList<>();
+       for(String friendid : user.getFriendManager().getFriendList())
+       {
+           friends.add(UserManager.findUser(friendid));
+       }
+        for(User friend: friends){
             System.out.println(friend.getUsername()+friend.isIsOnline());
         }
     }

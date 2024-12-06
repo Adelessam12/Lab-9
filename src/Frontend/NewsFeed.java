@@ -32,19 +32,17 @@ public final class NewsFeed extends javax.swing.JFrame {
     Database database;
     User user;
     ContentManager Cm;
-    UserManager M;
 
-    public NewsFeed(User user, Database database, ContentManager Cm, UserManager M) {
-        //setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
+    public NewsFeed(User user, Database database, ContentManager Cm) {
+        setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
-        ImageIcon originalIcon = new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
-        Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
-        Profile_button.setIcon(new ImageIcon(scaledImage));
+        ImageIcon originalIcon =new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
+Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+profile.setIcon(new ImageIcon(scaledImage));
         this.database = database;
 
         this.user = user;
         this.Cm = Cm;
-        this.M = M;
         loadnewsfeed();
     }
 
@@ -70,7 +68,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         friendSuggestionspanel = new javax.swing.JPanel();
         Refresh_button = new javax.swing.JButton();
-        Profile_button = new javax.swing.JButton();
+        profile = new javax.swing.JButton();
         create_content_button = new javax.swing.JButton();
         friend_managment_button = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -102,9 +100,9 @@ public final class NewsFeed extends javax.swing.JFrame {
             }
         });
 
-        Profile_button.addActionListener(new java.awt.event.ActionListener() {
+        profile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Profile_buttonActionPerformed(evt);
+                profileActionPerformed(evt);
             }
         });
 
@@ -140,69 +138,70 @@ public final class NewsFeed extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(466, 466, 466)
-                .addComponent(Refresh_button)
-                .addGap(18, 18, 18)
-                .addComponent(Profile_button)
-                .addGap(18, 18, 18)
-                .addComponent(create_content_button)
-                .addGap(18, 18, 18)
-                .addComponent(friend_managment_button)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(534, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 747, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(6, 6, 6))
+                        .addComponent(jScrollPane4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1037, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Refresh_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(create_content_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(friend_managment_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 43, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(Refresh_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE)
-                    .addComponent(Profile_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(create_content_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(friend_managment_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(40, 40, 40))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE))
+                        .addGap(62, 62, 62))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(Refresh_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(11, 11, 11)
+                        .addComponent(profile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(create_content_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(friend_managment_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(589, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_buttonActionPerformed
-        Storiescontainerpanel.removeAll();
+    Storiescontainerpanel.removeAll();
         friendsContainerPanel.removeAll();
         Friendpostspanel.removeAll();
         loadnewsfeed();
-
     }//GEN-LAST:event_Refresh_buttonActionPerformed
 
+    private void profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileActionPerformed
+update_profile up = new update_profile(this.user, database);
+        up.setVisible(true);        up.setVisible(true);        up.setVisible(true);    }//GEN-LAST:event_profileActionPerformed
+
     private void create_content_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_content_buttonActionPerformed
-        // Create a dialog
+     // Create a dialog
         int choice = javax.swing.JOptionPane.showOptionDialog(
                 this,
                 "What would you like to create?",
@@ -226,23 +225,16 @@ public final class NewsFeed extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_create_content_buttonActionPerformed
 
-    private void Profile_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Profile_buttonActionPerformed
-        update_profile up = new update_profile(this.user);
-        up.setVisible(true);
-    }//GEN-LAST:event_Profile_buttonActionPerformed
-
     private void friend_managment_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friend_managment_buttonActionPerformed
-
         FriendsPage fp = new FriendsPage(user, database);
         fp.setVisible(true);
     }//GEN-LAST:event_friend_managment_buttonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        M.logout(user);
+    UserManager.logout(user);
         this.dispose();
         StartupPage sp = new StartupPage();
         sp.setVisible(true);
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void loadnewsfeed() {
@@ -254,7 +246,12 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     public void loadPosts() {
         ArrayList<Post> allfriendsposts = new ArrayList<>();
-        for (User friend : user.getFriendManager().getFriendList()) {
+          ArrayList<User> friends= new ArrayList<>();
+       for(String friendid : user.getFriendManager().getFriendList())
+       {
+           friends.add(UserManager.findUser(friendid));
+       }
+        for (User friend : friends) {
             for (Post post : friend.getPostManager().getPosts()) {
                 allfriendsposts.add(post);
             }
@@ -273,7 +270,12 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     public void loadFriends() {
         friendsContainerPanel.removeAll();
-        ArrayList<User> friends = user.getFriendManager().getFriendList();
+            ArrayList<Post> allfriendsposts = new ArrayList<>();
+          ArrayList<User> friends= new ArrayList<>();
+       for(String friendid : user.getFriendManager().getFriendList())
+       {
+           friends.add(UserManager.findUser(friendid));
+       }
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
@@ -288,7 +290,13 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadfriendstories() {
-        for (User friend : user.getFriendManager().getFriendList()) {
+            ArrayList<Post> allfriendsposts = new ArrayList<>();
+          ArrayList<User> friends= new ArrayList<>();
+       for(String friendid : user.getFriendManager().getFriendList())
+       {
+           friends.add(UserManager.findUser(friendid));
+       }
+        for (User friend : friends) {
 
             StoryPanel storyPanel = new StoryPanel(friend);
             Storiescontainerpanel.add(storyPanel);
@@ -297,7 +305,7 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     public void loadSuggestions() {
         friendSuggestionspanel.removeAll();
-        FriendshipService FM = new FriendshipService(database, user.getFriendManager(), user.getFriendRequestManagable());
+        FriendshipService FM = new FriendshipService(database,user);
         ArrayList<User> suggestions = FM.suggestions(user);
 
         for (User suggestion : suggestions) {
@@ -314,7 +322,6 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Friendpostspanel;
-    private javax.swing.JButton Profile_button;
     private javax.swing.JButton Refresh_button;
     private javax.swing.JPanel Storiescontainerpanel;
     private javax.swing.JButton create_content_button;
@@ -326,5 +333,6 @@ public final class NewsFeed extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JButton profile;
     // End of variables declaration//GEN-END:variables
 }

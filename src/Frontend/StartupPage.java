@@ -23,14 +23,17 @@ public class StartupPage extends javax.swing.JFrame {
     /**
      * Creates new form StartupPage
      */
-    private final UserStorage userStorage = new FileUserStorage("C:\\Users\\Dell\\Desktop\\database.json");
+    private final UserStorage userStorage = new FileUserStorage("C:\\Users\\Mahmoud Waleed\\Downloads\\database (1).json");
     private final PasswordHasher passwordHasher = new SHA256PasswordHasher();
     private final Database db = new Database(userStorage, passwordHasher);
-    private final UserManager M = new UserManager(db);
+
+   
     private final ContentManager CM = new ContentManager(db);
 
     public StartupPage() {
+        UserManager.initializeDatabase(db);
         initComponents();
+        System.out.println(db.getUsers());
         jLabel1.setFont(new Font("Arial", Font.PLAIN, 50)); // Smaller font size
         jButton1.setPreferredSize(new Dimension(150, 50)); // Set the size of the button
         jButton1.setMinimumSize(new Dimension(150, 50)); // Prevent the button from shrinking
@@ -99,14 +102,14 @@ public class StartupPage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
 
-        Login l = new Login(M, CM, db);
+        Login l = new Login( CM, db);
         l.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Register r = new Register(M);
+        Register r = new Register();
         r.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed

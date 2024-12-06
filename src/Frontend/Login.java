@@ -19,13 +19,12 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    UserManager M;
+ 
     ContentManager CM;
     Database D;
-    public Login(UserManager M, ContentManager CM , Database D) {
+    public Login( ContentManager CM , Database D) {
         this.D= D;
         this.CM=CM;
-        this.M=M;
         initComponents();
     }
 
@@ -110,9 +109,9 @@ String E = jTextField1.getText().trim();
             JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
         } else {
 
-            User u1 = M.login(E, P);
+            User u1 = UserManager.login(E, P);
             if (u1 != null) {
-                NewsFeed N1 = new NewsFeed(u1, D, CM, M);
+                NewsFeed N1 = new NewsFeed(u1, D, CM);
                         this.dispose();
                 N1.setVisible(true);
 

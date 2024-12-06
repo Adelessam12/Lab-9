@@ -17,9 +17,8 @@ import lab.pkg9.UserManager;
  */
 public class Register extends javax.swing.JFrame {
 
-  UserManager M;
-    public Register( UserManager M) {
-       this.M=M;
+    public Register( ) {
+      
        
         initComponents();
         
@@ -164,7 +163,7 @@ public class Register extends javax.swing.JFrame {
 
         // Show success message
         javax.swing.JOptionPane.showMessageDialog(this, "User registered successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        M.addUser(user);
+        UserManager.registerUser(username, email, username, password, dob, false);
         // Clear fields after successful registration
         usernamefiled.setText("");
         emailfield.setText("");

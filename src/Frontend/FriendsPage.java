@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import lab.pkg9.Database;
 import lab.pkg9.FriendshipService;
 import lab.pkg9.FriendshipServiceInterface;
+import lab.pkg9.Post;
 import lab.pkg9.User;
+import lab.pkg9.UserManager;
 /**
  *
  * @author Mahmoud Waleed
@@ -30,7 +32,7 @@ public class FriendsPage extends javax.swing.JFrame {
     public FriendsPage(User user, Database db) {
         initComponents();
         this.user = user;
-        friendService = new FriendshipService(db, user.getFriendManager(), user.getFriendRequestManagable());
+        friendService = new FriendshipService(db,user);
         scrollFriends.setVisible(false);
         scrollRequests.setVisible(false);
         setLocationRelativeTo(null);
@@ -151,7 +153,13 @@ public class FriendsPage extends javax.swing.JFrame {
 
        // friends to the UI
         if (user.getFriendManager().getFriendList() != null && !user.getFriendManager().getFriendList().isEmpty()) {
-            for (User user1: user.getFriendManager().getFriendList()) {
+                ArrayList<Post> allfriendsposts = new ArrayList<>();
+          ArrayList<User> friends= new ArrayList<>();
+       for(String friendid : user.getFriendManager().getFriendList())
+       {
+           friends.add(UserManager.findUser(friendid));
+       }
+            for (User user1: friends) {
                 JPanel entryPanel = new JPanel();
                 entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
                 JLabel newLabel = new JLabel(user1.getUsername()); // Show the friend's username
@@ -214,11 +222,13 @@ public class FriendsPage extends javax.swing.JFrame {
    
 
   //add friend requests to the UI
-    if (user.getFriendRequestManagable().getSentFriendRequests()!= null && !user.getFriendRequestManagable().getReceivedFriendRequests().isEmpty()) {
+    if (user.getFriendRequestManagable().getReceivedFriendRequests()!= null && !user.getFriendRequestManagable().getReceivedFriendRequests().isEmpty()) {
         for (Map.Entry<User, String> user1 : user.getFriendRequestManagable().getReceivedFriendRequests().entrySet()) {
             if(user1.getValue().contains("Pending")){
-                System.out.println(user1.getValue());
+           //     System.out.println(user1.getValue());
                 System.out.println(user.getFriendRequestManagable().getReceivedFriendRequests());
+                System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                System.out.println(user1.getKey().getFriendRequestManagable().getReceivedFriendRequests());
             
             JPanel entryPanel = new JPanel();
             entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
@@ -293,7 +303,7 @@ public class FriendsPage extends javax.swing.JFrame {
             friendSuggestionspanel.add(suggestionPanel);
              add.addActionListener((java.awt.event.ActionEvent evt) -> {
                  friendService.sendFriendRequest(user, suggestion);
-                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+              //   System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
                  suggestionPanel.remove(add);
                  suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
                  friendSuggestionspanel.revalidate();
