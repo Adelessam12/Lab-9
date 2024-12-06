@@ -161,31 +161,34 @@ public class FriendsPage extends javax.swing.JFrame {
            friends.add(UserManager.findUser(friendid));
        }
             for (User user1: friends) {
-                JPanel entryPanel = new JPanel();
-                entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
+                JPanel entryPanel1 = new JPanel();
+                entryPanel1.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
                 JLabel newLabel = new JLabel(user1.getUsername()); // Show the friend's username
                 JButton remove = new JButton("Remove");
                 JButton block = new JButton("  Block  ");
 
                 // Add components to the panel
-                entryPanel.add(newLabel);
-                entryPanel.add(remove);
-                entryPanel.add(block);
+                entryPanel1.add(newLabel);
+                entryPanel1.add(remove);
+                entryPanel1.add(block);
                 remove.addActionListener((java.awt.event.ActionEvent evt1) -> {
                     user.getFriendManager().removeFriend(user, user1);
-                    entryPanel.remove(remove);
-                    entryPanel.remove(block);
+                    friendService.suggestions().add(user1);
                     newLabel.setText("Removed");
+                    entryPanel1.remove(remove);
+                    entryPanel1.remove(block);
+                    friendsContainer.repaint();
                 });
                   block.addActionListener((java.awt.event.ActionEvent evt1) -> {
                       user.getFriendManager().blockUser(user, user1);
-                      entryPanel.remove(remove);
-                      entryPanel.remove(block);
+                      entryPanel1.remove(remove);
+                      entryPanel1.remove(block);
                       newLabel.setText("Blcoked");
+                      friendsContainer.repaint();
                 });
 
                 // Add the entry panel to friendsContainer
-                friendsContainer.add(entryPanel);
+                friendsContainer.add(entryPanel1);
                 
             }
 
@@ -212,11 +215,8 @@ public class FriendsPage extends javax.swing.JFrame {
 
     requestActivity.setText("Hide Friend Requests");
     if (!scrollRequests.isVisible()) {
-        // When scrollRequests is hidden, show it and populate it
-        requestsContainer.removeAll(); 
-        requestsContainer.revalidate();
-        requestsContainer.repaint(); 
-    // Clear any previous entries to reset the friend list
+ 
+    // Clear any previous entries to reset the request list
     requestsContainer.removeAll();
     requestsContainer.revalidate();  
     requestsContainer.repaint();   
