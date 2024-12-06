@@ -7,52 +7,10 @@ package lab.pkg9;
 
 import java.util.Date;
 
-public class Post {
-    
-    private final String postId;
-    private final String authorId;
-    private final String content;
-    private final String imagePath;
-    private final Date timestamp;
+public class Post extends Content{
 
     public Post(String postId, String authorId, String content, String imagePath, Date timestamp) {
-        this.postId = postId;
-        this.authorId = authorId;
-        this.content = content;
-        this.imagePath = imagePath;
-        this.timestamp = timestamp;
+        super(postId, authorId, content, imagePath, timestamp);
     }
-
-   
-    public String getPostId() {
-        return postId;
-    }
-
-    public String getAuthorId() {
-        return authorId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getImagePath() {
-        return this.imagePath;
-    }
-
-    public Date getTimestamp() {
-        return timestamp;
-    }
-
-@Override
-public String toString() {
-    return "Post{" +
-            "postId='" + postId + '\'' +
-            ", authorId='" + authorId + '\'' +
-            ", content='" + content + '\'' +
-            ", imagePath='" + imagePath + '\'' +
-            ", timestamp=" + timestamp +
-            '}';
-}
 
 }
