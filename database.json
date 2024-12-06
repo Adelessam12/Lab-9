@@ -11,15 +11,20 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "ID986fb16c-3137-44c3-ae5b-8f9f36528144",
+        "ID3d1348d4-4b53-4f96-bc12-a99dec31efc2"
+      ],
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "2": "Pending"
+          "2": "Pending",
+          "1": "Accepted"
         },
         "receivedFriendRequests": {
           "IDe47cab1d-bf38-47d5-9254-10743fbd44f1": "Accepted",
-          "ID986fb16c-3137-44c3-ae5b-8f9f36528144": "Pending"
+          "ID986fb16c-3137-44c3-ae5b-8f9f36528144": "Pending",
+          "ID3d1348d4-4b53-4f96-bc12-a99dec31efc2": "Pending"
         }
       }
     },
@@ -27,7 +32,15 @@
       "posts": []
     },
     "storyManager": {
-      "stories": []
+      "stories": [
+        {
+          "storyId": "StoryIDbbc6f2d9-8837-4b61-ad7f-8ff9002415f2",
+          "authorId": "ID11b1dcce-a1f7-4dd8-adc5-38e594f3eb59",
+          "content": "1111",
+          "imagePath": "Screenshot (7).png",
+          "timestamp": "Dec 6, 2024, 9:29:49 PM"
+        }
+      ]
     }
   },
   {
@@ -72,13 +85,17 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "ID11b1dcce-a1f7-4dd8-adc5-38e594f3eb59"
+      ],
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
           "1": "Pending"
         },
-        "receivedFriendRequests": {}
+        "receivedFriendRequests": {
+          "ID11b1dcce-a1f7-4dd8-adc5-38e594f3eb59": "Accepted"
+        }
       }
     },
     "postManager": {
@@ -86,6 +103,68 @@
     },
     "storyManager": {
       "stories": []
+    }
+  },
+  {
+    "userId": "ID3d1348d4-4b53-4f96-bc12-a99dec31efc2",
+    "email": "123",
+    "username": "123",
+    "hashedPassword": "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+    "dateOfBirth": "Jan 2, 2000, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "friendManager": {
+      "friendList": [
+        "ID11b1dcce-a1f7-4dd8-adc5-38e594f3eb59"
+      ],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {
+          "1": "Pending"
+        },
+        "receivedFriendRequests": {
+          "ID11b1dcce-a1f7-4dd8-adc5-38e594f3eb59": "Accepted"
+        }
+      }
+    },
+    "postManager": {
+      "posts": [
+        {
+          "postId": "PostID5d701287-7d14-400c-b443-e6cfe6cff885",
+          "authorId": "ID3d1348d4-4b53-4f96-bc12-a99dec31efc2",
+          "content": "123123",
+          "imagePath": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot (1).png",
+          "timestamp": "Dec 6, 2024, 9:47:21 PM"
+        }
+      ]
+    },
+    "storyManager": {
+      "stories": [
+        {
+          "storyId": "StoryID27c6a333-46e7-4f95-a940-1adf0d256249",
+          "authorId": "ID3d1348d4-4b53-4f96-bc12-a99dec31efc2",
+          "content": "111111",
+          "imagePath": "Screenshot (6).png",
+          "timestamp": "Dec 6, 2024, 9:30:53 PM"
+        },
+        {
+          "storyId": "StoryIDa5b467bd-3a3d-4132-b4e2-ab2909977bd8",
+          "authorId": "ID3d1348d4-4b53-4f96-bc12-a99dec31efc2",
+          "content": "1111111111",
+          "imagePath": "Screenshot (1).png",
+          "timestamp": "Dec 6, 2024, 9:34:46 PM"
+        },
+        {
+          "storyId": "StoryID77f583af-99b0-4721-8d3f-5c2aa4e3603a",
+          "authorId": "ID3d1348d4-4b53-4f96-bc12-a99dec31efc2",
+          "content": "12312312",
+          "imagePath": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot (3).png",
+          "timestamp": "Dec 6, 2024, 9:47:31 PM"
+        }
+      ]
     }
   }
 ]

@@ -133,7 +133,7 @@ public class CreateStory extends javax.swing.JFrame {
             if (!file.getName().endsWith(".png")) {
                 JOptionPane.showMessageDialog(rootPane, "Invalid file. File should end with '.png'", "Error", JOptionPane.ERROR_MESSAGE);
             } else {
-                imagePath = file.getName();
+                imagePath = file.getAbsolutePath();
                 ImageIcon coverPhoto = new ImageIcon(file.getAbsolutePath());
                 jLabel2.setIcon(new ImageIcon(coverPhoto.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH)));
             }

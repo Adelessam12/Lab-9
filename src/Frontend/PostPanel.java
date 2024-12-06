@@ -60,8 +60,9 @@ public class PostPanel extends JPanel {
                 File imgFile = new File(imagePath);
                 if (imgFile.exists()) {
                     ImageIcon imageIcon = new ImageIcon(imagePath);
-                    Image scaledImage = imageIcon.getImage();
-                    JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
+                    Image image = imageIcon.getImage();
+                    Image scaledimage = image.getScaledInstance(200, 200, 100);
+                    JLabel imageLabel = new JLabel(new ImageIcon(scaledimage));
                     imagePanel.add(imageLabel);  
                 } 
             } catch (Exception e) {
