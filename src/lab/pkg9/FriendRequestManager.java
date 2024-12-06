@@ -12,12 +12,20 @@ import java.util.Map;
  */
 public class FriendRequestManager implements FriendRequestManagable{ //manages request statuses.
     
-    private final Map<String, String> sentFriendRequests;
-    private final Map<String, String> receivedFriendRequests;
+    private  Map<String, String> sentFriendRequests;
+    private  Map<String, String> receivedFriendRequests;
 
     public FriendRequestManager() {
         sentFriendRequests = new HashMap<>();
         receivedFriendRequests = new HashMap<>();
+    }
+
+    public void setSentFriendRequests(Map<String, String> sentFriendRequests) {
+        this.sentFriendRequests = sentFriendRequests;
+    }
+
+    public void setReceivedFriendRequests(Map<String, String> receivedFriendRequests) {
+        this.receivedFriendRequests = receivedFriendRequests;
     }
     
     @Override

@@ -12,7 +12,11 @@ import java.util.ArrayList;
  */
 public class PostManager implements PostManagable {
 
-    private final ArrayList<Post> posts;
+    private ArrayList<Post> posts;
+
+    public void setPosts(ArrayList<Post> posts) {
+        this.posts = posts;
+    }
 
     public PostManager() {
         posts = new ArrayList<>();

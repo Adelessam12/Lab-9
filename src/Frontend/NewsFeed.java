@@ -322,7 +322,7 @@ public final class NewsFeed extends javax.swing.JFrame {
                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
                 suggestionPanel.remove(add);
                 database.saveUsersToFile();
-                ArrayList<User> users = database.getUsers();
+                //ArrayList<User> users = database.getUsers();
                 suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
                 friendSuggestionspanel.revalidate();
                 friendSuggestionspanel.repaint();

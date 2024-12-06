@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author DELL
  */
 public class StoryManager implements StoryManagable{
-    private final ArrayList<Story> stories;
+    private ArrayList<Story> stories;
 
     public StoryManager() {
         stories = new ArrayList<>();
@@ -20,6 +20,10 @@ public class StoryManager implements StoryManagable{
     @Override
     public void addStory(Story story) {
         stories.add(story);
+    }
+
+    public void setStories(ArrayList<Story> stories) {
+        this.stories = stories;
     }
 
     @Override

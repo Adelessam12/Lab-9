@@ -1,11 +1,10 @@
 package lab.pkg9;
 
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.*;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class FileUserStorage implements UserStorage {
 
@@ -15,20 +14,21 @@ public class FileUserStorage implements UserStorage {
     public FileUserStorage(String filename) {
         this.filename = filename;
 
-        // Create a Gson instance with custom InstanceCreators
+        // Create a Gson instance with custom Deserializers
         this.gson = new GsonBuilder()
-                .registerTypeAdapter(FriendManagable.class, new FriendManagableCreator())
-                .registerTypeAdapter(PostManagable.class, new PostManagableCreator())
-                .registerTypeAdapter(StoryManagable.class, new StoryManagableCreator())
+                .registerTypeAdapter(FriendRequestManagable.class, new FriendRequestManagableDeserializer())
+                .registerTypeAdapter(FriendManagable.class, new FriendManagableDeserializer())
+                .registerTypeAdapter(PostManagable.class, new PostManagableDeserializer())
+                .registerTypeAdapter(StoryManagable.class, new StoryManagableDeserializer())
+                .setPrettyPrinting()
                 .create();
     }
 
     // Save users to JSON file
     @Override
     public boolean saveUsersToJson(ArrayList<User> users) {
-        Gson prettyGson = new GsonBuilder().setPrettyPrinting().create();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            String json = prettyGson.toJson(users);
+            String json = gson.toJson(users);
             System.out.println("Serialized JSON: " + json); // Log serialized JSON
             writer.write(json);
             return true;
@@ -41,32 +41,24 @@ public class FileUserStorage implements UserStorage {
     // Load users from JSON file
     @Override
     public ArrayList<User> loadUsersFromJson() {
-        try (Reader reader = new FileReader(filename)) {
-            Type userListType = new TypeToken<ArrayList<User>>() {
-            }.getType();
-            ArrayList<User> users = gson.fromJson(reader, userListType); // Deserialize JSON array
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+            // Define the type of ArrayList<User>
+            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+            ArrayList<User> users = gson.fromJson(reader, userListType);
 
-            // Debugging: Log the loaded users
             if (users != null) {
-                System.out.println("Loaded users from file:");
                 for (User user : users) {
-                    System.out.println(user); // Ensure User has a proper `toString` method
+                    System.out.println("Loaded User: " + user);
                 }
             } else {
-                System.out.println("No users found in the file.");
+                System.out.println("No users found in the JSON file.");
             }
-            return users != null ? users : new ArrayList<>();
+            return users;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filename + ". Returning an empty list.");
-            return new ArrayList<>();
+            System.out.println("File not found: " + filename);
         } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-            return new ArrayList<>();
-        } catch (Exception e) {
-            System.out.println("Unexpected error during deserialization: " + e.getMessage());
-            e.printStackTrace(); // Print stack trace for debugging
-            return new ArrayList<>();
+            System.out.println("Error loading users: " + e.getMessage());
         }
+        return new ArrayList<>(); // Return an empty list on error
     }
-
 }

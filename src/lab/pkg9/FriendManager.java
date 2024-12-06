@@ -13,19 +13,30 @@ import java.util.ArrayList;
 //manages the lower-level details of friendships.
 public class FriendManager implements FriendManagable {
 
-    private final ArrayList<String> friendList;
-    private final ArrayList<String> blockedList;
-        private final FriendRequestManagable friendRequestManager;
+    private  ArrayList<String> friendList= new ArrayList<>();
+    private  ArrayList<String> blockedList=new ArrayList<>();
+    private  FriendRequestManagable friendRequestManager;
     // Constructor to initialize friend and blocked lists
     public FriendManager(FriendRequestManagable friendRequestManager) {
-        friendList = new ArrayList<>();
-        blockedList = new ArrayList<>();
+
         this.friendRequestManager = friendRequestManager;
     }
 
     @Override
     public FriendRequestManagable getFriendRequestManager() {
         return friendRequestManager;
+    }
+
+    public void setFriendList(ArrayList<String> friendList) {
+        this.friendList = friendList;
+    }
+
+    public void setBlockedList(ArrayList<String> blockedList) {
+        this.blockedList = blockedList;
+    }
+
+    public void setFriendRequestManager(FriendRequestManagable friendRequestManager) {
+        this.friendRequestManager = friendRequestManager;
     }
 
     // Add a friend

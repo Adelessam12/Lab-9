@@ -5,13 +5,13 @@
 package lab.pkg9;
 import com.google.gson.InstanceCreator;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 
 // FriendRequestManagable InstanceCreator
 public class FriendRequestManagableCreator implements InstanceCreator<FriendRequestManagable> {
     @Override
     public FriendRequestManagable createInstance(Type type) {
-        return new FriendRequestManager();
+        // Initialize the FriendRequestManager with its internal maps
+        FriendRequestManager manager = new FriendRequestManager();      
+        return manager;
     }
 }
-
