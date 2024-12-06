@@ -113,7 +113,7 @@ public class StartupPage extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         this.dispose();
-        Register r = new Register();
+        Register r = new Register(db);
         r.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed

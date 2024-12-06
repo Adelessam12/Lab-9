@@ -109,15 +109,21 @@ String E = jTextField1.getText().trim();
         if (E.isEmpty() || P.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        } else {
-
+        } else {    
+                 
+             
             User u1 = UserManager.login(E, P);
             if (u1 != null) {
                 NewsFeed N1 = new NewsFeed(u1, D, CM);
                         this.dispose();
                 N1.setVisible(true);
+            }
+            else
+            {
+                            JOptionPane.showMessageDialog(this, "user email already registered", "Input Error", JOptionPane.ERROR_MESSAGE);
 
             }
+            
         }
 
 
