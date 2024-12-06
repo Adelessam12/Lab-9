@@ -40,11 +40,11 @@ public class StoryPanel extends JPanel {
     }
 
     // Open a popup with a scrollable list of the friend's stories
-   private void openStoryPopup(User friend) {
+  private void openStoryPopup(User friend) {
     // Create a new dialog to display the stories
     JDialog storyDialog = new JDialog((Frame) null, "Stories of " + friend.getUsername(), true);
     storyDialog.setLayout(new BorderLayout());
-    
+
     // Create a panel to hold the stories
     JPanel storiesPanel = new JPanel();
     storiesPanel.setLayout(new BoxLayout(storiesPanel, BoxLayout.Y_AXIS));
@@ -52,19 +52,29 @@ public class StoryPanel extends JPanel {
     // Add each story to the panel using PostPanel
     List<Story> stories = friend.getStoryManager().getStories();
     for (Story story : stories) {
-        if(story.isExpired()){
-        friend.getStoryManager().removeStory(story);}
-        else{
-        PostPanel postPanel = new PostPanel(story.getContent(), story.getImagePath());
-        storiesPanel.add(postPanel);}
+        if (story.isExpired()) {
+            friend.getStoryManager().removeStory(story);
+        } else {
+            PostPanel postPanel = new PostPanel(story.getContent(), story.getImagePath());
+            postPanel.setMaximumSize(new Dimension(500, 300)); // Restrict maximum size of each PostPanel
+            storiesPanel.add(postPanel);
+            storiesPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing between posts
+        }
     }
 
     // Add stories panel inside a JScrollPane for scrolling
     JScrollPane scrollPane = new JScrollPane(storiesPanel);
+    scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
     storyDialog.add(scrollPane, BorderLayout.CENTER);
 
-    // Set dialog size and display it
-    storyDialog.setSize(300, 400);
+    // Set dialog size dynamically based on content or provide a larger default size
+    int width = Math.max(500, storiesPanel.getPreferredSize().width + 50); // Add padding for scrollbars
+    int height = Math.min(600, storiesPanel.getPreferredSize().height + 50); // Limit to a reasonable height
+    storyDialog.setSize(width, height);
+    storyDialog.setLocationRelativeTo(null); // Center the dialog on the screen
+
+    // Display the dialog
     storyDialog.setVisible(true);
 }
 
