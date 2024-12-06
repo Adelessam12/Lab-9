@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @author DELL
  */
 public interface FriendshipServiceInterface {
-    void sendFriendRequest(User user, User friend);
-    void acceptFriendRequest(User user, User friend);
-    void declineFriendRequest(User user, User friend);
-    void blockFriend(User user, User friend);
-    ArrayList<User> suggestions(User user);
+    void sendFriendRequest(User friend);
+    void acceptFriendRequest(User friend);
+    void declineFriendRequest(User friend);
+    void blockFriend(User friend);
+    ArrayList<User> suggestions();
 }

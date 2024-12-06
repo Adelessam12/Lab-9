@@ -273,7 +273,6 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     public void loadFriends() {
         friendsContainerPanel.removeAll();
-        ArrayList<Post> allfriendsposts = new ArrayList<>();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
             friends.add(UserManager.findUser(friendid));
@@ -292,7 +291,6 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadfriendstories() {
-        ArrayList<Post> allfriendsposts = new ArrayList<>();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
             friends.add(UserManager.findUser(friendid));
@@ -307,7 +305,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     public void loadSuggestions() {
         friendSuggestionspanel.removeAll();
         FriendshipService FM = new FriendshipService(database, user);
-        ArrayList<User> suggestions = FM.suggestions(user);
+        ArrayList<User> suggestions = FM.suggestions();
 
         for (User suggestion : suggestions) {
             if(!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername())){
@@ -320,7 +318,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             suggestionPanel.add(add);
             friendSuggestionspanel.add(suggestionPanel);
             add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                FM.sendFriendRequest(user, suggestion);
+                FM.sendFriendRequest(suggestion);
                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
                 suggestionPanel.remove(add);
                 suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));

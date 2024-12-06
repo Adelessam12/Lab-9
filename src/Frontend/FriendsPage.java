@@ -29,16 +29,18 @@ public class FriendsPage extends javax.swing.JFrame {
    
     private final User user;
     private final  FriendshipServiceInterface friendService;
+    private final Database db;
     public FriendsPage(User user, Database db) {
         initComponents();
         this.user = user;
+        this.db = db;
         friendService = new FriendshipService(db,user);
+        loadSuggestions();
         scrollFriends.setVisible(false);
         scrollRequests.setVisible(false);
         setLocationRelativeTo(null);
         friendsContainer.setLayout(new BoxLayout(friendsContainer, BoxLayout.Y_AXIS));
         requestsContainer.setLayout(new BoxLayout(requestsContainer, BoxLayout.Y_AXIS));
-        loadSuggestions();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
@@ -153,7 +155,6 @@ public class FriendsPage extends javax.swing.JFrame {
 
        // friends to the UI
         if (user.getFriendManager().getFriendList() != null && !user.getFriendManager().getFriendList().isEmpty()) {
-                ArrayList<Post> allfriendsposts = new ArrayList<>();
           ArrayList<User> friends= new ArrayList<>();
        for(String friendid : user.getFriendManager().getFriendList())
        {
@@ -244,7 +245,7 @@ public class FriendsPage extends javax.swing.JFrame {
             entryPanel.add(decline);
             
               accept.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                 friendService.acceptFriendRequest(user, user1.getKey());
+                 friendService.acceptFriendRequest(user1.getKey());
                   //System.out.println(user.getValue().get(1));
                   entryPanel.remove(accept);
                   entryPanel.remove(decline);
@@ -253,7 +254,7 @@ public class FriendsPage extends javax.swing.JFrame {
                 });
               
               decline.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                  friendService.declineFriendRequest(user, user1.getKey());
+                  friendService.declineFriendRequest(user1.getKey());
                   entryPanel.remove(accept);
                   entryPanel.remove(decline);
                   newLabel.setText("Deleted");
@@ -292,10 +293,10 @@ public class FriendsPage extends javax.swing.JFrame {
     
     private void loadSuggestions(){
         friendSuggestionspanel.removeAll();
-        ArrayList<User> suggestions = friendService.suggestions(user);
+        ArrayList<User> suggestions = friendService.suggestions();
 //        System.out.println(suggestions.get(0));
         for(User suggestion: suggestions){
-            if(!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername())){
+            if(!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername()) ){
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
             SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, friendService);
             suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
@@ -303,7 +304,8 @@ public class FriendsPage extends javax.swing.JFrame {
             suggestionPanel.add(add);
             friendSuggestionspanel.add(suggestionPanel);
              add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                 friendService.sendFriendRequest(user, suggestion);
+                 friendService.sendFriendRequest(suggestion);
+                 db.saveUsersToFile();
                  suggestionPanel.remove(add);
                  suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
                  friendSuggestionspanel.revalidate();

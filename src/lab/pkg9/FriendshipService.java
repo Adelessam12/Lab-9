@@ -23,13 +23,13 @@ public class FriendshipService implements FriendshipServiceInterface {
     }
 
     @Override
-    public void sendFriendRequest(User user, User friend) {
+    public void sendFriendRequest(User friend) {
         user.getFriendRequestManagable().setSentRequestStatus(friend, "Pending");
          friend.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Pending");
     }
 
     @Override
-    public void acceptFriendRequest(User user, User friend) {
+    public void acceptFriendRequest(User friend) {
         // Check if the users are already friends
         if (user.getFriendManager().isFriend(user, friend)) {
             return; // Already friends
@@ -44,32 +44,32 @@ public class FriendshipService implements FriendshipServiceInterface {
     }
 
     @Override
-    public void declineFriendRequest(User user, User friend) {
+    public void declineFriendRequest(User friend) {
         user.getFriendRequestManagable().setSentRequestStatus(user, "Declined");
         user.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Declined");
     }
 
     @Override
-    public void blockFriend(User user, User friend) {
+    public void blockFriend(User friend) {
         user.getFriendManager().blockUser(user, friend);
     }
 
     @Override
-    public ArrayList<User> suggestions(User user) {
+    public ArrayList<User> suggestions() {
         ArrayList<User> suggestions = new ArrayList<>();
 
         for (User suggested : db.getUsers()) {
-            if (!user.equals(suggested) && canBeSuggested(user, suggested) && hasCommonFriends(suggested)) {
+            if (canBeSuggested(user, suggested) && hasCommonFriends(suggested)) {
 
                 {
-                    if (!user.equals(suggested)) {
+                    if (canBeSuggested(user, suggested)) {
                         suggestions.add(suggested);
                     }
                 }
             }
         }
         for (User suggested : db.getUsers()) {
-            if (!user.equals(suggested)) {
+            if (canBeSuggested(user, suggested)) {
                 suggestions.add(suggested);
             }
         }
@@ -82,7 +82,7 @@ public class FriendshipService implements FriendshipServiceInterface {
         return !user.equals(suggested)
                 && !user.getFriendManager().isFriend(user, suggested)
                 && !user.getFriendManager().isBlocked(user, suggested)
-                && !user.getFriendRequestManagable().getSentFriendRequests().containsValue("Pending");
+                && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggested);
     }
 
     //method to check for common friends
