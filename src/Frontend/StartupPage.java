@@ -6,6 +6,8 @@ package Frontend;
 
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import lab.pkg9.ContentManager;
 import lab.pkg9.Database;
 import lab.pkg9.FileUserStorage;
@@ -32,7 +34,9 @@ public class StartupPage extends javax.swing.JFrame {
 
     public StartupPage() {
         UserManager.initializeDatabase(db);
+        setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
+        
         System.out.println(db.getUsers());
         jLabel1.setFont(new Font("Arial", Font.PLAIN, 50)); // Smaller font size
         jButton1.setPreferredSize(new Dimension(150, 50)); // Set the size of the button

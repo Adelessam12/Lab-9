@@ -56,7 +56,7 @@ public class CreateStory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Post Content");
+        jLabel1.setText("Story Content");
 
         jButton2.setText("choose image (optional)");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +143,7 @@ public class CreateStory extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
         contentManager.createStory(user, content, imagePath);
+        
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 

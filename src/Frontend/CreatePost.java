@@ -16,7 +16,7 @@ import lab.pkg9.User;
  *
  * @author Dell
  */
-public class create_post extends javax.swing.JFrame {
+public class CreatePost extends javax.swing.JFrame {
     private final User user;
     private String imagePath;
     private final ContentManager contentManager;
@@ -27,7 +27,7 @@ public class create_post extends javax.swing.JFrame {
      */
 
 
-    public create_post(User user, ContentManager contentManager) {
+    public CreatePost(User user, ContentManager contentManager) {
         this.user = user;
         imagePath = null;
         this.contentManager = contentManager;

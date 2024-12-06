@@ -200,7 +200,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="friend_managment_buttonActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon originalIcon5 =new javax.swing.ImageIcon(&quot;OIP.jpeg&quot;);&#xa;Image scaledImage5 = originalIcon5.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);&#xa;friend_managment_button.setIcon(new ImageIcon(scaledImage5));"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ImageIcon originalIcon5 =new javax.swing.ImageIcon(&quot;image.jpeg&quot;);&#xa;Image scaledImage5 = originalIcon5.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);&#xa;friend_managment_button.setIcon(new ImageIcon(scaledImage5));"/>
       </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="jButton1">

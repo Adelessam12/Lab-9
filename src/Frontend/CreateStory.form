@@ -81,7 +81,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Post Content"/>
+        <Property name="text" type="java.lang.String" value="Story Content"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButton2">

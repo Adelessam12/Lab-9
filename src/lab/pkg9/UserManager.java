@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class UserManager {
-
-    private static Database userDatabase ;
-
+    
+    private static Database userDatabase;
+    
     // Static method to initialize the database
     public static void initializeDatabase(Database db) {
         userDatabase = db;
@@ -66,7 +66,7 @@ public class UserManager {
             return false;
         } else {
             try {
-              String hashedPassword= user.getHashedPassword() ;
+                String hashedPassword = user.getHashedPassword();
                 if (hashedPassword == null) {
                     System.out.println("Failed to hash password.");
                     return false;
@@ -108,25 +108,25 @@ public class UserManager {
         }
     }
 
-  public static User login(String email, String password) {
-    if (userDatabase == null) {
-        System.out.println("Database not initialized.");
-        return null;
-    }
-
-    // Iterate over users to find the user with the given email
-    for (User user : userDatabase.getUsers()) {
-        // Check if email matches and the password is valid
-        if (user.getEmail().equals(email) && validatePassword(user.getHashedPassword(), password)) {
-            user.setIsOnline(true);  // Set the user to online
-            userDatabase.saveUsersToFile();  // Save the updated users to the file
-            System.out.println("User logged in successfully.");
-            return user;
+    public static User login(String email, String password) {
+        if (userDatabase == null) {
+            System.out.println("Database not initialized.");
+            return null;
         }
+
+        // Iterate over users to find the user with the given email
+        for (User user : userDatabase.getUsers()) {
+            // Check if email matches and the password is valid
+            if (user.getEmail().equals(email) && validatePassword(user.getHashedPassword(), password)) {
+                user.setIsOnline(true);  // Set the user to online
+                userDatabase.saveUsersToFile();  // Save the updated users to the file
+                System.out.println("User logged in successfully.");
+                return user;
+            }
+        }
+        System.out.println("Invalid email or password.");
+        return null;  // Return null if no matching user is found
     }
-    System.out.println("Invalid email or password.");
-    return null;  // Return null if no matching user is found
-}
 
     public static boolean logout(User user) {
         if (userDatabase == null) {
@@ -145,11 +145,11 @@ public class UserManager {
         }
     }
 
-  private static boolean validatePassword(String hashedPassword, String password) {
-    // Hash the entered password and compare it with the stored hashed password
-    String hashedInputPassword = userDatabase.hashPassword(password);
-    System.out.println("Hashed input password: " + hashedInputPassword + "   Stored hashed password: " + hashedPassword);
-    return hashedPassword.equals(hashedInputPassword);  // Return true if passwords match
-}
-   
+    private static boolean validatePassword(String hashedPassword, String password) {
+        // Hash the entered password and compare it with the stored hashed password
+        String hashedInputPassword = userDatabase.hashPassword(password);
+        System.out.println("Hashed input password: " + hashedInputPassword + "   Stored hashed password: " + hashedPassword);
+        return hashedPassword.equals(hashedInputPassword);  // Return true if passwords match
+    }
+
 }

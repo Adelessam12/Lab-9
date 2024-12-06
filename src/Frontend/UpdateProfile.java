@@ -31,14 +31,14 @@ import lab.pkg9.UserManager;
  *
  * @author Dell
  */
-public class update_profile extends javax.swing.JFrame {
+public class UpdateProfile extends javax.swing.JFrame {
     /**
-     * Creates new form update_profile
+     * Creates new form UpdateProfile
      */
     User user;
     Database db;
 
-    public update_profile(User user, Database db) {
+    public UpdateProfile(User user, Database db) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
         bioTextPane.setEditable(false);
@@ -248,6 +248,7 @@ public class update_profile extends javax.swing.JFrame {
             user.getProfile().setProfilePhotoPath(path);
             ProfilePanel profilePanel = (ProfilePanel) profielphoto;
             profilePanel.setProfileImage(path);
+            db.saveUsersToFile();
         }
 
 
@@ -267,7 +268,7 @@ public class update_profile extends javax.swing.JFrame {
             // Scale the image to the specific size (945x309)
             Image scaledImage = coverPhoto.getImage().getScaledInstance(945, 309, Image.SCALE_SMOOTH);
             user.getProfile().setCoverPhotoPath(selectedFile.getAbsolutePath());
-
+            db.saveUsersToFile();
             // Ensure the label size is fixed and matches the desired image size
             coverphotolabel.setPreferredSize(new Dimension(945, 309));  // Set preferred size for label
             coverphotolabel.setIcon(new ImageIcon(scaledImage));  // Set scaled image as the icon
@@ -301,6 +302,7 @@ public class update_profile extends javax.swing.JFrame {
             String newBio = bioTextField.getText().trim();
             if (!newBio.isEmpty()) {
                 user.getProfile().setBio(newBio);
+                db.saveUsersToFile();
                 loadBio();
                 dialog.dispose();
             } else {
@@ -350,6 +352,7 @@ public class update_profile extends javax.swing.JFrame {
             if (!password.isEmpty()) {
                 System.out.println(user.getHashedPassword());
                 user.setHashedPassword(password); // Update password using setter
+                db.saveUsersToFile();
                 System.out.println(user.getHashedPassword());
                 JOptionPane.showMessageDialog(dialog, "Password updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 dialog.dispose(); // Close the dialog

@@ -42,7 +42,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         profile.setIcon(new ImageIcon(scaledImage));
         this.database = database;
-
         this.user = user;
         this.Cm = Cm;
         loadnewsfeed();
@@ -117,7 +116,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             }
         });
 
-        ImageIcon originalIcon5 =new javax.swing.ImageIcon("OIP.jpeg");
+        ImageIcon originalIcon5 =new javax.swing.ImageIcon("image.jpeg");
         Image scaledImage5 = originalIcon5.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         friend_managment_button.setIcon(new ImageIcon(scaledImage5));
         friend_managment_button.addActionListener(new java.awt.event.ActionListener() {
@@ -195,11 +194,14 @@ public final class NewsFeed extends javax.swing.JFrame {
         Storiescontainerpanel.removeAll();
         friendsContainerPanel.removeAll();
         Friendpostspanel.removeAll();
+        ImageIcon originalIcon = new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
+        Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        profile.setIcon(new ImageIcon(scaledImage));
         loadnewsfeed();
     }//GEN-LAST:event_Refresh_buttonActionPerformed
 
     private void profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileActionPerformed
-        update_profile up = new update_profile(this.user, database);
+        UpdateProfile up = new UpdateProfile(this.user, database);
         up.setVisible(true);        up.setVisible(true);        up.setVisible(true);    }//GEN-LAST:event_profileActionPerformed
 
     private void create_content_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_content_buttonActionPerformed
@@ -218,7 +220,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         // Handle user choice
         if (choice == javax.swing.JOptionPane.YES_OPTION) {
             // Open CreatePost JFrame
-            create_post postFrame = new create_post(user, Cm);
+            CreatePost postFrame = new CreatePost(user, Cm);
             postFrame.setVisible(true);
         } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
             // Open CreateStory JFrame
