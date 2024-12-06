@@ -14,7 +14,9 @@ import javax.swing.JPanel;
 import lab.pkg9.Database;
 import lab.pkg9.FriendshipService;
 import lab.pkg9.FriendshipServiceInterface;
+import lab.pkg9.Post;
 import lab.pkg9.User;
+import lab.pkg9.UserManager;
 /**
  *
  * @author Mahmoud Waleed
@@ -30,7 +32,7 @@ public class FriendsPage extends javax.swing.JFrame {
     public FriendsPage(User user, Database db) {
         initComponents();
         this.user = user;
-        friendService = new FriendshipService(db, user.getFriendManager(), user.getFriendRequestManagable());
+        friendService = new FriendshipService(db,user);
         scrollFriends.setVisible(false);
         scrollRequests.setVisible(false);
         setLocationRelativeTo(null);
@@ -151,7 +153,13 @@ public class FriendsPage extends javax.swing.JFrame {
 
        // friends to the UI
         if (user.getFriendManager().getFriendList() != null && !user.getFriendManager().getFriendList().isEmpty()) {
-            for (User user1: user.getFriendManager().getFriendList()) {
+                ArrayList<Post> allfriendsposts = new ArrayList<>();
+          ArrayList<User> friends= new ArrayList<>();
+       for(String friendid : user.getFriendManager().getFriendList())
+       {
+           friends.add(UserManager.findUser(friendid));
+       }
+            for (User user1: friends) {
                 JPanel entryPanel = new JPanel();
                 entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
                 JLabel newLabel = new JLabel(user1.getUsername()); // Show the friend's username

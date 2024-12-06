@@ -20,10 +20,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import lab.pkg9.Database;
 import lab.pkg9.Post;
 import lab.pkg9.Profile;
 import lab.pkg9.User;
 import lab.pkg9.UserFactory;
+import lab.pkg9.UserManager;
 
 /**
  *
@@ -35,13 +37,14 @@ public class update_profile extends javax.swing.JFrame {
      * Creates new form update_profile
      */
     User user;
-
-    public update_profile(User user) {
+Database db;
+    public update_profile(User user, Database db) {
         //setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
         initComponents();
         bioTextPane.setEditable(false);
         jLabel1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
         this.user = user;
+        this.db=db;
         loaduser();
     }
 
@@ -242,6 +245,7 @@ public class update_profile extends javax.swing.JFrame {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             String path = selectedFile.getAbsolutePath();
+            user.getProfile().setProfilePhotoPath(path);
             ProfilePanel profilePanel = (ProfilePanel) profielphoto;
             profilePanel.setProfileImage(path);
         }
@@ -262,7 +266,8 @@ public class update_profile extends javax.swing.JFrame {
 
             // Scale the image to the specific size (945x309)
             Image scaledImage = coverPhoto.getImage().getScaledInstance(945, 309, Image.SCALE_SMOOTH);
-
+                    user.getProfile().setCoverPhotoPath(selectedFile.getAbsolutePath());
+                    
             // Ensure the label size is fixed and matches the desired image size
             coverphotolabel.setPreferredSize(new Dimension(945, 309));  // Set preferred size for label
             coverphotolabel.setIcon(new ImageIcon(scaledImage));  // Set scaled image as the icon
@@ -365,7 +370,9 @@ public class update_profile extends javax.swing.JFrame {
     dialog.setVisible(true);    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+      db.saveUsersToFile();
         this.dispose();
+       
     }//GEN-LAST:event_jButton5ActionPerformed
     private void loadPosts() {
 
@@ -381,8 +388,11 @@ public class update_profile extends javax.swing.JFrame {
 
     private void loadFriends() {
         friendsContainerPanel.removeAll();
-
-        ArrayList<User> friends = user.getFriendManager().getFriendList();
+  ArrayList<User> friends= new ArrayList<>();
+       for(String friendid : user.getFriendManager().getFriendList())
+       {
+           friends.add(UserManager.findUser(friendid));
+       }
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;

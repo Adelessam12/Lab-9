@@ -53,16 +53,7 @@ public SuggestionPanel(User sender, User reciever, String profileImagePath, Frie
     usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left
     detailsPanel.add(usernameLabel);
 
-    // "Send Friend Request" Button
-    JButton friendRequestButton = new JButton("Send Request");
-friendRequestButton.setFont(new Font("Arial", Font.PLAIN, 12)); // Font size
-friendRequestButton.setPreferredSize(new Dimension(110, 30)); // Set button size
 
-
-    friendRequestButton.addActionListener(e -> {
-        Fm.sendFriendRequest(sender, reciever);
-    });
-    detailsPanel.add(friendRequestButton);
 
     add(detailsPanel);
 

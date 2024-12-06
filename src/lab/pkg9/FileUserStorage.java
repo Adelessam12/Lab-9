@@ -11,7 +11,7 @@ import com.google.gson.GsonBuilder;
 public class FileUserStorage implements UserStorage {
 
     private final String filename;
-    private Gson gson;
+    private final Gson gson;
 
     public FileUserStorage(String filename) {
         this.filename = filename;

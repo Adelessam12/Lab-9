@@ -22,12 +22,12 @@ public class UserFactory {
             Date dateOfBirth
     ) {
         // Hash the password before passing it to the User constructor
-
+      
         // Create the manager instances (or pass in existing ones)
         Map<String, String> sentFriendRequests = new HashMap<>();
         Map<User, String> receivedFriendRequests = new HashMap<>();
-        ArrayList<User> friendList = new ArrayList<>();
-        ArrayList<User> blockedList = new ArrayList<>();
+        ArrayList<String> friendList = new ArrayList<>();
+        ArrayList<String> blockedList = new ArrayList<>();
         ArrayList<Post> posts = new ArrayList<>();
         ArrayList<Story> stories = new ArrayList<>();
         FriendRequestManagable friendRequestManager = new FriendRequestManager(sentFriendRequests, receivedFriendRequests);

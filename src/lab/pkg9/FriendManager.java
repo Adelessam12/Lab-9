@@ -13,11 +13,11 @@ import java.util.ArrayList;
 //manages the lower-level details of friendships.
 public class FriendManager implements FriendManagable{
     
-    private final ArrayList<User> friendList;
-    private final ArrayList<User> blockedList;
+    private final ArrayList<String> friendList;
+    private final ArrayList<String> blockedList;
 
     // Constructor to initialize friend and blocked lists
-    public FriendManager(ArrayList<User> friendList, ArrayList<User> blockedList) {
+    public FriendManager(ArrayList<String> friendList, ArrayList<String> blockedList) {
         this.friendList = friendList;
         this.blockedList = blockedList;
     }
@@ -26,7 +26,7 @@ public class FriendManager implements FriendManagable{
     @Override
     public void addFriend(User user, User friend) {
         if (!isFriend(user, friend)) {
-            friendList.add(friend);
+            friendList.add(friend.getUserId());
             friend.getFriendManager().addFriend(friend, user); // Ensure bidirectional friendship
         }
     }
@@ -35,7 +35,7 @@ public class FriendManager implements FriendManagable{
     @Override
     public void removeFriend(User user, User friend) {
         if (isFriend(user, friend)) {
-            friendList.remove(friend);
+            friendList.remove(friend.getUserId());
             friend.getFriendManager().removeFriend(friend, user);
         }
 
@@ -44,29 +44,29 @@ public class FriendManager implements FriendManagable{
     // Block a user
     @Override
     public void blockUser(User user, User friend) {
-        blockedList.add(friend);
+        blockedList.add(friend.getUserId());
         removeFriend(user, friend);
     }
 
     @Override
-    public ArrayList<User> getFriendList() {
+    public ArrayList<String> getFriendList() {
         return friendList;
     }
 
     @Override
-    public ArrayList<User> getBlockedList() {
+    public ArrayList<String> getBlockedList() {
         return blockedList;
     }
 
     // Check if two users are friends
     @Override
     public boolean isFriend(User user, User friend) {
-        return friendList.contains(friend);
+        return friendList.contains(friend.getUserId());
     }
 
     // Check if a user is blocked
     @Override
     public boolean isBlocked(User user, User friend) {
-        return blockedList.contains(friend);
+        return blockedList.contains(friend.getUserId());
     }
 }

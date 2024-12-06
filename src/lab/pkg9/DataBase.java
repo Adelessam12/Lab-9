@@ -5,12 +5,13 @@ import java.util.ArrayList;
 public final class Database {
     private final UserStorage userStorage;
     private final PasswordHasher passwordHasher;
-    private final ArrayList<User> users;
+     ArrayList<User> users= new ArrayList<>();
 
     public Database(UserStorage userStorage, PasswordHasher passwordHasher) {
         this.userStorage = userStorage;
         this.passwordHasher = passwordHasher;
-        this.users = userStorage.loadUsersFromJson();
+       
+        users= this.userStorage.loadUsersFromJson();
     }
 
     public ArrayList<User> getUsers() {
