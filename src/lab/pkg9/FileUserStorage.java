@@ -1,6 +1,5 @@
 package lab.pkg9;
 
-
 import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.lang.reflect.Type;
@@ -18,11 +17,10 @@ public class FileUserStorage implements UserStorage {
 
         // Create a Gson instance with custom InstanceCreators
         this.gson = new GsonBuilder()
-            .registerTypeAdapter(FriendRequestManagable.class, new FriendRequestManagableCreator())
-            .registerTypeAdapter(FriendManagable.class, new FriendManagableCreator())
-            .registerTypeAdapter(PostManagable.class, new PostManagableCreator())
-            .registerTypeAdapter(StoryManagable.class, new StoryManagableCreator())
-            .create();
+                .registerTypeAdapter(FriendManagable.class, new FriendManagableCreator())
+                .registerTypeAdapter(PostManagable.class, new PostManagableCreator())
+                .registerTypeAdapter(StoryManagable.class, new StoryManagableCreator())
+                .create();
     }
 
     // Save users to JSON file
@@ -39,9 +37,10 @@ public class FileUserStorage implements UserStorage {
     // Load users from JSON file
     @Override
     public ArrayList<User> loadUsersFromJson() {
-        
+
         try (Reader reader = new FileReader(filename)) {
-            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+            Type userListType = new TypeToken<ArrayList<User>>() {
+            }.getType();
             return gson.fromJson(reader, userListType);
         } catch (FileNotFoundException e) {
             System.out.println("File not found. Returning an empty list.");

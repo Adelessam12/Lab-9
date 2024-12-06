@@ -11,7 +11,7 @@ public final class User {
     private final Date dateOfBirth;
     private boolean isOnline;
     private Profile profile;
-    private final FriendRequestManagable friendRequestManager;
+
     private final FriendManagable friendManager;
     private final PostManagable postManager;
     private final StoryManagable storyManager;
@@ -22,7 +22,6 @@ public final class User {
         String username,
         String hashedPassword,
         Date dateOfBirth,
-        FriendRequestManagable friendRequestManager,
         FriendManagable friendManager,
         PostManagable postManager,
         StoryManagable storyManager
@@ -34,12 +33,14 @@ public final class User {
         this.dateOfBirth = dateOfBirth;
         this.isOnline = false;
         this.profile = new Profile(null);
-        this.friendRequestManager = friendRequestManager;
         this.friendManager = friendManager;
         this.postManager = postManager;
         this.storyManager = storyManager;
     }
 
+    public FriendRequestManagable getFriendRequestManagable(){
+        return getFriendManager().getFriendRequestManager();
+    }
     public FriendManagable getFriendManager() {
         return friendManager;
     }
@@ -50,10 +51,6 @@ public final class User {
 
     public StoryManagable getStoryManager() {
         return storyManager;
-    }
-
-    public FriendRequestManagable getFriendRequestManagable() {
-        return friendRequestManager;
     }
     
     public String generateUserId() {

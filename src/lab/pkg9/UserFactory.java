@@ -21,10 +21,10 @@ public class UserFactory {
         // Hash the password before passing it to the User constructor     
         // Create the manager instances (or pass in existing ones)               
         FriendRequestManagable friendRequestManager = new FriendRequestManager();
-        FriendManagable friendManager = new FriendManager();
+        FriendManagable friendManager = new FriendManager(friendRequestManager);
         PostManagable postManager = new PostManager();
         StoryManagable storyManager = new StoryManager();
         // Create and return the User instance
-        return new User(email, username, hashedPassword, dateOfBirth, friendRequestManager, friendManager, postManager, storyManager);
+        return new User(email, username, hashedPassword, dateOfBirth, friendManager, postManager, storyManager);
     }
 }

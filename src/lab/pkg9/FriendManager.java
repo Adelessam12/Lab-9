@@ -15,11 +15,17 @@ public class FriendManager implements FriendManagable {
 
     private final ArrayList<String> friendList;
     private final ArrayList<String> blockedList;
-
+        private final FriendRequestManagable friendRequestManager;
     // Constructor to initialize friend and blocked lists
-    public FriendManager() {
+    public FriendManager(FriendRequestManagable friendRequestManager) {
         friendList = new ArrayList<>();
         blockedList = new ArrayList<>();
+        this.friendRequestManager = friendRequestManager;
+    }
+
+    @Override
+    public FriendRequestManagable getFriendRequestManager() {
+        return friendRequestManager;
     }
 
     // Add a friend
