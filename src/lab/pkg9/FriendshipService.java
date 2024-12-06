@@ -82,7 +82,7 @@ public class FriendshipService implements FriendshipServiceInterface {
         return !user.equals(suggested)
                 && !user.getFriendManager().isFriend(user, suggested)
                 && !user.getFriendManager().isBlocked(user, suggested)
-                && !user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggested.getUsername());
+                && !user.getFriendRequestManagable().getSentFriendRequests().containsValue("Pending");
     }
 
     //method to check for common friends

@@ -32,19 +32,19 @@ import lab.pkg9.UserManager;
  * @author Dell
  */
 public class update_profile extends javax.swing.JFrame {
-
     /**
      * Creates new form update_profile
      */
     User user;
-Database db;
+    Database db;
+
     public update_profile(User user, Database db) {
-        //setContentPane(new JLabel(new ImageIcon("C:\\Users\\Dell\\Desktop\\R (2).jpg")));
+        setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
         bioTextPane.setEditable(false);
         jLabel1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
         this.user = user;
-        this.db=db;
+        this.db = db;
         loaduser();
     }
 
@@ -266,8 +266,8 @@ Database db;
 
             // Scale the image to the specific size (945x309)
             Image scaledImage = coverPhoto.getImage().getScaledInstance(945, 309, Image.SCALE_SMOOTH);
-                    user.getProfile().setCoverPhotoPath(selectedFile.getAbsolutePath());
-                    
+            user.getProfile().setCoverPhotoPath(selectedFile.getAbsolutePath());
+
             // Ensure the label size is fixed and matches the desired image size
             coverphotolabel.setPreferredSize(new Dimension(945, 309));  // Set preferred size for label
             coverphotolabel.setIcon(new ImageIcon(scaledImage));  // Set scaled image as the icon
@@ -370,9 +370,9 @@ Database db;
     dialog.setVisible(true);    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-      db.saveUsersToFile();
+        db.saveUsersToFile();
         this.dispose();
-       
+
     }//GEN-LAST:event_jButton5ActionPerformed
     private void loadPosts() {
 
@@ -388,11 +388,10 @@ Database db;
 
     private void loadFriends() {
         friendsContainerPanel.removeAll();
-  ArrayList<User> friends= new ArrayList<>();
-       for(String friendid : user.getFriendManager().getFriendList())
-       {
-           friends.add(UserManager.findUser(friendid));
-       }
+        ArrayList<User> friends = new ArrayList<>();
+        for (String friendid : user.getFriendManager().getFriendList()) {
+            friends.add(UserManager.findUser(friendid));
+        }
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;

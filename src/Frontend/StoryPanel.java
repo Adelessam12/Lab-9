@@ -3,18 +3,15 @@ package Frontend;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import lab.pkg9.Story;
 import lab.pkg9.User;
 
 public class StoryPanel extends JPanel {
-    private ProfilePanel profilePanel; // Changed from ImagePanel to ProfilePanel
-    private JButton button;
-    private User friend;
+    private final ProfilePanel profilePanel; // Changed from ImagePanel to ProfilePanel
+    private final JButton button;
 
     public StoryPanel(User friend) {
-        this.friend = friend;
         setLayout(new GridBagLayout());  // Use GridBagLayout for more control
         GridBagConstraints gbc = new GridBagConstraints();
         
@@ -32,11 +29,8 @@ public class StoryPanel extends JPanel {
         button.setPreferredSize(new Dimension(150, 25)); // Set the size of the button
         button.setMinimumSize(new Dimension(150, 25)); // Prevent the button from shrinking
         button.setMaximumSize(new Dimension(150, 25)); // Prevent the button from expanding
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openStoryPopup(friend);
-            }
+        button.addActionListener((ActionEvent e) -> {
+            openStoryPopup(friend);
         });
         
         // Add button below the image panel

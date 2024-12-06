@@ -136,7 +136,7 @@ public class Register extends javax.swing.JFrame {
         }
 
         // Validate and parse the date of birth
-        Date dob = null;
+        Date dob;
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             dateFormat.setLenient(false); // Ensures strict date parsing

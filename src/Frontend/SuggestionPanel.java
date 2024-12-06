@@ -10,7 +10,6 @@ import java.awt.Font;
 import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import lab.pkg9.FriendshipServiceInterface;

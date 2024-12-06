@@ -295,6 +295,7 @@ public class FriendsPage extends javax.swing.JFrame {
         ArrayList<User> suggestions = friendService.suggestions(user);
 //        System.out.println(suggestions.get(0));
         for(User suggestion: suggestions){
+            if(!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername())){
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
             SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, friendService);
             suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
@@ -303,18 +304,15 @@ public class FriendsPage extends javax.swing.JFrame {
             friendSuggestionspanel.add(suggestionPanel);
              add.addActionListener((java.awt.event.ActionEvent evt) -> {
                  friendService.sendFriendRequest(user, suggestion);
-                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                 System.out.println(user.getFriendRequestManagable().getReceivedFriendRequests());
-                 System.out.println(suggestion.getFriendRequestManagable().getSentFriendRequests());
-                 System.out.println(suggestion.getFriendRequestManagable().getReceivedFriendRequests());
                  suggestionPanel.remove(add);
                  suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
                  friendSuggestionspanel.revalidate();
                  friendSuggestionspanel.repaint();
             });
+            }
         }
-        friendSuggestionspanel.revalidate();
-        friendSuggestionspanel.repaint();
+        scrollSuggestions.repaint();
+        scrollSuggestions.revalidate();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

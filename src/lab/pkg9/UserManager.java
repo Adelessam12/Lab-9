@@ -27,6 +27,7 @@ public class UserManager {
         User newUser = UserFactory.createUser(email, username, hashedPassword, dateOfBirth);
         addUser(newUser);
         System.out.println("User registered successfully.");
+        userDatabase.saveUsersToFile();
         return true;
     }
 
@@ -82,7 +83,7 @@ public class UserManager {
                 }
             } catch (Exception e) {
                 System.out.println("An error occurred while adding the user: " + e.getMessage());
-                e.printStackTrace(); // Optional: to log full stack trace for debugging
+                // Optional: to log full stack trace for debugging
                 return false;
             }
         }
