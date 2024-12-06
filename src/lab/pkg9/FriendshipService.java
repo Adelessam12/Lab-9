@@ -36,8 +36,8 @@ public class FriendshipService implements FriendshipServiceInterface {
         }
 
         // Set friend request status to Accepted
-        user.getFriendRequestManagable().setSentRequestStatus(user, "Accepted");
-        user.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Accepted");
+        friend.getFriendRequestManagable().setSentRequestStatus(user, "Accepted");
+        user.getFriendRequestManagable().setReceivedRequestStatus(friend, user, "Accepted");
 
         // Add to each other's friend list
         user.getFriendManager().addFriend(user, friend);
