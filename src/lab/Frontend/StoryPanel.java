@@ -1,4 +1,4 @@
-package Frontend;
+package lab.Frontend;
 
 import javax.swing.*;
 import java.awt.*;

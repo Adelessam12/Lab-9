@@ -1,5 +1,5 @@
 
-package Frontend;
+package lab.Frontend;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
