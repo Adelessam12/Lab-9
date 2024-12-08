@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package lab.Frontend;
+
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -12,10 +13,12 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import lab.pkg9.Database;
+import lab.pkg9.DatabaseFactory;
 import lab.pkg9.FriendshipService;
 import lab.pkg9.FriendshipServiceInterface;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
+
 /**
  *
  * @author Mahmoud Waleed
@@ -25,15 +28,15 @@ public class FriendsPage extends javax.swing.JFrame {
     /**
      * Creates new form FriendsPage
      */
-   
     private final User user;
-    private final  FriendshipServiceInterface friendService;
+    private final FriendshipServiceInterface friendService;
     private final Database db;
-    public FriendsPage(User user, Database db) {
+
+    public FriendsPage(User user) {
         initComponents();
         this.user = user;
-        this.db = db;
-        friendService = new FriendshipService(db,user);
+        this.db = DatabaseFactory.createDatabase();
+        friendService = new FriendshipService(user);
         loadSuggestions();
         scrollFriends.setVisible(false);
         scrollRequests.setVisible(false);
@@ -140,177 +143,157 @@ public class FriendsPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void friendsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friendsActionPerformed
-    friends.setText("Hide Friends List");
-    
-    
+        friends.setText("Hide Friends List");
 
-    // Clear any previous entries to reset the friend list only when switching views
-    if (!scrollFriends.isVisible()) {
-        // When scrollFriends is hidden, show it and populate it
-        friendsContainer.removeAll(); 
-        friendsContainer.revalidate();
-        friendsContainer.repaint(); 
-
-
-       // friends to the UI
-        if (user.getFriendManager().getFriendList() != null && !user.getFriendManager().getFriendList().isEmpty()) {
-          ArrayList<User> friends= new ArrayList<>();
-       for(String friendid : user.getFriendManager().getFriendList())
-       {
-           friends.add(UserManager.findUser(friendid));
-       }
-            for (User user1: friends) {
-                JPanel entryPanel1 = new JPanel();
-                entryPanel1.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
-                JLabel newLabel = new JLabel(user1.getUsername()); // Show the friend's username
-                JButton remove = new JButton("Remove");
-                JButton block = new JButton("  Block  ");
-
-                // Add components to the panel
-                entryPanel1.add(newLabel);
-                entryPanel1.add(remove);
-                entryPanel1.add(block);
-                remove.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                    user.getFriendManager().removeFriend(user, user1);
-                    db.saveUsersToFile();
-                    friendService.suggestions().add(user1);
-                    newLabel.setText("Removed");
-                    entryPanel1.remove(remove);
-                    entryPanel1.remove(block);
-                    friendsContainer.repaint();
-                });
-                  block.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                      friendService.blockFriend(user1);
-                      entryPanel1.remove(remove);
-                      entryPanel1.remove(block);
-                      newLabel.setText("Blcoked");
-                      friendsContainer.repaint();
-                });
-
-                // Add the entry panel to friendsContainer
-                friendsContainer.add(entryPanel1);
-                
-            }
-
+        // Clear any previous entries to reset the friend list only when switching views
+        if (!scrollFriends.isVisible()) {
+            // When scrollFriends is hidden, show it and populate it
+            friendsContainer.removeAll();
             friendsContainer.revalidate();
             friendsContainer.repaint();
-        } else {
-            System.out.println("No friends found!");
-        }
-        scrollFriends.setVisible(true);     
-        friendsContainer.setVisible(true);  
 
-        // Revalidate the scroll pane to update the view
-        scrollFriends.revalidate();
-        scrollFriends.repaint();
-    } else {
-        // Hide the friends list if it's already visible
-        scrollFriends.setVisible(false);
-        friendsContainer.setVisible(false);
-        friends.setText("Show Friends");
-    }
+            // friends to the UI
+            if (user.getFriendManager().getFriendList() != null && !user.getFriendManager().getFriendList().isEmpty()) {
+                ArrayList<User> friends = new ArrayList<>();
+                for (String friendid : user.getFriendManager().getFriendList()) {
+                    friends.add(UserManager.findUser(friendid));
+                }
+                for (User user1 : friends) {
+                    JPanel entryPanel1 = new JPanel();
+                    entryPanel1.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
+                    JLabel newLabel = new JLabel(user1.getUsername()); // Show the friend's username
+                    JButton remove = new JButton("Remove");
+                    JButton block = new JButton("  Block  ");
+
+                    // Add components to the panel
+                    entryPanel1.add(newLabel);
+                    entryPanel1.add(remove);
+                    entryPanel1.add(block);
+                    remove.addActionListener((java.awt.event.ActionEvent evt1) -> {
+                        user.getFriendManager().removeFriend(user, user1);
+                        db.saveUsersToFile();
+                        friendService.suggestions().add(user1);
+                        newLabel.setText("Removed");
+                        entryPanel1.remove(remove);
+                        entryPanel1.remove(block);
+                        friendsContainer.repaint();
+                    });
+                    block.addActionListener((java.awt.event.ActionEvent evt1) -> {
+                        friendService.blockFriend(user1);
+                        entryPanel1.remove(remove);
+                        entryPanel1.remove(block);
+                        newLabel.setText("Blcoked");
+                        friendsContainer.repaint();
+                    });
+
+                    // Add the entry panel to friendsContainer
+                    friendsContainer.add(entryPanel1);
+
+                }
+
+                friendsContainer.revalidate();
+                friendsContainer.repaint();
+            } else {
+                System.out.println("No friends found!");
+            }
+            scrollFriends.setVisible(true);
+            friendsContainer.setVisible(true);
+
+            // Revalidate the scroll pane to update the view
+            scrollFriends.revalidate();
+            scrollFriends.repaint();
+        } else {
+            // Hide the friends list if it's already visible
+            scrollFriends.setVisible(false);
+            friendsContainer.setVisible(false);
+            friends.setText("Show Friends");
+        }
     }//GEN-LAST:event_friendsActionPerformed
 
     private void requestActivityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestActivityActionPerformed
+        requestActivity.setText("Hide Friend Requests");
+        if (!scrollRequests.isVisible()) {
 
-    requestActivity.setText("Hide Friend Requests");
-    if (!scrollRequests.isVisible()) {
- 
-    // Clear any previous entries to reset the request list
-    requestsContainer.removeAll();
-    requestsContainer.revalidate();  
-    requestsContainer.repaint();   
-   
+            // Clear any previous entries to reset the request list
+            requestsContainer.removeAll();
+            requestsContainer.revalidate();
+            requestsContainer.repaint();
 
-  //add friend requests to the UI
-    if (user.getFriendRequestManagable().getReceivedFriendRequests()!= null && !user.getFriendRequestManagable().getReceivedFriendRequests().isEmpty()) {
-        for (Map.Entry<String, String> user1 : user.getFriendRequestManagable().getReceivedFriendRequests().entrySet()) {
-            if(user1.getValue().contains("Pending")){
-           //     System.out.println(user1.getValue());
-                System.out.println(user.getFriendRequestManagable().getReceivedFriendRequests());
-                System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                //System.out.println(user1.getKey().getFriendRequestManagable().getReceivedFriendRequests());
-            
-            JPanel entryPanel = new JPanel();
-            entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
-            
-            // Create the label dynamically for each friend
-            JLabel newLabel = new JLabel(UserManager.findUser(user1.getKey()).getUsername() + " "+user1.getValue()); 
-            JButton accept = new JButton("Accept"); 
-            JButton decline = new JButton("Delete"); 
-            
-            // Add components to the panel
-            entryPanel.add(newLabel);
-            entryPanel.add(accept);
-            entryPanel.add(decline);
-            
-              accept.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                 friendService.acceptFriendRequest(UserManager.findUser(user1.getKey()));
-                  //System.out.println(user.getValue().get(1));
-                  entryPanel.remove(accept);
-                  entryPanel.remove(decline);
-                  newLabel.setText("Accepted");
-                  requestsContainer.repaint();
-                });
-              
-              decline.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                  friendService.declineFriendRequest(UserManager.findUser(user1.getKey()));
-                  entryPanel.remove(accept);
-                  entryPanel.remove(decline);
-                  newLabel.setText("Deleted");
-                  requestsContainer.repaint();
-                });
-              
-            
-            // Add the entry panel to friendsContainer
-            requestsContainer.add(entryPanel);
+            //add friend requests to the UI
+            if (user.getFriendRequestManagable().getReceivedFriendRequests() != null && !user.getFriendRequestManagable().getReceivedFriendRequests().isEmpty()) {
+                for (Map.Entry<String, String> user1 : user.getFriendRequestManagable().getReceivedFriendRequests().entrySet()) {
+                    if (user1.getValue().contains("Pending")) {
+                        //     System.out.println(user1.getValue());
+                        System.out.println(user.getFriendRequestManagable().getReceivedFriendRequests());
+                        System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                        //System.out.println(user1.getKey().getFriendRequestManagable().getReceivedFriendRequests());
+
+                        JPanel entryPanel = new JPanel();
+                        entryPanel.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
+
+                        // Create the label dynamically for each friend
+                     
+                        JLabel newLabel = new JLabel(UserManager.findUser(user1.getKey()).getUsername() + " " + user1.getValue());
+                        JButton accept = new JButton("Accept");
+                        JButton decline = new JButton("Delete");
+
+                        // Add components to the panel
+                        entryPanel.add(newLabel);
+                        entryPanel.add(accept);
+                        entryPanel.add(decline);
+
+                        accept.addActionListener((java.awt.event.ActionEvent evt1) -> {
+                            friendService.acceptFriendRequest(UserManager.findUser(user1.getKey()));
+                            //System.out.println(user.getValue().get(1));
+                            entryPanel.remove(accept);
+                            entryPanel.remove(decline);
+                            newLabel.setText("Accepted");
+                            requestsContainer.repaint();
+                        });
+
+                        decline.addActionListener((java.awt.event.ActionEvent evt1) -> {
+                            friendService.declineFriendRequest(UserManager.findUser(user1.getKey()));
+                            entryPanel.remove(accept);
+                            entryPanel.remove(decline);
+                            newLabel.setText("Deleted");
+                            requestsContainer.repaint();
+                        });
+
+                        // Add the entry panel to friendsContainer
+                        requestsContainer.add(entryPanel);
+                    }
+
+                    // Revalidate and repaint after adding components to the container
+                    requestsContainer.revalidate();
+                    requestsContainer.repaint();
+                }
+            } else {
+                System.out.println("No requests found!");
+            }
         }
-
-        // Revalidate and repaint after adding components to the container
-        requestsContainer.revalidate();
-        requestsContainer.repaint();
-        }
-    }else {
-        System.out.println("No requests found!");
-    }
-
-    // Make sure the scroll pane and container are visible
-    scrollRequests.setVisible(true);      // Ensure the scroll pane is visible
-    requestsContainer.setVisible(true);   // Ensure the container is visible
-
-    // Revalidate the scroll pane to update the view
-    scrollRequests.revalidate();
-    scrollRequests.repaint();
-    
-    }else{
-         // Hide the friend requests if it's already visible
-        scrollRequests.setVisible(false);
-        requestsContainer.setVisible(false);
-        requestActivity.setText("Show Friend Requests");
-    }
 
     }//GEN-LAST:event_requestActivityActionPerformed
-    
-    private void loadSuggestions(){
+
+    private void loadSuggestions() {
         friendSuggestionspanel.removeAll();
         ArrayList<User> suggestions = friendService.suggestions();
 //        System.out.println(suggestions.get(0));
-        for(User suggestion: suggestions){
-            if(!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername()) ){
-            String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-            SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, friendService);
-            suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
-            JButton add = new JButton("Add Friend");
-            suggestionPanel.add(add);
-            friendSuggestionspanel.add(suggestionPanel);
-             add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                 friendService.sendFriendRequest(suggestion);
-                 System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                 suggestionPanel.remove(add);
-                 suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
-                 friendSuggestionspanel.revalidate();
-                 friendSuggestionspanel.repaint();
-            });
+        for (User suggestion : suggestions) {
+            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername())) {
+                String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
+                SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, friendService);
+                suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
+                JButton add = new JButton("Add Friend");
+                suggestionPanel.add(add);
+                friendSuggestionspanel.add(suggestionPanel);
+                add.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    friendService.sendFriendRequest(suggestion);
+                    System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                    suggestionPanel.remove(add);
+                    suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+                    friendSuggestionspanel.revalidate();
+                    friendSuggestionspanel.repaint();
+                });
             }
         }
         scrollSuggestions.repaint();

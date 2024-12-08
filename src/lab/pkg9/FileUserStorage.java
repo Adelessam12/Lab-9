@@ -18,8 +18,7 @@ public class FileUserStorage implements UserStorage {
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(FriendRequestManagable.class, new FriendRequestManagableDeserializer())
                 .registerTypeAdapter(FriendManagable.class, new FriendManagableDeserializer())
-                .registerTypeAdapter(PostManagable.class, new PostManagableDeserializer())
-                .registerTypeAdapter(StoryManagable.class, new StoryManagableDeserializer())
+                .registerTypeAdapter(ContentManagable.class, new ContentManagableDeserializer())
                 .setPrettyPrinting()
                 .create();
     }

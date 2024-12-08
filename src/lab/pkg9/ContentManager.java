@@ -10,29 +10,32 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-public class ContentManager implements ContentManagable{
-   
-    private ArrayList<Content> contents;
-    private final Database database = DatabaseFactory.createDatabase();
+public class ContentManager implements ContentManagable {
 
-    public ContentManager(){
+    private ArrayList<Content> contents;
+
+    public ContentManager() {
         contents = new ArrayList<>();
     }
 
     @Override
     public void addContent(Content content) {
         contents.add(content);
-        database.saveUsersToFile();
-    }
 
-    public void setContent(ArrayList<Content> content) {
-        contents = content;
+        Database database = DatabaseFactory.createDatabase();
         database.saveUsersToFile();
     }
 
     @Override
+    public void setContent(ArrayList<Content> content) {
+        contents = content;
+    }
+
+    @Override
     public void removeContent(Content content) {
-        contents.remove(content);       
+        contents.remove(content);
+
+        Database database = DatabaseFactory.createDatabase();
         database.saveUsersToFile();
     }
 

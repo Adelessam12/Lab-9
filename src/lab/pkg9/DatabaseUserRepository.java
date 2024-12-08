@@ -10,8 +10,8 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-
 public class DatabaseUserRepository implements UserRepository {
+
     private final Database database;
 
     public DatabaseUserRepository(Database database) {
@@ -21,24 +21,23 @@ public class DatabaseUserRepository implements UserRepository {
     @Override
     public User findUserById(String userId) {
         return database.getUsers().stream()
-            .filter(user -> user.getUserId().equals(userId))
-            .findFirst()
-            .orElse(null);
+                .filter(user -> user.getUserId().equals(userId))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
     public User findUserByEmail(String email) {
         return database.getUsers().stream()
-            .filter(user -> user.getEmail().equals(email))
-            .findFirst()
-            .orElse(null);
+                .filter(user -> user.getEmail().equals(email))
+                .findFirst()
+                .orElse(null);
     }
 
     @Override
-    public boolean addUser(User user) {
-        ArrayList<User> users = database.getUsers();
-        users.add(user);
-        return database.saveUsersToFile();
+    public boolean addUser(User user) {   
+        database.addUser(user);
+        return true;
     }
 
     @Override

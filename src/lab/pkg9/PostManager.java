@@ -4,40 +4,13 @@
  */
 package lab.pkg9;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author DELL
  */
-public class PostManager implements PostManagable {
-
-    private ArrayList<Post> posts;
-    private final Database database = DatabaseFactory.createDatabase();
-
+public class PostManager extends ContentManager{
     public PostManager() {
-        posts = new ArrayList<>();
+        super();
     }
 
-    @Override
-    public void addPost(Post post) {
-        posts.add(post);
-        database.saveUsersToFile();
-    }
-
-    public void setPosts(ArrayList<Post> post) {
-        this.posts = post;
-        database.saveUsersToFile();
-    }
-
-    @Override
-    public void removePost(Post post) {
-        posts.remove(post);
-        database.saveUsersToFile();
-    }
-
-    @Override
-    public ArrayList<Post> getPosts() {
-        return posts;
-    }
 }

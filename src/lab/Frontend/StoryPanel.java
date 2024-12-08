@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import lab.pkg9.Content;
 import lab.pkg9.Story;
 import lab.pkg9.User;
 
@@ -50,10 +51,10 @@ public class StoryPanel extends JPanel {
     storiesPanel.setLayout(new BoxLayout(storiesPanel, BoxLayout.Y_AXIS));
 
     // Add each story to the panel using PostPanel
-    ArrayList<Story> stories = friend.getStoryManager().getStories();
-    for (Story story : stories) {
-        if (story.isExpired()) {
-            friend.getStoryManager().removeStory(story);
+    ArrayList<Content> stories = friend.getStoryManager().getContent();
+    for (Content story : stories) {
+        if ((((Story) story).isExpired())) {
+            friend.getStoryManager().removeContent(story);
         } else {
             PostPanel postPanel = new PostPanel(story.getContent(), story.getImagePath());
             postPanel.setMaximumSize(new Dimension(500, 300)); // Restrict maximum size of each PostPanel

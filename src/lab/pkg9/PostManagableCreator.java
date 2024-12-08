@@ -11,9 +11,9 @@ import java.lang.reflect.Type;
  *
  * @author DELL
  */
-public class PostManagableCreator implements InstanceCreator<PostManagable> {
+public class PostManagableCreator implements InstanceCreator<ContentManagable> {
     @Override
-    public PostManagable createInstance(Type type) {
-        return new PostManager();
+    public ContentManagable createInstance(Type type) {
+        return (ContentManagable) new PostManager();
     }
 }

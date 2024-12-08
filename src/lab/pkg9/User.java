@@ -13,8 +13,8 @@ public final class User {
     private Profile profile;
 
     private final FriendManagable friendManager;
-    private final PostManagable postManager;
-    private final StoryManagable storyManager;
+    private final ContentManagable postManager;
+    private final ContentManagable storyManager;
 
     // Constructor
     public User(
@@ -23,8 +23,8 @@ public final class User {
         String hashedPassword,
         Date dateOfBirth,
         FriendManagable friendManager,
-        PostManagable postManager,
-        StoryManagable storyManager
+        ContentManagable postManager,
+        ContentManagable storyManager
     ) {
         this.userId = generateUserId();
         this.email = email;
@@ -45,11 +45,11 @@ public final class User {
         return friendManager;
     }
 
-    public PostManagable getPostManager() {
+    public ContentManagable getPostManager() {
         return postManager;
     }
 
-    public StoryManagable getStoryManager() {
+    public ContentManagable getStoryManager() {
         return storyManager;
     }
     

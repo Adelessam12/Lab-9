@@ -22,8 +22,8 @@ public class UserFactory {
         // Create the manager instances (or pass in existing ones)               
         FriendRequestManagable friendRequestManager = new FriendRequestManager();
         FriendManagable friendManager = new FriendManager(friendRequestManager);
-        PostManagable postManager = new PostManager();
-        StoryManagable storyManager = new StoryManager();
+        ContentManagable postManager = new ContentManager();
+        ContentManagable storyManager = new ContentManager();
         // Create and return the User instance
         return new User(email, username, hashedPassword, dateOfBirth, friendManager, postManager, storyManager);
     }

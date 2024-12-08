@@ -28,7 +28,11 @@ public final class Database {
     }
 
     public void addUser(User user){
+        if(users == null){
+            users = new ArrayList<>();
+        }
         users.add(user);
+        saveUsersToFile();
     }
     
     public ArrayList<User> getUsers() {

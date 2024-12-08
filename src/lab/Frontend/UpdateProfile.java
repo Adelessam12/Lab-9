@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import lab.pkg9.Content;
 import lab.pkg9.Database;
 import lab.pkg9.Post;
 import lab.pkg9.Profile;
@@ -381,7 +382,7 @@ public class UpdateProfile extends javax.swing.JFrame {
 
         postsContainerPanel.removeAll();
 
-        for (Post post : user.getPostManager().getPosts()) {
+        for (Content post : user.getPostManager().getContent()) {
             postsContainerPanel.add(new PostPanel(post.getContent(), post.getImagePath()));
         }
         // Refresh the UI to show new posts

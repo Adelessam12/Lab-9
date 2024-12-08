@@ -11,7 +11,7 @@ public class ContentCreator implements ContentCreatorInterface {
     public void createPost(User user, String content, String imagePath) {
         String postId = generateUniqueId("Post");
         Post newPost = new Post(postId, user.getUserId(), content, imagePath, new java.util.Date());
-        user.getPostManager().addPost(newPost);
+        user.getPostManager().addContent(newPost);
         database.saveUsersToFile();
     }
 
@@ -19,7 +19,7 @@ public class ContentCreator implements ContentCreatorInterface {
     public void createStory(User user, String content, String imagePath) {
         String storyId = generateUniqueId("Story");
         Story newStory = new Story(storyId, user.getUserId(), content, imagePath, new java.util.Date());
-        user.getStoryManager().addStory(newStory);
+        user.getStoryManager().addContent(newStory);
         database.saveUsersToFile();
     }
 

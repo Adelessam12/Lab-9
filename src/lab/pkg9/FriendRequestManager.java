@@ -22,12 +22,12 @@ public class FriendRequestManager implements FriendRequestManagable{ //manages r
     
     @Override
     public void setSentRequestStatus(User friend, String status) {
-        sentFriendRequests.put(friend.getUsername(), status);
+        sentFriendRequests.put(friend.getUserId(), status);
     }
 
     @Override
     public  void setReceivedRequestStatus(User friend, String status) {
-        receivedFriendRequests.put(friend.getUsername(), status);
+        receivedFriendRequests.put(friend.getUserId(), status);
     }
     @Override
      public Map<String, String> getSentFriendRequests(){

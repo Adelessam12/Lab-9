@@ -13,6 +13,7 @@ import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import lab.pkg9.Content;
 import lab.pkg9.ContentCreator;
 import lab.pkg9.Database;
 import lab.pkg9.FriendshipService;
@@ -231,7 +232,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_create_content_buttonActionPerformed
 
     private void friend_managment_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_friend_managment_buttonActionPerformed
-        FriendsPage fp = new FriendsPage(user, database);
+        FriendsPage fp = new FriendsPage(user);
         fp.setVisible(true);
     }//GEN-LAST:event_friend_managment_buttonActionPerformed
 
@@ -256,8 +257,8 @@ public final class NewsFeed extends javax.swing.JFrame {
             friends.add(UserManager.findUser(friendid));
         }
         for (User friend : friends) {
-            for (Post post : friend.getPostManager().getPosts()) {
-                allfriendsposts.add(post);
+            for (Content post : friend.getPostManager().getContent()) {
+                allfriendsposts.add((Post) post);
             }
         }
         Collections.sort(allfriendsposts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
@@ -304,7 +305,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadSuggestions() {
-        FriendshipService FM = new FriendshipService(database, user);
+        FriendshipService FM = new FriendshipService(user);
         ArrayList<User> suggestions = FM.suggestions();
 
         for (User suggestion : suggestions) {

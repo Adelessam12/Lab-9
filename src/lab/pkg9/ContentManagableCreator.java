@@ -6,15 +6,14 @@ package lab.pkg9;
 
 import com.google.gson.InstanceCreator;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 /**
  *
  * @author DELL
  */
-public class StoryManagableCreator implements InstanceCreator<StoryManagable> {
+public class ContentManagableCreator implements InstanceCreator<ContentManagable> {
     @Override
-    public StoryManagable createInstance(Type type) {
-        return new StoryManager();
+    public ContentManagable createInstance(Type type) {
+        return new ContentManager();
     }
 }

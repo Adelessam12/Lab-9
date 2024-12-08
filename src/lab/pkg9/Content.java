@@ -10,8 +10,7 @@ import java.util.Date;
  *
  * @author DELL
  */
-public class Content {
-    
+public class Content {  
     private final String postId;
     private final String authorId;
     private final String content;

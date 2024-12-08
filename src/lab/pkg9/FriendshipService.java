@@ -17,8 +17,8 @@ public class FriendshipService implements FriendshipServiceInterface {
     private final Database db;
     private final User user;
 
-    public FriendshipService(Database db, User user) {
-        this.db = db;
+    public FriendshipService(User user) {
+        this.db = DatabaseFactory.createDatabase();
         this.user = user;
     }
 
@@ -37,8 +37,8 @@ public class FriendshipService implements FriendshipServiceInterface {
         }
 
         // Set friend request status to Accepted
+        user.getFriendRequestManagable().setReceivedRequestStatus(friend, "Accepted");
         friend.getFriendRequestManagable().setSentRequestStatus(user, "Accepted");
-        friend.getFriendRequestManagable().setReceivedRequestStatus(user, "Accepted");
 
         // Add to each other's friend list
         user.getFriendManager().addFriend(user, friend);
@@ -47,8 +47,8 @@ public class FriendshipService implements FriendshipServiceInterface {
 
     @Override
     public void declineFriendRequest(User friend) {
+        user.getFriendRequestManagable().setReceivedRequestStatus(user, "Declined");
         friend.getFriendRequestManagable().setSentRequestStatus(user, "Declined");
-        friend.getFriendRequestManagable().setReceivedRequestStatus(user, "Declined");
         db.saveUsersToFile();
     }
 

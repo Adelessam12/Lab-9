@@ -20,16 +20,14 @@ public class UserManager {
 
     // Static method to register a user
     public static boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth) {
-        if (findUser(userId) != null) {
-            System.out.println("User with userId " + userId + " already exists.");
-            return false;
-        }
-
+        
         String hashedPassword = passwordHasher.hashPassword(password);
         User newUser = UserFactory.createUser(email, username, hashedPassword, dateOfBirth);
         boolean success = userRepository.addUser(newUser);
         if (success) {
             System.out.println("User registered successfully.");
+//            Database db = DatabaseFactory.createDatabase();
+//            db.saveUsersToFile();
         }
         return success;
     }

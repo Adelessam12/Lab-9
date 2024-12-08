@@ -5,17 +5,17 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class PostManagableDeserializer implements JsonDeserializer<ContentManagable> {
+public class ContentManagableDeserializer implements JsonDeserializer<ContentManagable> {
 
     @Override
     public ContentManagable deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
 
-        ArrayList<Content> posts = context.deserialize(
-                jsonObject.get("posts"), new TypeToken<ArrayList<Post>>() {}.getType());
+        ArrayList<Content> content = context.deserialize(
+                jsonObject.get("contents"), new TypeToken<ArrayList<Content>>() {}.getType());
 
-        PostManager manager = new PostManager();
-        manager.setContent(posts);
+        ContentManagable manager = new ContentManager();
+        manager.setContent(content);
 
         return manager;
     }

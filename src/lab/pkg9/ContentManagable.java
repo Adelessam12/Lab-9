@@ -14,4 +14,6 @@ public interface ContentManagable {
     void addContent(Content content);
     public void removeContent(Content content);
     public ArrayList<Content> getContent();
+    void setContent(ArrayList<Content> content);
+    
 }
