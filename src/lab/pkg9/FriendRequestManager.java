@@ -19,14 +19,6 @@ public class FriendRequestManager implements FriendRequestManagable{ //manages r
         sentFriendRequests = new HashMap<>();
         receivedFriendRequests = new HashMap<>();
     }
-
-    public void setSentFriendRequests(Map<String, String> sentFriendRequests) {
-        this.sentFriendRequests = sentFriendRequests;
-    }
-
-    public void setReceivedFriendRequests(Map<String, String> receivedFriendRequests) {
-        this.receivedFriendRequests = receivedFriendRequests;
-    }
     
     @Override
     public void setSentRequestStatus(User friend, String status) {
@@ -34,9 +26,8 @@ public class FriendRequestManager implements FriendRequestManagable{ //manages r
     }
 
     @Override
-    public  void setReceivedRequestStatus(User user, User friend, String status) {
-        Map m = friend.getFriendRequestManagable().getReceivedFriendRequests();
-        m.put(user.getUserId(), status);
+    public  void setReceivedRequestStatus(User friend, String status) {
+        receivedFriendRequests.put(friend.getUsername(), status);
     }
     @Override
      public Map<String, String> getSentFriendRequests(){
@@ -46,4 +37,13 @@ public class FriendRequestManager implements FriendRequestManagable{ //manages r
     public Map<String, String> getReceivedFriendRequests(){
         return receivedFriendRequests;
     }
+
+    public void setSentFriendRequests(Map<String, String> sentFriendRequests) {
+        this.sentFriendRequests = sentFriendRequests;
+    }
+
+    public void setReceivedFriendRequests(Map<String, String> receivedFriendRequests) {
+        this.receivedFriendRequests = receivedFriendRequests;
+    }
+
 }

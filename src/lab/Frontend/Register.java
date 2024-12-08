@@ -186,13 +186,13 @@ if (emailParts.length == 2 && emailParts[1].split("\\.").length != 2) {
 
     // Validate password strength
     if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{7,}$")) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "Password must contain at least:\n" +
-            "- One uppercase letter\n" +
-            "- One lowercase letter\n" +
-            "- One number\n" +
-            "- One special character\n" +
-            "- Minimum 7 characters", 
+        javax.swing.JOptionPane.showMessageDialog(this, """
+                                                        Password must contain at least:
+                                                        - One uppercase letter
+                                                        - One lowercase letter
+                                                        - One number
+                                                        - One special character
+                                                        - Minimum 7 characters""", 
             "Error", 
             javax.swing.JOptionPane.ERROR_MESSAGE
         );

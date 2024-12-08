@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface FriendRequestManagable {
     void setSentRequestStatus(User friend, String status);
-    void setReceivedRequestStatus(User user, User friend, String status);
+    void setReceivedRequestStatus(User friend, String status);
     Map<String, String> getSentFriendRequests();
     Map<String, String> getReceivedFriendRequests();
 }

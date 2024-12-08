@@ -1,17 +1,13 @@
 package lab.Frontend;
 
-
-
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import javax.swing.border.EmptyBorder;
 
 public class PostPanel extends JPanel {
- 
 
-
-         private final String content;
+    private final String content;
     private final String imagePath;
 
     public PostPanel(String content, String imagePath) {
@@ -19,7 +15,7 @@ public class PostPanel extends JPanel {
         this.imagePath = imagePath;
 
         // Set GridLayout for side-by-side panels with a gap of 10 between them
-        setLayout(new GridLayout(1, 2, 10,0));  // 1 row, 2 columns, 10px gap
+        setLayout(new GridLayout(1, 2, 10, 0));  // 1 row, 2 columns, 10px gap
 
         // Create and add content panel (for text)
         JPanel contentPanel = createContentPanel();
@@ -48,28 +44,26 @@ public class PostPanel extends JPanel {
     }
 
     /**
-     * Creates a panel for displaying the image content of the post.
-     * Includes error handling for missing or invalid images.
+     * Creates a panel for displaying the image content of the post. Includes
+     * error handling for missing or invalid images.
      */
     private JPanel createImagePanel() {
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new FlowLayout(FlowLayout.LEFT));  // Image layout inside image panel
 
-         
-            try {
-                File imgFile = new File(imagePath);
-                if (imgFile.exists()) {
-                    ImageIcon imageIcon = new ImageIcon(imagePath);
-                    Image image = imageIcon.getImage();
-                    Image scaledimage = image.getScaledInstance(200, 200, 100);
-                    JLabel imageLabel = new JLabel(new ImageIcon(scaledimage));
-                    imagePanel.add(imageLabel);  
-                } 
-            } catch (Exception e) {
-                e.printStackTrace();
-                imagePanel.add(createErrorPanel("Failed to load image!"));
+        try {
+            File imgFile = new File(imagePath);
+            if (imgFile.exists()) {
+                ImageIcon imageIcon = new ImageIcon(imagePath);
+                Image image = imageIcon.getImage();
+                Image scaledimage = image.getScaledInstance(200, 200, 100);
+                JLabel imageLabel = new JLabel(new ImageIcon(scaledimage));
+                imagePanel.add(imageLabel);
             }
-         
+        } catch (Exception e) {
+            e.printStackTrace();
+            imagePanel.add(createErrorPanel("Failed to load image!"));
+        }
 
         imagePanel.setOpaque(false);  // Make the image panel transparent
         return imagePanel;
@@ -88,6 +82,7 @@ public class PostPanel extends JPanel {
         errorPanel.setOpaque(false); // Transparent background
         return errorPanel;
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

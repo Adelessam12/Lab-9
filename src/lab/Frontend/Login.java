@@ -21,12 +21,12 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
- 
     ContentManager CM;
     Database D;
-    public Login( ContentManager CM , Database D) {
-        this.D= D;
-        this.CM=CM;
+
+    public Login(ContentManager CM, Database D) {
+        this.D = D;
+        this.CM = CM;
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
     }
@@ -103,27 +103,24 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-String E = jTextField1.getText().trim();
+        String E = jTextField1.getText().trim();
         String P = jPasswordField1.getText().trim();
- 
+
         if (E.isEmpty() || P.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        } else {    
-                 
-             
+        } else {
+
             User u1 = UserManager.login(E, P);
             if (u1 != null) {
                 NewsFeed N1 = new NewsFeed(u1, D, CM);
-                        this.dispose();
+                this.dispose();
                 N1.setVisible(true);
-            }
-            else
-            {
-                            JOptionPane.showMessageDialog(this, "Wrong email or password", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Wrong email or password", "Input Error", JOptionPane.ERROR_MESSAGE);
 
             }
-            
+
         }
 
 

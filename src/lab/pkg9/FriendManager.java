@@ -56,10 +56,9 @@ public class FriendManager implements FriendManagable {
             friendList.remove(friend.getUserId());
             friend.getFriendManager().removeFriend(friend, user);
             user.getFriendRequestManagable().getSentFriendRequests().remove(friend.getUsername());
-             Map<String, String> receivedRequests = friend.getFriendRequestManagable().getReceivedFriendRequests();
-             receivedRequests.remove(user.getUserId()); // Removing removed user from both maps
+            Map<String, String> receivedRequests = friend.getFriendRequestManagable().getReceivedFriendRequests();
+            receivedRequests.remove(user.getUserId()); // Removing removed user from both maps
         }
-
     }
 
     // Block a user

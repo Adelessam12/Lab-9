@@ -25,7 +25,8 @@ public class FriendshipService implements FriendshipServiceInterface {
     @Override
     public void sendFriendRequest(User friend) {
         user.getFriendRequestManagable().setSentRequestStatus(friend, "Pending");
-         friend.getFriendRequestManagable().setReceivedRequestStatus(user, friend, "Pending");
+        friend.getFriendRequestManagable().setReceivedRequestStatus(user, "Pending");
+        db.saveUsersToFile();
     }
 
     @Override
@@ -37,21 +38,24 @@ public class FriendshipService implements FriendshipServiceInterface {
 
         // Set friend request status to Accepted
         friend.getFriendRequestManagable().setSentRequestStatus(user, "Accepted");
-        user.getFriendRequestManagable().setReceivedRequestStatus(friend, user, "Accepted");
+        friend.getFriendRequestManagable().setReceivedRequestStatus(user, "Accepted");
 
         // Add to each other's friend list
         user.getFriendManager().addFriend(user, friend);
+        db.saveUsersToFile();
     }
 
     @Override
     public void declineFriendRequest(User friend) {
         friend.getFriendRequestManagable().setSentRequestStatus(user, "Declined");
-        user.getFriendRequestManagable().setReceivedRequestStatus(friend, user, "Declined");
+        friend.getFriendRequestManagable().setReceivedRequestStatus(user, "Declined");
+        db.saveUsersToFile();
     }
 
     @Override
     public void blockFriend(User friend) {
         user.getFriendManager().blockUser(user, friend);
+        db.saveUsersToFile();
     }
 
     @Override

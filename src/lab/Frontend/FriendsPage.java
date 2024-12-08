@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import lab.pkg9.Database;
 import lab.pkg9.FriendshipService;
 import lab.pkg9.FriendshipServiceInterface;
-import lab.pkg9.Post;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
 /**
@@ -173,6 +172,7 @@ public class FriendsPage extends javax.swing.JFrame {
                 entryPanel1.add(block);
                 remove.addActionListener((java.awt.event.ActionEvent evt1) -> {
                     user.getFriendManager().removeFriend(user, user1);
+                    db.saveUsersToFile();
                     friendService.suggestions().add(user1);
                     newLabel.setText("Removed");
                     entryPanel1.remove(remove);
@@ -180,7 +180,7 @@ public class FriendsPage extends javax.swing.JFrame {
                     friendsContainer.repaint();
                 });
                   block.addActionListener((java.awt.event.ActionEvent evt1) -> {
-                      user.getFriendManager().blockUser(user, user1);
+                      friendService.blockFriend(user1);
                       entryPanel1.remove(remove);
                       entryPanel1.remove(block);
                       newLabel.setText("Blcoked");
@@ -306,7 +306,6 @@ public class FriendsPage extends javax.swing.JFrame {
              add.addActionListener((java.awt.event.ActionEvent evt) -> {
                  friendService.sendFriendRequest(suggestion);
                  System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                 db.saveUsersToFile();
                  suggestionPanel.remove(add);
                  suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
                  friendSuggestionspanel.revalidate();

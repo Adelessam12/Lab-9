@@ -249,6 +249,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadPosts() {
+        Friendpostspanel.removeAll();
         ArrayList<Post> allfriendsposts = new ArrayList<>();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
@@ -291,6 +292,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadfriendstories() {
+        Storiescontainerpanel.removeAll();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
             friends.add(UserManager.findUser(friendid));
