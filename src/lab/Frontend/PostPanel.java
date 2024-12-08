@@ -23,6 +23,7 @@ public class PostPanel extends JPanel {
 
         // Create and add image panel (for image)
         JPanel imagePanel = createImagePanel();
+        if(imagePanel!=null)
         add(imagePanel);
     }
 
@@ -50,7 +51,7 @@ public class PostPanel extends JPanel {
     private JPanel createImagePanel() {
         JPanel imagePanel = new JPanel();
         imagePanel.setLayout(new FlowLayout(FlowLayout.LEFT));  // Image layout inside image panel
-
+if(imagePath!=null)
         try {
             File imgFile = new File(imagePath);
             if (imgFile.exists()) {
@@ -61,8 +62,6 @@ public class PostPanel extends JPanel {
                 imagePanel.add(imageLabel);
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            imagePanel.add(createErrorPanel("Failed to load image!"));
         }
 
         imagePanel.setOpaque(false);  // Make the image panel transparent

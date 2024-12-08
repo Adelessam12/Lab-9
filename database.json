@@ -13,26 +13,36 @@
     "friendManager": {
       "friendList": [
         "IDeab7bade-9b9d-4645-a260-6b3f72d1ca5b",
-        "ID4b99736a-0b6b-46f4-83b1-1d2c70dbeaae"
+        "ID4b99736a-0b6b-46f4-83b1-1d2c70dbeaae",
+        "IDe47cab1d-bf38-47d5-9254-10743fbd44f1"
       ],
       "blockedList": [
         "ID986fb16c-3137-44c3-ae5b-8f9f36528144"
       ],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "2": "Pending",
+          "2": "Accepted",
           "1": "Accepted",
           "123": "Pending"
         },
         "receivedFriendRequests": {
           "IDe47cab1d-bf38-47d5-9254-10743fbd44f1": "Accepted",
           "IDeab7bade-9b9d-4645-a260-6b3f72d1ca5b": "Accepted",
-          "ID4b99736a-0b6b-46f4-83b1-1d2c70dbeaae": "Pending"
+          "ID4b99736a-0b6b-46f4-83b1-1d2c70dbeaae": "Pending",
+          "2": "Accepted"
         }
       }
     },
     "postManager": {
-      "posts": []
+      "posts": [
+        {
+          "postId": "PostID0dd71239-61bd-484e-994b-701aead49328",
+          "authorId": "ID11b1dcce-a1f7-4dd8-adc5-38e594f3eb59",
+          "content": "111111",
+          "imagePath": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot (2).png",
+          "timestamp": "Dec 8, 2024, 6:53:21 PM"
+        }
+      ]
     },
     "storyManager": {
       "stories": []
@@ -50,7 +60,9 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "ID11b1dcce-a1f7-4dd8-adc5-38e594f3eb59"
+      ],
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
@@ -63,10 +75,24 @@
       }
     },
     "postManager": {
-      "posts": []
+      "posts": [
+        {
+          "postId": "PostID3f1e1902-e46f-479c-a2d5-851b06f4da46",
+          "authorId": "IDe47cab1d-bf38-47d5-9254-10743fbd44f1",
+          "content": "222",
+          "timestamp": "Dec 8, 2024, 6:54:12 PM"
+        }
+      ]
     },
     "storyManager": {
-      "stories": []
+      "stories": [
+        {
+          "postId": "StoryID568deb6c-2bc6-404a-b33f-cbed9f9835f2",
+          "authorId": "IDe47cab1d-bf38-47d5-9254-10743fbd44f1",
+          "content": "222",
+          "timestamp": "Dec 8, 2024, 6:54:08 PM"
+        }
+      ]
     }
   },
   {
