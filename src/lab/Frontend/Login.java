@@ -120,7 +120,7 @@ String E = jTextField1.getText().trim();
             }
             else
             {
-                            JOptionPane.showMessageDialog(this, "user email already registered", "Input Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(this, "Wrong email or password", "Input Error", JOptionPane.ERROR_MESSAGE);
 
             }
             

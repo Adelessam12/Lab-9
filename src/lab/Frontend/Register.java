@@ -11,7 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import lab.pkg9.Database;
 import lab.pkg9.User;
-import lab.pkg9.UserFactory;
 import lab.pkg9.UserManager;
 
 /**
@@ -171,6 +170,42 @@ Database db;
             javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[a-zA-Z]{2,4}$")) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Invalid email format. Example: user@example.com", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+        String[] emailParts = email.split("@");
+if (emailParts.length == 2 && emailParts[1].split("\\.").length != 2) {
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "Email must contain exactly one dot in the domain part. Example: user@example.com", 
+        "Error", 
+        javax.swing.JOptionPane.ERROR_MESSAGE
+    );
+    return;
+}
+
+    // Validate password strength
+    if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{7,}$")) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Password must contain at least:\n" +
+            "- One uppercase letter\n" +
+            "- One lowercase letter\n" +
+            "- One number\n" +
+            "- One special character\n" +
+            "- Minimum 7 characters", 
+            "Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE
+        );
+        return;
+    }
+    if (!username.matches(".*[a-zA-Z].*")) {
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "Username must contain at least one letter and cannot be entirely numeric.", 
+        "Error", 
+        javax.swing.JOptionPane.ERROR_MESSAGE);
+    return;
+}
+
 
         // Validate and parse the date of birth
         Date dob;
