@@ -309,7 +309,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         ArrayList<User> suggestions = FM.suggestions();
 
         for (User suggestion : suggestions) {
-            if(!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername())){
+             if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId())){
             String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
             SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, FM);
 

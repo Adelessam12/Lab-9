@@ -190,11 +190,14 @@ public class FriendsPage extends javax.swing.JFrame {
                     friendsContainer.add(entryPanel1);
 
                 }
+                
 
                 friendsContainer.revalidate();
                 friendsContainer.repaint();
             } else {
                 System.out.println("No friends found!");
+                 friendsContainer.add(new JLabel(" NO FRIENDS LOL")).setFont(new Font("Arial", Font.PLAIN, 14));
+                friendsContainer.repaint();
             }
             scrollFriends.setVisible(true);
             friendsContainer.setVisible(true);
@@ -220,7 +223,7 @@ public class FriendsPage extends javax.swing.JFrame {
             requestsContainer.repaint();
 
             //add friend requests to the UI
-            if (user.getFriendRequestManagable().getReceivedFriendRequests() != null && !user.getFriendRequestManagable().getReceivedFriendRequests().isEmpty()) {
+            if (user.getFriendRequestManagable().getReceivedFriendRequests().containsValue("Pending") && !user.getFriendRequestManagable().getReceivedFriendRequests().isEmpty()) {
                 for (Map.Entry<String, String> user1 : user.getFriendRequestManagable().getReceivedFriendRequests().entrySet()) {
                     if (user1.getValue().contains("Pending")) {
                         //     System.out.println(user1.getValue());
@@ -269,7 +272,21 @@ public class FriendsPage extends javax.swing.JFrame {
                 }
             } else {
                 System.out.println("No requests found!");
+                requestsContainer.add(new JLabel("NO NEW REQUESTS")).setFont(new Font("Arial", Font.PLAIN, 14));
+                requestsContainer.repaint();
             }
+            scrollRequests.setVisible(true);
+            requestsContainer.setVisible(true);
+
+            // Revalidate the scroll pane to update the view
+            scrollRequests.revalidate();
+            scrollRequests.repaint();
+}
+            else {
+            // Hide the friends list if it's already visible
+            scrollRequests.setVisible(false);
+            requestsContainer.setVisible(false);
+            requestActivity.setText("Show Friend Requests ");
         }
 
     }//GEN-LAST:event_requestActivityActionPerformed
@@ -279,7 +296,7 @@ public class FriendsPage extends javax.swing.JFrame {
         ArrayList<User> suggestions = friendService.suggestions();
 //        System.out.println(suggestions.get(0));
         for (User suggestion : suggestions) {
-            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUsername())) {
+            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId())) {
                 String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
                 SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, friendService);
                 suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
