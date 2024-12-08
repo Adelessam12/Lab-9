@@ -16,9 +16,7 @@
         "ID4b99736a-0b6b-46f4-83b1-1d2c70dbeaae",
         "IDe47cab1d-bf38-47d5-9254-10743fbd44f1"
       ],
-      "blockedList": [
-        "ID986fb16c-3137-44c3-ae5b-8f9f36528144"
-      ],
+      "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
           "2": "Accepted",

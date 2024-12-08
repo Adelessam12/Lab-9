@@ -26,4 +26,8 @@ public class SHA256PasswordHasher implements PasswordHasher {
             throw new RuntimeException("Error hashing password", e);
         }
     }
+    @Override
+    public boolean verifyPassword(String rawPassword, String hashedPassword) {
+        return hashPassword(rawPassword).equals(hashedPassword);
+    }
 }

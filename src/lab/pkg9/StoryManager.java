@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class StoryManager implements StoryManagable{
     private ArrayList<Story> stories;
+    private final Database database = DatabaseFactory.createDatabase();
 
     public StoryManager() {
         stories = new ArrayList<>();
@@ -20,15 +21,18 @@ public class StoryManager implements StoryManagable{
     @Override
     public void addStory(Story story) {
         stories.add(story);
+        database.saveUsersToFile();
     }
 
     public void setStories(ArrayList<Story> stories) {
         this.stories = stories;
+        database.saveUsersToFile();
     }
 
     @Override
     public void removeStory(Story story) {
-        stories.remove(story);
+        stories.remove(story);       
+        database.saveUsersToFile();
     }
 
     @Override

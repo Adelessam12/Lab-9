@@ -13,7 +13,7 @@ import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import lab.pkg9.ContentManager;
+import lab.pkg9.ContentCreator;
 import lab.pkg9.Database;
 import lab.pkg9.FriendshipService;
 import lab.pkg9.Post;
@@ -33,9 +33,9 @@ public final class NewsFeed extends javax.swing.JFrame {
      */
     Database database;
     User user;
-    ContentManager Cm;
+    ContentCreator Cm;
 
-    public NewsFeed(User user, Database database, ContentManager Cm) {
+    public NewsFeed(User user, Database database, ContentCreator Cm) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
         ImageIcon originalIcon = new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
@@ -194,6 +194,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         Storiescontainerpanel.removeAll();
         friendsContainerPanel.removeAll();
         Friendpostspanel.removeAll();
+        friendSuggestionspanel.removeAll();
         ImageIcon originalIcon = new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
         Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         profile.setIcon(new ImageIcon(scaledImage));
@@ -249,7 +250,6 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadPosts() {
-        Friendpostspanel.removeAll();
         ArrayList<Post> allfriendsposts = new ArrayList<>();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
@@ -273,7 +273,6 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadFriends() {
-        friendsContainerPanel.removeAll();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
             friends.add(UserManager.findUser(friendid));
@@ -292,20 +291,19 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadfriendstories() {
-        Storiescontainerpanel.removeAll();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
             friends.add(UserManager.findUser(friendid));
         }
         for (User friend : friends) {
-
             StoryPanel storyPanel = new StoryPanel(friend);
             Storiescontainerpanel.add(storyPanel);
         }
+        Storiescontainerpanel.revalidate();
+        Storiescontainerpanel.repaint();
     }
 
     public void loadSuggestions() {
-        friendSuggestionspanel.removeAll();
         FriendshipService FM = new FriendshipService(database, user);
         ArrayList<User> suggestions = FM.suggestions();
 

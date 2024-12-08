@@ -3,16 +3,34 @@ package lab.pkg9;
 import java.util.ArrayList;
 
 public final class Database {
+    private static Database instance; // Singleton instance
     private final UserStorage userStorage;
     private final PasswordHasher passwordHasher;
-    ArrayList<User> users= new ArrayList<>();
+    private ArrayList<User> users;
 
-    public Database(UserStorage userStorage, PasswordHasher passwordHasher) {
+    // Private constructor to prevent direct instantiation
+    private Database(UserStorage userStorage, PasswordHasher passwordHasher) {
         this.userStorage = userStorage;
-        this.passwordHasher = passwordHasher;       
-        users = this.userStorage.loadUsersFromJson();
+        this.passwordHasher = passwordHasher;
+        this.users = this.userStorage.loadUsersFromJson();
     }
 
+    // Package-private method to allow Factory access
+    static synchronized Database createInstance(UserStorage userStorage, PasswordHasher passwordHasher) {
+        if (instance == null) {
+            instance = new Database(userStorage, passwordHasher);
+        }
+        return instance;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
+    }
+
+    public void addUser(User user){
+        users.add(user);
+    }
+    
     public ArrayList<User> getUsers() {
         return users;
     }

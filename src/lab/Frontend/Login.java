@@ -7,7 +7,7 @@ package lab.Frontend;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import lab.pkg9.ContentManager;
+import lab.pkg9.ContentCreator;
 import lab.pkg9.Database;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
@@ -21,10 +21,10 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
-    ContentManager CM;
+    ContentCreator CM;
     Database D;
 
-    public Login(ContentManager CM, Database D) {
+    public Login(ContentCreator CM, Database D) {
         this.D = D;
         this.CM = CM;
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));

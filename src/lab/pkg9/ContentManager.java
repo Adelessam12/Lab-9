@@ -1,33 +1,42 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package lab.pkg9;
 
-import java.util.UUID;
+import java.util.ArrayList;
 
-public class ContentManager implements ContentCreatable {
-   
-    // ContentManager now depends on abstractions
-    private final Database database;
+/**
+ *
+ * @author DELL
+ */
+public class ContentManager implements ContentManagable{
+    private ArrayList<Content> contents;
+    private final Database database = DatabaseFactory.createDatabase();
 
-    public ContentManager(Database database) {
-        this.database = database;
+    public ContentManager(){
+        contents = new ArrayList<>();
     }
 
     @Override
-    public void createPost(User user, String content, String imagePath) {
-        String postId = generateUniqueId("Post");
-        Post newPost = new Post(postId, user.getUserId(), content, imagePath, new java.util.Date());
-        user.getPostManager().addPost(newPost);
+    public void addContent(Content content) {
+        contents.add(content);
+        database.saveUsersToFile();
+    }
+
+    public void setContent(ArrayList<Content> content) {
+        contents = content;
         database.saveUsersToFile();
     }
 
     @Override
-    public void createStory(User user, String content, String imagePath) {
-        String storyId = generateUniqueId("Story");
-        Story newStory = new Story(storyId, user.getUserId(), content, imagePath, new java.util.Date());
-        user.getStoryManager().addStory(newStory);
+    public void removeContent(Content content) {
+        contents.remove(content);       
         database.saveUsersToFile();
     }
 
-    private String generateUniqueId(String prefix) {
-        return prefix + "ID" + UUID.randomUUID();
+    @Override
+    public ArrayList<Content> getContent() {
+        return contents;
     }
 }

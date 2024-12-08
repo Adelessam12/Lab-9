@@ -239,7 +239,7 @@ if (emailParts.length == 2 && emailParts[1].split("\\.").length != 2) {
 
         // Show success message
         javax.swing.JOptionPane.showMessageDialog(this, "User registered successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        UserManager.registerUser(username, email, username,password, dob, false);
+        UserManager.registerUser(username, email, username,password, dob);
         // Clear fields after successful registration
         usernamefiled.setText("");
         emailfield.setText("");

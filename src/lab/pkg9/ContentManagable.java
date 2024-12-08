@@ -4,12 +4,14 @@
  */
 package lab.pkg9;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author DELL
  */
-public interface PasswordHasher {
-
-    String hashPassword(String password);
-    boolean verifyPassword(String rawPassword, String hashedPassword);
+public interface ContentManagable {
+    void addContent(Content content);
+    public void removeContent(Content content);
+    public ArrayList<Content> getContent();
 }

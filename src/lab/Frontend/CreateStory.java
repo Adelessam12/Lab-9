@@ -9,7 +9,7 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import lab.pkg9.ContentManager;
+import lab.pkg9.ContentCreator;
 import lab.pkg9.User;
 
 /**
@@ -20,7 +20,7 @@ public class CreateStory extends javax.swing.JFrame {
 
     private final User user;
     private String imagePath;
-    private final ContentManager contentManager;
+    private final ContentCreator contentManager;
 
     /**
      * Creates new form CreateStory
@@ -29,7 +29,7 @@ public class CreateStory extends javax.swing.JFrame {
      * @param contentManager
      */
 
-    public CreateStory(User user, ContentManager contentManager) {
+    public CreateStory(User user, ContentCreator contentManager) {
         this.user = user;
         imagePath = null;
         this.contentManager = contentManager;

@@ -9,7 +9,7 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import lab.pkg9.ContentManager;
+import lab.pkg9.ContentCreator;
 import lab.pkg9.User;
 
 /**
@@ -19,7 +19,7 @@ import lab.pkg9.User;
 public class CreatePost extends javax.swing.JFrame {
     private final User user;
     private String imagePath;
-    private final ContentManager contentManager;
+    private final ContentCreator contentManager;
     /**
      * Creates new form create_post
      * @param userId
@@ -27,7 +27,7 @@ public class CreatePost extends javax.swing.JFrame {
      */
 
 
-    public CreatePost(User user, ContentManager contentManager) {
+    public CreatePost(User user, ContentCreator contentManager) {
         this.user = user;
         imagePath = null;
         this.contentManager = contentManager;

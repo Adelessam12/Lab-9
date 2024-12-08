@@ -10,30 +10,34 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-public class PostManager implements PostManagable {
+public class PostManager {
+        private ArrayList<Story> posts;
+    private final Database database = DatabaseFactory.createDatabase();
 
-    private ArrayList<Post> posts;
-
-    public void setPosts(ArrayList<Post> posts) {
-        this.posts = posts;
-    }
-
-    public PostManager() {
+    public StoryManager() {
         posts = new ArrayList<>();
     }
 
     @Override
-    public void addPost(Post post) {
-        posts.add(post);
+    public void addStory(Story story) {
+        posts.add(story);
+        database.saveUsersToFile();
+    }
+
+    public void setStories(ArrayList<Story> stories) {
+        this.posts = stories;
+        database.saveUsersToFile();
     }
 
     @Override
-    public void removePost(Post post) {
-        posts.remove(post);
+    public void removeStory(Story story) {
+        posts.remove(story);       
+        database.saveUsersToFile();
     }
 
     @Override
-    public ArrayList<Post> getPosts() {
+    public ArrayList<Story> getStories() {
         return posts;
     }
+}
 }
