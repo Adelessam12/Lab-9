@@ -200,18 +200,11 @@ Database db;
             return;
         }
 
-        // Create User object
-        User user = UserFactory.createUser(email, username, password, dob); // Assuming User has a Date type for DOB
-
-        // For demonstration, print the user details
-        System.out.println("User Created:");
-        System.out.println("Username: " + user.getUsername());
-        System.out.println("Email: " + user.getEmail());
-        System.out.println("Date of Birth: " + user.getDateOfBirth());
+       
 
         // Show success message
         javax.swing.JOptionPane.showMessageDialog(this, "User registered successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        UserManager.registerUser(username, email, username, password, dob, false);
+        UserManager.registerUser(username, email, username,password, dob, false);
         // Clear fields after successful registration
         usernamefiled.setText("");
         emailfield.setText("");

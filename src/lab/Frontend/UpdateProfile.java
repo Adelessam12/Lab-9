@@ -351,7 +351,7 @@ public class UpdateProfile extends javax.swing.JFrame {
 
             if (!password.isEmpty()) {
                 System.out.println(user.getHashedPassword());
-                user.setHashedPassword(password); // Update password using setter
+                user.setHashedPassword(db.hashPassword(password)); // Update password using setter
                 db.saveUsersToFile();
                 System.out.println(user.getHashedPassword());
                 JOptionPane.showMessageDialog(dialog, "Password updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);

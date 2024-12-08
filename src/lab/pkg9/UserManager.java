@@ -26,6 +26,7 @@ public class UserManager {
         String hashedPassword = userDatabase.hashPassword(password);
         User newUser = UserFactory.createUser(email, username, hashedPassword, dateOfBirth);
         addUser(newUser);
+        System.out.println("         "+newUser.getHashedPassword());
         System.out.println("User registered successfully.");
         userDatabase.saveUsersToFile();
         return true;
