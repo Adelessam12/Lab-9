@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * @author DELL
  */
 public class ContentManager implements ContentManagable{
+   
     private ArrayList<Content> contents;
     private final Database database = DatabaseFactory.createDatabase();
 
