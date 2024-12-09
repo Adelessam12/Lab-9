@@ -383,7 +383,9 @@ public class UpdateProfile extends javax.swing.JFrame {
         postsContainerPanel.removeAll();
 
         for (Content post : user.getPostManager().getContent()) {
-            postsContainerPanel.add(new PostPanel(post.getContent(), post.getImagePath()));
+            String username = UserManager.findUser(post.getAuthorId()).getUsername();
+            String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
+            postsContainerPanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
         }
         // Refresh the UI to show new posts
         postsContainerPanel.revalidate();

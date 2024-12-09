@@ -48,10 +48,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         loadnewsfeed();
     }
 
-    public NewsFeed() throws HeadlessException {
-
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -251,21 +247,24 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadPosts() {
-        ArrayList<Post> allfriendsposts = new ArrayList<>();
+        ArrayList<Content> allfriendsposts = new ArrayList<>();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
             friends.add(UserManager.findUser(friendid));
         }
         for (User friend : friends) {
             for (Content post : friend.getPostManager().getContent()) {
-                allfriendsposts.add((Post) post);
+                allfriendsposts.add(post);
+
             }
         }
         Collections.sort(allfriendsposts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
 
         // Add PostPanel for each post (text first, then image)
-        for (Post post : allfriendsposts) {
-            Friendpostspanel.add(new PostPanel(post.getContent(), post.getImagePath()));
+        for (Content post : allfriendsposts) {
+            String username = UserManager.findUser(post.getAuthorId()).getUsername();
+            String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
+            Friendpostspanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
         }
 
         // Refresh the UI to show new posts
@@ -309,25 +308,25 @@ public final class NewsFeed extends javax.swing.JFrame {
         ArrayList<User> suggestions = FM.suggestions();
 
         for (User suggestion : suggestions) {
-             if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId())){
-            String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-            SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, FM);
+            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId())) {
+                String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
+                SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, FM);
 
-            suggestionPanel.setPreferredSize(new Dimension(200, 100));
-            friendSuggestionspanel.add(suggestionPanel);
-            JButton add = new JButton("Add Friend");
-            suggestionPanel.add(add);
-            friendSuggestionspanel.add(suggestionPanel);
-            add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                FM.sendFriendRequest(suggestion);
-                System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                suggestionPanel.remove(add);
-                database.saveUsersToFile();
-                //ArrayList<User> users = database.getUsers();
-                suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
-                friendSuggestionspanel.revalidate();
-                friendSuggestionspanel.repaint();
-            });
+                suggestionPanel.setPreferredSize(new Dimension(200, 100));
+                friendSuggestionspanel.add(suggestionPanel);
+                JButton add = new JButton("Add Friend");
+                suggestionPanel.add(add);
+                friendSuggestionspanel.add(suggestionPanel);
+                add.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    FM.sendFriendRequest(suggestion);
+                    System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                    suggestionPanel.remove(add);
+                    database.saveUsersToFile();
+                    //ArrayList<User> users = database.getUsers();
+                    suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+                    friendSuggestionspanel.revalidate();
+                    friendSuggestionspanel.repaint();
+                });
             }
         }
         friendSuggestionspanel.revalidate();

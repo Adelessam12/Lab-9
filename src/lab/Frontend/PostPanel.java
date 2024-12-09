@@ -7,80 +7,135 @@ import javax.swing.border.EmptyBorder;
 
 public class PostPanel extends JPanel {
 
+   private final String username;
+    private final String profileImagePath;
     private final String content;
     private final String imagePath;
-
-    public PostPanel(String content, String imagePath) {
+    
+    public PostPanel(String username, String profileImagePath, String content, String imagePath) {
+        this.username = username;
+        this.profileImagePath = profileImagePath;
         this.content = content;
         this.imagePath = imagePath;
 
-        // Set GridLayout for side-by-side panels with a gap of 10 between them
-        setLayout(new GridLayout(1, 2, 10, 0));  // 1 row, 2 columns, 10px gap
+        setLayout(new BorderLayout(10, 10)); // Border layout with gaps
 
-        // Create and add content panel (for text)
-        JPanel contentPanel = createContentPanel();
-        add(contentPanel);
+        // Create and add profile panel (username + profile photo)
+        JPanel profilePanel = createProfilePanel();
+        add(profilePanel, BorderLayout.NORTH);
 
-        // Create and add image panel (for image)
-        JPanel imagePanel = createImagePanel();
-        if(imagePanel!=null)
-        add(imagePanel);
+        // Create and add content and image panel (side-by-side layout)
+        JPanel postContentPanel = createPostContentPanel();
+        add(postContentPanel, BorderLayout.CENTER);
+
+        // Add separator line
+        JSeparator separator = new JSeparator();
+        add(separator, BorderLayout.SOUTH);
+    }
+     /**
+     * Creates a panel to display the user's profile picture and username.
+     */
+    private JPanel createProfilePanel() {
+        JPanel profilePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 0)); // Horizontal layout
+        profilePanel.setOpaque(false);
+
+        // Profile photo
+        ProfilePanel profileImagePanel = new ProfilePanel();
+        profileImagePanel.setPreferredSize(new Dimension(50, 50)); // Circular size
+        profileImagePanel.setProfileImage(profileImagePath);
+        profilePanel.add(profileImagePanel);
+
+        // Username label
+        JLabel usernameLabel = new JLabel(username);
+        usernameLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        usernameLabel.setForeground(Color.BLACK);
+        profilePanel.add(usernameLabel);
+
+        return profilePanel;
     }
 
     /**
-     * Creates a panel for displaying the text content of the post.
+     * Creates a panel to display the post's text content and image.
      */
-    private JPanel createContentPanel() {
-        JPanel contentPanel = new JPanel();
-        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));  // Text content layout vertically
+    private JPanel createPostContentPanel() {
+    JPanel postContentPanel = new JPanel(new BorderLayout(10, 0)); // Horizontal layout with a gap
+    postContentPanel.setOpaque(false);
 
-        JLabel contentLabel = new JLabel("<html>" + content.replace("\n", "<br>") + "</html>");
-        contentLabel.setForeground(Color.BLACK);  // Set text color
-        contentLabel.setHorizontalAlignment(SwingConstants.LEFT);  // Align left
-        contentPanel.setOpaque(false); // Make the content panel transparent
-        contentLabel.setBorder(new EmptyBorder(0, 0, 0, 10));  // Add some padding to the right
+    // Text content panel
+    JPanel contentPanel = new JPanel();
+    contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+    contentPanel.setOpaque(false);
 
-        contentPanel.add(contentLabel);  // Add text label to content panel
-        return contentPanel;
-    }
+    // Add padding to the content panel
+    contentPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+    // Post content label with proper multiline indentation
+    JLabel contentLabel = new JLabel("<html><div style='margin-left:20px; font-size:12px; line-height:1.5;'>"
+            + content.replace("\n", "<br>") + "</div></html>");
+    contentLabel.setForeground(Color.DARK_GRAY); // Use dark gray for a softer look
+    contentLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align content to the left
+    contentLabel.setBorder(new EmptyBorder(0, 0, 10, 0)); // Add padding below the label
+
+    // Add the label to the content panel
+    contentPanel.add(contentLabel);
+
+    // Add the content panel to the left side
+    postContentPanel.add(contentPanel, BorderLayout.CENTER);
+
+    // Image panel
+    JPanel imagePanel = createImagePanel();
+    imagePanel.setBorder(new EmptyBorder(10, 0, 10, 10)); // Add padding around the image
+    postContentPanel.add(imagePanel, BorderLayout.EAST); // Place the image on the right
+
+    return postContentPanel;
+}
+
+
 
     /**
-     * Creates a panel for displaying the image content of the post. Includes
-     * error handling for missing or invalid images.
+     * Creates a panel for displaying the image content of the post.
      */
-    private JPanel createImagePanel() {
-        JPanel imagePanel = new JPanel();
-        imagePanel.setLayout(new FlowLayout(FlowLayout.LEFT));  // Image layout inside image panel
-if(imagePath!=null)
+   private JPanel createImagePanel() {
+    JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    imagePanel.setOpaque(false);
+
+    if (imagePath != null) {
         try {
             File imgFile = new File(imagePath);
             if (imgFile.exists()) {
                 ImageIcon imageIcon = new ImageIcon(imagePath);
                 Image image = imageIcon.getImage();
-                Image scaledimage = image.getScaledInstance(200, 200, 100);
-                JLabel imageLabel = new JLabel(new ImageIcon(scaledimage));
+                Image scaledImage = image.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                JLabel imageLabel = new JLabel(new ImageIcon(scaledImage));
                 imagePanel.add(imageLabel);
+            } else {
+                // Use the error panel for missing image files
+                imagePanel.add(createErrorPanel("Image not found"));
             }
         } catch (Exception e) {
+            // Use the error panel for exceptions
+            imagePanel.add(createErrorPanel("Error loading image"));
         }
-
-        imagePanel.setOpaque(false);  // Make the image panel transparent
-        return imagePanel;
+    } else {
+        // Use the error panel for null image paths
+        imagePanel.add(createErrorPanel("No image provided"));
     }
 
+    return imagePanel;
+}
     /**
      * Creates a panel to display an error message.
      *
      * @param errorMessage The error message to display.
      */
     private JPanel createErrorPanel(String errorMessage) {
-        JPanel errorPanel = new JPanel();
-        JLabel errorLabel = new JLabel(errorMessage);
-        errorLabel.setForeground(Color.RED); // Display error message in red
-        errorPanel.add(errorLabel);
-        errorPanel.setOpaque(false); // Transparent background
-        return errorPanel;
-    }
+    JPanel errorPanel = new JPanel();
+    JLabel errorLabel = new JLabel(errorMessage);
+    errorLabel.setForeground(Color.RED); // Display error message in red
+    errorPanel.add(errorLabel);
+    errorPanel.setOpaque(false); // Transparent background
+    return errorPanel;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.

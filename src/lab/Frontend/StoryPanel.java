@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import lab.pkg9.Content;
 import lab.pkg9.Story;
 import lab.pkg9.User;
+import lab.pkg9.UserManager;
 
 public class StoryPanel extends JPanel {
     private final ProfilePanel profilePanel; // Changed from ImagePanel to ProfilePanel
@@ -56,7 +57,9 @@ public class StoryPanel extends JPanel {
         if ((((Story) story).isExpired())) {
             friend.getStoryManager().removeContent(story);
         } else {
-            PostPanel postPanel = new PostPanel(story.getContent(), story.getImagePath());
+            String username = UserManager.findUser(story.getAuthorId()).getUsername();
+            String profilepath = UserManager.findUser(story.getAuthorId()).getProfile().getProfilePhotoPath();
+            PostPanel postPanel = new PostPanel(username, profilepath, story.getContent(), story.getImagePath());
             postPanel.setMaximumSize(new Dimension(500, 300)); // Restrict maximum size of each PostPanel
             storiesPanel.add(postPanel);
             storiesPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing between posts
