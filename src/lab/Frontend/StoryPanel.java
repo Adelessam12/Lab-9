@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import lab.pkg9.Content;
+import lab.pkg9.Post;
 import lab.pkg9.Story;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
@@ -54,6 +55,7 @@ public class StoryPanel extends JPanel {
     // Add each story to the panel using PostPanel
     ArrayList<Content> stories = friend.getStoryManager().getContent();
     for (Content story : stories) {
+
         if ((((Story) story).isExpired())) {
             friend.getStoryManager().removeContent(story);
         } else {
