@@ -3,26 +3,40 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/PostManagableCreator.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/UserFactory.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/FriendPanel.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/UserManager.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/StartupPage.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/FriendManager.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/PostPanel.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/FriendshipServiceInterface.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/NewsFeed.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/NewsFeed.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/FriendsPage.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/StoryManager.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/Login.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/PostManager.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/PostManagableDeserializer.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/User.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/StoryPanel.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/FriendManagable.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/pkg9/Profile.java</file>
-            <file>file:/C:/Users/Dell/Documents/GitHub/Lab-9/src/lab/Frontend/NotificationsPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManagable.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserFactory.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendshipService.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/UpdateProfile.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentCreator.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/DatabaseUserRepository.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/SuggestionPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/ProfilePanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManagableCreator.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/FriendsPage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/PostManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FileUserStorage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Content.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManagableDeserializer.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/Login.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Database.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManagable.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Post.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/NewsFeed.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManagableDeserializer.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/DatabaseFactory.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManagable.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserRepository.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/StartupPage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManagableDeserializer.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/Register.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/PostPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/StoryPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManagableCreator.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/User.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManager.java</file>
         </group>
     </open-files>
 </project-private>
