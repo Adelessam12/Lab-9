@@ -1,37 +1,69 @@
 [
   {
-    "userId": "ID76925b8d-61f7-48a5-a158-cd16ae4de200",
+    "userId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
     "email": "1",
     "username": "1",
     "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
     "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
-    "isOnline": false,
+    "isOnline": true,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "IDa1e231da-e503-44a8-bd43-fb81a8450c76",
+        "ID9cd540b1-3312-4ee6-806a-6abe4cdac254"
+      ],
       "blockedList": [
-        "ID09c2daa2-9d24-44e7-86bf-1062419f33a9"
+        "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6"
       ],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "ID09c2daa2-9d24-44e7-86bf-1062419f33a9": "Accepted",
-          "ID74596825-5dc4-49ce-ae59-42df756af16f": "Pending"
+          "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted",
+          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted"
         },
-        "receivedFriendRequests": {}
+        "receivedFriendRequests": {
+          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Pending"
+        }
       }
     },
     "postManager": {
-      "contents": []
+      "contents": [
+        {
+          "postId": "PostID062eee2b-f7df-4e0e-b372-18acdd8374ea",
+          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+          "content": "ahmeeeeeeeeeeeeeeeed",
+          "imagePath": "C:\\Users\\DELL\\Pictures\\Screenshot 2024-05-17 020901.png",
+          "timestamp": "Dec 9, 2024, 4:17:01 PM"
+        },
+        {
+          "postId": "PostID96fbc3f8-618e-487d-8197-8d8ae262a56f",
+          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+          "content": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "imagePath": "C:\\Users\\DELL\\Pictures\\Screenshot 2022-09-14 012809.png",
+          "timestamp": "Dec 9, 2024, 4:17:19 PM"
+        },
+        {
+          "postId": "PostIDfaa9ec06-de2b-40cc-970f-fd617ffd884b",
+          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+          "content": "cccccccccccccccccccccccccccccc",
+          "timestamp": "Dec 9, 2024, 4:17:30 PM"
+        },
+        {
+          "postId": "PostID7cdfcca9-fa77-4f82-a97e-4a6be0da123c",
+          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+          "content": "1111111",
+          "timestamp": "Dec 9, 2024, 8:45:03 PM"
+        }
+      ]
     },
     "storyManager": {
       "contents": []
     }
   },
   {
-    "userId": "ID09c2daa2-9d24-44e7-86bf-1062419f33a9",
+    "userId": "IDa1e231da-e503-44a8-bd43-fb81a8450c76",
     "email": "2",
     "username": "2",
     "hashedPassword": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
@@ -42,25 +74,38 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+        "ID9cd540b1-3312-4ee6-806a-6abe4cdac254"
+      ],
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "ID74596825-5dc4-49ce-ae59-42df756af16f": "Accepted",
-          "ID76925b8d-61f7-48a5-a158-cd16ae4de200": "Accepted"
+          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Declined"
         },
-        "receivedFriendRequests": {}
+        "receivedFriendRequests": {
+          "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Accepted",
+          "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted",
+          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Pending"
+        }
       }
     },
     "postManager": {
       "contents": []
     },
     "storyManager": {
-      "contents": []
+      "contents": [
+        {
+          "postId": "StoryIDc68d32f0-c625-41ca-9b72-cafcc992659b",
+          "authorId": "IDa1e231da-e503-44a8-bd43-fb81a8450c76",
+          "content": "2\t111",
+          "timestamp": "Dec 9, 2024, 4:27:34 PM"
+        }
+      ]
     }
   },
   {
-    "userId": "ID21204fc4-d8e0-4094-b04a-ad15ca5329a5",
+    "userId": "ID9cd540b1-3312-4ee6-806a-6abe4cdac254",
     "email": "3",
     "username": "3",
     "hashedPassword": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
@@ -71,14 +116,19 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+        "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
+      ],
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "ID74596825-5dc4-49ce-ae59-42df756af16f": "Declined",
-          "ID76925b8d-61f7-48a5-a158-cd16ae4de200": "Accepted"
+          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted",
+          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Accepted"
         },
-        "receivedFriendRequests": {}
+        "receivedFriendRequests": {
+          "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Accepted"
+        }
       }
     },
     "postManager": {
@@ -89,7 +139,7 @@
     }
   },
   {
-    "userId": "ID74596825-5dc4-49ce-ae59-42df756af16f",
+    "userId": "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6",
     "email": "4",
     "username": "4",
     "hashedPassword": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
@@ -102,14 +152,15 @@
     "friendManager": {
       "friendList": [],
       "blockedList": [
-        "ID09c2daa2-9d24-44e7-86bf-1062419f33a9"
+        "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
       ],
       "friendRequestManager": {
-        "sentFriendRequests": {},
+        "sentFriendRequests": {
+          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Pending",
+          "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Pending"
+        },
         "receivedFriendRequests": {
-          "ID21204fc4-d8e0-4094-b04a-ad15ca5329a5": "Declined",
-          "ID74596825-5dc4-49ce-ae59-42df756af16f": "Declined",
-          "ID76925b8d-61f7-48a5-a158-cd16ae4de200": "Pending"
+          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Declined"
         }
       }
     },
