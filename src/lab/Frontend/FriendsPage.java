@@ -182,7 +182,7 @@ public class FriendsPage extends javax.swing.JFrame {
                         friendService.blockFriend(user1);
                         entryPanel1.remove(remove);
                         entryPanel1.remove(block);
-                        newLabel.setText("Blcoked");
+                        newLabel.setText("Blocked");
                         friendsContainer.repaint();
                     });
 
@@ -196,7 +196,7 @@ public class FriendsPage extends javax.swing.JFrame {
                 friendsContainer.repaint();
             } else {
                 System.out.println("No friends found!");
-                 friendsContainer.add(new JLabel(" NO FRIENDS LOL")).setFont(new Font("Arial", Font.PLAIN, 14));
+                 friendsContainer.add(new JLabel("\n \n \n    NO FRIENDS")).setFont(new Font("Arial", Font.PLAIN, 14));
                 friendsContainer.repaint();
             }
             scrollFriends.setVisible(true);

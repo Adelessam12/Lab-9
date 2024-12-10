@@ -100,7 +100,7 @@ public class StartupPage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
 
-        Login l = new Login( CM, db);
+        Login l = new Login(CM);
         l.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -140,10 +140,8 @@ public class StartupPage extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new StartupPage().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new StartupPage().setVisible(true);
         });
     }
 
