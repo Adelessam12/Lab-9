@@ -54,7 +54,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         this.Cm = Cm;
         friendService = new FriendshipService(user);
 
-        loadFriendRequests();
         loadnewsfeed();
     }
 
@@ -613,6 +612,8 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     public void loadnewsfeed() {
+        Notifications_panel.removeAll();
+        loadFriendRequests();
         loadFriends();
         loadPosts();
         loadfriendstories();
@@ -624,7 +625,6 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     public void loadPosts() {
         Friendpostspanel.removeAll();
-        Notifications_panel.removeAll();
         ArrayList<Content> allfriendsposts = new ArrayList<>();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
@@ -692,10 +692,10 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     public void loadFriendRequests() {
         // Clear the current content of the Notifications_panel
-        Notifications_panel.removeAll();
 
         // Get the received friend requests from the user's manager
         Map<String, String> receivedFriendRequests = user.getFriendRequestManagable().getReceivedFriendRequests();
+        Map<String, String> sentFriendRequests = user.getFriendRequestManagable().getSentFriendRequests();
 
         // Loop through the map and add a NotificationPanel for each friend request
         for (Map.Entry<String, String> entry : receivedFriendRequests.entrySet()) {
@@ -708,6 +708,18 @@ public final class NewsFeed extends javax.swing.JFrame {
             if (friend != null && requestStatus.equals("Pending")) {
                 // Add the NotificationPanel to the Notifications_panel
                 Notifications_panel.add(new NotificationsPanel(friend, friend.getUsername(), friend.getProfile().getProfilePhotoPath(), friendService));
+            }
+        }
+          for (Map.Entry<String, String> entry : sentFriendRequests.entrySet()) {
+            String friendId = entry.getKey(); // The user ID
+            String requestStatus = entry.getValue(); // The status of the request (e.g., "pending", "accepted", etc.)
+
+            // Find the User object using the userManager's findUser method
+            User friend = UserManager.findUser(friendId);
+
+            if (friend != null && requestStatus.equals("Accepted")|| requestStatus.equals("Declined")) {
+                // Add the NotificationPanel to the Notifications_panel
+                Notifications_panel.add(new NotificationsPanel(friend, friend.getUsername(), friend.getProfile().getProfilePhotoPath(), friendService,requestStatus));
             }
         }
 
