@@ -16,7 +16,7 @@ public class GroupCreator {
       public void createGroup(User user, String groupName, String description, String imagePath) {
         String groupId = generateUniqueId("Group");
         Group newGroup = new Group(groupId, user.getUserId(), imagePath, groupName, description);
-       // user.getPostManager().addContent(newPost);
+        user.getGroupManager().addGroup(newGroup);
         database.saveUsersToFile();
     }
         private String generateUniqueId(String prefix) {

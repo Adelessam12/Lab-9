@@ -4,6 +4,7 @@
  */
 package lab.pkg9;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -16,7 +17,9 @@ public class Group {
     private final String imagePath;
     private final String groupName;
     private final String description;
-   // private final Map<String, String> users;
+    private Map<String, String> users;
+    private ArrayList<String> groupRequests;
+
 
     public Group(String groupID, String creatorID, String imagePath, String groupName, String description) {
         this.groupID = groupID;
@@ -25,6 +28,13 @@ public class Group {
         this.groupName = groupName;
         this.description = description;
         
+    }
+
+    public ArrayList<String> getGroupRequests() {
+        return groupRequests;
+    }
+    public void setUsers(User user, String status) {
+        users.put(user.getUserId(), status);
     }
 
     public String getGroupID() {
@@ -45,6 +55,10 @@ public class Group {
 
     public String getDescription() {
         return description;
+    }
+
+    public Map<String, String> getUsers() {
+        return users;
     }
     
 }

@@ -11,30 +11,36 @@ import java.util.ArrayList;
  * @author Mahmoud Waleed
  */
 public class GroupManager implements GroupManagable {
-    ArrayList<Group> groups; 
+    private ArrayList<Group> groups; 
 
     public GroupManager() {
         groups = new ArrayList<>();
     }
 
-    @Override
-    public void requestToJoin(Group group) {
-        
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
     }
 
     @Override
-    public void joinGroup(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void requestToJoin(User user, Group group) {
+        group.getGroupRequests().add(user.getUserId());
+    }
+    @Override
+    public void joinGroup(User user, Group group) {
+      group.setUsers(user, "Member");
     }
 
-    @Override
-    public void viewGroup(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
-    public void leaveGroup(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void leaveGroup(User user, Group group) {
+        group.getUsers().remove(user.getUserId());
+    }
+    
+    @Override
+    public void addGroup(Group group) {
+        groups.add(group);
+        Database database = DatabaseFactory.createDatabase();
+        database.saveUsersToFile();
     }
     
 }

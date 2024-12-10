@@ -9,9 +9,17 @@ package lab.pkg9;
  * @author Mahmoud Waleed
  */
 public interface GroupManagable {
-    public void requestToJoin(Group group);
-    public void joinGroup(Group group);
-    public void viewGroup(Group group);
-    public void leaveGroup(Group group);
+    public void requestToJoin(User user, Group group);
+    public void joinGroup(User user, Group group);
+    public void leaveGroup(User user, Group group);
+    public void addGroup(Group group);    
+    public void removeMember(Group group);
+    public void approveRequest(User user, Group group);
+    public void declineRequest(User user, Group group);
+    public void promote(User user, Group group);
+    public void demote(User user, Group group);
+    public void addPost();
+    public void editPost();
+    public void deletePost();
     
 }

@@ -41,6 +41,7 @@ public final class User {
         this.groupManager = groupManager;
     }
 
+
     public FriendRequestManagable getFriendRequestManagable(){
         return getFriendManager().getFriendRequestManager();
     }
@@ -48,6 +49,9 @@ public final class User {
         return friendManager;
     }
 
+    public GroupManagable getGroupManager() {
+        return groupManager;
+    }
     public ContentManagable getPostManager() {
         return postManager;
     }
