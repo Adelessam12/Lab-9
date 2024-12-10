@@ -76,7 +76,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         create_content_button = new javax.swing.JButton();
         friend_managment_button = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jScrollPane5 = new javax.swing.JScrollPane();
         Notifications_panel = new javax.swing.JPanel();
         ViewStories = new javax.swing.JToggleButton();
@@ -139,8 +138,8 @@ public final class NewsFeed extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("show notifications");
-
+        Notifications_panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Notifications"))));
+        Notifications_panel.setToolTipText("");
         Notifications_panel.setLayout(new javax.swing.BoxLayout(Notifications_panel, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane5.setViewportView(Notifications_panel);
 
@@ -191,9 +190,7 @@ public final class NewsFeed extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -214,11 +211,8 @@ public final class NewsFeed extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Refresh_button, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
@@ -322,7 +316,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             String username = UserManager.findUser(post.getAuthorId()).getUsername();
             String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
             Friendpostspanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
-           // Notifications_panel.add(new NotificationsPanel( post, profilepath, username));
+            Notifications_panel.add(new NotificationsPanel( post, profilepath, username,FM));
         }
 
         Notifications_panel.revalidate();
@@ -374,6 +368,7 @@ public void loadFriendRequests() {
 
     // Get the received friend requests from the user's manager
     Map<String, String> receivedFriendRequests = user.getFriendRequestManagable().getReceivedFriendRequests();
+    Map<String, String> sentfriendrequests = user.getFriendRequestManagable().getSentFriendRequests();
 
     // Loop through the map and add a NotificationPanel for each friend request
     for (Map.Entry<String, String> entry : receivedFriendRequests.entrySet()) {
@@ -386,6 +381,18 @@ public void loadFriendRequests() {
         if (friend != null && requestStatus.equals("Pending")) {
             // Add the NotificationPanel to the Notifications_panel
             Notifications_panel.add(new NotificationsPanel(friend,friend.getUsername(), friend.getProfile().getProfilePhotoPath(),FM));
+        }
+    }
+    for (Map.Entry<String, String> entry : sentfriendrequests.entrySet()) {
+        String friendId = entry.getKey(); // The user ID
+        String requestStatus = entry.getValue(); // The status of the request (e.g., "pending", "accepted", etc.)
+
+        // Find the User object using the userManager's findUser method
+        User friend = UserManager.findUser(friendId);
+
+        if (friend != null && requestStatus.equals("Accepted")|| requestStatus.equals("Declined")) {
+            // Add the NotificationPanel to the Notifications_panel
+            Notifications_panel.add(new NotificationsPanel(friend,friend.getUsername(), friend.getProfile().getProfilePhotoPath(),FM,requestStatus));
         }
     }
 
@@ -435,7 +442,6 @@ public void loadFriendRequests() {
     private javax.swing.JButton friend_managment_button;
     private javax.swing.JPanel friendsContainerPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

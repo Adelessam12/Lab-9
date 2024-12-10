@@ -5,7 +5,7 @@
     "username": "1",
     "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
     "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
-    "isOnline": false,
+    "isOnline": true,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
@@ -81,7 +81,8 @@
         },
         "receivedFriendRequests": {
           "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Accepted",
-          "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted"
+          "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted",
+          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Declined"
         }
       }
     },
@@ -113,12 +114,14 @@
     "friendManager": {
       "friendList": [
         "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-        "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
+        "IDa1e231da-e503-44a8-bd43-fb81a8450c76",
+        "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6"
       ],
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted"
+          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted",
+          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Accepted"
         },
         "receivedFriendRequests": {
           "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Accepted"
@@ -144,16 +147,17 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "ID9cd540b1-3312-4ee6-806a-6abe4cdac254"
+      ],
       "blockedList": [
         "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
       ],
       "friendRequestManager": {
-        "sentFriendRequests": {
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted"
-        },
+        "sentFriendRequests": {},
         "receivedFriendRequests": {
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Declined"
+          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Declined",
+          "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted"
         }
       }
     },
