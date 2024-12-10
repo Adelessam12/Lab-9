@@ -12,7 +12,6 @@
     },
     "friendManager": {
       "friendList": [
-        "IDa1e231da-e503-44a8-bd43-fb81a8450c76",
         "ID9cd540b1-3312-4ee6-806a-6abe4cdac254"
       ],
       "blockedList": [
@@ -75,18 +74,21 @@
     },
     "friendManager": {
       "friendList": [
-        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-        "ID9cd540b1-3312-4ee6-806a-6abe4cdac254"
+        "ID9cd540b1-3312-4ee6-806a-6abe4cdac254",
+        "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6"
       ],
-      "blockedList": [],
+      "blockedList": [
+        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9"
+      ],
       "friendRequestManager": {
         "sentFriendRequests": {
           "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Declined"
         },
         "receivedFriendRequests": {
-          "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Accepted",
           "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted",
-          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Pending"
+          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Accepted"
         }
       }
     },
@@ -150,13 +152,15 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [],
+      "friendList": [
+        "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
+      ],
       "blockedList": [
         "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
       ],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Pending",
+          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted",
           "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Pending"
         },
         "receivedFriendRequests": {
