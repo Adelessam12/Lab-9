@@ -46,11 +46,11 @@ public SuggestionPanel(User sender, User reciever, String profileImagePath, Frie
     detailsPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0)); // Padding around text
 
     // Username Label
-    String name = reciever.getUsername();
-    JLabel usernameLabel = new JLabel(name);
-    usernameLabel.setFont(new Font("Arial", Font.PLAIN, 15)); // Font size
-    usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left
-    detailsPanel.add(usernameLabel);
+    //String name = reciever.getUsername();
+    //JLabel usernameLabel = new JLabel(name);
+    //usernameLabel.setFont(new Font("Arial", Font.PLAIN, 15)); // Font size
+    //usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left
+    //detailsPanel.add(usernameLabel);
 
 
 

@@ -1,94 +1,58 @@
 [
   {
-    "userId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
+    "userId": "ID353b102b-1e65-4572-9bf8-e2806ec5abc8",
     "email": "1",
     "username": "1",
     "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
     "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
-    "isOnline": true,
+    "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
       "friendList": [
-        "ID9cd540b1-3312-4ee6-806a-6abe4cdac254"
+        "IDda5c5e50-f8a9-43b9-8501-c50f27ffbb2b"
       ],
       "blockedList": [
-        "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6"
+        "ID7cca0a1e-b98f-4f8c-95be-2e2666d036a8"
       ],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted",
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted"
+          "IDa0058061-a5e3-46fe-ab7c-d151aec25cb5": "Declined",
+          "IDf1d4d2e9-efa9-437a-84fb-688e7a0afb6a": "Pending",
+          "ID61948399-2f82-412a-9dbd-1b870ecc2c50": "Pending"
         },
         "receivedFriendRequests": {
-          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Pending"
+          "IDda5c5e50-f8a9-43b9-8501-c50f27ffbb2b": "Accepted"
         }
       }
     },
     "postManager": {
-      "contents": [
-        {
-          "postId": "PostID062eee2b-f7df-4e0e-b372-18acdd8374ea",
-          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-          "content": "ahmeeeeeeeeeeeeeeeed",
-          "imagePath": "C:\\Users\\DELL\\Pictures\\Screenshot 2024-05-17 020901.png",
-          "timestamp": "Dec 9, 2024, 4:17:01 PM"
-        },
-        {
-          "postId": "PostID96fbc3f8-618e-487d-8197-8d8ae262a56f",
-          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-          "content": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-          "imagePath": "C:\\Users\\DELL\\Pictures\\Screenshot 2022-09-14 012809.png",
-          "timestamp": "Dec 9, 2024, 4:17:19 PM"
-        },
-        {
-          "postId": "PostIDfaa9ec06-de2b-40cc-970f-fd617ffd884b",
-          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-          "content": "cccccccccccccccccccccccccccccc",
-          "timestamp": "Dec 9, 2024, 4:17:30 PM"
-        },
-        {
-          "postId": "PostID7cdfcca9-fa77-4f82-a97e-4a6be0da123c",
-          "authorId": "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-          "content": "1111111",
-          "timestamp": "Dec 9, 2024, 8:45:03 PM"
-        }
-      ]
+      "contents": []
     },
     "storyManager": {
       "contents": []
     }
   },
   {
-    "userId": "IDa1e231da-e503-44a8-bd43-fb81a8450c76",
+    "userId": "ID61948399-2f82-412a-9dbd-1b870ecc2c50",
     "email": "2",
     "username": "2",
     "hashedPassword": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
     "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
-    "isOnline": true,
+    "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [
-        "ID9cd540b1-3312-4ee6-806a-6abe4cdac254",
-        "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6"
-      ],
-      "blockedList": [
-        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9"
-      ],
+      "friendList": [],
+      "blockedList": [],
       "friendRequestManager": {
-        "sentFriendRequests": {
-          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Declined"
-        },
+        "sentFriendRequests": {},
         "receivedFriendRequests": {
-          "ID9cd540b1-3312-4ee6-806a-6abe4cdac254": "Accepted",
-          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Accepted"
+          "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Pending"
         }
       }
     },
@@ -96,40 +60,57 @@
       "contents": []
     },
     "storyManager": {
-      "contents": [
-        {
-          "postId": "StoryIDc68d32f0-c625-41ca-9b72-cafcc992659b",
-          "authorId": "IDa1e231da-e503-44a8-bd43-fb81a8450c76",
-          "content": "2\t111",
-          "timestamp": "Dec 9, 2024, 4:27:34 PM"
-        }
-      ]
+      "contents": []
     }
   },
   {
-    "userId": "ID9cd540b1-3312-4ee6-806a-6abe4cdac254",
+    "userId": "IDda5c5e50-f8a9-43b9-8501-c50f27ffbb2b",
     "email": "3",
     "username": "3",
     "hashedPassword": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
     "dateOfBirth": "Mar 3, 3, 12:00:00 AM",
-    "isOnline": true,
+    "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
       "friendList": [
-        "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9",
-        "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
+        "ID353b102b-1e65-4572-9bf8-e2806ec5abc8"
       ],
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted",
-          "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6": "Accepted"
+          "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Accepted"
         },
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "IDf1d4d2e9-efa9-437a-84fb-688e7a0afb6a",
+    "email": "4",
+    "username": "4",
+    "hashedPassword": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
+    "dateOfBirth": "Apr 4, 4, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
         "receivedFriendRequests": {
-          "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Accepted"
+          "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Pending"
         }
       }
     },
@@ -141,31 +122,102 @@
     }
   },
   {
-    "userId": "IDfbf4196f-2c5a-4d2e-8d01-23b3f41438c6",
-    "email": "4",
-    "username": "4",
-    "hashedPassword": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
-    "dateOfBirth": "Apr 4, 4, 12:00:00 AM",
-    "isOnline": true,
+    "userId": "ID7cca0a1e-b98f-4f8c-95be-2e2666d036a8",
+    "email": "5",
+    "username": "5",
+    "hashedPassword": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d",
+    "dateOfBirth": "May 5, 5, 12:00:00 AM",
+    "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
-      "friendList": [
-        "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
-      ],
-      "blockedList": [
-        "IDa1e231da-e503-44a8-bd43-fb81a8450c76"
-      ],
+      "friendList": [],
+      "blockedList": [],
       "friendRequestManager": {
-        "sentFriendRequests": {
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Accepted",
-          "ID89b28604-abc8-4f21-a29a-bd4e736cb9d9": "Pending"
-        },
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "IDa0058061-a5e3-46fe-ab7c-d151aec25cb5",
+    "email": "6",
+    "username": "6",
+    "hashedPassword": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+    "dateOfBirth": "Jun 6, 6, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
         "receivedFriendRequests": {
-          "IDa1e231da-e503-44a8-bd43-fb81a8450c76": "Declined"
+          "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Declined"
         }
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "ID30295c76-fcf9-44f2-adb8-6614ee7d039a",
+    "email": "7",
+    "username": "7",
+    "hashedPassword": "7902699be42c8a8e46fbbb4501726517e86b22c56a189f7625a6da49081b2451",
+    "dateOfBirth": "Jul 7, 7, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "ID977ffd0d-67e4-42e5-9458-35aea9e2a48b",
+    "email": "8",
+    "username": "8",
+    "hashedPassword": "2c624232cdd221771294dfbb310aca000a0df6ac8b66b696d90ef06fdefb64a3",
+    "dateOfBirth": "Aug 8, 8, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
       }
     },
     "postManager": {

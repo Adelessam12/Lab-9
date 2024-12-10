@@ -51,6 +51,7 @@ public class FileUserStorage implements UserStorage {
                 }
             } else {
                 System.out.println("No users found in the JSON file.");
+                users = new ArrayList<>();
             }
             return users;
         } catch (FileNotFoundException e) {
