@@ -479,12 +479,13 @@ public final class NewsFeed extends javax.swing.JFrame {
             System.out.println("Viewing profile of " + friend.getUsername());
         });
 
-        // Event for blocking a user
-        blockButton.addActionListener(evt -> {
+
+         blockButton.addActionListener(evt -> {
             friendService.blockFriend(friend);
-            nameLabel.setText("Blocked");
             entryPanel.remove(viewProfileButton);
             entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.revalidate();
             entryPanel.repaint(); // Update UI after blocking
         });
 

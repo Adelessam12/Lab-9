@@ -20,11 +20,11 @@
       "friendRequestManager": {
         "sentFriendRequests": {
           "IDa0058061-a5e3-46fe-ab7c-d151aec25cb5": "Declined",
-          "IDf1d4d2e9-efa9-437a-84fb-688e7a0afb6a": "Pending",
-          "ID61948399-2f82-412a-9dbd-1b870ecc2c50": "Pending"
+          "IDf1d4d2e9-efa9-437a-84fb-688e7a0afb6a": "Pending"
         },
         "receivedFriendRequests": {
-          "IDda5c5e50-f8a9-43b9-8501-c50f27ffbb2b": "Accepted"
+          "IDda5c5e50-f8a9-43b9-8501-c50f27ffbb2b": "Accepted",
+          "ID61948399-2f82-412a-9dbd-1b870ecc2c50": "Pending"
         }
       }
     },
@@ -41,19 +41,23 @@
     "username": "2",
     "hashedPassword": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
     "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
-    "isOnline": false,
+    "isOnline": true,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
       "friendList": [],
-      "blockedList": [],
+      "blockedList": [
+        "ID353b102b-1e65-4572-9bf8-e2806ec5abc8",
+        "ID353b102b-1e65-4572-9bf8-e2806ec5abc8",
+        "ID353b102b-1e65-4572-9bf8-e2806ec5abc8"
+      ],
       "friendRequestManager": {
-        "sentFriendRequests": {},
-        "receivedFriendRequests": {
+        "sentFriendRequests": {
           "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Pending"
-        }
+        },
+        "receivedFriendRequests": {}
       }
     },
     "postManager": {
@@ -99,18 +103,23 @@
     "username": "4",
     "hashedPassword": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a",
     "dateOfBirth": "Apr 4, 4, 12:00:00 AM",
-    "isOnline": false,
+    "isOnline": true,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "friendManager": {
       "friendList": [],
-      "blockedList": [],
+      "blockedList": [
+        "ID7cca0a1e-b98f-4f8c-95be-2e2666d036a8"
+      ],
       "friendRequestManager": {
-        "sentFriendRequests": {},
+        "sentFriendRequests": {
+          "ID7cca0a1e-b98f-4f8c-95be-2e2666d036a8": "Pending"
+        },
         "receivedFriendRequests": {
-          "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Pending"
+          "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Pending",
+          "IDa0058061-a5e3-46fe-ab7c-d151aec25cb5": "Pending"
         }
       }
     },
@@ -137,7 +146,9 @@
       "blockedList": [],
       "friendRequestManager": {
         "sentFriendRequests": {},
-        "receivedFriendRequests": {}
+        "receivedFriendRequests": {
+          "IDf1d4d2e9-efa9-437a-84fb-688e7a0afb6a": "Pending"
+        }
       }
     },
     "postManager": {
@@ -160,9 +171,15 @@
     },
     "friendManager": {
       "friendList": [],
-      "blockedList": [],
+      "blockedList": [
+        "ID30295c76-fcf9-44f2-adb8-6614ee7d039a",
+        "IDf1d4d2e9-efa9-437a-84fb-688e7a0afb6a"
+      ],
       "friendRequestManager": {
-        "sentFriendRequests": {},
+        "sentFriendRequests": {
+          "ID30295c76-fcf9-44f2-adb8-6614ee7d039a": "Pending",
+          "IDf1d4d2e9-efa9-437a-84fb-688e7a0afb6a": "Pending"
+        },
         "receivedFriendRequests": {
           "ID353b102b-1e65-4572-9bf8-e2806ec5abc8": "Declined"
         }
@@ -188,10 +205,14 @@
     },
     "friendManager": {
       "friendList": [],
-      "blockedList": [],
+      "blockedList": [
+        "ID977ffd0d-67e4-42e5-9458-35aea9e2a48b"
+      ],
       "friendRequestManager": {
         "sentFriendRequests": {},
-        "receivedFriendRequests": {}
+        "receivedFriendRequests": {
+          "IDa0058061-a5e3-46fe-ab7c-d151aec25cb5": "Pending"
+        }
       }
     },
     "postManager": {
@@ -214,7 +235,9 @@
     },
     "friendManager": {
       "friendList": [],
-      "blockedList": [],
+      "blockedList": [
+        "ID353b102b-1e65-4572-9bf8-e2806ec5abc8"
+      ],
       "friendRequestManager": {
         "sentFriendRequests": {},
         "receivedFriendRequests": {}
