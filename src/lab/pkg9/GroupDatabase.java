@@ -40,8 +40,9 @@ public final class GroupDatabase {
         return groupStorage.saveToFile(Groups);
     }
 
-    public ArrayList<Group> getGroups() {
-        return Groups;
+    
+    public ArrayList<Group> loadGroups() {
+        return groupStorage.loadFromFile();
     }
 
 
