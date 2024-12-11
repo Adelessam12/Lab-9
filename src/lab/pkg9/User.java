@@ -11,7 +11,8 @@ public final class User {
     private final Date dateOfBirth;
     private boolean isOnline;
     private Profile profile;
-
+    
+    private final GroupManagable groupManager;
     private final FriendManagable friendManager;
     private final ContentManagable postManager;
     private final ContentManagable storyManager;
@@ -24,7 +25,8 @@ public final class User {
         Date dateOfBirth,
         FriendManagable friendManager,
         ContentManagable postManager,
-        ContentManagable storyManager
+        ContentManagable storyManager,
+        GroupManagable groupManager 
     ) {
         this.userId = generateUserId();
         this.email = email;
@@ -36,7 +38,9 @@ public final class User {
         this.friendManager = friendManager;
         this.postManager = postManager;
         this.storyManager = storyManager;
+        this.groupManager = groupManager;
     }
+
 
     public FriendRequestManagable getFriendRequestManagable(){
         return getFriendManager().getFriendRequestManager();
@@ -46,6 +50,9 @@ public final class User {
         return friendManager;
     }
 
+    public GroupManagable getGroupManager() {
+        return groupManager;
+    }
     public ContentManagable getPostManager() {
         return postManager;
     }
