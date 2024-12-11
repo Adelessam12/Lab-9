@@ -300,15 +300,8 @@ public class FriendsPage extends javax.swing.JFrame {
         for (User suggestion : suggestions) {
             if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId())) {
                 String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-                SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, friendService);
-                //Username Label
-                String name = suggestion.getUsername();
-                JLabel nameLabel = new JLabel(name);
-                nameLabel.setFont(new Font("Arial", Font.PLAIN, 15)); // Font size
-                nameLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left
-
+                EntryPanel suggestionPanel = new EntryPanel(user, suggestion, profileImagePath, friendService);
                 suggestionPanel.setPreferredSize(new Dimension(200, 100));
-                suggestionPanel.add(nameLabel);
                 JButton add = new JButton("Add Friend");
                 suggestionPanel.add(add);
                 friendSuggestionspanel.add(suggestionPanel);

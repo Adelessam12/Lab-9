@@ -52,12 +52,12 @@ public class FriendManager implements FriendManagable {
     // Remove a friend
     @Override
     public void removeFriend(User user, User friend) {
-        if (isFriend(friend) || isBlocked(friend)) {
+        if (isFriend(friend) || isBlocked(friend) || isBlocked(user)) {
             friendList.remove(friend.getUserId());
             user.getFriendRequestManagable().getSentFriendRequests().remove(friend.getUserId());
             Map<String, String> receivedRequests = friend.getFriendRequestManagable().getReceivedFriendRequests();
             receivedRequests.remove(user.getUserId()); // Removing removed user from both maps            
-            removeFriend(friend, user);
+            friend.getFriendManager().removeFriend(friend, user);
         }
     }
 
