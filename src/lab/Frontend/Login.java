@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import lab.pkg9.ContentCreator;
 import lab.pkg9.Database;
+import lab.pkg9.DatabaseFactory;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
 
@@ -22,10 +23,8 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     ContentCreator CM;
-    Database D;
 
-    public Login(ContentCreator CM, Database D) {
-        this.D = D;
+    public Login(ContentCreator CM) {
         this.CM = CM;
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
@@ -113,7 +112,7 @@ public class Login extends javax.swing.JFrame {
 
             User u1 = UserManager.login(E, P);
             if (u1 != null) {
-                NewsFeed N1 = new NewsFeed(u1, D, CM);
+                NewsFeed N1 = new NewsFeed(u1, CM);
                 this.dispose();
                 N1.setVisible(true);
             } else {

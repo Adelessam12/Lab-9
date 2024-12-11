@@ -6,6 +6,7 @@ package lab.Frontend;
 
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.io.File;
 import javax.swing.BorderFactory;
@@ -19,15 +20,15 @@ import lab.pkg9.User;
  *
  * @author DELL
  */
-public class SuggestionPanel extends javax.swing.JPanel {
+public class EntryPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form SuggestionPanel
      */
-    public SuggestionPanel() {
+    public EntryPanel() {
         initComponents();
     }
-public SuggestionPanel(User sender, User reciever, String profileImagePath, FriendshipServiceInterface Fm) {
+public EntryPanel(User sender, User reciever, String profileImagePath, FriendshipServiceInterface Fm) {
 
     // Profile Image
     ProfilePanel profilePanel = new ProfilePanel();
@@ -38,6 +39,8 @@ public SuggestionPanel(User sender, User reciever, String profileImagePath, Frie
             profilePanel.setProfileImage(imgFile.getAbsolutePath());
         }
     }
+    setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
+        
     add(profilePanel);
 
     // Panel for username and button
@@ -45,15 +48,15 @@ public SuggestionPanel(User sender, User reciever, String profileImagePath, Frie
     detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.Y_AXIS)); // Vertical alignment
     detailsPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0)); // Padding around text
 
-    // Username Label
-    String firstname = reciever.getUsername().split(" ")[0];
-    JLabel usernameLabel = new JLabel(firstname);
+    //Username Label
+    String name = reciever.getUsername();
+    JLabel usernameLabel = new JLabel(name);
     usernameLabel.setFont(new Font("Arial", Font.PLAIN, 15)); // Font size
     usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left
     detailsPanel.add(usernameLabel);
 
 
-
+    add(usernameLabel);
     add(detailsPanel);
 
    
