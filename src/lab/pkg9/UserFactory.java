@@ -24,8 +24,7 @@ public class UserFactory {
         FriendManagable friendManager = new FriendManager(friendRequestManager);
         ContentManagable postManager = new ContentManager();
         ContentManagable storyManager = new ContentManager();
-        GroupManagable groupManager = new GroupManager();
         // Create and return the User instance
-        return new User(email, username, hashedPassword, dateOfBirth, friendManager, postManager, storyManager, groupManager);
+        return new User(email, username, hashedPassword, dateOfBirth, friendManager, postManager, storyManager);
     }
 }

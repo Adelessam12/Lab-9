@@ -8,7 +8,7 @@ package lab.pkg9;
  *
  * @author Mahmoud Waleed
  */
-public interface GroupManagable {
+public interface GroupManagable {////////////////////////
     public void requestToJoin(User user, Group group);
     public void joinGroup(User user, Group group);
     public void leaveGroup(User user, Group group);

@@ -10,77 +10,66 @@ import java.util.ArrayList;
  *
  * @author Mahmoud Waleed
  */
-public class GroupManager implements GroupManagable {
-    private ArrayList<Group> groups; 
+public class GroupManager {
 
-    public GroupManager() {
+    private final ArrayList<Group> groups;
+    private final User user;
+
+    public GroupManager(User user) {
         groups = new ArrayList<>();
+        this.user = user;
     }
 
-    public void setGroups(ArrayList<Group> groups) {
-        this.groups = groups;
-    }
-
-    @Override
-    public void requestToJoin(User user, Group group) {
+    public void requestToJoin(Group group) {
         group.getGroupRequests().add(user.getUserId());
     }
-    @Override
-    public void joinGroup(User user, Group group) {
-      group.setUsers(user, "Member");
+
+    public void joinGroup(Group group) {
+        group.setUsers(user.getUserId(), "Member");
+        user.getGroups().add(group.getGroupID());
     }
 
-
-    @Override
-    public void leaveGroup(User user, Group group) {
+    public void leaveGroup(Group group) {
         group.getUsers().remove(user.getUserId());
+        user.getGroups().remove(group.getGroupID());
     }
-    
-    @Override
+
     public void addGroup(Group group) {
         groups.add(group);
-        Database database = DatabaseFactory.createDatabase();
-        database.saveUsersToFile();
+       GroupDatabase gdb= new GroupDatabaseFactory().createDatabase();
+       gdb.saveGroupstofile();
     }
 
-    @Override
     public void removeMember(Group group) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void approveRequest(User user, Group group) {
+    public void approveRequest(Group group) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void declineRequest(User user, Group group) {
+    public void declineRequest(Group group) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void promote(User user, Group group) {
+    public void promote(Group group) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void demote(User user, Group group) {
+    public void demote(Group group) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public void addPost() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public void editPost() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public void deletePost() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }

@@ -33,8 +33,8 @@ public class Group {
     public ArrayList<String> getGroupRequests() {
         return groupRequests;
     }
-    public void setUsers(User user, String status) {
-        users.put(user.getUserId(), status);
+    public void setUsers(String userId, String status) {
+        users.put(userId, status);
     }
 
     public String getGroupID() {

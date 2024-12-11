@@ -12,11 +12,11 @@ import java.util.UUID;
  */
 public class GroupCreator {
      private final Database database = DatabaseFactory.createDatabase();
-     
       public void createGroup(User user, String groupName, String description, String imagePath) {
         String groupId = generateUniqueId("Group");
         Group newGroup = new Group(groupId, user.getUserId(), imagePath, groupName, description);
-        user.getGroupManager().addGroup(newGroup);
+        GroupManager groupManager = new GroupManager(user);
+        groupManager.addGroup(newGroup);
         database.saveUsersToFile();
     }
         private String generateUniqueId(String prefix) {
