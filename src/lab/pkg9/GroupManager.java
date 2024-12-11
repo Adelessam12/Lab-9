@@ -10,37 +10,36 @@ import java.util.ArrayList;
  *
  * @author Mahmoud Waleed
  */
-public class GroupManager {
-
+class GroupManager {
     private final ArrayList<Group> groups;
-
-    private ArrayList<String> groupRequests;
-    private final GroupRole role;
-
-    public GroupManager(GroupRole role) {
-        groups = new ArrayList<>();
-        this.role = role;
+    private final GroupDatabase groupDatabase;
+    
+    public GroupManager() {
+        this.groups = new ArrayList<>();
+        groupDatabase = GroupDatabaseFactory.createDatabase();
     }
 
-    public ArrayList<String> getGroupRequests() {
-        return groupRequests;
-    }
-
-    public void requestToJoin(Group group) {
-        groupRequests.add(role.getUser().getUserId());
-        //
-    }
-
-
-
-    public void joinGroup(Group group) {
+    public Group createGroup(String groupId, String name, String description, String groupPhoto, String adminId) {
+        Group group = GroupFactory.createGroup(groupId, name, description, groupPhoto, adminId);
         groups.add(group);
-        group.addMember(role.getUser().getUserId());
-        role.getUser().getGroups().add(group.getGroupID());
-        //
+        groupDatabase.saveGroupstofile();
+        return group;
     }
 
-    public boolean isOwner(Group group) {
-        return (role.getUser().getUserId().equals(group.getCreatorID()));
+    public void deleteGroup(String groupId) {
+        Group group = findGroupById(groupId);
+        if (group != null) {
+            groups.remove(group);
+        groupDatabase.saveGroupstofile();
+        }
+    }
+
+    private Group findGroupById(String groupId) {
+        for (Group group : groups) {
+            if (group.getGroupId().equals(groupId)) {
+                return group;
+            }
+        }
+        return null;
     }
 }
