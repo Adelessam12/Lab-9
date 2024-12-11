@@ -5,8 +5,10 @@
 package lab.Frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
 import java.io.File;
 import java.util.ArrayList;
@@ -22,7 +24,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import lab.pkg9.Content;
 import lab.pkg9.Database;
-import lab.pkg9.Post;
 import lab.pkg9.Profile;
 import lab.pkg9.User;
 import lab.pkg9.UserFactory;
@@ -36,8 +37,8 @@ public class UpdateProfile extends javax.swing.JFrame {
     /**
      * Creates new form UpdateProfile
      */
-    User user;
-    Database db;
+    private User user;
+    private Database db;
 
     public UpdateProfile(User user, Database db) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -46,6 +47,10 @@ public class UpdateProfile extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
         this.user = user;
         this.db = db;
+        jLabel4.setText(user.getUsername());
+        jLabel4.setFont(new Font("Arial", Font.PLAIN, 15)); // Font size
+        jLabel4.setAlignmentX(Component.CENTER_ALIGNMENT); // Align to the left
+
         loaduser();
     }
 
@@ -74,8 +79,9 @@ public class UpdateProfile extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         coverphotolabel = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
         setBackground(new java.awt.Color(255, 153, 153));
 
@@ -106,7 +112,7 @@ public class UpdateProfile extends javax.swing.JFrame {
         profielphoto.setLayout(profielphotoLayout);
         profielphotoLayout.setHorizontalGroup(
             profielphotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 199, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         profielphotoLayout.setVerticalGroup(
             profielphotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,7 +167,7 @@ public class UpdateProfile extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1219, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(381, 381, 381)))
-                .addGap(0, 77, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(539, 539, 539)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,6 +177,7 @@ public class UpdateProfile extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(16, 16, 16)
@@ -179,11 +186,11 @@ public class UpdateProfile extends javax.swing.JFrame {
                                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(73, 73, 73)
-                        .addComponent(profielphoto, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(79, 79, 79)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(profielphoto, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 1060, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -200,9 +207,7 @@ public class UpdateProfile extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(coverphotolabel, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
+                            .addComponent(coverphotolabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -219,7 +224,9 @@ public class UpdateProfile extends javax.swing.JFrame {
                                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton5)))
-                                .addGap(159, 159, 159)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -232,7 +239,7 @@ public class UpdateProfile extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
 
         pack();
@@ -401,8 +408,8 @@ public class UpdateProfile extends javax.swing.JFrame {
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
-
-            FriendPanel friendPanel = new FriendPanel(username, profileImagePath, friend.isIsOnline());
+            int x =  friend.isIsOnline()? 1: 0;
+            FriendPanel friendPanel = new FriendPanel(username, profileImagePath, x);
             friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));  // Consistent size for each friend panel
 
             friendsContainerPanel.add(friendPanel);
@@ -448,6 +455,7 @@ public class UpdateProfile extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

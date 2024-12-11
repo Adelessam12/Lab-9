@@ -4,6 +4,8 @@
  */
 package lab.Frontend;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -16,6 +18,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.border.TitledBorder;
 import lab.pkg9.Content;
 import lab.pkg9.ContentCreator;
@@ -40,7 +43,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     Database database;
     User user;
     ContentCreator Cm;
-    FriendshipService FM;
+    FriendshipService friendService;
 
     public NewsFeed(User user, ContentCreator Cm) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -51,9 +54,8 @@ public final class NewsFeed extends javax.swing.JFrame {
         this.database = DatabaseFactory.createDatabase();
         this.user = user;
         this.Cm = Cm;
-        FM = new FriendshipService(user);
+        friendService = new FriendshipService(user);
 
-        loadFriendRequests();
         loadnewsfeed();
     }
 
@@ -70,11 +72,10 @@ public final class NewsFeed extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         Friendpostspanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Storiescontainerpanel = new javax.swing.JPanel();
+        container2Panel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         friendsContainerPanel = new javax.swing.JPanel();
         Refresh_button = new javax.swing.JButton();
-        profile = new javax.swing.JButton();
         create_content_button = new javax.swing.JButton();
         friend_managment_button = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -86,17 +87,26 @@ public final class NewsFeed extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         searchContainer = new javax.swing.JPanel();
+        profile = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         Friendpostspanel.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Freind's Posts"));
         Friendpostspanel.setLayout(new javax.swing.BoxLayout(Friendpostspanel, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane1.setViewportView(Friendpostspanel);
 
-        Storiescontainerpanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Friend Stories"));
-        Storiescontainerpanel.setLayout(new javax.swing.BoxLayout(Storiescontainerpanel, javax.swing.BoxLayout.LINE_AXIS));
-        jScrollPane2.setViewportView(Storiescontainerpanel);
-        Storiescontainerpanel.getAccessibleContext().setAccessibleName("");
+        container2Panel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Friend Stories"));
+        container2Panel.setLayout(new javax.swing.BoxLayout(container2Panel, javax.swing.BoxLayout.LINE_AXIS));
+        jScrollPane2.setViewportView(container2Panel);
+        container2Panel.getAccessibleContext().setAccessibleName("");
 
         friendsContainerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(""), "Friends"));
         friendsContainerPanel.setLayout(new javax.swing.BoxLayout(friendsContainerPanel, javax.swing.BoxLayout.LINE_AXIS));
@@ -108,12 +118,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         Refresh_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Refresh_buttonActionPerformed(evt);
-            }
-        });
-
-        profile.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                profileActionPerformed(evt);
             }
         });
 
@@ -178,22 +182,29 @@ public final class NewsFeed extends javax.swing.JFrame {
             }
         });
 
+        searchContainer.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Search Bar")));
         searchContainer.setLayout(new javax.swing.BoxLayout(searchContainer, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane4.setViewportView(searchContainer);
+
+        profile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ViewStories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 667, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,65 +212,62 @@ public final class NewsFeed extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(189, 189, 189)
                                 .addComponent(Refresh_button)
-                                .addGap(18, 18, 18)
-                                .addComponent(profile)
                                 .addGap(29, 29, 29)
+                                .addComponent(profile)
+                                .addGap(18, 18, 18)
                                 .addComponent(create_content_button)
                                 .addGap(18, 18, 18)
                                 .addComponent(friend_managment_button)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton1)))))
-                .addGap(18, 18, 18)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(search, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65))))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(search, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                            .addComponent(jTextField1)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(ViewStories)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(ViewStories)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jToggleButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane3)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane5)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 534, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Refresh_button, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                            .addComponent(profile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Refresh_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(friend_managment_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(create_content_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(create_content_button, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(profile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(156, 156, 156))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(search)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(5, 5, 5)
+                                .addComponent(search)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane4))
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -275,11 +283,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         loadnewsfeed();
     }//GEN-LAST:event_Refresh_buttonActionPerformed
 
-    private void profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileActionPerformed
-        UpdateProfile up = new UpdateProfile(this.user, database);
-
-
-        up.setVisible(true);        up.setVisible(true);        up.setVisible(true);    }//GEN-LAST:event_profileActionPerformed
 
     private void create_content_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_create_content_buttonActionPerformed
         // Create a dialog
@@ -320,14 +323,14 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     private void ViewStoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewStoriesActionPerformed
         TitledBorder title = BorderFactory.createTitledBorder("Friend Stories");
-        Storiescontainerpanel.setBorder(title);
+        container2Panel.setBorder(title);
         loadfriendstories();
 
     }//GEN-LAST:event_ViewStoriesActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         TitledBorder title = BorderFactory.createTitledBorder("Friend Suggestions");
-        Storiescontainerpanel.setBorder(title);
+        container2Panel.setBorder(title);
         loadSuggestions();
                 }//GEN-LAST:event_jToggleButton1ActionPerformed
     // TODO add your handling code here:
@@ -338,7 +341,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
-searchContainer.removeAll(); // Clear previous results
+        searchContainer.removeAll(); // Clear previous results
         String searchText = jTextField1.getText().trim();
         if (searchText.isEmpty()) {
             System.out.println("Wrong search input");
@@ -353,18 +356,24 @@ searchContainer.removeAll(); // Clear previous results
         ArrayList<User> userNonFriends = new ArrayList<>();
         ArrayList<User> userSentFriends = new ArrayList<>();
         ArrayList<User> userRecievedFriends = new ArrayList<>();
+        ArrayList<User> userBlockedFriends = new ArrayList<>();
         FriendManager friendManager = (FriendManager) user.getFriendManager();
-
         // Categorize users into friends and non-friends
         for (User userInSearch : database.getUsers()) {
-            if (!userInSearch.getUserId().equals(user.getUserId()) && userInSearch.getUsername().contains(searchText)) {
+            if (!userInSearch.getUserId().equals(user.getUserId()) && userInSearch.getUsername().toLowerCase().contains(searchText.toLowerCase())) {
                 if (friendManager.getFriendList().contains(userInSearch.getUserId())) {
                     userFriends.add(userInSearch); // viewprofile block remove 
-                } else if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(userInSearch.getUserId())) {
-                    userSentFriends.add(userInSearch); // viewprofile block
-                } else if (!user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(userInSearch.getUserId())) {
-                    userRecievedFriends.add(userInSearch); // viewprofile block accept decline
-                } else if (!friendManager.getBlockedList().contains(userInSearch.generateUserId())) {
+                } else if (user.getFriendRequestManagable().getSentFriendRequests().containsKey(userInSearch.getUserId())) {
+                    if (user.getFriendRequestManagable().getSentFriendRequests().get(userInSearch.getUserId()).equalsIgnoreCase("Pending")) {
+                        userSentFriends.add(userInSearch); // viewprofile block
+                    }
+                } else if (user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(userInSearch.getUserId())) {
+                    if (user.getFriendRequestManagable().getReceivedFriendRequests().get(userInSearch.getUserId()).equalsIgnoreCase("Pending")) {
+                        userRecievedFriends.add(userInSearch); // viewprofile block accept decline
+                    }
+                } else if (friendManager.getBlockedList().contains(userInSearch.getUserId())) {
+                    userBlockedFriends.add(userInSearch);            //(username of userInSearch) is blocked appears in searchcontainer
+                } else if (!userInSearch.getFriendManager().getBlockedList().contains(user.getUserId())) {
                     userNonFriends.add(userInSearch); // viewprofile block add
                 }
             }
@@ -372,70 +381,106 @@ searchContainer.removeAll(); // Clear previous results
 
         // Display friends
         userFriends.forEach(friend -> {
-            JPanel entryPanel = createFriendPanel(friend, friendManager);
+            JPanel entryPanel = createFriendPanel(friend);
             searchContainer.add(entryPanel);
+            JSeparator separator = new JSeparator();
+            searchContainer.add(separator, BorderLayout.SOUTH);
+            
         });
 
         userSentFriends.forEach(friend -> {
             JPanel entryPanel = createFriendSentPanel(friend);
             searchContainer.add(entryPanel);
+            JSeparator separator = new JSeparator();
+            searchContainer.add(separator, BorderLayout.SOUTH);
         });
 
         userRecievedFriends.forEach(friend -> {
             JPanel entryPanel = createFriendRecievePanel(friend);
             searchContainer.add(entryPanel);
+            JSeparator separator = new JSeparator();
+            searchContainer.add(separator, BorderLayout.SOUTH);
+        });
+
+        // Display blocked users
+        userBlockedFriends.forEach(blockedUser -> {
+            JPanel blockedPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            JLabel messageLabel = new JLabel(blockedUser.getUsername() + "   is blocked");
+            blockedPanel.add(messageLabel);
+            searchContainer.add(blockedPanel);
+            JSeparator separator = new JSeparator();
+            searchContainer.add(separator, BorderLayout.SOUTH);
         });
 
         // Display non-friends with suggestion panels
         userNonFriends.forEach(nonFriend -> {
-            SuggestionPanel suggestionPanel = createSuggestionPanel(nonFriend);
-            searchContainer.add(suggestionPanel);
+            JPanel entryPanel = createSuggestionPanel(nonFriend);
+            searchContainer.add(entryPanel);
+            JSeparator separator = new JSeparator();
+            searchContainer.add(separator, BorderLayout.SOUTH);
+            
         });
 
         // Refresh UI
         searchContainer.revalidate();
         searchContainer.repaint();
-        
     }//GEN-LAST:event_searchActionPerformed
 
+    private void profileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileActionPerformed
+        UpdateProfile p = new UpdateProfile(user, database);
+        p.setVisible(true);
+    }//GEN-LAST:event_profileActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        UserManager.logout(user);
+        this.dispose();
+
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+
+    }//GEN-LAST:event_formWindowClosing
+
 // Helper method to create a panel for friends
-    private JPanel createFriendPanel(User friend, FriendManager friendManager) {
-        JPanel entryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel nameLabel = new JLabel(friend.getUsername());
+    private JPanel createFriendPanel(User friend) {
+        String profileImagePath = (friend.getProfile() != null)
+                ? friend.getProfile().getProfilePhotoPath()
+                : null;
+        EntryPanel entryPanel = new EntryPanel(user, friend, profileImagePath, friendService);
+        entryPanel.setPreferredSize(new Dimension(200, 100));
+
         JButton viewProfileButton = new JButton("View Profile");
         JButton removeButton = new JButton("Remove");
         JButton blockButton = new JButton("Block");
 
         // Event for viewing the friend's profile
         viewProfileButton.addActionListener(evt -> {
-            // Logic to view the friend's profile (implement as needed)
+            UserProfile userProfile = new UserProfile(friend);
+            userProfile.setVisible(true);
             System.out.println("Viewing profile of " + friend.getUsername());
         });
 
         // Event for removing a friend
         removeButton.addActionListener(evt -> {
-            friendManager.removeFriend(user, friend);
+            user.getFriendManager().removeFriend(user, friend);
             database.saveUsersToFile();
-            FM.suggestions().add(friend);
-            nameLabel.setText("Removed");
-            entryPanel.remove(viewProfileButton);
             entryPanel.remove(removeButton);
             entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Removed")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.add(blockButton);
             entryPanel.repaint(); // Update UI after removing
         });
 
-        // Event for blocking a friend
         blockButton.addActionListener(evt -> {
-            FM.blockFriend(friend);
-            nameLabel.setText("Blocked");
+            friendService.blockFriend(friend);
             entryPanel.remove(viewProfileButton);
-            entryPanel.remove(removeButton);
             entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.revalidate();
             entryPanel.repaint(); // Update UI after blocking
         });
 
         // Add components to the panel
-        entryPanel.add(nameLabel);
         entryPanel.add(viewProfileButton);
         entryPanel.add(removeButton);
         entryPanel.add(blockButton);
@@ -445,28 +490,32 @@ searchContainer.removeAll(); // Clear previous results
 
     private JPanel createFriendSentPanel(User friend) {
         // Create a horizontal panel for displaying sent friend requests
-        JPanel entryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel nameLabel = new JLabel(friend.getUsername());
+        String profileImagePath = (friend.getProfile() != null)
+                ? friend.getProfile().getProfilePhotoPath()
+                : null;
+        EntryPanel entryPanel = new EntryPanel(user, friend, profileImagePath, friendService);
+        entryPanel.setPreferredSize(new Dimension(200, 100));
+
         JButton viewProfileButton = new JButton("View Profile");
         JButton blockButton = new JButton("Block");
 
         // Event for viewing the friend's profile
         viewProfileButton.addActionListener(evt -> {
-            // Logic to view the friend's profile (implement as needed)
+            UserProfile userProfile = new UserProfile(friend);
+            userProfile.setVisible(true);
             System.out.println("Viewing profile of " + friend.getUsername());
         });
 
-        // Event for blocking a user
         blockButton.addActionListener(evt -> {
-            FM.blockFriend(friend);
-            nameLabel.setText("Blocked");
+            friendService.blockFriend(friend);
             entryPanel.remove(viewProfileButton);
             entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.revalidate();
             entryPanel.repaint(); // Update UI after blocking
         });
 
         // Add components to the panel
-        entryPanel.add(nameLabel);
         entryPanel.add(viewProfileButton);
         entryPanel.add(blockButton);
         return entryPanel;
@@ -475,8 +524,12 @@ searchContainer.removeAll(); // Clear previous results
 // Helper method to create a panel for received friend requests
     private JPanel createFriendRecievePanel(User friend) {
         // Create a horizontal panel for displaying received friend requests
-        JPanel entryPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel nameLabel = new JLabel(friend.getUsername());
+        String profileImagePath = (friend.getProfile() != null)
+                ? friend.getProfile().getProfilePhotoPath()
+                : null;
+        EntryPanel entryPanel = new EntryPanel(user, friend, profileImagePath, friendService);
+        entryPanel.setPreferredSize(new Dimension(200, 100));
+
         JButton viewProfileButton = new JButton("View Profile");
         JButton acceptButton = new JButton("Accept");
         JButton declineButton = new JButton("Decline");
@@ -484,101 +537,112 @@ searchContainer.removeAll(); // Clear previous results
 
         // Event for viewing the user's profile
         viewProfileButton.addActionListener(evt -> {
-            // Logic to view the user's profile (implement as needed)
+            UserProfile userProfile = new UserProfile(friend);
+            userProfile.setVisible(true);
             System.out.println("Viewing profile of " + friend.getUsername());
         });
 
         // Event for accepting a friend request
         acceptButton.addActionListener(evt -> {
-            FM.acceptFriendRequest(friend);
+            friendService.acceptFriendRequest(friend);
             database.saveUsersToFile(); // Save changes to the database
-            nameLabel.setText("Accepted");
-            entryPanel.remove(viewProfileButton);
             entryPanel.remove(acceptButton);
             entryPanel.remove(declineButton);
+            entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Accepted")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.add(blockButton);
             entryPanel.repaint(); // Update UI after accepting
         });
 
         // Event for declining a friend request
         declineButton.addActionListener(evt -> {
-            FM.declineFriendRequest(friend);
-            database.saveUsersToFile(); // Save changes to the database
-            nameLabel.setText("Declined");
-            entryPanel.remove(viewProfileButton);
+            friendService.declineFriendRequest(friend);
+            database.saveUsersToFile(); // Save changes to the database          
             entryPanel.remove(acceptButton);
             entryPanel.remove(declineButton);
+            entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Declined")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.add(blockButton);
             entryPanel.repaint(); // Update UI after declining
         });
-        
+
         blockButton.addActionListener(evt -> {
-            FM.blockFriend(friend);
-            nameLabel.setText("Blocked");
+            friendService.blockFriend(friend);
             entryPanel.remove(viewProfileButton);
             entryPanel.remove(blockButton);
+            entryPanel.remove(acceptButton);
+            entryPanel.remove(declineButton);
+            entryPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.revalidate();
             entryPanel.repaint(); // Update UI after blocking
         });
-        
+
         // Add components to the panel
-        entryPanel.add(nameLabel);
         entryPanel.add(viewProfileButton);
         entryPanel.add(acceptButton);
         entryPanel.add(declineButton);
         return entryPanel;
     }
 
-    private SuggestionPanel createSuggestionPanel(User nonFriend) {
+    private JPanel createSuggestionPanel(User nonFriend) {
         String profileImagePath = (nonFriend.getProfile() != null)
                 ? nonFriend.getProfile().getProfilePhotoPath()
                 : null;
-        SuggestionPanel suggestionPanel = new SuggestionPanel(user, nonFriend, profileImagePath, FM);
-        suggestionPanel.setPreferredSize(new Dimension(200, 100));
+        EntryPanel entryPanel = new EntryPanel(user, nonFriend, profileImagePath, friendService);
+        entryPanel.setPreferredSize(new Dimension(200, 100));
 
-        JLabel nameLabel = new JLabel(nonFriend.getUsername());
         JButton viewProfileButton = new JButton("View Profile");
         JButton addButton = new JButton("Add Friend");
         JButton blockButton = new JButton("Block");
 
         // Event for viewing the user's profile
         viewProfileButton.addActionListener(evt -> {
-            ///////////////
+            UserProfile userProfile = new UserProfile(nonFriend);
+            userProfile.setVisible(true);
             System.out.println("Viewing profile of " + nonFriend.getUsername());
         });
 
         // Event for sending a friend request
         addButton.addActionListener(evt -> {
-            FM.sendFriendRequest(nonFriend);
+            friendService.sendFriendRequest(nonFriend);
             System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-            suggestionPanel.remove(addButton);
-            suggestionPanel.add(new JLabel("Sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.remove(addButton);
+            entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.add(blockButton);
             database.saveUsersToFile();
-            suggestionPanel.revalidate();
-            suggestionPanel.repaint(); // Update UI after sending a request
+            entryPanel.revalidate();
+            entryPanel.repaint(); // Update UI after sending a request
         });
 
         // Event for blocking a user
         blockButton.addActionListener(evt -> {
-            FM.blockFriend(nonFriend);
-            suggestionPanel.remove(viewProfileButton);
-            suggestionPanel.remove(addButton);
-            suggestionPanel.remove(blockButton);
-            suggestionPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
-            suggestionPanel.revalidate();
-            suggestionPanel.repaint(); // Update UI after blocking
+            friendService.blockFriend(nonFriend);
+            entryPanel.remove(viewProfileButton);
+            entryPanel.remove(addButton);
+            entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.revalidate();
+            entryPanel.repaint(); // Update UI after blocking
         });
 
         // Add components to the suggestion panel
-        suggestionPanel.add(nameLabel);
-        suggestionPanel.add(viewProfileButton);
-        suggestionPanel.add(addButton);
-        suggestionPanel.add(blockButton);
-        return suggestionPanel;
+        entryPanel.add(viewProfileButton);
+        entryPanel.add(addButton);
+        entryPanel.add(blockButton);
+        return entryPanel;
     }
 
     public void loadnewsfeed() {
+        Notifications_panel.removeAll();
+        loadFriendRequests();
         loadFriends();
         loadPosts();
         loadfriendstories();
         searchContainer.removeAll();
+        searchContainer.revalidate();
+        searchContainer.repaint();
+        jTextField1.setText("");
     }
 
     public void loadPosts() {
@@ -601,7 +665,7 @@ searchContainer.removeAll(); // Clear previous results
             String username = UserManager.findUser(post.getAuthorId()).getUsername();
             String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
             Friendpostspanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
-            Notifications_panel.add(new NotificationsPanel(post, profilepath, username, FM));
+            Notifications_panel.add(new NotificationsPanel(post, profilepath, username, friendService));
         }
 
         Notifications_panel.revalidate();
@@ -619,8 +683,8 @@ searchContainer.removeAll(); // Clear previous results
         for (User friend : friends) {
             String username = friend.getUsername();
             String profileImagePath = (friend.getProfile() != null) ? friend.getProfile().getProfilePhotoPath() : null;
-
-            FriendPanel friendPanel = new FriendPanel(username, profileImagePath, friend.isIsOnline());
+            int x = friend.isIsOnline() ? 1 : 0;
+            FriendPanel friendPanel = new FriendPanel(username, profileImagePath, x);
             friendPanel.setPreferredSize(new java.awt.Dimension(80, 80));  // Consistent size for each friend panel
 
             friendsContainerPanel.add(friendPanel);
@@ -630,7 +694,7 @@ searchContainer.removeAll(); // Clear previous results
     }
 
     public void loadfriendstories() {
-        Storiescontainerpanel.removeAll();
+        container2Panel.removeAll();
         ArrayList<User> friends = new ArrayList<>();
         for (String friendid : user.getFriendManager().getFriendList()) {
             User friend = UserManager.findUser(friendid);
@@ -641,19 +705,19 @@ searchContainer.removeAll(); // Clear previous results
         }
         for (User friend : friends) {
             StoryPanel storyPanel = new StoryPanel(friend);
-            Storiescontainerpanel.add(storyPanel);
+            container2Panel.add(storyPanel);
 
         }
-        Storiescontainerpanel.revalidate();
-        Storiescontainerpanel.repaint();
+        container2Panel.revalidate();
+        container2Panel.repaint();
     }
 
     public void loadFriendRequests() {
         // Clear the current content of the Notifications_panel
-        Notifications_panel.removeAll();
 
         // Get the received friend requests from the user's manager
         Map<String, String> receivedFriendRequests = user.getFriendRequestManagable().getReceivedFriendRequests();
+        Map<String, String> sentFriendRequests = user.getFriendRequestManagable().getSentFriendRequests();
 
         // Loop through the map and add a NotificationPanel for each friend request
         for (Map.Entry<String, String> entry : receivedFriendRequests.entrySet()) {
@@ -665,7 +729,19 @@ searchContainer.removeAll(); // Clear previous results
 
             if (friend != null && requestStatus.equals("Pending")) {
                 // Add the NotificationPanel to the Notifications_panel
-                Notifications_panel.add(new NotificationsPanel(friend, friend.getUsername(), friend.getProfile().getProfilePhotoPath(), FM));
+                Notifications_panel.add(new NotificationsPanel(friend, friend.getUsername(), friend.getProfile().getProfilePhotoPath(), friendService));
+            }
+        }
+        for (Map.Entry<String, String> entry : sentFriendRequests.entrySet()) {
+            String friendId = entry.getKey(); // The user ID
+            String requestStatus = entry.getValue(); // The status of the request (e.g., "pending", "accepted", etc.)
+
+            // Find the User object using the userManager's findUser method
+            User friend = UserManager.findUser(friendId);
+
+            if (friend != null && requestStatus.equals("Accepted") || requestStatus.equals("Declined")) {
+                // Add the NotificationPanel to the Notifications_panel
+                Notifications_panel.add(new NotificationsPanel(friend, friend.getUsername(), friend.getProfile().getProfilePhotoPath(), friendService, requestStatus));
             }
         }
 
@@ -675,43 +751,43 @@ searchContainer.removeAll(); // Clear previous results
     }
 
     public void loadSuggestions() {
-        Storiescontainerpanel.removeAll();
+        container2Panel.removeAll();
 
-        ArrayList<User> suggestions = FM.suggestions();
+        ArrayList<User> suggestions = friendService.suggestions();
 
         for (User suggestion : suggestions) {
-            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId())) {
+            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId()) && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggestion.getUserId())) {
                 String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-                SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, FM);
+                EntryPanel suggestionPanel = new EntryPanel(user, suggestion, profileImagePath, friendService);
 
                 suggestionPanel.setPreferredSize(new Dimension(200, 100));
-                Storiescontainerpanel.add(suggestionPanel);
+                container2Panel.add(suggestionPanel);
                 JButton add = new JButton("Add Friend");
                 suggestionPanel.add(add);
-                Storiescontainerpanel.add(suggestionPanel);
+                container2Panel.add(suggestionPanel);
                 add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    FM.sendFriendRequest(suggestion);
+                    friendService.sendFriendRequest(suggestion);
                     System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
                     suggestionPanel.remove(add);
                     database.saveUsersToFile();
                     //ArrayList<User> users = database.getUsers();
                     suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
-                    Storiescontainerpanel.revalidate();
-                    Storiescontainerpanel.repaint();
+                    container2Panel.revalidate();
+                    container2Panel.repaint();
                 });
             }
         }
-        Storiescontainerpanel.revalidate();
-        Storiescontainerpanel.repaint();
+        container2Panel.revalidate();
+        container2Panel.repaint();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Friendpostspanel;
     private javax.swing.JPanel Notifications_panel;
     private javax.swing.JButton Refresh_button;
-    private javax.swing.JPanel Storiescontainerpanel;
     private javax.swing.JToggleButton ViewStories;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel container2Panel;
     private javax.swing.JButton create_content_button;
     private javax.swing.JButton friend_managment_button;
     private javax.swing.JPanel friendsContainerPanel;

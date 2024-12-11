@@ -4,6 +4,8 @@
  */
 package lab.Frontend;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -154,11 +156,11 @@ public class FriendsPage extends javax.swing.JFrame {
 
             // friends to the UI
             if (user.getFriendManager().getFriendList() != null && !user.getFriendManager().getFriendList().isEmpty()) {
-                ArrayList<User> friends = new ArrayList<>();
+                ArrayList<User> friendss = new ArrayList<>();
                 for (String friendid : user.getFriendManager().getFriendList()) {
-                    friends.add(UserManager.findUser(friendid));
+                    friendss.add(UserManager.findUser(friendid));
                 }
-                for (User user1 : friends) {
+                for (User user1 : friendss) {
                     JPanel entryPanel1 = new JPanel();
                     entryPanel1.setLayout(new FlowLayout(FlowLayout.LEFT)); // Horizontal layout for label and button
                     JLabel newLabel = new JLabel(user1.getUsername()); // Show the friend's username
@@ -298,8 +300,8 @@ public class FriendsPage extends javax.swing.JFrame {
         for (User suggestion : suggestions) {
             if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId())) {
                 String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-                SuggestionPanel suggestionPanel = new SuggestionPanel(user, suggestion, profileImagePath, friendService);
-                suggestionPanel.setPreferredSize(new java.awt.Dimension(80, 80));
+                EntryPanel suggestionPanel = new EntryPanel(user, suggestion, profileImagePath, friendService);
+                suggestionPanel.setPreferredSize(new Dimension(200, 100));
                 JButton add = new JButton("Add Friend");
                 suggestionPanel.add(add);
                 friendSuggestionspanel.add(suggestionPanel);

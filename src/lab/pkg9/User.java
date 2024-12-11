@@ -41,6 +41,7 @@ public final class User {
     public FriendRequestManagable getFriendRequestManagable(){
         return getFriendManager().getFriendRequestManager();
     }
+    
     public FriendManagable getFriendManager() {
         return friendManager;
     }
