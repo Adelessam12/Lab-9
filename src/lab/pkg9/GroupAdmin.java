@@ -8,17 +8,30 @@ package lab.pkg9;
  *
  * @author DELL
  */
-public class GroupAdmin extends GroupRole {
 
-    public GroupAdmin(User user) {
-        super(user);
-    }
-    
-    public void promote(Group group) {
-    }
+class GroupAdmin implements GroupRole{
 
-    public void demote(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void promoteToCoAdmin(Group group, String userId) {
+        if (group.getGroupMembers().getMemberIds().contains(userId) && !group.getGroupCoAdmins().getCoAdminIds().contains(userId)) {
+            group.getGroupCoAdmins().addCoAdmin(userId);
+        }
     }
 
+    public void demoteCoAdmin(Group group, String userId) {
+        if (!group.getGroupMembers().getMemberIds().contains(userId) && group.getGroupCoAdmins().getCoAdminIds().contains(userId)) {
+            group.getGroupCoAdmins().removeCoAdmin(userId);
+        }
+    }
+
+    public void removeMember(Group group, String memberId) {
+            group.getGroupMembers().removeMember(memberId);
+    }
+
+    public void deleteGroup(GroupManager manager, String groupId) {
+        manager.deleteGroup(groupId);
+    }
+
+    public void managePost(Group group, String content, String userId) {
+        group.addPost(content, userId);
+    }
 }

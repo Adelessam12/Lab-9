@@ -5,67 +5,91 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  *
  * @author Mahmoud Waleed
  */
-public class Group {
-    private final String groupID;
-    private final String creatorID;
-    private final String imagePath;
-    private final String groupName;
+class Group {
+    private final String groupId;
+    private final String name;
     private final String description;
-    private final ArrayList<String> groupCoAdmins;
-    private final ArrayList<String> groupMembers;
+    private final String groupPhoto;
+    private final String AdminId;   
+    
+    private final GroupAdmin admin;
+    private final GroupCoAdmins groupCoAdmins;
+    private final GroupMembers groupMembers;  
+    private final ArrayList<String> posts;
 
-    public Group(String groupID, String creatorID, String imagePath, String groupName, String description) {
-        this.groupID = groupID;
-        this.creatorID = creatorID;
-        this.imagePath = imagePath;
-        this.groupName = groupName;
+    public Group(String groupId, String name, String description, String groupPhoto, String AdminId, GroupAdmin admin, GroupCoAdmins groupCoAdmins, GroupMembers groupMembers) {
+        this.groupId = groupId;
+        this.name = name;
         this.description = description;
-        this.groupCoAdmins = new ArrayList<>();
-        this.groupMembers = new ArrayList<>();
-    }
-    
-    public void addCoAdmin(String groupCoAdmin){
-        groupCoAdmins.add(groupCoAdmin);
-    }
-    public void addMember(String member){
-        groupMembers.add(member);
-    }
-    
-
-    public ArrayList<String> getGroupCoAdmins() {
-        return groupCoAdmins;
+        this.groupPhoto = groupPhoto;
+        this.AdminId = AdminId;
+        this.admin = admin;
+        this.groupCoAdmins = groupCoAdmins;
+        this.groupMembers = groupMembers;
+        this.posts = new ArrayList<>();
     }
 
-    public ArrayList<String> getGroupMembers() {
-        return groupMembers;
-    }
-    
-    
-    public String getGroupID() {
-        return groupID;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public String getCreatorID() {
-        return creatorID;
-    }
-
-    public String getImagePath() {
-        return imagePath;
-    }
-
-    public String getGroupName() {
-        return groupName;
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
         return description;
     }
+
+    public String getGroupPhoto() {
+        return groupPhoto;
+    }
+
+    public String getAdminId() {
+        return AdminId;
+    }
+
+    public ArrayList<String> getPosts() {
+        return posts;
+    }
+  
+
+    public void addPost(String content, String userId) {
+        if (groupMembers.getMemberIds().contains(userId) || groupCoAdmins.getCoAdminIds().contains(userId) || userId.equals(AdminId)) {
+            posts.add(content);
+        }
+    }
     
+    public void leaveGroup(String userId){
+        if(!userId.equals(AdminId)){
+            if(getGroupCoAdmins().getCoAdminIds().contains(userId)){
+                getGroupCoAdmins().getCoAdminIds().remove(userId);
+            }else if(getGroupMembers().getMemberIds().contains(userId)){
+                 getGroupMembers().getMemberIds().remove(userId);
+            }
+        }
+    }
+
+    public GroupAdmin getAdmin() {
+        return admin;
+    }
+
+    public GroupCoAdmins getGroupCoAdmins() {
+        return groupCoAdmins;
+    }
+
+    public GroupMembers getGroupMembers() {
+        return groupMembers;
+    }
+
+    public void delete() {
+        groupCoAdmins.getCoAdminIds().clear();
+        groupMembers.getMemberIds().clear();
+        posts.clear();
+    }
 }
-    

@@ -316,5 +316,32 @@
     "storyManager": {
       "contents": []
     }
+  },
+  {
+    "userId": "ID6a789467-a365-48a4-98ff-a46764273bc8",
+    "email": "10",
+    "username": "10",
+    "hashedPassword": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+    "dateOfBirth": "Dec 10, 2000, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "groups": [],
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
   }
 ]

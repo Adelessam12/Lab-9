@@ -2,9 +2,11 @@ package lab.pkg9;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
-public final class User {
+public class User {
     private final String userId;
     private final String email;
     private final String username;
@@ -13,7 +15,9 @@ public final class User {
     private boolean isOnline;
     private Profile profile;
     
-    private final ArrayList<String> groups;
+    //private final ArrayList<String> groups;
+    private final Map<String, String> groups;
+    
     private final FriendManagable friendManager;
     private final ContentManagable postManager;
     private final ContentManagable storyManager;
@@ -38,10 +42,10 @@ public final class User {
         this.friendManager = friendManager;
         this.postManager = postManager;
         this.storyManager = storyManager;
-        groups = new ArrayList<>();
+        groups = new HashMap<>();
     }
 
-    public ArrayList<String> getGroups() {
+    public Map<String, String> getGroups() {
         return groups;
     }
     
@@ -53,9 +57,6 @@ public final class User {
         return friendManager;
     }
 
-    public void addGroup(String groupId){
-        groups.add(groupId);
-    }
     
     public ContentManagable getPostManager() {
         return postManager;
@@ -65,7 +66,7 @@ public final class User {
         return storyManager;
     }
     
-    public String generateUserId() {
+    private String generateUserId() {
         return "ID" + UUID.randomUUID();
     }
 
