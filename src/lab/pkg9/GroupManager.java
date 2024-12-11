@@ -13,63 +13,34 @@ import java.util.ArrayList;
 public class GroupManager {
 
     private final ArrayList<Group> groups;
-    private final User user;
 
-    public GroupManager(User user) {
+    private ArrayList<String> groupRequests;
+    private final GroupRole role;
+
+    public GroupManager(GroupRole role) {
         groups = new ArrayList<>();
-        this.user = user;
+        this.role = role;
+    }
+
+    public ArrayList<String> getGroupRequests() {
+        return groupRequests;
     }
 
     public void requestToJoin(Group group) {
-        group.getGroupRequests().add(user.getUserId());
+        groupRequests.add(role.getUser().getUserId());
+        //
     }
+
+
 
     public void joinGroup(Group group) {
-        group.setUsers(user.getUserId(), "Member");
-        user.getGroups().add(group.getGroupID());
-    }
-
-    public void leaveGroup(Group group) {
-        group.getUsers().remove(user.getUserId());
-        user.getGroups().remove(group.getGroupID());
-    }
-
-    public void addGroup(Group group) {
         groups.add(group);
-        Database database = DatabaseFactory.createDatabase();
-        database.saveUsersToFile();
+        group.addMember(role.getUser().getUserId());
+        role.getUser().getGroups().add(group.getGroupID());
+        //
     }
 
-    public void removeMember(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean isOwner(Group group) {
+        return (role.getUser().getUserId().equals(group.getCreatorID()));
     }
-
-    public void approveRequest(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void declineRequest(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void promote(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void demote(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void addPost() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void editPost() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void deletePost() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

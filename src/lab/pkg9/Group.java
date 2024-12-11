@@ -17,9 +17,8 @@ public class Group {
     private final String imagePath;
     private final String groupName;
     private final String description;
-    private Map<String, String> users;
-    private ArrayList<String> groupRequests;
-
+    private final ArrayList<String> groupCoAdmins;
+    private final ArrayList<String> groupMembers;
 
     public Group(String groupID, String creatorID, String imagePath, String groupName, String description) {
         this.groupID = groupID;
@@ -27,16 +26,27 @@ public class Group {
         this.imagePath = imagePath;
         this.groupName = groupName;
         this.description = description;
-        
+        this.groupCoAdmins = new ArrayList<>();
+        this.groupMembers = new ArrayList<>();
+    }
+    
+    public void addCoAdmin(String groupCoAdmin){
+        groupCoAdmins.add(groupCoAdmin);
+    }
+    public void addMember(String member){
+        groupMembers.add(member);
+    }
+    
+
+    public ArrayList<String> getGroupCoAdmins() {
+        return groupCoAdmins;
     }
 
-    public ArrayList<String> getGroupRequests() {
-        return groupRequests;
+    public ArrayList<String> getGroupMembers() {
+        return groupMembers;
     }
-    public void setUsers(String userId, String status) {
-        users.put(userId, status);
-    }
-
+    
+    
     public String getGroupID() {
         return groupID;
     }
@@ -55,10 +65,6 @@ public class Group {
 
     public String getDescription() {
         return description;
-    }
-
-    public Map<String, String> getUsers() {
-        return users;
     }
     
 }
