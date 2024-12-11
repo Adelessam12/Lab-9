@@ -88,6 +88,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         searchContainer = new javax.swing.JPanel();
         profile = new javax.swing.JButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -192,6 +193,13 @@ public final class NewsFeed extends javax.swing.JFrame {
             }
         });
 
+        jToggleButton2.setText("View Groups Suggestions");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,7 +210,8 @@ public final class NewsFeed extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ViewStories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE))
+                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
@@ -241,7 +250,10 @@ public final class NewsFeed extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(ViewStories)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton1))
+                        .addComponent(jToggleButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton2)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,7 +397,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             searchContainer.add(entryPanel);
             JSeparator separator = new JSeparator();
             searchContainer.add(separator, BorderLayout.SOUTH);
-            
+
         });
 
         userSentFriends.forEach(friend -> {
@@ -418,7 +430,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             searchContainer.add(entryPanel);
             JSeparator separator = new JSeparator();
             searchContainer.add(separator, BorderLayout.SOUTH);
-            
+
         });
 
         // Refresh UI
@@ -440,6 +452,12 @@ public final class NewsFeed extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
 
     }//GEN-LAST:event_formWindowClosing
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        TitledBorder title = BorderFactory.createTitledBorder("Groups Suggestions");
+        container2Panel.setBorder(title);
+        loadGroups();
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
 
 // Helper method to create a panel for friends
     private JPanel createFriendPanel(User friend) {
@@ -781,6 +799,10 @@ public final class NewsFeed extends javax.swing.JFrame {
         container2Panel.repaint();
     }
 
+    private void loadGroups() {
+        container2Panel.removeAll();    
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Friendpostspanel;
     private javax.swing.JPanel Notifications_panel;
@@ -799,8 +821,10 @@ public final class NewsFeed extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JButton profile;
     private javax.swing.JButton search;
     private javax.swing.JPanel searchContainer;
     // End of variables declaration//GEN-END:variables
+
 }
