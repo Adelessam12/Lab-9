@@ -32,7 +32,7 @@ public class FriendshipService implements FriendshipServiceInterface {
     @Override
     public void acceptFriendRequest(User friend) {
         // Check if the users are already friends
-        if (user.getFriendManager().isFriend(user, friend)) {
+        if (user.getFriendManager().isFriend(friend)) {
             return; // Already friends
         }
 
@@ -45,6 +45,7 @@ public class FriendshipService implements FriendshipServiceInterface {
         db.saveUsersToFile();
     }
 
+    
     @Override
     public void declineFriendRequest(User friend) {
         user.getFriendRequestManagable().setReceivedRequestStatus(friend, "Declined");
@@ -84,9 +85,11 @@ public class FriendshipService implements FriendshipServiceInterface {
     //method to check if a user can be suggested
     private boolean canBeSuggested(User user, User suggested) {
         return !user.equals(suggested)
-                && !user.getFriendManager().isFriend(user, suggested)
-                && !user.getFriendManager().isBlocked(user, suggested)
-                && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggested.getUserId());
+                && !user.getFriendManager().isFriend(suggested)
+                && !user.getFriendManager().isBlocked(suggested)
+                && !suggested.getFriendManager().isBlocked(user)
+                && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggested.getUserId())
+                && !user.getFriendRequestManagable().getSentFriendRequests().containsKey(user.getUserId());
     }
 
     //method to check for common friends
@@ -96,7 +99,7 @@ public class FriendshipService implements FriendshipServiceInterface {
             friends.add(UserManager.findUser(friendId));
         }
         for (User friend : friends) {
-            if (user.getFriendManager().isFriend(suggested, friend)) {
+            if (friend.getFriendManager().isFriend(suggested)) {
                 return true;
             }
         }

@@ -10,8 +10,14 @@ import java.io.File;
 
 public class FriendPanel extends JPanel {
 
-    public FriendPanel(String username, String profileImagePath, boolean Status) {
+    public FriendPanel(String username, String profileImagePath, int Status) {
         setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0)); // Smaller horizontal and vertical gaps
+
+        // Username Label
+        JLabel usernameLabel = new JLabel(username);
+        usernameLabel.setFont(new Font("Arial", Font.PLAIN, 20)); // Smaller font size
+
+        add(usernameLabel);
 
         // Profile Image
         ProfilePanel profilePanel = new ProfilePanel();
@@ -24,26 +30,20 @@ public class FriendPanel extends JPanel {
         }
         add(profilePanel);
         JLabel statuslable;
-        if (Status) {
+        if (Status == 1) {
             statuslable = new JLabel("  is online");
-        statuslable.setForeground(Color.GREEN);
-                    
+            statuslable.setForeground(Color.GREEN);
 
-        } else {
+            statuslable.setFont(new Font("Arial", Font.PLAIN, 15)); // Smaller font size
+            add(statuslable);
+
+        } else if (Status == 0) {
             statuslable = new JLabel("  is offline");
-                    statuslable.setForeground(Color.RED);
+            statuslable.setForeground(Color.RED);
 
+            statuslable.setFont(new Font("Arial", Font.PLAIN, 15)); // Smaller font size
+            add(statuslable);
         }
-
-        // Username Label
-        JLabel usernameLabel = new JLabel(username);
-        usernameLabel.setFont(new Font("Arial", Font.PLAIN, 20)); // Smaller font size
-        statuslable.setFont(new Font("Arial", Font.PLAIN, 15)); // Smaller font size
-        
-        add(usernameLabel);
-        
-        add(statuslable);
-
         // Reduce panel padding
         setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0)); // Smaller padding
     }

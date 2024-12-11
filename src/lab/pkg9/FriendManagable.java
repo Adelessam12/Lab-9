@@ -23,9 +23,9 @@ public interface FriendManagable { // interface for Interface Segregation Princi
     // Get the list of blocked users
     ArrayList<String> getBlockedList();
     // Check if two users are friends
-    boolean isFriend(User user, User friend);
+    boolean isFriend(User friend);
     // Check if a user is blocked
-    boolean isBlocked(User user, User friend);
+    boolean isBlocked(User friend);
     
     FriendRequestManagable getFriendRequestManager();
 }
