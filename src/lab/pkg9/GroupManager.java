@@ -36,8 +36,8 @@ public class GroupManager {
 
     public void addGroup(Group group) {
         groups.add(group);
-        Database database = DatabaseFactory.createDatabase();
-        database.saveUsersToFile();
+       GroupDatabase gdb= new GroupDatabaseFactory().createDatabase();
+       gdb.saveGroupstofile();
     }
 
     public void removeMember(Group group) {
