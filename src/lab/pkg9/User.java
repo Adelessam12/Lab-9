@@ -42,6 +42,7 @@ public final class User {
     }
 
     public ArrayList<String> getGroups() {
+     
         return groups;
     }
     
