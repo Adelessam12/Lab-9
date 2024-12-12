@@ -89,13 +89,13 @@ public final class NewsFeed extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         Notifications_panel = new javax.swing.JPanel();
         ViewStories = new javax.swing.JToggleButton();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        viewFriendSuggestions = new javax.swing.JToggleButton();
         search = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         searchContainer = new javax.swing.JPanel();
         profile = new javax.swing.JButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        viewGroupSuggestions = new javax.swing.JToggleButton();
         jToggleButton3 = new javax.swing.JToggleButton();
         jToggleButton4 = new javax.swing.JToggleButton();
 
@@ -171,11 +171,11 @@ public final class NewsFeed extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jToggleButton1);
-        jToggleButton1.setText("View friend suggestions");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(viewFriendSuggestions);
+        viewFriendSuggestions.setText("View friend suggestions");
+        viewFriendSuggestions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                viewFriendSuggestionsActionPerformed(evt);
             }
         });
 
@@ -202,11 +202,11 @@ public final class NewsFeed extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jToggleButton2);
-        jToggleButton2.setText("View Groups Suggestions");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(viewGroupSuggestions);
+        viewGroupSuggestions.setText("View Groups Suggestions");
+        viewGroupSuggestions.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                viewGroupSuggestionsActionPerformed(evt);
             }
         });
 
@@ -236,8 +236,8 @@ public final class NewsFeed extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(ViewStories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
-                            .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(viewFriendSuggestions, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                            .addComponent(viewGroupSuggestions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane2))
                     .addGroup(layout.createSequentialGroup()
@@ -281,9 +281,9 @@ public final class NewsFeed extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(ViewStories)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton1)
+                        .addComponent(viewFriendSuggestions)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton2))
+                        .addComponent(viewGroupSuggestions))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -376,11 +376,11 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     }//GEN-LAST:event_ViewStoriesActionPerformed
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void viewFriendSuggestionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewFriendSuggestionsActionPerformed
         TitledBorder title = BorderFactory.createTitledBorder("Friend Suggestions");
         container2Panel.setBorder(title);
-        loadSuggestions();
-                }//GEN-LAST:event_jToggleButton1ActionPerformed
+        loadFriendSuggestions();
+                }//GEN-LAST:event_viewFriendSuggestionsActionPerformed
     // TODO add your handling code here:
 
 
@@ -591,11 +591,11 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosing
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void viewGroupSuggestionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewGroupSuggestionsActionPerformed
         TitledBorder title = BorderFactory.createTitledBorder("Groups Suggestions");
         container2Panel.setBorder(title);
 
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_viewGroupSuggestionsActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         TitledBorder title = BorderFactory.createTitledBorder("friends");
@@ -917,8 +917,38 @@ public final class NewsFeed extends javax.swing.JFrame {
         Notifications_panel.revalidate();
         Notifications_panel.repaint();
     }
+     public void loadGroupSuggestions() {
+        container2Panel.removeAll();
 
-    public void loadSuggestions() {
+        ArrayList<User> suggestions = null;
+
+        for (User suggestion : suggestions) {
+            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId()) && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggestion.getUserId())) {
+                String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
+                EntryPanel suggestionPanel = new EntryPanel(suggestion.getUsername(), profileImagePath);
+
+                suggestionPanel.setPreferredSize(new Dimension(200, 100));
+                container2Panel.add(suggestionPanel);
+                JButton add = new JButton("Add Friend");
+                suggestionPanel.add(add);
+                container2Panel.add(suggestionPanel);
+                add.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    friendService.sendFriendRequest(suggestion);
+                    System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+                    suggestionPanel.remove(add);
+                    database.saveUsersToFile();
+                    //ArrayList<User> users = database.getUsers();
+                    suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+                    container2Panel.revalidate();
+                    container2Panel.repaint();
+                });
+            }
+        }
+        container2Panel.revalidate();
+        container2Panel.repaint();
+    }
+
+    public void loadFriendSuggestions() {
         container2Panel.removeAll();
 
         ArrayList<User> suggestions = friendService.suggestions();
@@ -950,19 +980,22 @@ public final class NewsFeed extends javax.swing.JFrame {
     }
 
     private void loadGroups() {
-        ContainerPanel1.removeAll();
-        if (user.getGroups() != null) {
-            ArrayList<String> keys = new ArrayList<>(user.getGroups().keySet());
+        ContainerPanel1.removeAll();    
+        if(user.getGroups()!=null){
+      ArrayList<String> keys = new ArrayList<>(user.getGroups().keySet());
+      
+       
+        for(String groupid : keys )
+        {
+            for(Group group : groupDatabase.loadGroups())
+                if(group.getGroupId().equals(groupid))
+                {
+                    ContainerPanel1.add(new GroupPanel(group,  user));
 
-            for (String groupid : keys) {
-                for (Group group : groupDatabase.loadGroups()) {
-                    if (group.getGroupId().equals(groupid)) {
-                        ContainerPanel1.add(new GroupPanel(group.getName(), group.getGroupPhoto()));
-                    }
-                }
             }
 
         }
+    }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel1;
@@ -982,13 +1015,13 @@ public final class NewsFeed extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JButton profile;
     private javax.swing.JButton search;
     private javax.swing.JPanel searchContainer;
+    private javax.swing.JToggleButton viewFriendSuggestions;
+    private javax.swing.JToggleButton viewGroupSuggestions;
     // End of variables declaration//GEN-END:variables
 
 }

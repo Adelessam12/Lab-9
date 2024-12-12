@@ -17,6 +17,8 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
     
     public GroupCoAdmin(String coAdminID, Group group) {
        super(coAdminID,group);  
+       this.coAdminID=coAdminID;
+       this.group=group;
     }
 
     @Override
@@ -48,32 +50,24 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
     }
 
     @Override
-    public void deletePost(String memberId, Post content) {
-        if (group.getUsers().containsKey(memberId) && group.getPosts().containsKey(memberId)){
-            if(group.getPosts().get(memberId).contains(content)){
-               group.getPosts().get(memberId).remove(content);
-               if(group.getPosts().get(memberId).isEmpty()){
-                   group.getPosts().remove(memberId);
+
+    public void deletePost(Post content) {
+            if(group.getPosts().contains(content)){
+                   group.getPosts().remove(content);
                }
-            }
-        }
         GroupManager.saveAll();
     }
 
-    @Override
-    public void editPost(String memberId, Post content, Post newContent) {
-        if (group.getUsers().containsKey(memberId) && group.getPosts().containsKey(memberId)) {
-            if(group.getPosts().get(memberId).contains(content)){
-                ArrayList<Post> posts = group.getPosts().get(memberId);
-                for(Post post: posts){
-                    if(post.getPostId().equals(content.getPostId())){
-                        post = newContent;
-                    }
-                }
-            }    
-        }
+
+  @Override
+    public void editPost(Post content, String newContent, String imagePath) {
+            if(group.getPosts().contains(content)){
+                content.setContent(newContent);
+                if(imagePath!=null)
+                    content.setImagePath(imagePath);
+            }
+            GroupManager.saveAll();
     }
-    
 }
 
  

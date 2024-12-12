@@ -39,8 +39,8 @@
                       <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="ViewStories" max="32767" attributes="0"/>
-                          <Component id="jToggleButton1" pref="167" max="32767" attributes="0"/>
-                          <Component id="jToggleButton2" max="32767" attributes="0"/>
+                          <Component id="viewFriendSuggestions" pref="167" max="32767" attributes="0"/>
+                          <Component id="viewGroupSuggestions" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" max="32767" attributes="0"/>
@@ -97,9 +97,9 @@
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="ViewStories" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="viewFriendSuggestions" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jToggleButton2" min="-2" max="-2" attributes="0"/>
+                      <Component id="viewGroupSuggestions" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -291,7 +291,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ViewStoriesActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton1">
+    <Component class="javax.swing.JToggleButton" name="viewFriendSuggestions">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
@@ -299,7 +299,7 @@
         <Property name="text" type="java.lang.String" value="View friend suggestions"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewFriendSuggestionsActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="search">
@@ -343,7 +343,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JToggleButton" name="jToggleButton2">
+    <Component class="javax.swing.JToggleButton" name="viewGroupSuggestions">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="buttonGroup1"/>
@@ -351,7 +351,7 @@
         <Property name="text" type="java.lang.String" value="View Groups Suggestions"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewGroupSuggestionsActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JToggleButton" name="jToggleButton3">
