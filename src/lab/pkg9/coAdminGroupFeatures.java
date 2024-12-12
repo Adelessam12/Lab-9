@@ -12,6 +12,6 @@ public interface coAdminGroupFeatures {
     public void approveRequest(String userId);
     public void declineRequest(String userId);
     public void removeMember(String memberId);
-    public void deletePost(String content, String userId);
-    public void editPost(String content, String userId, String newContent);
+    public void deletePost(Post content);
+    public void editPost(Post content, String newContent, String imagePath);
 }

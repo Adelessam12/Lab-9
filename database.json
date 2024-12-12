@@ -68,7 +68,11 @@
     },
     "friendManager": {
       "friendList": [],
-      "blockedList": [],
+      "blockedList": [
+        "ID32ca31e7-5640-4c1f-8cd2-fe524cfe4b68",
+        "ID98f71551-72c4-4bac-b6ba-b48f4a2d5e09",
+        "IDaf834cc9-c4b7-4187-b553-2f5a46781413"
+      ],
       "friendRequestManager": {
         "sentFriendRequests": {},
         "receivedFriendRequests": {}
@@ -328,7 +332,7 @@
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
-    "groups": [],
+    "groups": {},
     "friendManager": {
       "friendList": [],
       "blockedList": [],

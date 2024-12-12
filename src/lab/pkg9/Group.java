@@ -20,7 +20,7 @@ public class Group {
     private final String groupPhoto;
     private String AdminId;   
     private Map<String, String> users;
-    private Map<String, ArrayList<Post>> posts;
+    private ArrayList<Post> posts;
     private ArrayList<String> groupRequests;
 
     public Group(String groupId, String name, String description, String groupPhoto, String AdminId) {
@@ -30,7 +30,7 @@ public class Group {
         this.groupPhoto = groupPhoto;
         this.AdminId = AdminId;
         this.users = new HashMap<>();
-        this.posts = new HashMap<>();
+        this.posts = new ArrayList<>();
         this.groupRequests = new ArrayList<>();
     }
 
@@ -64,11 +64,11 @@ public class Group {
         this.AdminId = AdminId;
     }
 
-    public Map<String, ArrayList<Post>> getPosts() {
+    public ArrayList<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Map<String, ArrayList<Post>> posts) {
+    public void setPosts(ArrayList<Post> posts) {
         this.posts = posts;
     }
     

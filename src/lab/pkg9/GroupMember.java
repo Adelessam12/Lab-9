@@ -23,15 +23,8 @@ import java.util.ArrayList;
 
     @Override
     public void addPost(Post content) {
-        if(group.getUsers().containsKey(memberID)){
-            if(group.getPosts().containsKey(memberID)){
-                group.getPosts().get(memberID).add(content);
+                group.getPosts().add(content);
                 GroupManager.saveAll();
-            }else{
-                group.getPosts().put(memberID, new ArrayList<>());
-                addPost(content);
-            }
-        }
     }
     
     @Override
