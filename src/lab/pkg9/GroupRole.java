@@ -10,5 +10,5 @@ package lab.pkg9;
  */
 public interface GroupRole {
      void leaveGroup();
-     void addPost(String content);
+     void addPost(Post content);
 }

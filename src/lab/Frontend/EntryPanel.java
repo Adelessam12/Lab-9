@@ -13,8 +13,6 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import lab.pkg9.FriendshipServiceInterface;
-import lab.pkg9.User;
 
 /**
  *
@@ -28,7 +26,7 @@ public class EntryPanel extends javax.swing.JPanel {
     public EntryPanel() {
         initComponents();
     }
-public EntryPanel(User sender, User reciever, String profileImagePath, FriendshipServiceInterface Fm) {
+public EntryPanel(String recievername, String profileImagePath) {
 
     // Profile Image
     ProfilePanel profilePanel = new ProfilePanel();
@@ -49,7 +47,7 @@ public EntryPanel(User sender, User reciever, String profileImagePath, Friendshi
     detailsPanel.setBorder(BorderFactory.createEmptyBorder(5, 10, 5, 0)); // Padding around text
 
     //Username Label
-    String name = reciever.getUsername();
+    String name = recievername;
     JLabel usernameLabel = new JLabel(name);
     usernameLabel.setFont(new Font("Arial", Font.PLAIN, 15)); // Font size
     usernameLabel.setAlignmentX(Component.LEFT_ALIGNMENT); // Align to the left

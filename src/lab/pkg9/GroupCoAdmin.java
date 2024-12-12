@@ -4,11 +4,13 @@
  */
 package lab.pkg9;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author DELL
  */
-class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, GroupRole {
+public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, GroupRole {
 
    private String coAdminID;
    private Group group;
@@ -44,30 +46,22 @@ class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, GroupRol
     }
 
     @Override
-    public void deletePost(String memberId, String content) {
-        if (group.getUsers().containsKey(memberId) && group.getPosts().containsKey(memberId)){
-            if(group.getPosts().get(memberId).contains(content)){
-               group.getPosts().get(memberId).remove(content);
-               if(group.getPosts().get(memberId).isEmpty()){
-                   group.getPosts().remove(memberId);
+    public void deletePost(Post content) {
+            if(group.getPosts().contains(content)){
+                   group.getPosts().remove(content);
                }
-            }
-        }
         GroupManager.saveAll();
     }
 
-    @Override
-    public void editPost(String memberId, String content, String newContent) {
-        //hmmmmmmmmmmmmmmmmmmmmm
-        if (group.getUsers().containsKey(memberId) && group.getPosts().containsKey(memberId)) {
-            if(group.getPosts().get(memberId).contains(content)){
-                deletePost(memberId, content);
-                User user = UserManager.findUser(memberId);
-                //user.getGroups().get(group.getGroupId()).((GroupMember)addPost)(newContent);
-            }    
-        }
+  @Override
+    public void editPost(Post content, String newContent, String imagePath) {
+            if(group.getPosts().contains(content)){
+                content.setContent(newContent);
+                if(imagePath!=null)
+                    content.setImagePath(imagePath);
+            }
+            GroupManager.saveAll();
     }
-    
 }
     
    
