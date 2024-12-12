@@ -10,25 +10,29 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-class GroupMembers implements GroupRole {
+class GroupMembers implements GroupRole, memberGroupFeaturesInterface{
 
-    private final ArrayList<String> memberIds;
+       private final String memberID; 
+       private final Group group;
 
-    public GroupMembers() {
-        this.memberIds = new ArrayList<>();
+    public GroupMembers(String memberID, Group group) {
+        this.memberID = memberID;
+        this.group = group;
     }
 
-    public void addMember(String userId) {
-        if (!memberIds.contains(userId)) {
-            memberIds.add(userId);
-        }
+    @Override
+    public void addPost(String userId, String content) {
+        if(group.getUsers().containsKey(userId))
+            group.getPosts().add(content);
     }
 
-    public void removeMember(String userId) {
-        memberIds.remove(userId);
+    @Override
+    public void leaveGroup() {
+         if(!memberID.equals(group.getAdminId())){
+             UserManager.findUser(memberID).getGroups().keySet().remove(group.getGroupId());
+             group.getUsers().keySet().remove(memberID);
+         }
     }
 
-    public ArrayList<String> getMemberIds() {
-        return memberIds;
-    }
+ 
 }

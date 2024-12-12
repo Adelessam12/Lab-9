@@ -5,6 +5,8 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -13,27 +15,33 @@ import java.util.ArrayList;
 class Group {
     private final String groupId;
     private final String name;
+
     private final String description;
     private final String groupPhoto;
-    private final String AdminId;   
-    
-    private final GroupAdmin admin;
-    private final GroupCoAdmins groupCoAdmins;
-    private final GroupMembers groupMembers;  
-    private final ArrayList<String> posts;
+    private String AdminId;   
+    private Map<String, String> users;
+    private ArrayList<String> posts;
+    private ArrayList<String> groupRequests;
 
-    public Group(String groupId, String name, String description, String groupPhoto, String AdminId, GroupAdmin admin, GroupCoAdmins groupCoAdmins, GroupMembers groupMembers) {
+    public Group(String groupId, String name, String description, String groupPhoto, String AdminId) {
         this.groupId = groupId;
         this.name = name;
         this.description = description;
         this.groupPhoto = groupPhoto;
         this.AdminId = AdminId;
-        this.admin = admin;
-        this.groupCoAdmins = groupCoAdmins;
-        this.groupMembers = groupMembers;
+        this.users = new HashMap<>();
         this.posts = new ArrayList<>();
+        this.groupRequests = new ArrayList<>();
     }
 
+    public Map<String, String> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Map<String, String> users) {
+        this.users = users;
+    }
+    
     public String getGroupId() {
         return groupId;
     }
@@ -54,42 +62,48 @@ class Group {
         return AdminId;
     }
 
+    public void setAdminId(String AdminId) {
+        this.AdminId = AdminId;
+    }
+    
+
     public ArrayList<String> getPosts() {
         return posts;
     }
-  
 
-    public void addPost(String content, String userId) {
-        if (groupMembers.getMemberIds().contains(userId) || groupCoAdmins.getCoAdminIds().contains(userId) || userId.equals(AdminId)) {
-            posts.add(content);
-        }
+    public void setPosts(ArrayList<String> posts) {
+        this.posts = posts;
     }
     
-    public void leaveGroup(String userId){
-        if(!userId.equals(AdminId)){
-            if(getGroupCoAdmins().getCoAdminIds().contains(userId)){
-                getGroupCoAdmins().getCoAdminIds().remove(userId);
-            }else if(getGroupMembers().getMemberIds().contains(userId)){
-                 getGroupMembers().getMemberIds().remove(userId);
-            }
+    public ArrayList<String> getGroupRequests() {
+        return groupRequests;
+    }
+    
+  
+/*
+    public void delete() {
+        getCoAdminIds().clear();
+        getMemberIds().clear();
+        posts.clear();
+    }
+       public void addMember(String userId) {
+        if (!memberIds.contains(userId)) {
+            memberIds.add(userId);
         }
     }
 
-    public GroupAdmin getAdmin() {
-        return admin;
+    public void removeMember(String userId) {
+        memberIds.remove(userId);
     }
 
-    public GroupCoAdmins getGroupCoAdmins() {
-        return groupCoAdmins;
+    public void addCoAdmin(String userId) {
+        if (!coAdminIds.contains(userId)) {
+            coAdminIds.add(userId);
+        }
     }
 
-    public GroupMembers getGroupMembers() {
-        return groupMembers;
-    }
+    public void removeCoAdmin(String userId) {
+        coAdminIds.remove(userId);
+    }*/
 
-    public void delete() {
-        groupCoAdmins.getCoAdminIds().clear();
-        groupMembers.getMemberIds().clear();
-        posts.clear();
-    }
 }

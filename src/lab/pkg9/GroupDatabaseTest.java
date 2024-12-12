@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class GroupDatabaseTest {
 
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
         // Create an instance of GroupDatabase
         GroupStorage groupStorage;
 
@@ -34,4 +34,5 @@ public class GroupDatabaseTest {
                     + ", Description: " + group.getDescription());
         }
     }
+*/
 }

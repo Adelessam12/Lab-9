@@ -35,6 +35,11 @@ public final class GroupDatabase {
         saveGroupstofile();
     }
     
+    public void removeGroup(Group group)
+    {
+        Groups.remove(group);
+        saveGroupstofile();
+    }
    
     public boolean saveGroupstofile() {
         return groupStorage.saveToFile(Groups);
