@@ -23,6 +23,7 @@ class GroupManager {
         Group group = GroupFactory.createGroup(groupId, name, description, groupPhoto, adminId);
         groups.add(group);
         groupDatabase.saveGroupstofile();
+        
         return group;
     }
 
