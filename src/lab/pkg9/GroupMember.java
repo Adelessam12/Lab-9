@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-class GroupMember implements GroupRole, memberGroupFeaturesInterface{
+public class GroupMember implements GroupRole, memberGroupFeaturesInterface{
 
        private final String memberID; 
        private final Group group;
@@ -21,7 +21,7 @@ class GroupMember implements GroupRole, memberGroupFeaturesInterface{
     }
 
     @Override
-    public void addPost(String content) {
+    public void addPost(Post content) {
         if(group.getUsers().containsKey(memberID)){
             if(group.getPosts().containsKey(memberID)){
                 group.getPosts().get(memberID).add(content);
