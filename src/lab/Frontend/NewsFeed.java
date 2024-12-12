@@ -30,7 +30,8 @@ import lab.pkg9.GroupDatabaseFactory;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
 import lab.pkg9.Group;
-import lab.pkg9.Post;
+import lab.pkg9.GroupManager;
+import lab.pkg9.GroupRole;
 //import lab.pkg9.;
 /**
  *
@@ -508,12 +509,21 @@ public final class NewsFeed extends javax.swing.JFrame {
 //            entryPanel.repaint();
         });
         leaveGroupButton.addActionListener(e -> {
+            
             entryPanel.remove(leaveGroupButton);
             entryPanel.add(new JLabel("Removed"));
-            entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
-            //if(user.getGroups().get(groupInSearch.getGroupId()) instanceof ){
-                
-            //}
+            entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));           
+            GroupRole groupRole = user.getGroups().get(groupInSearch.getGroupId());
+            groupRole.leaveGroup();
+//            if(groupRole instanceof GroupAdmin){
+//                GroupAdmin groupAdmin = (GroupAdmin)groupRole;
+//                
+//            }else if(groupRole instanceof GroupCoAdmin){
+//                
+//                GroupCoAdmin groupCoAdmin = (GroupCoAdmin)groupRole;
+//            }else{
+//                GroupMember groupMember = (GroupMember)groupRole;
+//            }
             entryPanel.revalidate();
             entryPanel.repaint();
         });
@@ -530,7 +540,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         EntryPanel entryPanel = new EntryPanel(groupInSearch.getName(), profileImagePath);
         entryPanel.setPreferredSize(new Dimension(200, 100));
 
-        JLabel statusLabel = new JLabel("Requested / Pending");
+        JLabel statusLabel = new JLabel("Requested To Join");
         JButton viewGroupButton = new JButton("View Group");
 
         viewGroupButton.addActionListener(e -> System.out.println("View Group: " + groupInSearch.getName()));
@@ -547,10 +557,11 @@ public final class NewsFeed extends javax.swing.JFrame {
         EntryPanel entryPanel = new EntryPanel(groupInSearch.getName(), profileImagePath);
         entryPanel.setPreferredSize(new Dimension(200, 100));
 
-        JButton requestToJoinButton = new JButton("Request to Join");
+        JButton requestToJoinButton = new JButton("Request");
         JButton viewGroupButton = new JButton("View Group");
 
         requestToJoinButton.addActionListener(e -> {
+            GroupManager.requestToJoin(user, groupInSearch);
             entryPanel.removeAll();
             entryPanel.add(new JLabel("Requested"));
             entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));

@@ -4,6 +4,8 @@
  */
 package lab.pkg9;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author DELL
@@ -19,10 +21,12 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
 
     @Override
     public void approveRequest(String userId) {
+       if(group.getGroupRequests().contains(userId)){
        group.getGroupRequests().remove(userId);
        group.getUsers().put(userId, "Member");
        UserManager.findUser(userId).getGroups().put(group.getGroupId(), new GroupMember(userId, group));
        GroupManager.saveAll();
+       }
     }
 
     @Override
@@ -44,7 +48,7 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
     }
 
     @Override
-    public void deletePost(String memberId, String content) {
+    public void deletePost(String memberId, Post content) {
         if (group.getUsers().containsKey(memberId) && group.getPosts().containsKey(memberId)){
             if(group.getPosts().get(memberId).contains(content)){
                group.getPosts().get(memberId).remove(content);
@@ -57,20 +61,19 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
     }
 
     @Override
-    public void editPost(String memberId, String content, String newContent) {
-        //hmmmmmmmmmmmmmmmmmmmmm
+    public void editPost(String memberId, Post content, Post newContent) {
         if (group.getUsers().containsKey(memberId) && group.getPosts().containsKey(memberId)) {
             if(group.getPosts().get(memberId).contains(content)){
-                deletePost(memberId, content);
-                User user = UserManager.findUser(memberId);
-                //user.getGroups().get(group.getGroupId()).((GroupMember)addPost)(newContent);
+                ArrayList<Post> posts = group.getPosts().get(memberId);
+                for(Post post: posts){
+                    if(post.getPostId().equals(content.getPostId())){
+                        post = newContent;
+                    }
+                }
             }    
         }
     }
     
 }
-    
-   
-
 
  

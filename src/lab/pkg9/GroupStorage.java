@@ -41,14 +41,16 @@ public class GroupStorage {
      * @return An ArrayList of Group objects loaded from the file, or an empty list if an error occurs.
      */
     public ArrayList<Group> loadFromFile() {
-        try (FileReader reader = new FileReader(FILE_PATH)) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Group>>() {}.getType();
-            ArrayList<Group> loadedGroups = gson.fromJson(reader, type);
-            return loadedGroups != null ? loadedGroups : new ArrayList<>();
-        } catch (IOException e) {
-            System.err.println("Error loading groups from file: " + e.getMessage());
-            return new ArrayList<>();
-        }
+    try (FileReader reader = new FileReader(FILE_PATH)) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Group>>() {}.getType();
+        ArrayList<Group> loadedGroups = gson.fromJson(reader, type);
+        System.out.println("Loaded groups: " + loadedGroups); // Debugging output
+        return loadedGroups != null ? loadedGroups : new ArrayList<>();
+    } catch (IOException e) {
+        System.err.println("Error loading groups from file: " + e.getMessage());
+        return new ArrayList<>();
     }
+}
+
 }

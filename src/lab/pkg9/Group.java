@@ -7,6 +7,7 @@ package lab.pkg9;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  *
@@ -23,8 +24,8 @@ public class Group {
     private Map<String, ArrayList<Post>> posts;
     private ArrayList<String> groupRequests;
 
-    public Group(String groupId, String name, String description, String groupPhoto, String AdminId) {
-        this.groupId = groupId;
+    public Group(String name, String description, String groupPhoto, String AdminId) {
+        this.groupId = generateUniqueId("Group");
         this.name = name;
         this.description = description;
         this.groupPhoto = groupPhoto;
@@ -38,7 +39,9 @@ public class Group {
         return users;
     }
 
-
+    private String generateUniqueId(String prefix) {
+        return prefix + "ID" + UUID.randomUUID();
+    }
     
     public String getGroupId() {
         return groupId;
