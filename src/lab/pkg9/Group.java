@@ -20,7 +20,7 @@ class Group {
     private final String groupPhoto;
     private String AdminId;   
     private Map<String, String> users;
-    private ArrayList<String> posts;
+    private Map<String, ArrayList<String>> posts;
     private ArrayList<String> groupRequests;
 
     public Group(String groupId, String name, String description, String groupPhoto, String AdminId) {
@@ -30,7 +30,7 @@ class Group {
         this.groupPhoto = groupPhoto;
         this.AdminId = AdminId;
         this.users = new HashMap<>();
-        this.posts = new ArrayList<>();
+        this.posts = new HashMap<>();
         this.groupRequests = new ArrayList<>();
     }
 
@@ -38,9 +38,7 @@ class Group {
         return users;
     }
 
-    public void setUsers(Map<String, String> users) {
-        this.users = users;
-    }
+
     
     public String getGroupId() {
         return groupId;
@@ -65,14 +63,22 @@ class Group {
     public void setAdminId(String AdminId) {
         this.AdminId = AdminId;
     }
-    
 
-    public ArrayList<String> getPosts() {
+    public Map<String, ArrayList<String>> getPosts() {
         return posts;
     }
 
-    public void setPosts(ArrayList<String> posts) {
+    public void setPosts(Map<String, ArrayList<String>> posts) {
         this.posts = posts;
+    }
+    
+
+    public void setUsers(Map<String, String> users) {
+        this.users = users;
+    }
+
+    public void setGroupRequests(ArrayList<String> groupRequests) {
+        this.groupRequests = groupRequests;
     }
     
     public ArrayList<String> getGroupRequests() {

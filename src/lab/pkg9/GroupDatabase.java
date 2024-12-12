@@ -24,22 +24,8 @@ public final class GroupDatabase {
 
     public void setGroups(ArrayList<Group> Groups) {
         this.Groups = Groups;
-    }
+    }    
 
-  
-    public void addGroup(Group group){
-        if(Groups == null){
-            Groups = new ArrayList<>();
-        }
-        Groups.add(group);
-        saveGroupstofile();
-    }
-    
-    public void removeGroup(Group group)
-    {
-        Groups.remove(group);
-        saveGroupstofile();
-    }
    
     public boolean saveGroupstofile() {
         return groupStorage.saveToFile(Groups);

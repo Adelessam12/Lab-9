@@ -9,5 +9,6 @@ package lab.pkg9;
  * @author DELL
  */
 public interface GroupRole {
-    
+     void leaveGroup();
+     void addPost(String content);
 }

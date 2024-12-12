@@ -16,7 +16,7 @@ public class User {
     private Profile profile;
     
     //private final ArrayList<String> groups;
-    private final Map<String, String> groups;
+    private final Map<String, GroupMember> groups;
     
     private final FriendManagable friendManager;
     private final ContentManagable postManager;
@@ -45,9 +45,11 @@ public class User {
         groups = new HashMap<>();
     }
 
-    public Map<String, String> getGroups() {
+    public Map<String, GroupMember> getGroups() {
         return groups;
     }
+
+
     
     public FriendRequestManagable getFriendRequestManagable(){
         return getFriendManager().getFriendRequestManager();
