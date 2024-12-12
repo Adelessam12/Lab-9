@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author DELL
  */
-public class GroupMember implements GroupRole, memberGroupFeaturesInterface{
+ public class GroupMember implements GroupRole, memberGroupFeaturesInterface{
 
        private final String memberID; 
        private final Group group;
