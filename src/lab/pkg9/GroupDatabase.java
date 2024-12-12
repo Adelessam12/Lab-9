@@ -3,9 +3,10 @@ package lab.pkg9;
 import java.util.ArrayList;
 
 public final class GroupDatabase {
+
     private static GroupDatabase instance; // Singleton instance
     private final GroupStorage groupStorage;
- 
+
     private ArrayList<Group> Groups;
 
     // Private constructor to prevent direct instantiation
@@ -22,19 +23,11 @@ public final class GroupDatabase {
         return instance;
     }
 
-    public void setGroups(ArrayList<Group> Groups) {
-        this.Groups = Groups;
-    }    
-
-   
     public boolean saveGroupstofile() {
         return groupStorage.saveToFile(Groups);
     }
 
-    
     public ArrayList<Group> loadGroups() {
-        return groupStorage.loadFromFile();
+        return Groups;
     }
-
-
 }

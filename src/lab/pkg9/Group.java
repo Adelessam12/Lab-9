@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author Mahmoud Waleed
  */
-class Group {
+public class Group {
     private final String groupId;
     private final String name;
 

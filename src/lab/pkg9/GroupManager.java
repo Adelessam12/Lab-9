@@ -56,19 +56,5 @@ class GroupManager {
         return null;
     }
 
-    public static void main(String args[]) {
-        Date currentDate = new Date();
-        User admin = UserFactory.createUser("ahm@", "ahm", "mahPass", currentDate);
-        Group group1 = GroupManager.createGroup("123", "TheGroup", "desc", "C:\\programming 2\\connectHub\\OIP.jpeg", admin.getUserId());
-        User mah = UserFactory.createUser("mah@", "mah", "mahPass", currentDate);
-        System.out.println("Mah Created");
-        System.out.println(group1.getGroupRequests());
-        System.out.println(group1.getUsers());
-        System.out.println("Mah Request");
-        requestToJoin(mah, group1);
-        admin.getGroups().get(group1.getGroupId()).
-        System.out.println(group1.getGroupRequests());
-        System.out.println(group1.getUsers());
 
-    }
 }

@@ -5,7 +5,6 @@
 package lab.Frontend;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -26,11 +25,12 @@ import lab.pkg9.Database;
 import lab.pkg9.DatabaseFactory;
 import lab.pkg9.FriendManager;
 import lab.pkg9.FriendshipService;
-import lab.pkg9.Group;
 import lab.pkg9.GroupDatabase;
 import lab.pkg9.GroupDatabaseFactory;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
+import lab.pkg9.Group;
+
 
 /**
  *
@@ -43,8 +43,9 @@ public final class NewsFeed extends javax.swing.JFrame {
      *
      * @param user
      */
+    
     Database database;
-    GroupDatabase gdb;
+    GroupDatabase groupDatabase;
     User user;
     ContentCreator Cm;
     FriendshipService friendService;
@@ -56,7 +57,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
         profile.setIcon(new ImageIcon(scaledImage));
         this.database = DatabaseFactory.createDatabase();
-        this.gdb= GroupDatabaseFactory.createDatabase();
+        this.groupDatabase= GroupDatabaseFactory.createDatabase();
         this.user = user;
         this.Cm = Cm;
         friendService = new FriendshipService(user);
@@ -849,13 +850,15 @@ public final class NewsFeed extends javax.swing.JFrame {
     private void loadGroups() {
         ContainerPanel1.removeAll();    
         if(user.getGroups()!=null){
-        
-        for(String groupid:user.getGroups())
+      ArrayList<String> keys = new ArrayList<>(user.getGroups().keySet());
+      
+       
+        for(String groupid : keys )
         {
-            for(Group group : gdb.getGroups())
-                if(group.getGroupID().equals(groupid))
+            for(Group group : groupDatabase.loadGroups())
+                if(group.getGroupId().equals(groupid))
                 {
-                    ContainerPanel1.add(new GroupPanel(group.getGroupName(),group.getImagePath()));
+                    ContainerPanel1.add(new GroupPanel(group.getName(),group.getGroupPhoto()));
                 }
         }
         
