@@ -909,7 +909,7 @@ public final class NewsFeed extends javax.swing.JFrame {
      public void loadGroupSuggestions() {
         container2Panel.removeAll();
 
-        ArrayList<User> suggestions;
+        ArrayList<User> suggestions = null;
 
         for (User suggestion : suggestions) {
             if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId()) && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggestion.getUserId())) {

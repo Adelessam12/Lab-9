@@ -9,20 +9,22 @@ package lab.pkg9;
  */
 public class GroupAdmin extends GroupCoAdmin implements adminGroupFeatures, GroupRole {
 
-    private Group group;
+    private Group group2;
     private String adminId;
 
     public GroupAdmin(String adminId, Group group) {
         super(adminId, group);
+        this.group2=group;
+        this.adminId=adminId;
     }
 
     @Override
     public void promoteToCoAdmin(String memberId) {
-        if (group.getUsers().containsKey(memberId) && !memberId.equals(group.getAdminId())) {
+        if (group2.getUsers().containsKey(memberId) && !memberId.equals(group2.getAdminId())) {
 
-            if (group.getUsers().get(memberId).contains("Member")) {
-                group.getUsers().put(memberId, "CoAdmin");
-                UserManager.findUser(memberId).getGroups().put(group.getGroupId(), new GroupCoAdmin(memberId, group));
+            if (group2.getUsers().get(memberId).contains("Member")) {
+                group2.getUsers().put(memberId, "CoAdmin");
+                UserManager.findUser(memberId).getGroups().put(group2.getGroupId(), new GroupCoAdmin(memberId, group2));
                 GroupManager.saveAll();
             }
         }
@@ -30,10 +32,10 @@ public class GroupAdmin extends GroupCoAdmin implements adminGroupFeatures, Grou
 
     @Override
     public void demoteToMember(String memberId) {
-        if (group.getUsers().containsKey(memberId) && !memberId.equals(group.getAdminId())) {
-            if (group.getUsers().get(memberId).contains("CoAdmin")) {
-                group.getUsers().put(memberId, "Member");
-                UserManager.findUser(memberId).getGroups().put(group.getGroupId(), new GroupMember(memberId, group));
+        if (group2.getUsers().containsKey(memberId) && !memberId.equals(group2.getAdminId())) {
+            if (group2.getUsers().get(memberId).contains("CoAdmin")) {
+                group2.getUsers().put(memberId, "Member");
+                UserManager.findUser(memberId).getGroups().put(group2.getGroupId(), new GroupMember(memberId, group2));
                 GroupManager.saveAll();
             }
         }
@@ -41,11 +43,11 @@ public class GroupAdmin extends GroupCoAdmin implements adminGroupFeatures, Grou
 
     @Override
     public void deleteGroup() {
-        for (String userId : group.getUsers().keySet()) {
+        for (String userId : group2.getUsers().keySet()) {
             removeMember(userId);
         }
-        UserManager.findUser(adminId).getGroups().remove(group.getGroupId());
-        GroupManager.removeGroup(group);
+        UserManager.findUser(adminId).getGroups().remove(group2.getGroupId());
+        GroupManager.removeGroup(group2);
         GroupManager.saveAll();
 
     }
@@ -53,28 +55,28 @@ public class GroupAdmin extends GroupCoAdmin implements adminGroupFeatures, Grou
     @Override
     public void leaveGroup() {
 
-        if (group.getUsers().isEmpty()) {
+        if (group2.getUsers().isEmpty()) {
             deleteGroup();
             return;
         }
-        for (String userID : group.getUsers().keySet()) {
-            if (group.getUsers().get(userID).contains("CoAdmin")) {
-                group.setAdminId(userID);
-                UserManager.findUser(adminId).getGroups().remove(group.getGroupId());
+        for (String userID : group2.getUsers().keySet()) {
+            if (group2.getUsers().get(userID).contains("CoAdmin")) {
+                group2.setAdminId(userID);
+                UserManager.findUser(adminId).getGroups().remove(group2.getGroupId());
                 GroupManager.saveAll();
                 return;
             }
         }
-        UserManager.findUser(adminId).getGroups().remove(group.getGroupId());
-        group.setAdminId(group.getUsers().keySet().iterator().next());//sets first normal member to admin
+        UserManager.findUser(adminId).getGroups().remove(group2.getGroupId());
+        group2.setAdminId(group2.getUsers().keySet().iterator().next());//sets first normal member to admin
         GroupManager.saveAll();
     }
 
     @Override
     public void removeMember(String memberId) {
-        if (group.getUsers().containsKey(memberId) && !memberId.equals(group.getAdminId())) {
-            group.getUsers().remove(memberId);
-            UserManager.findUser(memberId).getGroups().remove(group.getGroupId());
+        if (group2.getUsers().containsKey(memberId) && !memberId.equals(group2.getAdminId())) {
+            group2.getUsers().remove(memberId);
+            UserManager.findUser(memberId).getGroups().remove(group2.getGroupId());
             GroupManager.saveAll();
         }
 

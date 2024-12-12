@@ -16,7 +16,7 @@ public class User {
     private Profile profile;
     
     //private final ArrayList<String> groups;
-    private final Map<String, GroupMember> groups;
+    private  Map<String, GroupMember> groups;
     
     private final FriendManagable friendManager;
     private final ContentManagable postManager;
@@ -43,6 +43,10 @@ public class User {
         this.postManager = postManager;
         this.storyManager = storyManager;
         groups = new HashMap<>();
+    }
+
+    public void setGroups(Map<String, GroupMember> groups) {
+        this.groups = groups;
     }
 
     public Map<String, GroupMember> getGroups() {

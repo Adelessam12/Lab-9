@@ -27,252 +27,247 @@ public class GroupPage extends javax.swing.JFrame {
     /**
      * Creates new form GroupPage
      */
-    Group group ;
+    Group group;
     User user;
+
     public GroupPage(Group group, User user) {
-        this.group=group;
+        this.group = group;
         this.user = user;
         initComponents();
-       GroupRole role= user.getGroups().get(group.getGroupId());
-               if( role instanceof GroupAdmin)
-               {
-                           loadAdminpage(new GroupAdmin(user.getUserId(), group));
+        GroupRole role = user.getGroups().get(group.getGroupId());
+        if (role instanceof GroupAdmin) {
+            loadAdminpage(new GroupAdmin(user.getUserId(), group));
 
-               }
-               else if(role instanceof GroupCoAdmin)
-                   
-               {
-                   loadcoadminPage(new GroupCoAdmin(user.getUserId(), group));
-               }
-               else if(role instanceof GroupMember)
-               {
-                   loadGroupsPage();
-               }
+        } else if (role instanceof GroupCoAdmin) {
+            loadcoadminPage(new GroupCoAdmin(user.getUserId(), group));
+        } else if (role instanceof GroupMember) {
+            loadGroupsPage();
+        }
     }
 
     public GroupPage() {
     }
-  public void  loadcoadminPage(GroupCoAdmin coadmin)
-    {   loadGroup();
-           loadposts();
-           loadcoadminmembers(coadmin);
+
+    public void loadcoadminPage(GroupCoAdmin coadmin) {
+        loadGroup();
+        loadposts();
+        loadcoadminmembers(coadmin);
     }
-public void loadGroupsPage()
-{   loadGroup();
-    loadposts();
-    loadnobuttonmembers();
-    
-}
-public void loadnobuttonposts()
-{
+
+    public void loadGroupsPage() {
+        loadGroup();
+        loadposts();
+        loadnobuttonmembers();
+
+    }
+
+    public void loadnobuttonposts() {
         groupPosts.removeAll(); // Clear previous posts before reloading
-    ArrayList<Post> posts = new ArrayList<>();
+        ArrayList<Post> posts = new ArrayList<>();
 
-    // Collect all posts from the group
-    for (ArrayList<Post> key : group.getPosts().values()) {
-        posts.addAll(key);
+        // Collect all posts from the group
+        for (Post key : group.getPosts()) {
+            posts.add(key);
+        }
+
+        // Sort posts by timestamp (newest first)
+        Collections.sort(posts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
+
+        // Loop through each post to create panels
+        for (Content post : posts) {
+            String username = UserManager.findUser(post.getAuthorId()).getUsername();
+            String profilePath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
+
+            // Create a PostPanel for the post
+            PostPanel postPanel = new PostPanel(username, profilePath, post.getContent(), post.getImagePath());
+
+            // Add the post panel to the groupPosts panel
+            groupPosts.add(postPanel);
+        }
+
+        // Refresh the groupPosts panel
+        groupPosts.revalidate();
+        groupPosts.repaint();
     }
 
-    // Sort posts by timestamp (newest first)
-    Collections.sort(posts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
-
-    // Loop through each post to create panels
-    for (Content post : posts) {
-        String username = UserManager.findUser(post.getAuthorId()).getUsername();
-        String profilePath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
-
-        // Create a PostPanel for the post
-        PostPanel postPanel = new PostPanel(username, profilePath, post.getContent(), post.getImagePath());
-
-    
-        // Add the post panel to the groupPosts panel
-        groupPosts.add(postPanel);
-    }
-
-    // Refresh the groupPosts panel
-    groupPosts.revalidate();
-    groupPosts.repaint();
-}
-public void loadnobuttonmembers()
-{
-    for(String id : group.getUsers().keySet())
-    {  User user =UserManager.findUser(id);
-        if(!user.getUserId().contains(id))
-        {
-            membersPanel.add(new EntryPanel(user.getUsername(), user.getProfile().getProfilePhotoPath()));
+    public void loadnobuttonmembers() {
+        for (String id : group.getUsers().keySet()) {
+            User user = UserManager.findUser(id);
+            if (!user.getUserId().contains(id)) {
+                membersPanel.add(new EntryPanel(user.getUsername(), user.getProfile().getProfilePhotoPath()));
+            }
         }
     }
-}
-public void loadAdminpage(GroupAdmin admin)
-{
-    loadGroup();
-    loadposts();
-    loadmembers(admin);
-}
-public void loadGroup()
-{
-    ProfilePanel Groupimage = (ProfilePanel) groupPhoto ;
+
+    public void loadAdminpage(GroupAdmin admin) {
+        loadGroup();
+        loadposts();
+        loadmembers(admin);
+    }
+
+    public void loadGroup() {
+        ProfilePanel Groupimage = (ProfilePanel) groupPhoto;
         Groupimage.setProfileImage(group.getGroupPhoto());
-         String Description = group.getDescription();
+        String Description = group.getDescription();
 
         // Set the bio text into the JTextPane
         jTextField1.setText(Description);
         jTextField1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-        
-}
-public void loadposts() {
-    groupPosts.removeAll(); // Clear previous posts before reloading
-    ArrayList<Post> posts = new ArrayList<>();
 
-    // Collect all posts from the group
-    for (ArrayList<Post> key : group.getPosts().values()) {
-        posts.addAll(key);
     }
 
-    // Sort posts by timestamp (newest first)
-    Collections.sort(posts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
+    public void loadposts() {
+        groupPosts.removeAll(); // Clear previous posts before reloading
+        ArrayList<Post> posts = new ArrayList<>();
 
-    // Loop through each post to create panels
-    for (Content post : posts) {
-        String username = UserManager.findUser(post.getAuthorId()).getUsername();
-        String profilePath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
+        // Collect all posts from the group
+        for (Post key : group.getPosts()) {
+            posts.add(key);
+        }
 
-        // Create a PostPanel for the post
-        PostPanel postPanel = new PostPanel(username, profilePath, post.getContent(), post.getImagePath());
+        // Sort posts by timestamp (newest first)
+        Collections.sort(posts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
 
-        // Create Edit button
-        JButton editButton = new JButton("Edit");
-        GroupAdmin groupadmin= new GroupAdmin(group.getAdminId(), group);
-        editButton.addActionListener(e -> {
-            // Handle post editing logic here
-            groupadmin.editPost(post.getAuthorId(), profilePath, username);
-        });
+        // Loop through each post to create panels
+        for (Content post : posts) {
+            String username = UserManager.findUser(post.getAuthorId()).getUsername();
+            String profilePath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
 
-        // Create Remove button
-        JButton removeButton = new JButton("Remove");
-        removeButton.addActionListener(e -> {
-            // Handle post removal logic here
-        });
+            // Create a PostPanel for the post
+            PostPanel postPanel = new PostPanel(username, profilePath, post.getContent(), post.getImagePath());
 
-        // Add buttons to the post panel
-        postPanel.add(editButton);
-        postPanel.add(removeButton);
+            // Create Edit button
+            JButton editButton = new JButton("Edit");
+            GroupAdmin groupadmin = new GroupAdmin(group.getAdminId(), group);
+            editButton.addActionListener(e -> {
+                // Handle post editing logic here
+                groupadmin.editPost((Post) post, profilePath, username);
+            });
 
-        // Add the post panel to the groupPosts panel
-        groupPosts.add(postPanel);
+            // Create Remove button
+            JButton removeButton = new JButton("Remove");
+            removeButton.addActionListener(e -> {
+                // Handle post removal logic here
+            });
+
+            // Add buttons to the post panel
+            postPanel.add(editButton);
+            postPanel.add(removeButton);
+
+            // Add the post panel to the groupPosts panel
+            groupPosts.add(postPanel);
+        }
+
+        // Refresh the groupPosts panel
+        groupPosts.revalidate();
+        groupPosts.repaint();
     }
 
-    // Refresh the groupPosts panel
-    groupPosts.revalidate();
-    groupPosts.repaint();
-}
-public void loadcoadminmembers(GroupCoAdmin coadmin)
-{
+    public void loadcoadminmembers(GroupCoAdmin coadmin) {
         membersPanel.removeAll(); // Clear the panel before loading members
 
-    for (String id : group.getUsers().keySet()) {
-        User user = UserManager.findUser(id);
-        
-        if (!user.getUserId().contains(id)) {
-            EntryPanel panel = new EntryPanel(user.getUsername(), user.getProfile().getProfilePhotoPath());
+        for (String id : group.getUsers().keySet()) {
+            User user = UserManager.findUser(id);
 
-            // Create Promote button
-            JButton promoteButton = new JButton("Promote");
-            promoteButton.addActionListener(e -> {
-                // Handle promote logic
-               
-              
-                loadcoadminmembers(coadmin); // Refresh the members panel
-            });
+            if (!user.getUserId().contains(id)) {
+                EntryPanel panel = new EntryPanel(user.getUsername(), user.getProfile().getProfilePhotoPath());
+                // Create Promote button
+                JButton promoteButton = new JButton("Promote");
+                promoteButton.addActionListener(e -> {
+                    // Handle promote logic
 
-            // Create Demote button
-            JButton demoteButton = new JButton("Demote");
-            demoteButton.addActionListener(e -> {
-                // Handle demote logic
-       GroupRole role= user.getGroups().get(group.getGroupId());
-                if (role instanceof GroupMember) {
-                    coadmin.removeMember(user.getUserId());
-                    System.out.println(user.getUsername() + " demoted to Member.");
-                }
-                loadcoadminmembers(coadmin); // Refresh the members panel
-            });
+                    loadcoadminmembers(coadmin); // Refresh the members panel
+                });
 
-            // Create Remove button
-            JButton removeButton = new JButton("Remove");
-            removeButton.addActionListener(e -> {
-                // Handle remove logic
-                coadmin.removeMember(id);
-                
-                System.out.println(user.getUsername() + " removed from the group.");
-                loadcoadminmembers(coadmin); // Refresh the members panel
-            });
+                // Create Demote button
+                JButton demoteButton = new JButton("Demote");
+                demoteButton.addActionListener(e -> {
+                    // Handle demote logic
+                    GroupRole role = user.getGroups().get(group.getGroupId());
+                    if (role instanceof GroupMember) {
+                        coadmin.removeMember(user.getUserId());
+                        System.out.println(user.getUsername() + " demoted to Member.");
+                    }
+                    loadcoadminmembers(coadmin); // Refresh the members panel
+                });
 
-            // Add buttons to the EntryPanel
-            panel.add(promoteButton);
-            panel.add(demoteButton);
-            panel.add(removeButton);
+                // Create Remove button
+                JButton removeButton = new JButton("Remove");
+                removeButton.addActionListener(e -> {
+                    // Handle remove logic
+                    coadmin.removeMember(id);
 
-            // Add EntryPanel to membersPanel
-            membersPanel.add(panel);
+                    System.out.println(user.getUsername() + " removed from the group.");
+                    loadcoadminmembers(coadmin); // Refresh the members panel
+                });
+
+                // Add buttons to the EntryPanel
+                panel.add(promoteButton);
+                panel.add(demoteButton);
+                panel.add(removeButton);
+
+                // Add EntryPanel to membersPanel
+                membersPanel.add(panel);
+            }
         }
+
+        membersPanel.revalidate(); // Refresh the UI
+        membersPanel.repaint();
     }
 
-    membersPanel.revalidate(); // Refresh the UI
-    membersPanel.repaint();
-}
-public void loadmembers(GroupAdmin admin) {
-    membersPanel.removeAll(); // Clear the panel before loading members
+    public void loadmembers(GroupAdmin admin) {
+        membersPanel.removeAll(); // Clear the panel before loading members
 
-    for (String id : group.getUsers().keySet()) {
-        User user = UserManager.findUser(id);
-        
-        if (!user.getUserId().contains(id)) {
-            EntryPanel panel = new EntryPanel(user.getUsername(), user.getProfile().getProfilePhotoPath());
+        for (String id : group.getUsers().keySet()) {
+            User user = UserManager.findUser(id);
 
-            // Create Promote button
-            JButton promoteButton = new JButton("Promote");
-            promoteButton.addActionListener(e -> {
-                // Handle promote logic
-               
-              
-                loadmembers(admin); // Refresh the members panel
-            });
+            if (!user.getUserId().contains(id)) {
+                EntryPanel panel = new EntryPanel(user.getUsername(), user.getProfile().getProfilePhotoPath());
 
-            // Create Demote button
-            JButton demoteButton = new JButton("Demote");
-            demoteButton.addActionListener(e -> {
-                // Handle demote logic
-       GroupRole role= user.getGroups().get(group.getGroupId());
-                if (role instanceof GroupCoAdmin) {
-                    admin.demoteToMember(user.getUserId());
-                    System.out.println(user.getUsername() + " demoted to Member.");
-                }
-                loadmembers(admin); // Refresh the members panel
-            });
+                // Create Promote button
+                JButton promoteButton = new JButton("Promote");
+                promoteButton.addActionListener(e -> {
+                    // Handle promote logic
 
-            // Create Remove button
-            JButton removeButton = new JButton("Remove");
-            removeButton.addActionListener(e -> {
-                // Handle remove logic
-                admin.removeMember(id);
-                
-                System.out.println(user.getUsername() + " removed from the group.");
-                loadmembers(admin); // Refresh the members panel
-            });
+                    loadmembers(admin); // Refresh the members panel
+                });
 
-            // Add buttons to the EntryPanel
-            panel.add(promoteButton);
-            panel.add(demoteButton);
-            panel.add(removeButton);
+                // Create Demote button
+                JButton demoteButton = new JButton("Demote");
+                demoteButton.addActionListener(e -> {
+                    // Handle demote logic
+                    GroupRole role = user.getGroups().get(group.getGroupId());
+                    if (role instanceof GroupCoAdmin) {
+                        admin.demoteToMember(user.getUserId());
+                        System.out.println(user.getUsername() + " demoted to Member.");
+                    }
+                    loadmembers(admin); // Refresh the members panel
+                });
 
-            // Add EntryPanel to membersPanel
-            membersPanel.add(panel);
+                // Create Remove button
+                JButton removeButton = new JButton("Remove");
+                removeButton.addActionListener(e -> {
+                    // Handle remove logic
+                    admin.removeMember(id);
+
+                    System.out.println(user.getUsername() + " removed from the group.");
+                    loadmembers(admin); // Refresh the members panel
+                });
+
+                // Add buttons to the EntryPanel
+                panel.add(promoteButton);
+                panel.add(demoteButton);
+                panel.add(removeButton);
+
+                // Add EntryPanel to membersPanel
+                membersPanel.add(panel);
+            }
         }
+
+        membersPanel.revalidate(); // Refresh the UI
+        membersPanel.repaint();
     }
 
-    membersPanel.revalidate(); // Refresh the UI
-    membersPanel.repaint();
-}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -363,40 +358,6 @@ public void loadmembers(GroupAdmin admin) {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GroupPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GroupPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GroupPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GroupPage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GroupPage().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createPost;

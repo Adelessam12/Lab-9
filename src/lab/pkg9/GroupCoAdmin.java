@@ -17,6 +17,8 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
     
     public GroupCoAdmin(String coAdminID, Group group) {
        super(coAdminID,group);  
+       this.coAdminID=coAdminID;
+       this.group=group;
     }
 
     @Override
