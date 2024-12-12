@@ -858,7 +858,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             for(Group group : groupDatabase.loadGroups())
                 if(group.getGroupId().equals(groupid))
                 {
-                    ContainerPanel1.add(new GroupPanel(group.getName(),group.getGroupPhoto()));
+                    ContainerPanel1.add(new GroupPanel(group,  user));
                 }
         }
         

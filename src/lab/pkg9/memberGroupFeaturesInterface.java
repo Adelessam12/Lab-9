@@ -9,6 +9,6 @@ package lab.pkg9;
  * @author Mahmoud Waleed
  */
 public interface memberGroupFeaturesInterface {
-    public void addPost(String content);
+    public void addPost(Post content);
     public void leaveGroup();
 }

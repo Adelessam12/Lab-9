@@ -8,7 +8,7 @@ package lab.pkg9;
  *
  * @author DELL
  */
-class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, GroupRole {
+public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, GroupRole {
 
    private String coAdminID;
    private Group group;
