@@ -14,8 +14,7 @@ import lab.pkg9.Group;
 import lab.pkg9.Post;
 import lab.pkg9.UserManager;
 import lab.pkg9.GroupAdmin;
-import lab.pkg9.GroupCoAdmin;
-import lab.pkg9.GroupMember;
+import lab.pkg9.GroupRole;
 import lab.pkg9.User;
 
 /**
@@ -33,7 +32,12 @@ public class GroupPage extends javax.swing.JFrame {
         this.group=group;
         this.user = user;
         initComponents();
-        loadGroupsPage();
+       GroupRole role= user.getGroups().get(group);
+               if( role instanceof GroupAdmin)
+               {
+                           loadAdminpage();
+
+               }
     }
 
     public GroupPage() {
@@ -44,6 +48,12 @@ public void loadGroupsPage()
    loadposts();
     loadmembers();
     
+}
+public void loadAdminpage()
+{
+    loadGroup();
+    loadposts();
+    loadm
 }
 public void loadGroup()
 {
@@ -88,7 +98,6 @@ public void loadposts() {
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(e -> {
             // Handle post removal logic here
-            groupadmin.removeMember();
         });
 
         // Add buttons to the post panel
