@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
  public class GroupMember implements GroupRole, memberGroupFeaturesInterface{
 
+
        private final String memberID; 
        private final Group group;
 
