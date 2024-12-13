@@ -5,6 +5,7 @@
 package lab.Frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
@@ -161,6 +162,7 @@ public class GroupPage extends javax.swing.JFrame {
                 buttonPanel.add(editButton);
                 buttonPanel.add(removeButton);
                 postPanel.add(buttonPanel);
+
             } else if (role instanceof GroupCoAdmin) {
                 GroupCoAdmin groupCoadmin = (GroupCoAdmin) user.getGroups().get(group.getGroupId());
                 editButton.addActionListener(e -> {
@@ -176,8 +178,11 @@ public class GroupPage extends javax.swing.JFrame {
                     postPanel.repaint();
 
                 });
-                postPanel.add(editButton);
-                postPanel.add(removeButton);
+JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the right
+buttonPanel.add(editButton);
+buttonPanel.add(removeButton);
+
+postPanel.add(buttonPanel);
             }
 
             // Add buttons to the post panel
