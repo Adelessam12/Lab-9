@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import lab.pkg9.ContentCreator;
+import lab.pkg9.ContentManager;
 import lab.pkg9.User;
 
 /**
@@ -19,18 +20,15 @@ import lab.pkg9.User;
 public class CreatePost extends javax.swing.JFrame {
     private final User user;
     private String imagePath;
-    private final ContentCreator contentManager;
     /**
      * Creates new form create_post
      * @param user
-     * @param contentManager
      */
 
 
-    public CreatePost(User user, ContentCreator contentManager) {
+    public CreatePost(User user) {
         this.user = user;
         imagePath = null;
-        this.contentManager = contentManager;
         initComponents();       
     }
 
@@ -140,7 +138,7 @@ public class CreatePost extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
-        contentManager.createPost(user, content, imagePath);
+        ContentCreator.createPost(user, content, imagePath);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 

@@ -4,9 +4,13 @@
  */
 package lab.Frontend;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JSeparator;
 import lab.pkg9.Content;
 import lab.pkg9.Group;
 import lab.pkg9.Post;
@@ -29,15 +33,15 @@ public class GroupPage extends javax.swing.JFrame {
      */
     private Group group;
     private User user;
+    GroupRole role;
 
     public GroupPage(Group group, User user) {
         this.group = group;
         this.user = user;
         initComponents();
-        GroupRole role = user.getGroups().get(group.getGroupId());
+        role = user.getGroups().get(group.getGroupId());
         if (role instanceof GroupAdmin) {
             loadAdminpage(new GroupAdmin(user.getUserId(), group.getGroupId()));
-
         } else if (role instanceof GroupCoAdmin) {
             loadcoadminPage(new GroupCoAdmin(user.getUserId(), group.getGroupId()));
         } else if (role instanceof GroupMember) {
@@ -45,7 +49,10 @@ public class GroupPage extends javax.swing.JFrame {
         }
     }
 
-    public GroupPage() {
+    private void loadAdminpage(GroupAdmin admin) {
+        loadGroup();
+        loadposts();
+        loadmembers(admin);
     }
 
     private void loadcoadminPage(GroupCoAdmin coadmin) {
@@ -58,6 +65,20 @@ public class GroupPage extends javax.swing.JFrame {
         loadGroup();
         loadposts();
         loadnobuttonmembers();
+
+    }
+
+    public void loadGroup() {
+
+        ProfilePanel Groupimage = (ProfilePanel) groupPhoto;
+        if (group.getGroupPhoto() != null) {
+            Groupimage.setProfileImage(group.getGroupPhoto());
+        }
+        String Description = group.getDescription();
+
+        // Set the bio text into the JTextPane
+        jTextField1.setText(Description);
+        jTextField1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
 
     }
 
@@ -90,49 +111,21 @@ public class GroupPage extends javax.swing.JFrame {
         groupPosts.repaint();
     }
 
-    public void loadnobuttonmembers() {
-        for (String id : group.getUsers().keySet()) {
-            User user1 = UserManager.findUser(id);
-            if (!user1.getUserId().contains(id)) {
-                membersPanel.add(new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath()));
-            }
-        }
-    }
-
-    private void loadAdminpage(GroupAdmin admin) {
-        loadGroup();
-        loadposts();
-        loadmembers(admin);
-    }
-
-    public void loadGroup() {
-        
-        ProfilePanel Groupimage = (ProfilePanel) groupPhoto;
-        if(group.getGroupPhoto() != null)
-            Groupimage.setProfileImage(group.getGroupPhoto());
-        String Description = group.getDescription();
-
-        // Set the bio text into the JTextPane
-        jTextField1.setText(Description);
-        jTextField1.setFont(new java.awt.Font("Arial", java.awt.Font.PLAIN, 20));
-
-    }
-
     public void loadposts() {
         groupPosts.removeAll(); // Clear previous posts before reloading
         ArrayList<Post> posts = new ArrayList<>();
 
         // Collect all posts from the group
-        for (Post key : group.getPosts()) {
-            posts.add(key);
+        for (Post post : group.getPosts()) {
+            posts.add(post);
         }
 
         // Sort posts by timestamp (newest first)
         Collections.sort(posts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
 
         // Loop through each post to create panels
-        for (Content post : posts) {
-            String username = UserManager.findUser(post.getAuthorId()).getUsername();
+        for (Post post : posts) {
+            String username = post.getAuthorId();
             String profilePath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
 
             // Create a PostPanel for the post
@@ -140,17 +133,35 @@ public class GroupPage extends javax.swing.JFrame {
 
             // Create Edit button
             JButton editButton = new JButton("Edit");
-            GroupAdmin groupadmin = new GroupAdmin(group.getAdminId(), group.getGroupId());
-            editButton.addActionListener(e -> {
-                // Handle post editing logic here
-                groupadmin.editPost((Post) post, profilePath, username);
-            });
-
             // Create Remove button
-            JButton removeButton = new JButton("Remove");
-            removeButton.addActionListener(e -> {
-                // Handle post removal logic here
-            });
+            JButton removeButton = new JButton("Delete");
+            if (role instanceof GroupAdmin) {
+                GroupAdmin groupadmin = (GroupAdmin) user.getGroups().get(group.getGroupId());
+                editButton.addActionListener(e -> {
+                    EditPost editPost = new EditPost(groupadmin, post);
+                    editPost.setVisible(true);
+                });
+
+                removeButton.addActionListener(e -> {
+                    groupadmin.deletePost((Post) post);
+                    postPanel.remove(removeButton);
+                    postPanel.add(new JLabel("Deleted")).setFont(new Font("Arial", Font.PLAIN, 14));
+
+                });
+            } else if (role instanceof GroupCoAdmin) {
+                GroupCoAdmin groupCoadmin = (GroupCoAdmin) user.getGroups().get(group.getGroupId());
+                editButton.addActionListener(e -> {
+                    EditPost editPost = new EditPost(groupCoadmin, post);
+                    editPost.setVisible(true);
+                });
+
+                removeButton.addActionListener(e -> {
+                    groupCoadmin.deletePost((Post) post);
+                    postPanel.remove(removeButton);
+                    postPanel.add(new JLabel("Deleted")).setFont(new Font("Arial", Font.PLAIN, 14));
+
+                });
+            }
 
             // Add buttons to the post panel
             postPanel.add(editButton);
@@ -165,65 +176,102 @@ public class GroupPage extends javax.swing.JFrame {
         groupPosts.repaint();
     }
 
-    public void loadcoadminmembers(GroupCoAdmin coadmin) {
-        membersPanel.removeAll(); // Clear the panel before loading members
-
+    public void loadnobuttonmembers() {
+        membersPanel.removeAll();
         for (String id : group.getUsers().keySet()) {
             User user1 = UserManager.findUser(id);
-
-            if (!user1.getUserId().contains(id)) {
-                EntryPanel panel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
-                // Create Promote button
-                JButton promoteButton = new JButton("Promote");
-                promoteButton.addActionListener(e -> {
-                    // Handle promote logic
-
-                    loadcoadminmembers(coadmin); // Refresh the members panel
-                });
-
-                // Create Demote button
-                JButton demoteButton = new JButton("Demote");
-                demoteButton.addActionListener(e -> {
-                    // Handle demote logic
-                    GroupRole role = user1.getGroups().get(group.getGroupId());
-                    if (role instanceof GroupMember) {
-                        coadmin.removeMember(user1.getUserId());
-                        System.out.println(user1.getUsername() + " demoted to Member.");
-                    }
-                    loadcoadminmembers(coadmin); // Refresh the members panel
-                });
-
-                // Create Remove button
-                JButton removeButton = new JButton("Remove");
-                removeButton.addActionListener(e -> {
-                    // Handle remove logic
-                    coadmin.removeMember(id);
-
-                    System.out.println(user1.getUsername() + " removed from the group.");
-                    loadcoadminmembers(coadmin); // Refresh the members panel
-                });
-
-                // Add buttons to the EntryPanel
-                panel.add(promoteButton);
-                panel.add(demoteButton);
-                panel.add(removeButton);
-
-                // Add EntryPanel to membersPanel
-                membersPanel.add(panel);
+            if (!user.getUserId().equals(id)) {
+                membersPanel.add(new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath()));
             }
         }
-
-        membersPanel.revalidate(); // Refresh the UI
+        membersPanel.revalidate();
         membersPanel.repaint();
     }
 
-    public void loadmembers(GroupAdmin admin) {
+    public void loadcoadminmembers(GroupCoAdmin coadmin) {
+        membersPanel.removeAll(); // Clear the panel before loading members
+        ArrayList<User> memberUsers = new ArrayList<>();
+        ArrayList<User> restUsers = new ArrayList<>();
+        restUsers.add(UserManager.findUser(group.getAdminId()));
+        for (String id : group.getUsers().keySet()) {
+            if (!user.getUserId().equals(id)) {
+                User user1 = UserManager.findUser(id);
+                if (group.getUsers().get(id).equals("Member")) {
+                    memberUsers.add(user1);
+                } else if (group.getUsers().get(id).equals("CoAdmin")) {
+                    restUsers.add(user1);
+                }
+            }
+        }
+        for(User user1: restUsers){
+            membersPanel.add(new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath()));
+            JSeparator separator = new JSeparator();
+            membersPanel.add(separator, BorderLayout.SOUTH);
+        }
+        for(User user1: memberUsers){
+            EntryPanel entrypanel = new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath());
+             JButton removeButton = new JButton("Remove");
+             removeButton.addActionListener(e -> {
+                 coadmin.removeMember(user1.getUserId());
+                 entrypanel.remove(removeButton);
+                 entrypanel.add(new JLabel("Removed")).setFont(new Font("Arial", Font.PLAIN, 14));           
+              });
+             entrypanel.add(removeButton);                        
+             membersPanel.add(entrypanel);
+             JSeparator separator = new JSeparator();
+            membersPanel.add(separator, BorderLayout.SOUTH);
+        }
+        
+        membersPanel.revalidate();
+        membersPanel.repaint();
+        //JButton promoteButton = new JButton("Promote");
+        //JButton demoteButton = new JButton("Demote");
+//
+//            promoteButton.addActionListener(e -> {
+//                // Handle promote logic
+//
+//                loadcoadminmembers(coadmin); // Refresh the members panel
+//            });
+//
+//            demoteButton.addActionListener(e -> {
+//                // Handle demote logic
+//                if (role instanceof GroupMember) {
+//                    coadmin.removeMember(user1.getUserId());
+//                    System.out.println(user1.getUsername() + " demoted to Member.");
+//                }
+//                loadcoadminmembers(coadmin); // Refresh the members panel
+//            });
+//
+//            // Create Remove button
+//            JButton removeButton = new JButton("Remove");
+//            removeButton.addActionListener(e -> {
+//                // Handle remove logic
+//                coadmin.removeMember(id);
+//
+//                System.out.println(user1.getUsername() + " removed from the group.");
+//                loadcoadminmembers(coadmin); // Refresh the members panel
+//            });
+//
+//            // Add buttons to the EntryPanel
+//            panel.add(promoteButton);
+//            panel.add(demoteButton);
+//            panel.add(removeButton);
+//
+//            // Add EntryPanel to membersPanel
+//            membersPanel.add(panel);
+//        }
+//
+//        membersPanel.revalidate(); // Refresh the UI
+//        membersPanel.repaint();
+    }
+
+    public void loadmembers(GroupAdmin admin) { /////// not done yet, dont do it, fix promote and demote. look a the pdf
         membersPanel.removeAll(); // Clear the panel before loading members
 
         for (String id : group.getUsers().keySet()) {
             User user1 = UserManager.findUser(id);
 
-            if (!user1.getUserId().contains(id)) {
+            if (!user.getUserId().equals(id)) {
                 EntryPanel panel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
 
                 // Create Promote button
@@ -307,6 +355,14 @@ public class GroupPage extends javax.swing.JFrame {
         groupPosts.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         groupPosts.setLayout(new javax.swing.BoxLayout(groupPosts, javax.swing.BoxLayout.Y_AXIS));
 
+        jTextField1.setEditable(false);
+        jTextField1.setBackground(java.awt.SystemColor.controlHighlight);
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Description");
 
         createPost.setText("Create Post");
@@ -359,6 +415,10 @@ public class GroupPage extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

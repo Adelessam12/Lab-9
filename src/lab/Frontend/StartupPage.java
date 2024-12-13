@@ -24,8 +24,6 @@ public class StartupPage extends javax.swing.JFrame {
 
      private final Database db = DatabaseFactory.createDatabase();
 
-   
-    private final ContentCreator CM = new ContentCreator();
 
     public StartupPage() {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -100,7 +98,7 @@ public class StartupPage extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         this.dispose();
 
-        Login l = new Login(CM);
+        Login l = new Login();
         l.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed

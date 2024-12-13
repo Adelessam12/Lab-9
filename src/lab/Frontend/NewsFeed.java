@@ -49,10 +49,9 @@ public final class NewsFeed extends javax.swing.JFrame {
     Database database;
     GroupDatabase groupDatabase;
     User user;
-    ContentCreator Cm;
     FriendshipService friendService;
 
-    public NewsFeed(User user, ContentCreator Cm) {
+    public NewsFeed(User user) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
         ImageIcon originalIcon = new javax.swing.ImageIcon(user.getProfile().getProfilePhotoPath());
@@ -61,7 +60,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         this.database = DatabaseFactory.createDatabase();
         this.groupDatabase = GroupDatabaseFactory.createDatabase();
         this.user = user;
-        this.Cm = Cm;
         friendService = new FriendshipService(user);
 
         loadnewsfeed();
@@ -363,11 +361,11 @@ public final class NewsFeed extends javax.swing.JFrame {
         // Handle user choice
         if (choice == javax.swing.JOptionPane.YES_OPTION) {
             // Open CreatePost JFrame
-            CreatePost postFrame = new CreatePost(user, Cm);
+            CreatePost postFrame = new CreatePost(user);
             postFrame.setVisible(true);
         } else if (choice == javax.swing.JOptionPane.NO_OPTION) {
             // Open CreateStory JFrame
-            CreateStory storyFrame = new CreateStory(user, Cm);
+            CreateStory storyFrame = new CreateStory(user);
             storyFrame.setVisible(true);
         }
     }//GEN-LAST:event_create_content_buttonActionPerformed

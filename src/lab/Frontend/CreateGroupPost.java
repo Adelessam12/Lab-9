@@ -9,31 +9,21 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import lab.pkg9.ContentCreator;
-import lab.pkg9.User;
 
 /**
  *
  * @author DELL
  */
-public class CreateStory extends javax.swing.JFrame {
+public class CreateGroupPost extends javax.swing.JFrame {
 
-    private final User user;
     private String imagePath;
-
     /**
-     * Creates new form CreateStory
-     *
-     * @param userId
+     * Creates new form CreateGroupPost
      */
-
-    public CreateStory(User user) {
-        this.user = user;
-        imagePath = null;
+    public CreateGroupPost() {
         initComponents();
-        
+        imagePath =null;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -51,9 +41,9 @@ public class CreateStory extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Story Content");
+        jLabel1.setText("Post Content");
 
         jButton2.setText("choose image (optional)");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +87,7 @@ public class CreateStory extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37))
+                .addGap(95, 95, 95))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,18 +123,20 @@ public class CreateStory extends javax.swing.JFrame {
                 imagePath = file.getAbsolutePath();
                 ImageIcon coverPhoto = new ImageIcon(file.getAbsolutePath());
                 jLabel2.setIcon(new ImageIcon(coverPhoto.getImage().getScaledInstance(jLabel2.getWidth(), jLabel2.getHeight(), Image.SCALE_SMOOTH)));
+
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
-        ContentCreator.createStory(user, content, imagePath);
         
+        //ContentCreator.createPost(user, content, imagePath);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
