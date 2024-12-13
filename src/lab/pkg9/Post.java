@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class Post extends Content{
 
-    public Post(String postId, String authorId, String content, String imagePath, Date timestamp) {
-        super(postId, authorId, content, imagePath, timestamp);
+    public Post(String authorId, String content, String imagePath, Date timestamp) {
+        super(authorId, content, imagePath, timestamp);
     }
 
 }

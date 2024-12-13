@@ -20,6 +20,7 @@
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/FriendPanel.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/EntryPanel.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/Login.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/adminGroupFeatures.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendshipServiceInterface.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupManagable.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserStorage.java</file>
@@ -44,6 +45,7 @@
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManager.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserManager.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/PostManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/EditPost.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupRole.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupStorage.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupCreator.java</file>
@@ -60,6 +62,7 @@
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupRoleTypeAdapter.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/NotificationsPanel.java</file>
             <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/User.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/CreateGroupPost.java</file>
         </group>
     </open-files>
 </project-private>

@@ -11,4 +11,6 @@ package lab.pkg9;
 public interface GroupRole {
      void leaveGroup();
      void addPost(Post content);
+     String getMemberID();
+     String getGroupId();
 }

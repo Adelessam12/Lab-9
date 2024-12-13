@@ -5,26 +5,28 @@
 package lab.pkg9;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  *
  * @author DELL
  */
-public class Content {  
+public class Content {
+
     private final String postId;
     private final String authorId;
     private String content;
     private String imagePath;
     private final Date timestamp;
 
-    public Content(String postId, String authorId, String content, String imagePath, Date timestamp) {
-        this.postId = postId;
+    public Content(String authorId, String content, String imagePath, Date timestamp) {
+        postId = generateUniqueId("Content");
         this.authorId = authorId;
         this.content = content;
         this.imagePath = imagePath;
         this.timestamp = timestamp;
     }
-    
+
     public String getPostId() {
         return postId;
     }
@@ -36,7 +38,6 @@ public class Content {
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
     }
-    
 
     public String getAuthorId() {
         return authorId;
@@ -63,5 +64,9 @@ public class Content {
                 + ", imagePath='" + imagePath + '\''
                 + ", timestamp=" + timestamp
                 + '}';
+    }
+
+    private static String generateUniqueId(String prefix) {
+        return prefix + "ID" + UUID.randomUUID();
     }
 }
