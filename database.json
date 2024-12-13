@@ -1,42 +1,16 @@
 [
   {
-    "userId": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
+    "userId": "IDbf24369c-fe74-4e9b-89db-cba5a1081dc3",
     "email": "1",
     "username": "1",
     "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
     "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
-    "isOnline": true,
+    "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
-    "groups": {
-      "GroupIDc32b55d6-b805-4d10-aae3-cf00b4185a3a": {
-        "memberID": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
-        "group": {
-          "groupId": "GroupIDc32b55d6-b805-4d10-aae3-cf00b4185a3a",
-          "name": "mihos",
-          "description": "moooooooooooooooo",
-          "AdminId": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
-          "users": {},
-          "posts": [],
-          "groupRequests": []
-        }
-      },
-      "GroupIDeb14cf6d-55b9-4245-bc01-39e24124759f": {
-        "memberID": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
-        "group": {
-          "groupId": "GroupIDeb14cf6d-55b9-4245-bc01-39e24124759f",
-          "name": "hiiiiii",
-          "description": "byee",
-          "groupPhoto": "C:\\Users\\DELL\\Pictures\\Screenshot 2023-01-31 051554.png",
-          "AdminId": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
-          "users": {},
-          "posts": [],
-          "groupRequests": []
-        }
-      }
-    },
+    "groups": {},
     "friendManager": {
       "friendList": [],
       "blockedList": [],

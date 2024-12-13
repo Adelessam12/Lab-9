@@ -30,6 +30,7 @@ import lab.pkg9.GroupDatabaseFactory;
 import lab.pkg9.User;
 import lab.pkg9.UserManager;
 import lab.pkg9.Group;
+import lab.pkg9.GroupAdmin;
 import lab.pkg9.GroupManager;
 import lab.pkg9.GroupRole;
 //import lab.pkg9.;
@@ -440,13 +441,18 @@ public final class NewsFeed extends javax.swing.JFrame {
                 }
             }
         }
+        
+        ArrayList<Group> admingroups = new ArrayList<>();
         ArrayList<Group> joinedgroups = new ArrayList<>();
         ArrayList<Group> requestedgroups = new ArrayList<>();
         ArrayList<Group> restOfgroups = new ArrayList<>();
         for (Group groupInSearch : groupDatabase.loadGroups()) {
             if (groupInSearch.getName().toLowerCase().contains(searchText.toLowerCase())) {
                 if (user.getGroups().containsKey(groupInSearch.getGroupId())) {
-                    joinedgroups.add(groupInSearch);
+                    if(groupInSearch.getAdminId().equals(user.getUserId()))
+                        admingroups.add(groupInSearch);
+                    else
+                        joinedgroups.add(groupInSearch);
                 } else if (groupInSearch.getGroupRequests().contains(user.getUserId())) {
                     requestedgroups.add(groupInSearch);
 
@@ -463,6 +469,13 @@ public final class NewsFeed extends javax.swing.JFrame {
             JSeparator separator = new JSeparator();
             searchContainer.add(separator, BorderLayout.SOUTH);
 
+        });
+
+        admingroups.forEach(group -> {
+            JPanel entryPanel = adminGroupPanel(group);
+            searchContainer.add(entryPanel);
+            JSeparator separator = new JSeparator();
+            searchContainer.add(separator, BorderLayout.SOUTH);
         });
         
         joinedgroups.forEach(group -> {
@@ -524,7 +537,8 @@ public final class NewsFeed extends javax.swing.JFrame {
         searchContainer.revalidate();
         searchContainer.repaint();
     }//GEN-LAST:event_searchActionPerformed
-    public JPanel joinedGroupPanel(Group groupInSearch) {
+    
+     public JPanel adminGroupPanel(Group groupInSearch) {
 
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)
                 ? groupInSearch.getGroupPhoto()
@@ -533,17 +547,17 @@ public final class NewsFeed extends javax.swing.JFrame {
         entryPanel.setPreferredSize(new Dimension(200, 100));
 
         JButton viewGroupButton = new JButton("View Group");
-        JButton leaveGroupButton = new JButton("Leave Group");
+        JButton leaveGroupButton = new JButton("Delete Group");
 
         viewGroupButton.addActionListener(e -> {
             GroupPage gp = new GroupPage(groupInSearch, user);
             gp.setVisible(true);
         });
         leaveGroupButton.addActionListener(e -> {
-            GroupRole groupRole = user.getGroups().get(groupInSearch.getGroupId());
-            groupRole.leaveGroup();
+            GroupAdmin groupRole = (GroupAdmin)user.getGroups().get(groupInSearch.getGroupId());
+            groupRole.deleteGroup();
             entryPanel.remove(leaveGroupButton);
-            entryPanel.add(new JLabel("Removed"));
+            entryPanel.add(new JLabel("Deleted"));
             entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
 
 //            if(groupRole instanceof GroupAdmin){
@@ -564,6 +578,47 @@ public final class NewsFeed extends javax.swing.JFrame {
         return entryPanel;
     }
 
+    public JPanel joinedGroupPanel(Group groupInSearch) {
+
+        String profileImagePath = (groupInSearch.getGroupPhoto() != null)
+                ? groupInSearch.getGroupPhoto()
+                : null;
+        EntryPanel entryPanel = new EntryPanel(groupInSearch.getName(), profileImagePath);
+        entryPanel.setPreferredSize(new Dimension(200, 100));
+
+        JButton viewGroupButton = new JButton("View Group");
+        JButton leaveGroupButton = new JButton("Leave Group");
+
+        viewGroupButton.addActionListener(e -> {
+            GroupPage gp = new GroupPage(groupInSearch, user);
+            gp.setVisible(true);
+        });
+        leaveGroupButton.addActionListener(e -> {
+            GroupRole groupRole = user.getGroups().get(groupInSearch.getGroupId());
+            groupRole.leaveGroup();
+            entryPanel.remove(leaveGroupButton);
+            entryPanel.add(new JLabel("Left"));
+            entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
+
+//            if(groupRole instanceof GroupAdmin){
+//                GroupAdmin groupAdmin = (GroupAdmin)groupRole;
+//                
+//            }else if(groupRole instanceof GroupCoAdmin){
+//                
+//                GroupCoAdmin groupCoAdmin = (GroupCoAdmin)groupRole;
+//            }else{
+//                GroupMember groupMember = (GroupMember)groupRole;
+//            }
+            entryPanel.revalidate();
+            entryPanel.repaint();
+        });
+
+        entryPanel.add(viewGroupButton);
+        entryPanel.add(leaveGroupButton);
+        return entryPanel;
+    }
+
+    
     public JPanel requestedGroupPanel(Group groupInSearch) {
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)
                 ? groupInSearch.getGroupPhoto()

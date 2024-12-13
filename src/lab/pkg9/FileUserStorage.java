@@ -16,6 +16,7 @@ public class FileUserStorage implements UserStorage {
 
         // Create a Gson instance with custom Deserializers
         this.gson = new GsonBuilder()
+                .registerTypeAdapter(GroupRole.class, new GroupRoleTypeAdapter())
                 .registerTypeAdapter(FriendRequestManagable.class, new FriendRequestManagableDeserializer())
                 .registerTypeAdapter(FriendManagable.class, new FriendManagableDeserializer())
                 .registerTypeAdapter(ContentManagable.class, new ContentManagableDeserializer())
@@ -42,7 +43,8 @@ public class FileUserStorage implements UserStorage {
     public ArrayList<User> loadUsersFromJson() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             // Define the type of ArrayList<User>
-            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+            Type userListType = new TypeToken<ArrayList<User>>() {
+            }.getType();
             ArrayList<User> users = gson.fromJson(reader, userListType);
 
             if (users == null) {
@@ -53,7 +55,7 @@ public class FileUserStorage implements UserStorage {
         } catch (FileNotFoundException e) {
             //System.out.println("File not found: " + filename);
         } catch (IOException e) {
-          //  System.out.println("Error loading users: " + e.getMessage());
+            //  System.out.println("Error loading users: " + e.getMessage());
         }
         return new ArrayList<>(); // Return an empty list on error
     }
