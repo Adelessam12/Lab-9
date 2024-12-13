@@ -6,6 +6,7 @@ package lab.pkg9;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -20,6 +21,13 @@ class GroupManager {
     public static Group createGroup(String groupId, String name, String description, String groupPhoto, String adminId) {
         Group group = new Group(groupId, name, description, groupPhoto, adminId);
         addGroup(group);
+        if(UserManager.findUser(adminId).getGroups()==null)
+        {
+            HashMap<String,GroupMember> newmap= new HashMap<>();
+            newmap.put(adminId, new GroupAdmin(adminId, group));
+                    UserManager.findUser(adminId).setGroups(newmap);
+
+        }
         UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group));
         groupDatabase.saveGroupstofile();
         return group;
@@ -45,6 +53,7 @@ class GroupManager {
 
     public static void requestToJoin(User user, Group group) {
         group.getGroupRequests().add(user.getUserId());
+        GroupManager.saveAll();
     }
 
     public static Group findGroupById(String groupId) {

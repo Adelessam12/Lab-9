@@ -4,8 +4,6 @@
  */
 package lab.pkg9;
 
-import java.util.ArrayList;
-
 /**
  *
  * @author DELL
@@ -14,24 +12,24 @@ import java.util.ArrayList;
 
 
        private final String memberID; 
-       private final Group group;
+       private final Group group1;
 
     public GroupMember(String memberID, Group group) {
         this.memberID = memberID;
-        this.group = group;
+        this.group1 = group;
     }
 
     @Override
     public void addPost(Post content) {
-                group.getPosts().add(content);
+                group1.getPosts().add(content);
                 GroupManager.saveAll();
     }
     
     @Override
     public void leaveGroup() {
-         if(!memberID.equals(group.getAdminId())){
-             UserManager.findUser(memberID).getGroups().remove(group.getGroupId());
-             group.getUsers().remove(memberID);
+         if(!memberID.equals(group1.getAdminId())){
+             UserManager.findUser(memberID).getGroups().remove(group1.getGroupId());
+             group1.getUsers().remove(memberID);
              GroupManager.saveAll();
          }
     }

@@ -28,11 +28,11 @@ public class FileUserStorage implements UserStorage {
     public boolean saveUsersToJson(ArrayList<User> users) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             String json = gson.toJson(users);
-            System.out.println("Serialized JSON: " + json); // Log serialized JSON
+            //System.out.println("Serialized JSON: " + json); // Log serialized JSON
             writer.write(json);
             return true;
         } catch (IOException e) {
-            System.out.println("Error saving users: " + e.getMessage());
+            //System.out.println("Error saving users: " + e.getMessage());
             return false;
         }
     }
@@ -45,19 +45,14 @@ public class FileUserStorage implements UserStorage {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             ArrayList<User> users = gson.fromJson(reader, userListType);
 
-            if (users != null) {
-                for (User user : users) {
-                    System.out.println("Loaded User: " + user);
-                }
-            } else {
-                System.out.println("No users found in the JSON file.");
-                users = new ArrayList<>();
-            }
+            if (users == null) {
+              users = new ArrayList<>();
+            } 
             return users;
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filename);
+            //System.out.println("File not found: " + filename);
         } catch (IOException e) {
-            System.out.println("Error loading users: " + e.getMessage());
+          //  System.out.println("Error loading users: " + e.getMessage());
         }
         return new ArrayList<>(); // Return an empty list on error
     }
