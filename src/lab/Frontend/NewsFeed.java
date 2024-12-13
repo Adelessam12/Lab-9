@@ -561,16 +561,6 @@ public final class NewsFeed extends javax.swing.JFrame {
             entryPanel.remove(leaveGroupButton);
             entryPanel.add(new JLabel("Deleted"));
             entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
-
-//            if(groupRole instanceof GroupAdmin){
-//                GroupAdmin groupAdmin = (GroupAdmin)groupRole;
-//                
-//            }else if(groupRole instanceof GroupCoAdmin){
-//                
-//                GroupCoAdmin groupCoAdmin = (GroupCoAdmin)groupRole;
-//            }else{
-//                GroupMember groupMember = (GroupMember)groupRole;
-//            }
             entryPanel.revalidate();
             entryPanel.repaint();
         });
@@ -601,16 +591,6 @@ public final class NewsFeed extends javax.swing.JFrame {
             entryPanel.remove(leaveGroupButton);
             entryPanel.add(new JLabel("Left"));
             entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
-
-//            if(groupRole instanceof GroupAdmin){
-//                GroupAdmin groupAdmin = (GroupAdmin)groupRole;
-//                
-//            }else if(groupRole instanceof GroupCoAdmin){
-//                
-//                GroupCoAdmin groupCoAdmin = (GroupCoAdmin)groupRole;
-//            }else{
-//                GroupMember groupMember = (GroupMember)groupRole;
-//            }
             entryPanel.revalidate();
             entryPanel.repaint();
         });

@@ -26,7 +26,7 @@ public class PostPanel extends JPanel {
 
         // Create and add content and image panel (side-by-side layout)
         JPanel postContentPanel = createPostContentPanel();
-        add(postContentPanel, BorderLayout.CENTER);
+        add(postContentPanel, BorderLayout.WEST);
 
         // Add separator line
         JSeparator separator = new JSeparator();
