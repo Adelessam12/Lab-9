@@ -5,6 +5,7 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 /**
  *
@@ -15,6 +16,11 @@ public class GroupManager {
     private static final GroupDatabase groupDatabase = GroupDatabaseFactory.createDatabase();
     private static final Database userDatabase = DatabaseFactory.createDatabase();
     private static ArrayList<Group> groups = groupDatabase.loadGroups();
+    private final User user;
+
+    public GroupManager(User user) {
+        this.user = user;
+    }
 
     public static Group createGroup(String name, String description, String groupPhoto, String adminId) {
         Group group = new Group(name, description, groupPhoto, adminId);
@@ -57,6 +63,41 @@ public class GroupManager {
             }
         }
         return null;
+    }
+       public ArrayList<Group> suggestions() {
+        ArrayList<Group> suggestions = new ArrayList<>();
+
+        for (Group suggested : groupDatabase.loadGroups()) {
+            if (!user.getGroups().containsKey(suggested.getGroupId()) && hasFriends(suggested)) {
+
+                {
+                    if (!user.getGroups().containsKey(suggested.getGroupId())) {
+                        suggestions.add(suggested);
+                    }
+                }
+            }
+        }
+        for (Group suggested : groupDatabase.loadGroups()) {
+            if (!user.getGroups().containsKey(suggested.getGroupId())) {
+                suggestions.add(suggested);
+            }
+        }
+        // Remove duplicate suggestions
+        return new ArrayList<>(new LinkedHashSet<>(suggestions));
+    }
+
+    //method to check for common friends
+    private boolean hasFriends(Group suggested) {
+        ArrayList<User> friends = new ArrayList<>();
+        for (String friendId : user.getFriendManager().getFriendList()) {
+            friends.add(UserManager.findUser(friendId));
+        }
+        for (User friend : friends) {
+            if (friend.getGroups().containsKey(suggested.getGroupId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
 
