@@ -8,31 +8,34 @@
     "users": {
       "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1": "Member"
     },
-    "posts": [
-      {
-        "postId": "ContentID0f921053-d34e-4985-b7f0-bf84e641c764",
-        "authorId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-        "content": "33333333",
-        "timestamp": "Dec 13, 2024, 4:12:06 PM"
-      }
-    ],
+    "posts": [],
     "groupRequests": []
   },
   {
-    "groupId": "GroupIDa952e1d2-cfec-465e-95f7-ab7e4f5fc9ea",
+    "groupId": "GroupIDbb291d21-75c6-4f80-8475-c064e496ca46",
+    "name": "C",
+    "description": "C",
+    "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\default_group_photo.png",
+    "AdminId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+    "users": {},
+    "posts": [],
+    "groupRequests": []
+  },
+  {
+    "groupId": "GroupID7c6f91c7-c5c1-4ed3-a182-907c1d42f507",
     "name": "B",
-    "description": "B",
-    "groupPhoto": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-09-26 212937.png",
+    "description": "b",
+    "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\default_group_photo.png",
     "AdminId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
     "users": {
       "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1": "Member"
     },
     "posts": [
       {
-        "postId": "ContentID9a9e05a2-bdb4-4052-9dc3-073c0a696535",
+        "postId": "ContentIDd826eccd-4687-4f17-a017-7673bb71a707",
         "authorId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-        "content": "22",
-        "timestamp": "Dec 13, 2024, 4:12:20 PM"
+        "content": "11111",
+        "timestamp": "Dec 13, 2024, 4:49:19 PM"
       }
     ],
     "groupRequests": []

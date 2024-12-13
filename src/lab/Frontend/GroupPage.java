@@ -5,6 +5,8 @@
 package lab.Frontend;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -153,6 +155,11 @@ public class GroupPage extends javax.swing.JFrame {
                     postPanel.add(new JLabel("Deleted")).setFont(new Font("Arial", Font.PLAIN, 14));
 
                 });
+                JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the right
+buttonPanel.add(editButton);
+buttonPanel.add(removeButton);
+
+postPanel.add(buttonPanel);
                 postPanel.add(editButton);
                 postPanel.add(removeButton);
             } else if (role instanceof GroupCoAdmin) {
@@ -168,8 +175,11 @@ public class GroupPage extends javax.swing.JFrame {
                     postPanel.add(new JLabel("Deleted")).setFont(new Font("Arial", Font.PLAIN, 14));
 
                 });
-                postPanel.add(editButton);
-                postPanel.add(removeButton);
+JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the right
+buttonPanel.add(editButton);
+buttonPanel.add(removeButton);
+
+postPanel.add(buttonPanel);
             }
 
             // Add buttons to the post panel
