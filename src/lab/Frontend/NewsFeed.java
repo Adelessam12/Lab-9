@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -646,7 +647,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         EntryPanel entryPanel = new EntryPanel(groupInSearch.getName(), profileImagePath);
         entryPanel.setPreferredSize(new Dimension(200, 100));
         JButton viewGroupButton = new JButton("View Group");
-        JButton requestToJoinButton = new JButton("Request");
+        JButton requestToJoinButton = new JButton("   Request   ");
 
         viewGroupButton.addActionListener(e -> {
             GroupPage gp = new GroupPage(groupInSearch, user);
@@ -659,6 +660,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             entryPanel.revalidate();
             entryPanel.repaint();
         });
+        entryPanel.add(Box.createRigidArea(new Dimension(75, 0)));
         entryPanel.add(viewGroupButton);
         entryPanel.add(requestToJoinButton);
 
@@ -1095,23 +1097,10 @@ public final class NewsFeed extends javax.swing.JFrame {
 
         for (Group suggestion : suggestions) {
             if (!suggestion.getGroupRequests().contains(user.getUserId()) && !user.getGroups().containsKey(suggestion.getGroupId())) {
-                String groupImagePath = (suggestion.getGroupPhoto() != null) ? suggestion.getGroupPhoto() : null;
-                EntryPanel suggestionPanel = new EntryPanel(suggestion.getName(), groupImagePath);
-
-                suggestionPanel.setPreferredSize(new Dimension(200, 100));
+                JPanel suggestionPanel = restOfGroupPanel(suggestion);
                 container2Panel.add(suggestionPanel);
-                JButton join = new JButton("request");
-                suggestionPanel.add(join);
-                container2Panel.add(suggestionPanel);
-                join.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    GroupManager.requestToJoin(user, suggestion);
-                    System.out.println(suggestion.getGroupRequests());
-                    suggestionPanel.remove(join);
-                    GroupManager.saveAll();
-                    suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
-                    container2Panel.revalidate();
-                    container2Panel.repaint();
-                });
+                container2Panel.revalidate();
+        container2Panel.repaint();
             }
         }
         container2Panel.revalidate();
@@ -1131,6 +1120,7 @@ public final class NewsFeed extends javax.swing.JFrame {
                 suggestionPanel.setPreferredSize(new Dimension(200, 100));
                 container2Panel.add(suggestionPanel);
                 JButton add = new JButton("Add Friend");
+                suggestionPanel.add(Box.createRigidArea(new Dimension(55, 0)));
                 suggestionPanel.add(add);
                 container2Panel.add(suggestionPanel);
                 add.addActionListener((java.awt.event.ActionEvent evt) -> {

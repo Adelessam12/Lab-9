@@ -39,5 +39,15 @@
       }
     ],
     "groupRequests": []
+  },
+  {
+    "groupId": "GroupID4b86fb2e-5fa3-40fd-ba35-564e72c8d7ee",
+    "name": "gg",
+    "description": "gg",
+    "groupPhoto": "C:\\Users\\Mahmoud Waleed\\OneDrive\\Pictures\\Screenshots\\2023-12-29 (5).png",
+    "AdminId": "ID19bc7c7e-b51d-4eb6-bcac-67f1379b1fe4",
+    "users": {},
+    "posts": [],
+    "groupRequests": []
   }
 ]
