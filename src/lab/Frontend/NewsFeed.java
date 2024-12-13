@@ -53,7 +53,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     User user;
     FriendshipService friendService;
     GroupManager groupManager;
-    ArrayList<Content> allPosts;
+    ArrayList<Content> allPosts= new ArrayList<>();
 
     public NewsFeed(User user) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -945,7 +945,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         JButton acceptButton = new JButton();
         JButton declineButton = new JButton();
         acceptButton.setText("Accept");
-        GroupRole role = user1.getGroups().get(g.getGroupId());
+        GroupRole role = user.getGroups().get(g.getGroupId());
         if (role instanceof GroupAdmin groupAdmin) {
 
             acceptButton.addActionListener(e -> {
@@ -1004,13 +1004,14 @@ public final class NewsFeed extends javax.swing.JFrame {
         }
         Collections.sort(allPosts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         for (Content post : allPosts) {
+            if(!user.getUserId().equals(post.getAuthorId())){
             String username = UserManager.findUser(post.getAuthorId()).getUsername();
             String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
-            Friendpostspanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
-            allPosts.add(post);
-        }
+            Notifications_panel.add(new NotificationsPanel(post,profilepath,username, friendService));
+            
+        }}
     }
-
+    
     public void loadFriends() {
         ContainerPanel1.removeAll();
         ArrayList<User> friends = new ArrayList<>();

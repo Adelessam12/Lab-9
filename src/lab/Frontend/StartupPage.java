@@ -8,7 +8,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import lab.pkg9.ContentCreator;
 import lab.pkg9.Database;
 import lab.pkg9.DatabaseFactory;
 

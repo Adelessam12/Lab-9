@@ -1,0 +1,68 @@
+[
+  {
+    "userId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+    "email": "1",
+    "username": "1",
+    "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "groups": {
+      "GroupID4d1895bb-29c9-4031-971d-77731f0d5659": {
+        "memberID": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+        "groupId": "GroupID4d1895bb-29c9-4031-971d-77731f0d5659",
+        "type": "GroupAdmin"
+      }
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1",
+    "email": "2",
+    "username": "2",
+    "hashedPassword": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+    "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "groups": {
+      "GroupID4d1895bb-29c9-4031-971d-77731f0d5659": {
+        "memberID": "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1",
+        "groupId": "GroupID4d1895bb-29c9-4031-971d-77731f0d5659",
+        "type": "GroupMember"
+      }
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  }
+]
