@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -53,7 +54,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     User user;
     FriendshipService friendService;
     GroupManager groupManager;
-    ArrayList<Content> allPosts;
+    ArrayList<Content> allPosts= new ArrayList<>();
 
     public NewsFeed(User user) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -646,7 +647,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         EntryPanel entryPanel = new EntryPanel(groupInSearch.getName(), profileImagePath);
         entryPanel.setPreferredSize(new Dimension(200, 100));
         JButton viewGroupButton = new JButton("View Group");
-        JButton requestToJoinButton = new JButton("Request");
+        JButton requestToJoinButton = new JButton("   Request   ");
 
         viewGroupButton.addActionListener(e -> {
             GroupPage gp = new GroupPage(groupInSearch, user);
@@ -659,6 +660,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             entryPanel.revalidate();
             entryPanel.repaint();
         });
+        entryPanel.add(Box.createRigidArea(new Dimension(75, 0)));
         entryPanel.add(viewGroupButton);
         entryPanel.add(requestToJoinButton);
 
@@ -945,7 +947,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         JButton acceptButton = new JButton();
         JButton declineButton = new JButton();
         acceptButton.setText("Accept");
-        GroupRole role = user1.getGroups().get(g.getGroupId());
+        GroupRole role = user.getGroups().get(g.getGroupId());
         if (role instanceof GroupAdmin groupAdmin) {
 
             acceptButton.addActionListener(e -> {
@@ -1004,13 +1006,14 @@ public final class NewsFeed extends javax.swing.JFrame {
         }
         Collections.sort(allPosts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         for (Content post : allPosts) {
+            if(!user.getUserId().equals(post.getAuthorId())){
             String username = UserManager.findUser(post.getAuthorId()).getUsername();
             String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
-            Friendpostspanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
-            allPosts.add(post);
-        }
+            Notifications_panel.add(new NotificationsPanel(post,profilepath,username, friendService));
+            
+        }}
     }
-
+    
     public void loadFriends() {
         ContainerPanel1.removeAll();
         ArrayList<User> friends = new ArrayList<>();
@@ -1094,23 +1097,10 @@ public final class NewsFeed extends javax.swing.JFrame {
 
         for (Group suggestion : suggestions) {
             if (!suggestion.getGroupRequests().contains(user.getUserId()) && !user.getGroups().containsKey(suggestion.getGroupId())) {
-                String groupImagePath = (suggestion.getGroupPhoto() != null) ? suggestion.getGroupPhoto() : null;
-                EntryPanel suggestionPanel = new EntryPanel(suggestion.getName(), groupImagePath);
-
-                suggestionPanel.setPreferredSize(new Dimension(200, 100));
+                JPanel suggestionPanel = restOfGroupPanel(suggestion);
                 container2Panel.add(suggestionPanel);
-                JButton join = new JButton("request");
-                suggestionPanel.add(join);
-                container2Panel.add(suggestionPanel);
-                join.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    GroupManager.requestToJoin(user, suggestion);
-                    System.out.println(suggestion.getGroupRequests());
-                    suggestionPanel.remove(join);
-                    GroupManager.saveAll();
-                    suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
-                    container2Panel.revalidate();
-                    container2Panel.repaint();
-                });
+                container2Panel.revalidate();
+        container2Panel.repaint();
             }
         }
         container2Panel.revalidate();
@@ -1130,6 +1120,7 @@ public final class NewsFeed extends javax.swing.JFrame {
                 suggestionPanel.setPreferredSize(new Dimension(200, 100));
                 container2Panel.add(suggestionPanel);
                 JButton add = new JButton("Add Friend");
+                suggestionPanel.add(Box.createRigidArea(new Dimension(55, 0)));
                 suggestionPanel.add(add);
                 container2Panel.add(suggestionPanel);
                 add.addActionListener((java.awt.event.ActionEvent evt) -> {

@@ -1,0 +1,50 @@
+[
+  {
+    "groupId": "GroupID4d1895bb-29c9-4031-971d-77731f0d5659",
+    "name": "A",
+    "description": "A",
+    "groupPhoto": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-09-03 215654.png",
+    "AdminId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+    "users": {
+      "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1": "Member"
+    },
+    "posts": [
+      {
+        "postId": "ContentID0f921053-d34e-4985-b7f0-bf84e641c764",
+        "authorId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+        "content": "33333333",
+        "timestamp": "Dec 13, 2024, 4:12:06 PM"
+      }
+    ],
+    "groupRequests": []
+  },
+  {
+    "groupId": "GroupIDa952e1d2-cfec-465e-95f7-ab7e4f5fc9ea",
+    "name": "B",
+    "description": "B",
+    "groupPhoto": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-09-26 212937.png",
+    "AdminId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+    "users": {
+      "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1": "Member"
+    },
+    "posts": [
+      {
+        "postId": "ContentID9a9e05a2-bdb4-4052-9dc3-073c0a696535",
+        "authorId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+        "content": "22",
+        "timestamp": "Dec 13, 2024, 4:12:20 PM"
+      }
+    ],
+    "groupRequests": []
+  },
+  {
+    "groupId": "GroupID4b86fb2e-5fa3-40fd-ba35-564e72c8d7ee",
+    "name": "gg",
+    "description": "gg",
+    "groupPhoto": "C:\\Users\\Mahmoud Waleed\\OneDrive\\Pictures\\Screenshots\\2023-12-29 (5).png",
+    "AdminId": "ID19bc7c7e-b51d-4eb6-bcac-67f1379b1fe4",
+    "users": {},
+    "posts": [],
+    "groupRequests": []
+  }
+]
