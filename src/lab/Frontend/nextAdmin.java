@@ -4,40 +4,52 @@
  */
 package lab.Frontend;
 
+import java.awt.Dimension;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import lab.pkg9.Group;
 import lab.pkg9.UserManager;
+import lab.pkg9.GroupAdmin;
+import lab.pkg9.GroupRole;
 
 /**
  *
  * @author Mahmoud Waleed
  */
-public class nextAdmin extends javax.swing.JFrame {
-     private Group group;
+public final class nextAdmin extends javax.swing.JFrame {
+     private final Group group;
+     private GroupRole role;
 
     public nextAdmin(Group group) {
         this.group = group;
+        initComponents();
+        displayyUsers(group);
     }
     /**
      * Creates new form nextAdmin
+     * @param group
      */
-    public nextAdmin() {
-        initComponents();
-    }
-    public void displayUsers(Group group){
+
+    public void displayyUsers(Group group){
         for(String userID: group.getUsers().keySet()){
             JLabel userName = new JLabel();
             userName.setText(UserManager.findUser(userID).getUsername());
             JButton choose = new JButton("Choose");
+             nextAdminContainer.add(Box.createRigidArea(new Dimension(35, 0)));
             nextAdminContainer.add(userName);
             nextAdminContainer.add(choose);
             nextAdminPanel.add(nextAdminContainer);
             nextAdminContainer.repaint();
             nextAdminContainer.revalidate();
+            choose.addActionListener(evt -> {
+            role = UserManager.findUser(group.getAdminId()).getGroups().get(group.getGroupId());
+            GroupAdmin admin = (GroupAdmin)role;
+            admin.leaveGroup(UserManager.findUser(userID));
+        });
         }
-            nextAdminContainer.repaint();
-            nextAdminContainer.revalidate();
+            nextAdminPanel.repaint();
+            nextAdminPanel.revalidate();
     }
 
     /**
@@ -66,22 +78,19 @@ public class nextAdmin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(nextAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(76, Short.MAX_VALUE))
+                    .addComponent(nextAdminPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(nextAdminPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nextAdminPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

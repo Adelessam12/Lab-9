@@ -1,6 +1,6 @@
 [
   {
-    "userId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+    "userId": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
     "email": "1",
     "username": "1",
     "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
@@ -11,20 +11,20 @@
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "groups": {
-      "GroupID4d1895bb-29c9-4031-971d-77731f0d5659": {
-        "memberID": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-        "groupId": "GroupID4d1895bb-29c9-4031-971d-77731f0d5659",
+      "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326": {
+        "memberID": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
+        "groupId": "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326",
         "type": "GroupAdmin"
       },
-      "GroupIDbb291d21-75c6-4f80-8475-c064e496ca46": {
-        "memberID": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-        "groupId": "GroupIDbb291d21-75c6-4f80-8475-c064e496ca46",
+      "GroupID1c71c106-12f4-4706-ab20-f61c9773d8fb": {
+        "memberID": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
+        "groupId": "GroupID1c71c106-12f4-4706-ab20-f61c9773d8fb",
         "type": "GroupAdmin"
       },
-      "GroupID7c6f91c7-c5c1-4ed3-a182-907c1d42f507": {
-        "memberID": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-        "groupId": "GroupID7c6f91c7-c5c1-4ed3-a182-907c1d42f507",
-        "type": "GroupAdmin"
+      "GroupID1f36c4fd-5e67-4a5f-a9dd-6cc21e94776c": {
+        "memberID": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
+        "groupId": "GroupID1f36c4fd-5e67-4a5f-a9dd-6cc21e94776c",
+        "type": "GroupMember"
       }
     },
     "friendManager": {
@@ -43,25 +43,20 @@
     }
   },
   {
-    "userId": "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1",
+    "userId": "ID594132ef-79bf-4112-bf6a-e890b7c0bd56",
     "email": "2",
     "username": "2",
     "hashedPassword": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
     "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
-    "isOnline": true,
+    "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "groups": {
-      "GroupID4d1895bb-29c9-4031-971d-77731f0d5659": {
-        "memberID": "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1",
-        "groupId": "GroupID4d1895bb-29c9-4031-971d-77731f0d5659",
-        "type": "GroupMember"
-      },
-      "GroupID7c6f91c7-c5c1-4ed3-a182-907c1d42f507": {
-        "memberID": "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1",
-        "groupId": "GroupID7c6f91c7-c5c1-4ed3-a182-907c1d42f507",
+      "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326": {
+        "memberID": "ID594132ef-79bf-4112-bf6a-e890b7c0bd56",
+        "groupId": "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326",
         "type": "GroupMember"
       }
     },
@@ -91,7 +86,13 @@
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
-    "groups": {},
+    "groups": {
+      "GroupID1f36c4fd-5e67-4a5f-a9dd-6cc21e94776c": {
+        "memberID": "ID007a6603-78c0-4193-9106-6485786cb6fa",
+        "groupId": "GroupID1f36c4fd-5e67-4a5f-a9dd-6cc21e94776c",
+        "type": "GroupCoAdmin"
+      }
+    },
     "friendManager": {
       "friendList": [],
       "blockedList": [],
@@ -140,12 +141,18 @@
     "username": "naruto",
     "hashedPassword": "846f6a76ffc111552f1c9ca3a06d989d0c9c9b79c4fc25ff67f6207be512955c",
     "dateOfBirth": "May 5, 5, 12:00:00 AM",
-    "isOnline": false,
+    "isOnline": true,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
-    "groups": {},
+    "groups": {
+      "GroupID1f36c4fd-5e67-4a5f-a9dd-6cc21e94776c": {
+        "memberID": "IDbd96a8e3-a137-4491-9fe4-046bbdc41fe1",
+        "groupId": "GroupID1f36c4fd-5e67-4a5f-a9dd-6cc21e94776c",
+        "type": "GroupAdmin"
+      }
+    },
     "friendManager": {
       "friendList": [],
       "blockedList": [],

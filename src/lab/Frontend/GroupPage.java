@@ -8,8 +8,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +38,7 @@ public class GroupPage extends javax.swing.JFrame {
      */
     private final Group group;
     private final User user;
-    GroupRole role;
+    private GroupRole role;
 
     public GroupPage(Group group, User user) {
         this.group = group;
@@ -136,7 +138,8 @@ public class GroupPage extends javax.swing.JFrame {
             String profilePath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
 
             // Create a PostPanel for the post
-            PostPanel postPanel = new PostPanel(username, profilePath, post.getContent(), post.getImagePath());
+            PostPanel postPanel = new PostPanel(
+                    UserManager.findUser(username).getUsername(), profilePath, post.getContent(), post.getImagePath());
 
             // Create Edit button
             JButton editButton = new JButton("Edit");
@@ -153,15 +156,15 @@ public class GroupPage extends javax.swing.JFrame {
                     groupadmin.deletePost((Post) post);
                     postPanel.remove(removeButton);
                     postPanel.add(new JLabel("Deleted")).setFont(new Font("Arial", Font.PLAIN, 14));
+                    postPanel.revalidate();
+                    postPanel.repaint();
 
                 });
                 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the right
-buttonPanel.add(editButton);
-buttonPanel.add(removeButton);
+                buttonPanel.add(editButton);
+                buttonPanel.add(removeButton);
+                postPanel.add(buttonPanel);
 
-postPanel.add(buttonPanel);
-                postPanel.add(editButton);
-                postPanel.add(removeButton);
             } else if (role instanceof GroupCoAdmin) {
                 GroupCoAdmin groupCoadmin = (GroupCoAdmin) user.getGroups().get(group.getGroupId());
                 editButton.addActionListener(e -> {
@@ -173,6 +176,8 @@ postPanel.add(buttonPanel);
                     groupCoadmin.deletePost((Post) post);
                     postPanel.remove(removeButton);
                     postPanel.add(new JLabel("Deleted")).setFont(new Font("Arial", Font.PLAIN, 14));
+                    postPanel.revalidate();
+                    postPanel.repaint();
 
                 });
 JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // Align buttons to the right
@@ -195,13 +200,29 @@ postPanel.add(buttonPanel);
     public void loadnobuttonmembers() {
         membersPanel.removeAll();
         User admin = UserManager.findUser(group.getAdminId());
-        membersPanel.add(new EntryPanel(admin.getUsername(), admin.getProfile().getProfilePhotoPath()));
+        membersPanel.add(new EntryPanel(admin.getUsername() + "  (Admin)", admin.getProfile().getProfilePhotoPath()));
         for (String id : group.getUsers().keySet()) {
+
             User user1 = UserManager.findUser(id);
-            if (!user.getUserId().equals(id)) {
-                membersPanel.add(new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath()));
+            if (group.getUsers().get(id).equals("CoAdmin")) {
+                membersPanel.add(new EntryPanel(user1.getUsername() + "  (Moderator)", user1.getProfile().getProfilePhotoPath()));
+
             }
         }
+        if (group.getUsers().containsKey(user.getUserId())) {
+            membersPanel.add(new EntryPanel(user.getUsername() + " Current user  (Member)", user.getProfile().getProfilePhotoPath()));
+        }
+
+        for (String id : group.getUsers().keySet()) {
+            if (!user.getUserId().equals(id)) {
+                User user1 = UserManager.findUser(id);
+                if (group.getUsers().get(id).equals("Member")) {
+                    membersPanel.add(new EntryPanel(user1.getUsername() + "  (Member)", user1.getProfile().getProfilePhotoPath()));
+                }
+
+            }
+        }
+
         membersPanel.revalidate();
         membersPanel.repaint();
     }
@@ -211,19 +232,20 @@ postPanel.add(buttonPanel);
         ArrayList<User> memberUsers = new ArrayList<>();
         ArrayList<User> restUsers = new ArrayList<>();
         User admin = UserManager.findUser(group.getAdminId());
-        membersPanel.add(new EntryPanel(admin.getUsername(), admin.getProfile().getProfilePhotoPath()));
+        membersPanel.add(new EntryPanel(admin.getUsername() + "  (Admin)", admin.getProfile().getProfilePhotoPath()));
+        membersPanel.add(new EntryPanel(user.getUsername() + "  (Current user - Moderator)", user.getProfile().getProfilePhotoPath()));
         for (String id : group.getUsers().keySet()) {
             if (!user.getUserId().equals(id)) {
                 User user1 = UserManager.findUser(id);
-                if (group.getUsers().get(id).equals("GroupMember")) {
+                if (group.getUsers().get(id).equals("Member")) {
                     memberUsers.add(user1);
-                } else if (group.getUsers().get(id).equals("GroupCoAdmin")) {
+                } else if (group.getUsers().get(id).equals("CoAdmin")) {
                     restUsers.add(user1);
                 }
             }
         }
         for (User user1 : restUsers) {
-            membersPanel.add(new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath()));
+            membersPanel.add(new EntryPanel(user1.getUsername() + "  (Moderator)", user1.getProfile().getProfilePhotoPath()));
             JSeparator separator = new JSeparator();
             membersPanel.add(separator, BorderLayout.SOUTH);
         }
@@ -239,7 +261,7 @@ postPanel.add(buttonPanel);
     }
 
     private JPanel loadcoAdminPanel(User user1) {
-        EntryPanel entrypanel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
+        EntryPanel entrypanel = new EntryPanel(user1.getUsername() + "  (Moderator)", user1.getProfile().getProfilePhotoPath());
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(e -> {
             switch (role) {
@@ -253,27 +275,31 @@ postPanel.add(buttonPanel);
 
             entrypanel.remove(removeButton);
             entrypanel.add(new JLabel("Removed")).setFont(new Font("Arial", Font.PLAIN, 14));
+            GroupCoAdmin coAdmin = (GroupCoAdmin) role;
+            loadcoadminPage(coAdmin);
+            entrypanel.revalidate();
+            entrypanel.repaint();
         });
         entrypanel.add(removeButton);
         return entrypanel;
     }
 
-    public void loadmembers(GroupAdmin admin) { /////// not done yet, dont do it, fix promote and demote. look a the pdf
+    public void loadmembers(GroupAdmin adminrole) { /////// not done yet, dont do it, fix promote and demote. look a the pdf
         membersPanel.removeAll(); // Clear the panel before loading members
         ArrayList<User> memberUsers = new ArrayList<>();
         ArrayList<User> restUsers = new ArrayList<>();
+        User admin = UserManager.findUser(group.getAdminId());
+        membersPanel.add(new EntryPanel(admin.getUsername() + " (Current user - Admin)", admin.getProfile().getProfilePhotoPath()));
         for (String id : group.getUsers().keySet()) {
-            if (!user.getUserId().equals(id)) {
-                User user1 = UserManager.findUser(id);
-                if (group.getUsers().get(id).equals("GroupMember")) {
-                    memberUsers.add(user1);
-                } else if (group.getUsers().get(id).equals("GroupCoAdmin")) {
-                    restUsers.add(user1);
-                }
+            User user1 = UserManager.findUser(id);
+            if (group.getUsers().get(id).equals("Member")) {
+                memberUsers.add(user1);
+            } else if (group.getUsers().get(id).equals("CoAdmin")) {
+                restUsers.add(user1);
             }
         }
         for (User user1 : restUsers) {
-            JPanel entryPanel = loadAdminPanel(admin, user1);
+            JPanel entryPanel = loadAdminPanel(adminrole, user1);
             membersPanel.add(entryPanel);
             JSeparator separator = new JSeparator();
             membersPanel.add(separator, BorderLayout.SOUTH);
@@ -289,13 +315,15 @@ postPanel.add(buttonPanel);
     }
 
     private JPanel loadAdminPanel(GroupAdmin admin, User user1) {
-        EntryPanel entrypanel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
+        EntryPanel entrypanel = new EntryPanel(user1.getUsername() + "  (Moderator)", user1.getProfile().getProfilePhotoPath());
         JButton demoteButton = new JButton("Demote");
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(e -> {
             admin.removeMember(user1.getUserId());
             entrypanel.remove(removeButton);
             entrypanel.add(new JLabel("Removed")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entrypanel.revalidate();
+            entrypanel.repaint();
         });
 
         demoteButton.addActionListener(e -> {
@@ -304,6 +332,8 @@ postPanel.add(buttonPanel);
             entrypanel.remove(removeButton);
             entrypanel.add(new JLabel("Demoted")).setFont(new Font("Arial", Font.PLAIN, 14));
             entrypanel.add(removeButton);
+            entrypanel.revalidate();
+            entrypanel.repaint();
         });
         entrypanel.add(demoteButton);
         entrypanel.add(removeButton);
@@ -311,13 +341,16 @@ postPanel.add(buttonPanel);
     }
 
     private JPanel loadMemberAdminPanel(User user1) {
-        EntryPanel entrypanel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
+        EntryPanel entrypanel = new EntryPanel(user1.getUsername() + "  (Member)", user1.getProfile().getProfilePhotoPath());
         JButton removeButton = new JButton("Remove");
         JButton promoteButton = new JButton("Promote");
         removeButton.addActionListener(e -> {
             ((GroupAdmin) role).removeMember(user1.getUserId());
             entrypanel.remove(removeButton);
+            entrypanel.remove(promoteButton);
             entrypanel.add(new JLabel("Removed")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entrypanel.revalidate();
+            entrypanel.repaint();
         });
         promoteButton.addActionListener(e -> {
             ((GroupAdmin) role).promoteToCoAdmin(user1.getUserId());
@@ -325,9 +358,12 @@ postPanel.add(buttonPanel);
             entrypanel.remove(removeButton);
             entrypanel.add(new JLabel("Promoted")).setFont(new Font("Arial", Font.PLAIN, 14));
             entrypanel.add(removeButton);
+            entrypanel.revalidate();
+            entrypanel.repaint();
         });
-        entrypanel.add(removeButton);
         entrypanel.add(promoteButton);
+        entrypanel.add(removeButton);
+
         return entrypanel;
     }
 
@@ -340,17 +376,17 @@ postPanel.add(buttonPanel);
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        membersPanel = new javax.swing.JPanel();
         groupPhoto = new ProfilePanel();
-        groupPosts = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         createPost = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        groupPosts = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        membersPanel = new javax.swing.JPanel();
+        Refresh_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        membersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        membersPanel.setLayout(new javax.swing.BoxLayout(membersPanel, javax.swing.BoxLayout.Y_AXIS));
 
         groupPhoto.setPreferredSize(new java.awt.Dimension(150, 150));
 
@@ -364,9 +400,6 @@ postPanel.add(buttonPanel);
             groupPhotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 158, Short.MAX_VALUE)
         );
-
-        groupPosts.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        groupPosts.setLayout(new javax.swing.BoxLayout(groupPosts, javax.swing.BoxLayout.Y_AXIS));
 
         jTextField1.setEditable(false);
         jTextField1.setBackground(java.awt.SystemColor.controlHighlight);
@@ -385,26 +418,46 @@ postPanel.add(buttonPanel);
             }
         });
 
+        groupPosts.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        groupPosts.setLayout(new javax.swing.BoxLayout(groupPosts, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane1.setViewportView(groupPosts);
+
+        membersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        membersPanel.setLayout(new javax.swing.BoxLayout(membersPanel, javax.swing.BoxLayout.Y_AXIS));
+        jScrollPane2.setViewportView(membersPanel);
+
+        ImageIcon originalIcon =new javax.swing.ImageIcon("R.png");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        Refresh_button.setIcon(new ImageIcon(scaledImage));
+        Refresh_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Refresh_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 894, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(groupPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
-                        .addComponent(createPost))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(groupPosts, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(membersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(createPost)
+                            .addComponent(Refresh_button))
+                        .addGap(0, 31, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -414,7 +467,7 @@ postPanel.add(buttonPanel);
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(groupPhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addGap(0, 15, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -424,10 +477,12 @@ postPanel.add(buttonPanel);
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(createPost)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(27, 27, 27)
+                        .addComponent(Refresh_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(32, 32, 32)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(membersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(groupPosts, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
 
@@ -445,12 +500,31 @@ postPanel.add(buttonPanel);
 
     }//GEN-LAST:event_createPostActionPerformed
 
+    private void Refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_buttonActionPerformed
+    if (user.getGroups().get(group.getGroupId()) == null) {
+            loadGroupsPage();
+            createPost.setVisible(false);
+        } else {
+            role = user.getGroups().get(group.getGroupId());
+            if (role instanceof GroupAdmin) {
+                loadAdminpage(new GroupAdmin(user.getUserId(), group.getGroupId()));
+            } else if (role instanceof GroupCoAdmin) {
+                loadcoadminPage(new GroupCoAdmin(user.getUserId(), group.getGroupId()));
+            } else if (role instanceof GroupMember) {
+                loadGroupsPage();
+            }
+        }        
+    }//GEN-LAST:event_Refresh_buttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Refresh_button;
     private javax.swing.JButton createPost;
     private javax.swing.JPanel groupPhoto;
     private javax.swing.JPanel groupPosts;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel membersPanel;
     // End of variables declaration//GEN-END:variables

@@ -550,7 +550,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         entryPanel.setPreferredSize(new Dimension(200, 100));
 
         JButton viewGroupButton = new JButton("View Group");
-        JButton leaveGroupButton = new JButton("Delete Group");
+        JButton leaveGroupButton = new JButton("Leave Group");
 
         viewGroupButton.addActionListener(e -> {
             GroupPage gp = new GroupPage(groupInSearch, user);
@@ -558,20 +558,11 @@ public final class NewsFeed extends javax.swing.JFrame {
         });
         leaveGroupButton.addActionListener(e -> {
             GroupAdmin groupRole = (GroupAdmin) user.getGroups().get(groupInSearch.getGroupId());
-            groupRole.deleteGroup();
+            nextAdmin na = new nextAdmin(groupInSearch);
+            na.setVisible(true);
             entryPanel.remove(leaveGroupButton);
             entryPanel.add(new JLabel("Deleted"));
             entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
-
-//            if(groupRole instanceof GroupAdmin){
-//                GroupAdmin groupAdmin = (GroupAdmin)groupRole;
-//                
-//            }else if(groupRole instanceof GroupCoAdmin){
-//                
-//                GroupCoAdmin groupCoAdmin = (GroupCoAdmin)groupRole;
-//            }else{
-//                GroupMember groupMember = (GroupMember)groupRole;
-//            }
             entryPanel.revalidate();
             entryPanel.repaint();
         });
@@ -602,16 +593,6 @@ public final class NewsFeed extends javax.swing.JFrame {
             entryPanel.remove(leaveGroupButton);
             entryPanel.add(new JLabel("Left"));
             entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
-
-//            if(groupRole instanceof GroupAdmin){
-//                GroupAdmin groupAdmin = (GroupAdmin)groupRole;
-//                
-//            }else if(groupRole instanceof GroupCoAdmin){
-//                
-//                GroupCoAdmin groupCoAdmin = (GroupCoAdmin)groupRole;
-//            }else{
-//                GroupMember groupMember = (GroupMember)groupRole;
-//            }
             entryPanel.revalidate();
             entryPanel.repaint();
         });

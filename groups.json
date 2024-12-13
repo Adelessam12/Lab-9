@@ -1,52 +1,50 @@
 [
   {
-    "groupId": "GroupID4d1895bb-29c9-4031-971d-77731f0d5659",
-    "name": "A",
-    "description": "A",
-    "groupPhoto": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-09-03 215654.png",
-    "AdminId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-    "users": {
-      "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1": "Member"
-    },
-    "posts": [],
-    "groupRequests": []
-  },
-  {
-    "groupId": "GroupIDbb291d21-75c6-4f80-8475-c064e496ca46",
-    "name": "C",
-    "description": "C",
+    "groupId": "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326",
+    "name": "ahmed group",
+    "description": "aaaaaaaaaaa3aaaaaaaaaaaaaaa",
     "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\default_group_photo.png",
-    "AdminId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-    "users": {},
-    "posts": [],
-    "groupRequests": []
-  },
-  {
-    "groupId": "GroupID7c6f91c7-c5c1-4ed3-a182-907c1d42f507",
-    "name": "B",
-    "description": "b",
-    "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\default_group_photo.png",
-    "AdminId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
+    "AdminId": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
     "users": {
-      "ID9a96b698-24b9-4a06-a0d2-b651db64c4c1": "Member"
+      "ID594132ef-79bf-4112-bf6a-e890b7c0bd56": "Member"
     },
     "posts": [
       {
-        "postId": "ContentIDd826eccd-4687-4f17-a017-7673bb71a707",
-        "authorId": "IDfaf80bdf-4d74-433e-a373-06ddf60b1341",
-        "content": "11111",
-        "timestamp": "Dec 13, 2024, 4:49:19 PM"
+        "postId": "ContentIDc5323b51-9dbf-4c16-8335-86fb91f4087c",
+        "authorId": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
+        "content": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "timestamp": "Dec 13, 2024, 6:12:29 PM"
       }
     ],
     "groupRequests": []
   },
   {
-    "groupId": "GroupID4b86fb2e-5fa3-40fd-ba35-564e72c8d7ee",
-    "name": "gg",
-    "description": "gg",
-    "groupPhoto": "C:\\Users\\Mahmoud Waleed\\OneDrive\\Pictures\\Screenshots\\2023-12-29 (5).png",
-    "AdminId": "ID19bc7c7e-b51d-4eb6-bcac-67f1379b1fe4",
+    "groupId": "GroupID1c71c106-12f4-4706-ab20-f61c9773d8fb",
+    "name": "11",
+    "description": "2",
+    "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\default_group_photo.png",
+    "AdminId": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
     "users": {},
+    "posts": [
+      {
+        "postId": "ContentIDea2dd782-a649-4831-8c6c-094293c8dede",
+        "authorId": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
+        "content": "sssssssssssssssss",
+        "timestamp": "Dec 13, 2024, 6:27:37 PM"
+      }
+    ],
+    "groupRequests": []
+  },
+  {
+    "groupId": "GroupID1f36c4fd-5e67-4a5f-a9dd-6cc21e94776c",
+    "name": "bros",
+    "description": "hoes",
+    "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\default_group_photo.png",
+    "AdminId": "IDbd96a8e3-a137-4491-9fe4-046bbdc41fe1",
+    "users": {
+      "ID007a6603-78c0-4193-9106-6485786cb6fa": "CoAdmin",
+      "IDd770a17f-fbe0-421d-81d8-8e3aa731658e": "Member"
+    },
     "posts": [],
     "groupRequests": []
   }

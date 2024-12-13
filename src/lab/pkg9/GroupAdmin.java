@@ -51,24 +51,14 @@ public class GroupAdmin extends GroupCoAdmin implements adminGroupFeatures, coAd
 
     }
 
-    @Override
-    public void leaveGroup() {
+    
+    public void leaveGroup(User user) {
         Group group = GroupManager.findGroupById(groupId);
-        if (group.getUsers().isEmpty()) {
-            deleteGroup();
-            return;
-        }
-        for (String userID : group.getUsers().keySet()) {
-            if (group.getUsers().get(userID).contains("CoAdmin")) {
-                group.setAdminId(userID);
-                UserManager.findUser(memberID).getGroups().remove(group.getGroupId());
-                GroupManager.saveAll();
-                return;
-            }
-        }
-        UserManager.findUser(memberID).getGroups().remove(group.getGroupId());
-        group.setAdminId(group.getUsers().keySet().iterator().next());//sets first normal member to admin
-        GroupManager.saveAll();
+         UserManager.findUser(group.getAdminId()).getGroups().remove(group.getGroupId());
+         group.getUsers().remove(group.getAdminId());
+          group.getUsers().remove(user.getUserId());
+          group.setAdminId(user.getUserId());
+     
     }
 
     @Override
