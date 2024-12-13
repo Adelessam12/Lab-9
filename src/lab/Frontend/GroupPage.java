@@ -8,8 +8,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +38,7 @@ public class GroupPage extends javax.swing.JFrame {
      */
     private final Group group;
     private final User user;
-    GroupRole role;
+    private GroupRole role;
 
     public GroupPage(Group group, User user) {
         this.group = group;
@@ -382,6 +384,7 @@ postPanel.add(buttonPanel);
         groupPosts = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         membersPanel = new javax.swing.JPanel();
+        Refresh_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -423,6 +426,15 @@ postPanel.add(buttonPanel);
         membersPanel.setLayout(new javax.swing.BoxLayout(membersPanel, javax.swing.BoxLayout.Y_AXIS));
         jScrollPane2.setViewportView(membersPanel);
 
+        ImageIcon originalIcon =new javax.swing.ImageIcon("R.png");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH);
+        Refresh_button.setIcon(new ImageIcon(scaledImage));
+        Refresh_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Refresh_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -441,7 +453,9 @@ postPanel.add(buttonPanel);
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
-                        .addComponent(createPost)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(createPost)
+                            .addComponent(Refresh_button))
                         .addGap(0, 31, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -463,7 +477,9 @@ postPanel.add(buttonPanel);
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
                         .addComponent(createPost)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(27, 27, 27)
+                        .addComponent(Refresh_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(32, 32, 32)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                     .addComponent(jScrollPane2))
@@ -484,8 +500,25 @@ postPanel.add(buttonPanel);
 
     }//GEN-LAST:event_createPostActionPerformed
 
+    private void Refresh_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Refresh_buttonActionPerformed
+    if (user.getGroups().get(group.getGroupId()) == null) {
+            loadGroupsPage();
+            createPost.setVisible(false);
+        } else {
+            role = user.getGroups().get(group.getGroupId());
+            if (role instanceof GroupAdmin) {
+                loadAdminpage(new GroupAdmin(user.getUserId(), group.getGroupId()));
+            } else if (role instanceof GroupCoAdmin) {
+                loadcoadminPage(new GroupCoAdmin(user.getUserId(), group.getGroupId()));
+            } else if (role instanceof GroupMember) {
+                loadGroupsPage();
+            }
+        }        
+    }//GEN-LAST:event_Refresh_buttonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Refresh_button;
     private javax.swing.JButton createPost;
     private javax.swing.JPanel groupPhoto;
     private javax.swing.JPanel groupPosts;
