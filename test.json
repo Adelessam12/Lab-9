@@ -1,0 +1,1 @@
+[{"groupId":"1","name":"Group 1","description":"A sample group","groupPhoto":"path1.jpg","adminId":"admin1","users":{"user1":"User One"},"posts":{},"groupRequests":["user2"]}]

@@ -11,20 +11,19 @@ import java.util.ArrayList;
  * @author DELL
  */
 public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, GroupRole {
-
-   private String coAdminID;
-   private Group group;
     
-    public GroupCoAdmin(String coAdminID, Group group) {
-       super(coAdminID,group);  
+    public GroupCoAdmin(String memberID, Group group) {
+       super(memberID,group);
     }
 
     @Override
     public void approveRequest(String userId) {
+       if(group.getGroupRequests().contains(userId)){
        group.getGroupRequests().remove(userId);
        group.getUsers().put(userId, "Member");
        UserManager.findUser(userId).getGroups().put(group.getGroupId(), new GroupMember(userId, group));
        GroupManager.saveAll();
+       }
     }
 
     @Override
@@ -46,12 +45,14 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
     }
 
     @Override
+
     public void deletePost(Post content) {
             if(group.getPosts().contains(content)){
                    group.getPosts().remove(content);
                }
         GroupManager.saveAll();
     }
+
 
   @Override
     public void editPost(Post content, String newContent, String imagePath) {
@@ -63,8 +64,5 @@ public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, G
             GroupManager.saveAll();
     }
 }
-    
-   
-
 
  

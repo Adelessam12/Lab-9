@@ -47,9 +47,10 @@ public class FileUserStorage implements UserStorage {
 
             if (users == null) {
               users = new ArrayList<>();
-            } 
+
             return users;
-        } catch (FileNotFoundException e) {
+        }
+        }catch (FileNotFoundException e) {
             //System.out.println("File not found: " + filename);
         } catch (IOException e) {
           //  System.out.println("Error loading users: " + e.getMessage());

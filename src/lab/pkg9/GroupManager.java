@@ -5,29 +5,21 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  *
  * @author Mahmoud Waleed
  */
-class GroupManager {
+public class GroupManager {
 
     private static final GroupDatabase groupDatabase = GroupDatabaseFactory.createDatabase();
     private static final Database userDatabase = DatabaseFactory.createDatabase();
     private static ArrayList<Group> groups = groupDatabase.loadGroups();
 
-    public static Group createGroup(String groupId, String name, String description, String groupPhoto, String adminId) {
-        Group group = new Group(groupId, name, description, groupPhoto, adminId);
+    public static Group createGroup(String name, String description, String groupPhoto, String adminId) {
+        Group group = new Group(name, description, groupPhoto, adminId);
+        groupDatabase.saveGroupstofile();
         addGroup(group);
-        if(UserManager.findUser(adminId).getGroups()==null)
-        {
-            HashMap<String,GroupMember> newmap= new HashMap<>();
-            newmap.put(adminId, new GroupAdmin(adminId, group));
-                    UserManager.findUser(adminId).setGroups(newmap);
-
-        }
         UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group));
         groupDatabase.saveGroupstofile();
         return group;
@@ -52,7 +44,9 @@ class GroupManager {
     }
 
     public static void requestToJoin(User user, Group group) {
-        group.getGroupRequests().add(user.getUserId());
+        if(!user.getGroups().containsKey(group.getGroupId())){
+            group.getGroupRequests().add(user.getUserId());
+        }    
         GroupManager.saveAll();
     }
 
