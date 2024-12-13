@@ -1,19 +1,19 @@
 [
   {
-    "userId": "ID5367f47c-a3c6-4dab-820c-7073528f5b2f",
+    "userId": "ID58f1b42e-fdaf-4b05-9200-273b730edc40",
     "email": "1",
     "username": "1",
     "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
-    "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
-    "isOnline": true,
+    "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
+    "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "groups": {
-      "GroupID8c4a89c2-2a0f-497b-af66-2e473f53cbcd": {
-        "memberID": "ID5367f47c-a3c6-4dab-820c-7073528f5b2f",
-        "groupId": "GroupID8c4a89c2-2a0f-497b-af66-2e473f53cbcd",
+      "GroupID1cf90cbb-9ea0-491d-9b33-81c68880b613": {
+        "memberID": "ID58f1b42e-fdaf-4b05-9200-273b730edc40",
+        "groupId": "GroupID1cf90cbb-9ea0-491d-9b33-81c68880b613",
         "type": "GroupAdmin"
       }
     },
@@ -33,38 +33,11 @@
     }
   },
   {
-    "userId": "ID00b2f485-1bda-47c1-8eb4-17cd52ffb973",
+    "userId": "ID6c01e2be-a2bc-438b-aef5-73c5486fb8c2",
     "email": "2",
     "username": "2",
     "hashedPassword": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
     "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
-    "isOnline": false,
-    "profile": {
-      "profilePhotoPath": "R (1).jpg",
-      "coverPhotoPath": "image-3@2x.jpg"
-    },
-    "groups": {},
-    "friendManager": {
-      "friendList": [],
-      "blockedList": [],
-      "friendRequestManager": {
-        "sentFriendRequests": {},
-        "receivedFriendRequests": {}
-      }
-    },
-    "postManager": {
-      "contents": []
-    },
-    "storyManager": {
-      "contents": []
-    }
-  },
-  {
-    "userId": "ID44f67a4f-7b58-4e2b-9d1a-58a349e2ac62",
-    "email": "3",
-    "username": "3",
-    "hashedPassword": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce",
-    "dateOfBirth": "Mar 3, 3, 12:00:00 AM",
     "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",

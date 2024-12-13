@@ -31,8 +31,10 @@ import lab.pkg9.User;
 import lab.pkg9.UserManager;
 import lab.pkg9.Group;
 import lab.pkg9.GroupAdmin;
+import lab.pkg9.GroupCoAdmin;
 import lab.pkg9.GroupManager;
 import lab.pkg9.GroupRole;
+import lab.pkg9.Post;
 //import lab.pkg9.;
 
 /**
@@ -51,6 +53,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     User user;
     FriendshipService friendService;
     GroupManager groupManager;
+    ArrayList<Content> allPosts;
 
     public NewsFeed(User user) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -440,7 +443,7 @@ public final class NewsFeed extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         ArrayList<Group> admingroups = new ArrayList<>();
         ArrayList<Group> joinedgroups = new ArrayList<>();
         ArrayList<Group> requestedgroups = new ArrayList<>();
@@ -448,10 +451,11 @@ public final class NewsFeed extends javax.swing.JFrame {
         for (Group groupInSearch : groupDatabase.loadGroups()) {
             if (groupInSearch.getName().toLowerCase().contains(searchText.toLowerCase())) {
                 if (user.getGroups().containsKey(groupInSearch.getGroupId())) {
-                    if(groupInSearch.getAdminId().equals(user.getUserId()))
+                    if (groupInSearch.getAdminId().equals(user.getUserId())) {
                         admingroups.add(groupInSearch);
-                    else
+                    } else {
                         joinedgroups.add(groupInSearch);
+                    }
                 } else if (groupInSearch.getGroupRequests().contains(user.getUserId())) {
                     requestedgroups.add(groupInSearch);
 
@@ -476,14 +480,14 @@ public final class NewsFeed extends javax.swing.JFrame {
             JSeparator separator = new JSeparator();
             searchContainer.add(separator, BorderLayout.SOUTH);
         });
-        
+
         joinedgroups.forEach(group -> {
             JPanel entryPanel = joinedGroupPanel(group);
             searchContainer.add(entryPanel);
             JSeparator separator = new JSeparator();
             searchContainer.add(separator, BorderLayout.SOUTH);
         });
-        
+
         userSentFriends.forEach(friend -> {
             JPanel entryPanel = createFriendSentPanel(friend);
             searchContainer.add(entryPanel);
@@ -498,14 +502,13 @@ public final class NewsFeed extends javax.swing.JFrame {
             searchContainer.add(separator, BorderLayout.SOUTH);
         });
 
-        
         userRecievedFriends.forEach(friend -> {
             JPanel entryPanel = createFriendRecievePanel(friend);
             searchContainer.add(entryPanel);
             JSeparator separator = new JSeparator();
             searchContainer.add(separator, BorderLayout.SOUTH);
         });
-        
+
         // Display blocked users
         userBlockedFriends.forEach(blockedUser -> {
             JPanel blockedPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -524,7 +527,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             searchContainer.add(separator, BorderLayout.SOUTH);
 
         });
-        
+
         restOfgroups.forEach(group -> {
             JPanel entryPanel = restOfGroupPanel(group);
             searchContainer.add(entryPanel);
@@ -536,8 +539,8 @@ public final class NewsFeed extends javax.swing.JFrame {
         searchContainer.revalidate();
         searchContainer.repaint();
     }//GEN-LAST:event_searchActionPerformed
-    
-     public JPanel adminGroupPanel(Group groupInSearch) {
+
+    public JPanel adminGroupPanel(Group groupInSearch) {
 
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)
                 ? groupInSearch.getGroupPhoto()
@@ -553,7 +556,7 @@ public final class NewsFeed extends javax.swing.JFrame {
             gp.setVisible(true);
         });
         leaveGroupButton.addActionListener(e -> {
-            GroupAdmin groupRole = (GroupAdmin)user.getGroups().get(groupInSearch.getGroupId());
+            GroupAdmin groupRole = (GroupAdmin) user.getGroups().get(groupInSearch.getGroupId());
             groupRole.deleteGroup();
             entryPanel.remove(leaveGroupButton);
             entryPanel.add(new JLabel("Deleted"));
@@ -617,7 +620,6 @@ public final class NewsFeed extends javax.swing.JFrame {
         return entryPanel;
     }
 
-    
     public JPanel requestedGroupPanel(Group groupInSearch) {
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)
                 ? groupInSearch.getGroupPhoto()
@@ -897,10 +899,12 @@ public final class NewsFeed extends javax.swing.JFrame {
     public void loadnewsfeed() {
         Notifications_panel.removeAll();
         loadFriendRequests();
+         loadrequests();
         loadFriends();
         loadPosts();
         loadfriendstories();
-        
+        loadnotifications();
+
         searchContainer.removeAll();
         searchContainer.revalidate();
         searchContainer.repaint();
@@ -927,13 +931,84 @@ public final class NewsFeed extends javax.swing.JFrame {
             String username = UserManager.findUser(post.getAuthorId()).getUsername();
             String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
             Friendpostspanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
-            Notifications_panel.add(new NotificationsPanel(post, profilepath, username, friendService));
+            allPosts.add(post);
         }
 
-        Notifications_panel.revalidate();
-        Notifications_panel.repaint();
         Friendpostspanel.revalidate();
         Friendpostspanel.repaint();
+    }
+
+    public JPanel requests(User user1, Group g) {
+        EntryPanel entryPanel = new EntryPanel(user.getUsername(), user.getProfile().getProfilePhotoPath());
+        JLabel messageLabel = new JLabel("has requested to join group " + g.getName());
+        entryPanel.add(messageLabel);
+        JButton acceptButton = new JButton();
+        JButton declineButton = new JButton();
+        acceptButton.setText("Accept");
+        GroupRole role = user1.getGroups().get(g.getGroupId());
+        if (role instanceof GroupAdmin groupAdmin) {
+
+            acceptButton.addActionListener(e -> {
+                groupAdmin.approveRequest(user1.getUserId());
+            });
+            declineButton.addActionListener(e -> {
+                groupAdmin.declineRequest(user1.getUserId());
+            });
+        } else if (role instanceof GroupCoAdmin groupCoAdmin) {
+
+            acceptButton.addActionListener(e -> {
+                groupCoAdmin.approveRequest(user1.getUserId());
+            });
+            declineButton.addActionListener(e -> {
+                groupCoAdmin.declineRequest(user1.getUserId());
+            });
+
+        }
+        declineButton.setText("Declined");
+        entryPanel.add(acceptButton);
+        entryPanel.add(declineButton);
+        return entryPanel;
+
+    }
+
+    public void loadrequests() {
+
+        for (String groupID : user.getGroups().keySet()) {
+            Group g = GroupManager.findGroupById(groupID);
+            GroupRole role = user.getGroups().get(g.getGroupId());
+            if (role instanceof GroupAdmin) {
+                for (String request : g.getGroupRequests()) {
+                    User user1 = UserManager.findUser(request);
+                    JPanel entryJPanel = requests(user1, g);
+                    Notifications_panel.add(entryJPanel);
+
+                }
+            } else if (role instanceof GroupCoAdmin) {
+                for (String request : g.getGroupRequests()) {
+                    User user1 = UserManager.findUser(request);
+                    JPanel entryJPanel = requests(user1, g);
+                    Notifications_panel.add(entryJPanel);
+                }
+            }
+
+        }
+    }
+
+    public void loadnotifications() {
+
+        for (String groupID : user.getGroups().keySet()) {
+            Group g = GroupManager.findGroupById(groupID);
+            for (Post post : g.getPosts()) {
+                allPosts.add(post);
+            }
+        }
+        Collections.sort(allPosts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
+        for (Content post : allPosts) {
+            String username = UserManager.findUser(post.getAuthorId()).getUsername();
+            String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
+            Friendpostspanel.add(new PostPanel(username, profilepath, post.getContent(), post.getImagePath()));
+            allPosts.add(post);
+        }
     }
 
     public void loadFriends() {
@@ -1018,13 +1093,13 @@ public final class NewsFeed extends javax.swing.JFrame {
         ArrayList<Group> suggestions = groupManager.suggestions();
 
         for (Group suggestion : suggestions) {
-            if (!suggestion.getGroupRequests().contains(user.getUserId())&& !user.getGroups().containsKey(suggestion.getGroupId())) {
+            if (!suggestion.getGroupRequests().contains(user.getUserId()) && !user.getGroups().containsKey(suggestion.getGroupId())) {
                 String groupImagePath = (suggestion.getGroupPhoto() != null) ? suggestion.getGroupPhoto() : null;
                 EntryPanel suggestionPanel = new EntryPanel(suggestion.getName(), groupImagePath);
 
                 suggestionPanel.setPreferredSize(new Dimension(200, 100));
                 container2Panel.add(suggestionPanel);
-                JButton join = new JButton("Join");
+                JButton join = new JButton("request");
                 suggestionPanel.add(join);
                 container2Panel.add(suggestionPanel);
                 join.addActionListener((java.awt.event.ActionEvent evt) -> {
@@ -1075,12 +1150,12 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     private void loadGroups() {
         ContainerPanel1.removeAll();
-                    System.out.println(user.getGroups());
+        System.out.println(user.getGroups());
 
         if (user.getGroups() != null) {
             ArrayList<String> keys = new ArrayList<>(user.getGroups().keySet());
             for (String groupid : keys) {
-                            System.out.println(groupid);
+                System.out.println(groupid);
 
                 for (Group group : groupDatabase.loadGroups()) {
                     System.out.println(group);
@@ -1093,7 +1168,7 @@ public final class NewsFeed extends javax.swing.JFrame {
 
             }
         }
-         ContainerPanel1.revalidate();
+        ContainerPanel1.revalidate();
         ContainerPanel1.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

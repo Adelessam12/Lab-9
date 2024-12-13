@@ -9,5 +9,29 @@
     "groupRequests": [
       "ID00b2f485-1bda-47c1-8eb4-17cd52ffb973"
     ]
+  },
+  {
+    "groupId": "GroupIDdc730289-d855-4cfa-b9de-d5ad1b0d83e2",
+    "name": "A",
+    "description": "A",
+    "groupPhoto": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-09-03 215654.png",
+    "AdminId": "ID49a3febc-1f3c-4513-98d5-1ac6ff9663b8",
+    "users": {},
+    "posts": [],
+    "groupRequests": [
+      "ID34a332f4-331b-4de6-bd16-2a789a1d54f0"
+    ]
+  },
+  {
+    "groupId": "GroupID1cf90cbb-9ea0-491d-9b33-81c68880b613",
+    "name": "A",
+    "description": "a",
+    "groupPhoto": "C:\\Users\\Dell\\Pictures\\Screenshots\\Screenshot 2024-09-03 215654.png",
+    "AdminId": "ID58f1b42e-fdaf-4b05-9200-273b730edc40",
+    "users": {},
+    "posts": [],
+    "groupRequests": [
+      "ID6c01e2be-a2bc-438b-aef5-73c5486fb8c2"
+    ]
   }
 ]
