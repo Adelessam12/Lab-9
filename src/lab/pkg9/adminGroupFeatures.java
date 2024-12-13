@@ -12,4 +12,5 @@ public interface adminGroupFeatures {
     public void promoteToCoAdmin(String userId);
     public void demoteToMember(String userId);
     public void deleteGroup();
+    public void leaveGroup(String userId);
 }

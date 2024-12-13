@@ -538,7 +538,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         searchContainer.repaint();
     }//GEN-LAST:event_searchActionPerformed
 
-    public JPanel adminGroupPanel(Group groupInSearch) {
+public JPanel adminGroupPanel(Group groupInSearch) {
 
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)
                 ? groupInSearch.getGroupPhoto()
@@ -547,16 +547,32 @@ public final class NewsFeed extends javax.swing.JFrame {
         entryPanel.setPreferredSize(new Dimension(200, 100));
 
         JButton viewGroupButton = new JButton("View Group");
-        JButton leaveGroupButton = new JButton("Delete Group");
+        JButton leaveGroupButton = new JButton("Leave Group");
+        JButton deleteGroupButton = new JButton("Delete Group");
 
         viewGroupButton.addActionListener(e -> {
             GroupPage gp = new GroupPage(groupInSearch, user);
             gp.setVisible(true);
         });
-        leaveGroupButton.addActionListener(e -> {
+leaveGroupButton.addActionListener(e -> {
+            GroupAdmin groupRole = (GroupAdmin) user.getGroups().get(groupInSearch.getGroupId());
+            System.out.println(groupInSearch.getUsers());
+            if (groupInSearch.getUsers().isEmpty()) {
+                groupRole.deleteGroup();
+            entryPanel.remove(deleteGroupButton);
+            entryPanel.remove(viewGroupButton);
+            entryPanel.remove(leaveGroupButton);
+            entryPanel.add(new JLabel("Left ... Group Deleted (No Members in the Group)"));
+            entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
+
+            }else{
+            nextAdmin na = new nextAdmin(groupInSearch, groupRole);
+            na.setVisible(true);}
+        });
+        deleteGroupButton.addActionListener(e -> {
             GroupAdmin groupRole = (GroupAdmin) user.getGroups().get(groupInSearch.getGroupId());
             groupRole.deleteGroup();
-            entryPanel.remove(leaveGroupButton);
+            entryPanel.remove(deleteGroupButton);
             entryPanel.add(new JLabel("Deleted"));
             entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
             entryPanel.revalidate();
@@ -565,9 +581,9 @@ public final class NewsFeed extends javax.swing.JFrame {
 
         entryPanel.add(viewGroupButton);
         entryPanel.add(leaveGroupButton);
+        entryPanel.add(deleteGroupButton);
         return entryPanel;
     }
-
     public JPanel joinedGroupPanel(Group groupInSearch) {
 
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)

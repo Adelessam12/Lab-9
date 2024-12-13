@@ -58,6 +58,11 @@
         "memberID": "ID594132ef-79bf-4112-bf6a-e890b7c0bd56",
         "groupId": "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326",
         "type": "GroupCoAdmin"
+      },
+      "GroupIDfc4edcbc-c6a7-4da9-bfe8-2ec2035940b6": {
+        "memberID": "ID594132ef-79bf-4112-bf6a-e890b7c0bd56",
+        "groupId": "GroupIDfc4edcbc-c6a7-4da9-bfe8-2ec2035940b6",
+        "type": "GroupAdmin"
       }
     },
     "friendManager": {

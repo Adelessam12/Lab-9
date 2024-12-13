@@ -68,5 +68,15 @@
     "users": {},
     "posts": [],
     "groupRequests": []
+  },
+  {
+    "groupId": "GroupIDfc4edcbc-c6a7-4da9-bfe8-2ec2035940b6",
+    "name": "A",
+    "description": "",
+    "groupPhoto": "default_group_photo.png",
+    "AdminId": "ID594132ef-79bf-4112-bf6a-e890b7c0bd56",
+    "users": {},
+    "posts": [],
+    "groupRequests": []
   }
 ]
