@@ -39,23 +39,21 @@ public class FileUserStorage implements UserStorage {
     }
 
     // Load users from JSON file
-    @Override
+   @Override
     public ArrayList<User> loadUsersFromJson() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             // Define the type of ArrayList<User>
-            Type userListType = new TypeToken<ArrayList<User>>() {
-            }.getType();
+            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             ArrayList<User> users = gson.fromJson(reader, userListType);
 
             if (users == null) {
-              users = new ArrayList<>();
-
+                users = new ArrayList<>();
+            }
             return users;
-        }
-        }catch (FileNotFoundException e) {
-            //System.out.println("File not found: " + filename);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found: " + filename);
         } catch (IOException e) {
-            //  System.out.println("Error loading users: " + e.getMessage());
+            System.out.println("Error loading users: " + e.getMessage());
         }
         return new ArrayList<>(); // Return an empty list on error
     }

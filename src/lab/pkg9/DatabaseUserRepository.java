@@ -28,6 +28,7 @@ public class DatabaseUserRepository implements UserRepository {
 
     @Override
     public User findUserByEmail(String email) {
+        System.out.println("User List: " + database.getUsers());
         return database.getUsers().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
