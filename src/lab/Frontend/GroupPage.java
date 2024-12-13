@@ -200,7 +200,8 @@ public class GroupPage extends javax.swing.JFrame {
         membersPanel.removeAll(); // Clear the panel before loading members
         ArrayList<User> memberUsers = new ArrayList<>();
         ArrayList<User> restUsers = new ArrayList<>();
-        restUsers.add(UserManager.findUser(group.getAdminId()));
+        User admin = UserManager.findUser(group.getAdminId());
+        membersPanel.add(new EntryPanel(admin.getUsername(), admin.getProfile().getProfilePhotoPath()));
         for (String id : group.getUsers().keySet()) {
             if (!user.getUserId().equals(id)) {
                 User user1 = UserManager.findUser(id);
@@ -212,7 +213,7 @@ public class GroupPage extends javax.swing.JFrame {
             }
         }
         for (User user1 : restUsers) {
-            membersPanel.add(new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath()));
+            membersPanel.add(new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath()));
             JSeparator separator = new JSeparator();
             membersPanel.add(separator, BorderLayout.SOUTH);
         }
@@ -228,7 +229,7 @@ public class GroupPage extends javax.swing.JFrame {
     }
 
     private JPanel loadcoAdminPanel(User user1) {
-        EntryPanel entrypanel = new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath());
+        EntryPanel entrypanel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(e -> {
             switch (role) {
@@ -251,7 +252,6 @@ public class GroupPage extends javax.swing.JFrame {
         membersPanel.removeAll(); // Clear the panel before loading members
         ArrayList<User> memberUsers = new ArrayList<>();
         ArrayList<User> restUsers = new ArrayList<>();
-        restUsers.add(UserManager.findUser(group.getAdminId()));
         for (String id : group.getUsers().keySet()) {
             if (!user.getUserId().equals(id)) {
                 User user1 = UserManager.findUser(id);
@@ -279,7 +279,7 @@ public class GroupPage extends javax.swing.JFrame {
     }
 
     private JPanel loadAdminPanel(GroupAdmin admin, User user1) {
-        EntryPanel entrypanel = new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath());
+        EntryPanel entrypanel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
         JButton demoteButton = new JButton("Demote");
         JButton removeButton = new JButton("Remove");
         removeButton.addActionListener(e -> {
@@ -301,7 +301,7 @@ public class GroupPage extends javax.swing.JFrame {
     }
 
     private JPanel loadMemberAdminPanel(User user1) {
-        EntryPanel entrypanel = new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath());
+        EntryPanel entrypanel = new EntryPanel(user1.getUsername(), user1.getProfile().getProfilePhotoPath());
         JButton removeButton = new JButton("Remove");
         JButton promoteButton = new JButton("Promote");
         removeButton.addActionListener(e -> {
