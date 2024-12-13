@@ -28,6 +28,7 @@ public class DatabaseUserRepository implements UserRepository {
 
     @Override
     public User findUserByEmail(String email) {
+        System.out.println("User List: " + database.getUsers());
         return database.getUsers().stream()
                 .filter(user -> user.getEmail().equals(email))
                 .findFirst()
@@ -37,6 +38,7 @@ public class DatabaseUserRepository implements UserRepository {
     @Override
     public boolean addUser(User user) {   
         database.addUser(user);
+        database.saveUsersToFile();
         return true;
     }
 

@@ -65,6 +65,8 @@ public class StoryPanel extends JPanel {
             postPanel.setMaximumSize(new Dimension(500, 300)); // Restrict maximum size of each PostPanel
             storiesPanel.add(postPanel);
             storiesPanel.add(Box.createRigidArea(new Dimension(0, 10))); // Add spacing between posts
+            JSeparator separator = new JSeparator();
+            add(separator, BorderLayout.SOUTH);
         }
     }
 
@@ -80,6 +82,7 @@ public class StoryPanel extends JPanel {
     storyDialog.setSize(width, height);
     storyDialog.setLocationRelativeTo(null); // Center the dialog on the screen
 
+        
     // Display the dialog
     storyDialog.setVisible(true);
 }

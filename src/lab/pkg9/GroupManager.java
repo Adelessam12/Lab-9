@@ -5,6 +5,7 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 
 /**
  *
@@ -12,64 +13,92 @@ import java.util.ArrayList;
  */
 public class GroupManager {
 
-    private final ArrayList<Group> groups;
+    private static final GroupDatabase groupDatabase = GroupDatabaseFactory.createDatabase();
+    private static final Database userDatabase = DatabaseFactory.createDatabase();
+    private static ArrayList<Group> groups = groupDatabase.loadGroups();
     private final User user;
 
     public GroupManager(User user) {
-        groups = new ArrayList<>();
         this.user = user;
     }
 
-    public void requestToJoin(Group group) {
-        group.getGroupRequests().add(user.getUserId());
+    public static Group createGroup(String name, String description, String groupPhoto, String adminId) {
+        Group group = new Group(name, description, groupPhoto, adminId);
+        addGroup(group);
+        UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group.getGroupId()));
+        saveAll();
+        //System.out.println(UserManager.findUser(adminId).getGroups().get(group.getGroupId()).getClass().getSimpleName());
+        return group;
     }
 
-    public void joinGroup(Group group) {
-        group.setUsers(user.getUserId(), "Member");
-        user.getGroups().add(group.getGroupID());
+    public static void saveAll() {
+        userDatabase.saveUsersToFile();
+        groupDatabase.saveGroupstofile();
     }
 
-    public void leaveGroup(Group group) {
-        group.getUsers().remove(user.getUserId());
-        user.getGroups().remove(group.getGroupID());
-    }
-
-    public void addGroup(Group group) {
+    public static void addGroup(Group group) {
+        if (groups == null) {
+            groups = new ArrayList<>();
+        }
         groups.add(group);
-       GroupDatabase gdb= new GroupDatabaseFactory().createDatabase();
-       gdb.saveGroupstofile();
+        groupDatabase.saveGroupstofile();
     }
 
-    public void removeMember(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public static void removeGroup(Group group) {
+        groups.remove(group);
+        groupDatabase.saveGroupstofile();
     }
 
-    public void approveRequest(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public static void requestToJoin(User user, Group group) {
+        if(!user.getGroups().containsKey(group.getGroupId())){
+            group.getGroupRequests().add(user.getUserId());
+        }    
+        GroupManager.saveAll();
     }
 
-    public void declineRequest(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public static Group findGroupById(String groupId) {
+        for (Group group : groups) {
+            if (group.getGroupId().equals(groupId)) {
+                return group;
+            }
+        }
+        return null;
+    }
+       public  ArrayList<Group> suggestions() {
+        ArrayList<Group> suggestions = new ArrayList<>();
+
+        for (Group suggested : groupDatabase.loadGroups()) {
+            if (!user.getGroups().containsKey(suggested.getGroupId()) && hasFriends(suggested)) {
+
+                {
+                    if (!user.getGroups().containsKey(suggested.getGroupId())) {
+                        suggestions.add(suggested);
+                    }
+                }
+            }
+        }
+        for (Group suggested : groupDatabase.loadGroups()) {
+            if (!user.getGroups().containsKey(suggested.getGroupId())) {
+                suggestions.add(suggested);
+            }
+        }
+        // Remove duplicate suggestions
+        return new ArrayList<>(new LinkedHashSet<>(suggestions));
     }
 
-    public void promote(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    //method to check for common friends
+    private boolean hasFriends(Group suggested) {
+        ArrayList<User> friends = new ArrayList<>();
+        for (String friendId : user.getFriendManager().getFriendList()) {
+            friends.add(UserManager.findUser(friendId));
+        }
+        for (User friend : friends) {
+            if (friend.getGroups().containsKey(suggested.getGroupId())) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void demote(Group group) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void addPost() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void editPost() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void deletePost() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

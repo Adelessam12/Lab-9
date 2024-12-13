@@ -1,7 +1,10 @@
 package lab.pkg9;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,7 +30,7 @@ public class GroupStorage {
      */
     public boolean saveToFile(ArrayList<Group> groups) {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(groups, writer);
             return true;
         } catch (IOException e) {
@@ -41,14 +44,33 @@ public class GroupStorage {
      * @return An ArrayList of Group objects loaded from the file, or an empty list if an error occurs.
      */
     public ArrayList<Group> loadFromFile() {
-        try (FileReader reader = new FileReader(FILE_PATH)) {
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Group>>() {}.getType();
-            ArrayList<Group> loadedGroups = gson.fromJson(reader, type);
-            return loadedGroups != null ? loadedGroups : new ArrayList<>();
-        } catch (IOException e) {
-            System.err.println("Error loading groups from file: " + e.getMessage());
-            return new ArrayList<>();
-        }
+    try (FileReader reader = new FileReader(FILE_PATH)) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Group>>() {}.getType();
+        ArrayList<Group> loadedGroups = gson.fromJson(reader, type);
+        //System.out.println("Loaded groups: " + loadedGroups); // Debugging output
+        return loadedGroups != null ? loadedGroups : new ArrayList<>();
+    } catch (IOException e) {
+        //System.err.println("Error loading groups from file: " + e.getMessage());
+        return new ArrayList<>();
     }
+//      public ArrayList<User> loadUsersFromJson() {
+//        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+//            // Define the type of ArrayList<User>
+//            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+//            ArrayList<User> users = gson.fromJson(reader, userListType);
+//
+//            if (users == null) {
+//              users = new ArrayList<>();
+//            } 
+//            return users;
+//        } catch (FileNotFoundException e) {
+//            //System.out.println("File not found: " + filename);
+//        } catch (IOException e) {
+//          //  System.out.println("Error loading users: " + e.getMessage());
+//        }
+//        return new ArrayList<>(); // Return an empty list on error
+//    }
+}
+
 }
