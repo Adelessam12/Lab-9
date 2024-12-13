@@ -54,7 +54,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     User user;
     FriendshipService friendService;
     GroupManager groupManager;
-    ArrayList<Content> allPosts= new ArrayList<>();
+    ArrayList<Content> allPosts = new ArrayList<>();
 
     public NewsFeed(User user) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -538,7 +538,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         searchContainer.repaint();
     }//GEN-LAST:event_searchActionPerformed
 
-public JPanel adminGroupPanel(Group groupInSearch) {
+    public JPanel adminGroupPanel(Group groupInSearch) {
 
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)
                 ? groupInSearch.getGroupPhoto()
@@ -554,20 +554,21 @@ public JPanel adminGroupPanel(Group groupInSearch) {
             GroupPage gp = new GroupPage(groupInSearch, user);
             gp.setVisible(true);
         });
-leaveGroupButton.addActionListener(e -> {
+        leaveGroupButton.addActionListener(e -> {
             GroupAdmin groupRole = (GroupAdmin) user.getGroups().get(groupInSearch.getGroupId());
             System.out.println(groupInSearch.getUsers());
             if (groupInSearch.getUsers().isEmpty()) {
                 groupRole.deleteGroup();
-            entryPanel.remove(deleteGroupButton);
-            entryPanel.remove(viewGroupButton);
-            entryPanel.remove(leaveGroupButton);
-            entryPanel.add(new JLabel("Left ... Group Deleted (No Members in the Group)"));
-            entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
+                entryPanel.remove(deleteGroupButton);
+                entryPanel.remove(viewGroupButton);
+                entryPanel.remove(leaveGroupButton);
+                entryPanel.add(new JLabel("Left ... Group Deleted (No Members in the Group)"));
+                entryPanel.setFont(new Font("Arial", Font.PLAIN, 14));
 
-            }else{
-            nextAdmin na = new nextAdmin(groupInSearch, groupRole);
-            na.setVisible(true);}
+            } else {
+                nextAdmin na = new nextAdmin(groupInSearch, groupRole);
+                na.setVisible(true);
+            }
         });
         deleteGroupButton.addActionListener(e -> {
             GroupAdmin groupRole = (GroupAdmin) user.getGroups().get(groupInSearch.getGroupId());
@@ -584,6 +585,7 @@ leaveGroupButton.addActionListener(e -> {
         entryPanel.add(deleteGroupButton);
         return entryPanel;
     }
+
     public JPanel joinedGroupPanel(Group groupInSearch) {
 
         String profileImagePath = (groupInSearch.getGroupPhoto() != null)
@@ -653,7 +655,7 @@ leaveGroupButton.addActionListener(e -> {
             entryPanel.revalidate();
             entryPanel.repaint();
         });
-        entryPanel.add(Box.createRigidArea(new Dimension(75, 0)));
+        //entryPanel.add(Box.createRigidArea(new Dimension(1, 0)));
         entryPanel.add(viewGroupButton);
         entryPanel.add(requestToJoinButton);
 
@@ -836,65 +838,19 @@ leaveGroupButton.addActionListener(e -> {
         });
 
         // Add components to the panel
+        
         entryPanel.add(viewProfileButton);
         entryPanel.add(acceptButton);
         entryPanel.add(declineButton);
         return entryPanel;
     }
 
-    private JPanel createSuggestionPanel(User nonFriend) {
-        String profileImagePath = (nonFriend.getProfile() != null)
-                ? nonFriend.getProfile().getProfilePhotoPath()
-                : null;
-        EntryPanel entryPanel = new EntryPanel(nonFriend.getUsername(), profileImagePath);
-        entryPanel.setPreferredSize(new Dimension(200, 100));
-
-        JButton viewProfileButton = new JButton("View Profile");
-        JButton addButton = new JButton("Add Friend");
-        JButton blockButton = new JButton("Block");
-
-        // Event for viewing the user's profile
-        viewProfileButton.addActionListener(evt -> {
-            UserProfile userProfile = new UserProfile(nonFriend);
-            userProfile.setVisible(true);
-            System.out.println("Viewing profile of " + nonFriend.getUsername());
-        });
-
-        // Event for sending a friend request
-        addButton.addActionListener(evt -> {
-            friendService.sendFriendRequest(nonFriend);
-            System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-            entryPanel.remove(addButton);
-            entryPanel.remove(blockButton);
-            entryPanel.add(new JLabel("Sent")).setFont(new Font("Arial", Font.PLAIN, 14));
-            entryPanel.add(blockButton);
-            database.saveUsersToFile();
-            entryPanel.revalidate();
-            entryPanel.repaint(); // Update UI after sending a request
-        });
-
-        // Event for blocking a user
-        blockButton.addActionListener(evt -> {
-            friendService.blockFriend(nonFriend);
-            entryPanel.remove(viewProfileButton);
-            entryPanel.remove(addButton);
-            entryPanel.remove(blockButton);
-            entryPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
-            entryPanel.revalidate();
-            entryPanel.repaint(); // Update UI after blocking
-        });
-
-        // Add components to the suggestion panel
-        entryPanel.add(viewProfileButton);
-        entryPanel.add(addButton);
-        entryPanel.add(blockButton);
-        return entryPanel;
-    }
+   
 
     public void loadnewsfeed() {
         Notifications_panel.removeAll();
         loadFriendRequests();
-         loadrequests();
+        loadrequests();
         loadFriends();
         loadPosts();
         loadfriendstories();
@@ -940,26 +896,44 @@ leaveGroupButton.addActionListener(e -> {
         JButton acceptButton = new JButton();
         JButton declineButton = new JButton();
         acceptButton.setText("Accept");
-        GroupRole role = user.getGroups().get(g.getGroupId());
-        if (role instanceof GroupAdmin groupAdmin) {
-
-            acceptButton.addActionListener(e -> {
-                groupAdmin.approveRequest(user1.getUserId());
-            });
-            declineButton.addActionListener(e -> {
-                groupAdmin.declineRequest(user1.getUserId());
-            });
-        } else if (role instanceof GroupCoAdmin groupCoAdmin) {
-
-            acceptButton.addActionListener(e -> {
-                groupCoAdmin.approveRequest(user1.getUserId());
-            });
-            declineButton.addActionListener(e -> {
-                groupCoAdmin.declineRequest(user1.getUserId());
-            });
-
-        }
         declineButton.setText("Declined");
+        GroupRole role = user.getGroups().get(g.getGroupId());
+        switch (role) {
+            case GroupAdmin groupAdmin -> {
+                
+                acceptButton.addActionListener(e -> {
+                    groupAdmin.approveRequest(user1.getUserId());
+                    entryPanel.remove(acceptButton);
+                    entryPanel.remove(declineButton);
+                    entryPanel.add(new JLabel("Accepted")).setFont(new Font("Arial", Font.PLAIN, 14));
+                });
+                declineButton.addActionListener(e -> {
+                    groupAdmin.declineRequest(user1.getUserId());
+                    
+                    entryPanel.remove(acceptButton);
+                    entryPanel.remove(declineButton);
+                    entryPanel.add(new JLabel("Declined")).setFont(new Font("Arial", Font.PLAIN, 14));
+                });
+            }
+            case GroupCoAdmin groupCoAdmin -> {
+                
+                acceptButton.addActionListener(e -> {
+                    groupCoAdmin.approveRequest(user1.getUserId());
+                    entryPanel.remove(acceptButton);
+                    entryPanel.remove(declineButton);
+                    entryPanel.add(new JLabel("Accepted")).setFont(new Font("Arial", Font.PLAIN, 14));
+                });
+                declineButton.addActionListener(e -> {
+                    groupCoAdmin.declineRequest(user1.getUserId());
+                    entryPanel.remove(acceptButton);
+                    entryPanel.remove(declineButton);
+                    entryPanel.add(new JLabel("Declined")).setFont(new Font("Arial", Font.PLAIN, 14));
+                });
+                
+            }
+            default -> {
+            }
+        }
         entryPanel.add(acceptButton);
         entryPanel.add(declineButton);
         return entryPanel;
@@ -999,14 +973,15 @@ leaveGroupButton.addActionListener(e -> {
         }
         Collections.sort(allPosts, (p1, p2) -> p2.getTimestamp().compareTo(p1.getTimestamp()));
         for (Content post : allPosts) {
-            if(!user.getUserId().equals(post.getAuthorId())){
-            String username = UserManager.findUser(post.getAuthorId()).getUsername();
-            String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
-            Notifications_panel.add(new NotificationsPanel(post,profilepath,username, friendService));
-            
-        }}
+            if (!user.getUserId().equals(post.getAuthorId())) {
+                String username = UserManager.findUser(post.getAuthorId()).getUsername();
+                String profilepath = UserManager.findUser(post.getAuthorId()).getProfile().getProfilePhotoPath();
+                Notifications_panel.add(new NotificationsPanel(post, profilepath, username, friendService));
+
+            }
+        }
     }
-    
+
     public void loadFriends() {
         ContainerPanel1.removeAll();
         ArrayList<User> friends = new ArrayList<>();
@@ -1093,7 +1068,7 @@ leaveGroupButton.addActionListener(e -> {
                 JPanel suggestionPanel = restOfGroupPanel(suggestion);
                 container2Panel.add(suggestionPanel);
                 container2Panel.revalidate();
-        container2Panel.repaint();
+                container2Panel.repaint();
             }
         }
         container2Panel.revalidate();
@@ -1107,31 +1082,63 @@ leaveGroupButton.addActionListener(e -> {
 
         for (User suggestion : suggestions) {
             if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId()) && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggestion.getUserId())) {
-                String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-                EntryPanel suggestionPanel = new EntryPanel(suggestion.getUsername(), profileImagePath);
-
-                suggestionPanel.setPreferredSize(new Dimension(200, 100));
-                container2Panel.add(suggestionPanel);
-                JButton add = new JButton("Add Friend");
-                suggestionPanel.add(Box.createRigidArea(new Dimension(55, 0)));
-                suggestionPanel.add(add);
-                container2Panel.add(suggestionPanel);
-                add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    friendService.sendFriendRequest(suggestion);
-                    System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                    suggestionPanel.remove(add);
-                    database.saveUsersToFile();
-                    //ArrayList<User> users = database.getUsers();
-                    suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+                    JPanel entryPanel = createSuggestionPanel(suggestion);
+                    container2Panel.add(entryPanel);
                     container2Panel.revalidate();
-                    container2Panel.repaint();
-                });
-            }
-        }
-        container2Panel.revalidate();
         container2Panel.repaint();
-    }
+    }}}
 
+     private JPanel createSuggestionPanel(User nonFriend) {
+        String profileImagePath = (nonFriend.getProfile() != null)
+                ? nonFriend.getProfile().getProfilePhotoPath()
+                : null;
+        EntryPanel entryPanel = new EntryPanel(nonFriend.getUsername(), profileImagePath);
+        entryPanel.setPreferredSize(new Dimension(200, 100));
+
+        JButton viewProfileButton = new JButton("View Profile");
+        JButton addButton = new JButton("Add Friend");
+        JButton blockButton = new JButton("Block");
+
+        // Event for viewing the user's profile
+        viewProfileButton.addActionListener(evt -> {
+            UserProfile userProfile = new UserProfile(nonFriend);
+            userProfile.setVisible(true);
+            System.out.println("Viewing profile of " + nonFriend.getUsername());
+        });
+
+        // Event for sending a friend request
+        addButton.addActionListener(evt -> {
+            friendService.sendFriendRequest(nonFriend);
+            System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
+            entryPanel.remove(addButton);
+            entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Sent")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.add(blockButton);
+            database.saveUsersToFile();
+            entryPanel.revalidate();
+            entryPanel.repaint(); // Update UI after sending a request
+        });
+
+        // Event for blocking a user
+        blockButton.addActionListener(evt -> {
+            friendService.blockFriend(nonFriend);
+            entryPanel.remove(viewProfileButton);
+            entryPanel.remove(addButton);
+            entryPanel.remove(blockButton);
+            entryPanel.add(new JLabel("Blocked")).setFont(new Font("Arial", Font.PLAIN, 14));
+            entryPanel.revalidate();
+            entryPanel.repaint(); // Update UI after blocking
+        });
+
+        // Add components to the suggestion panel
+        
+        entryPanel.add(Box.createRigidArea(new Dimension(100, 0)));
+        entryPanel.add(viewProfileButton);
+        entryPanel.add(addButton);
+        entryPanel.add(blockButton);
+        return entryPanel;
+    }
+    
     private void loadGroups() {
         ContainerPanel1.removeAll();
         System.out.println(user.getGroups());

@@ -171,42 +171,42 @@ public class Register extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all the fields.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-//        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[a-zA-Z]{2,4}$")) {
-//            javax.swing.JOptionPane.showMessageDialog(this, "Invalid email format. Example: user@example.com", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        String[] emailParts = email.split("@");
-//        if (emailParts.length == 2 && emailParts[1].split("\\.").length != 2) {
-//            javax.swing.JOptionPane.showMessageDialog(this,
-//                    "Email must contain exactly one dot in the domain part. Example: user@example.com",
-//                    "Error",
-//                    javax.swing.JOptionPane.ERROR_MESSAGE
-//            );
-//            return;
-//        }
-//
-//        // Validate password strength
-//        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{7,}$")) {
-//            javax.swing.JOptionPane.showMessageDialog(this, """
-//                                                        Password must contain at least:
-//                                                        - One uppercase letter
-//                                                        - One lowercase letter
-//                                                        - One number
-//                                                        - One special character
-//                                                        - Minimum 7 characters""",
-//                    "Error",
-//                    javax.swing.JOptionPane.ERROR_MESSAGE
-//            );
-//            return;
-//        }
-//        if (!username.matches(".*[a-zA-Z].*")) {
-//            javax.swing.JOptionPane.showMessageDialog(this,
-//                    "Username must contain at least one letter and cannot be entirely numeric.",
-//                    "Error",
-//                    javax.swing.JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//
+        if (!email.matches("^[^@\\s]+@[^@\\s]+\\.[a-zA-Z]{2,4}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid email format. Example: user@example.com", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String[] emailParts = email.split("@");
+        if (emailParts.length == 2 && emailParts[1].split("\\.").length != 2) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Email must contain exactly one dot in the domain part. Example: user@example.com",
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+
+        // Validate password strength
+        if (!password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{7,}$")) {
+            javax.swing.JOptionPane.showMessageDialog(this, """
+                                                        Password must contain at least:
+                                                        - One uppercase letter
+                                                        - One lowercase letter
+                                                        - One number
+                                                        - One special character
+                                                        - Minimum 7 characters""",
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE
+            );
+            return;
+        }
+        if (!username.matches(".*[a-zA-Z].*")) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "Username must contain at least one letter and cannot be entirely numeric.",
+                    "Error",
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         // Validate and parse the date of birth
         Date dob;
         try {
@@ -217,24 +217,24 @@ public class Register extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid date format. Please use yyyy-MM-dd.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
-//        boolean emailExists = false;
-//        if (db.getUsers() != null) {
-//            for (User user : db.getUsers()) {
-//                if (user.getEmail().equals(email)) {
-//                    emailExists = true;
-//                    break;
-//                }
-//            }
-//        }
-//        if (emailExists) {
-//            javax.swing.JOptionPane.showMessageDialog(this, "Email is already registered.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
-//        // Check if password matches confirm password
-//        if (!password.equals(confirmPassword)) {
-//            javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-//            return;
-//        }
+        boolean emailExists = false;
+        if (db.getUsers() != null) {
+            for (User user : db.getUsers()) {
+                if (user.getEmail().equals(email)) {
+                    emailExists = true;
+                    break;
+                }
+            }
+        }
+        if (emailExists) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Email is already registered.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // Check if password matches confirm password
+        if (!password.equals(confirmPassword)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         // Show success message
         javax.swing.JOptionPane.showMessageDialog(this, "User registered successfully!", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
