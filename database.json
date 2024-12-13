@@ -79,5 +79,86 @@
     "storyManager": {
       "contents": []
     }
+  },
+  {
+    "userId": "ID007a6603-78c0-4193-9106-6485786cb6fa",
+    "email": "david",
+    "username": "david",
+    "hashedPassword": "07d046d5fac12b3f82daf5035b9aae86db5adc8275ebfbf05ec83005a4a8ba3e",
+    "dateOfBirth": "Mar 3, 3, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "groups": {},
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "IDbcbc232d-2e19-4297-a381-f28660a56d21",
+    "email": "zoro",
+    "username": "zoro",
+    "hashedPassword": "3b97b8eff0244f748356ba9dd0cca1a8524699b8eb462716d78593370ce00236",
+    "dateOfBirth": "Feb 2, 2, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "groups": {},
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "IDbd96a8e3-a137-4491-9fe4-046bbdc41fe1",
+    "email": "naruto",
+    "username": "naruto",
+    "hashedPassword": "846f6a76ffc111552f1c9ca3a06d989d0c9c9b79c4fc25ff67f6207be512955c",
+    "dateOfBirth": "May 5, 5, 12:00:00 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "groups": {},
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
   }
 ]

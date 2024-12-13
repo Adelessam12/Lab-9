@@ -1120,7 +1120,7 @@ public final class NewsFeed extends javax.swing.JFrame {
                 suggestionPanel.setPreferredSize(new Dimension(200, 100));
                 container2Panel.add(suggestionPanel);
                 JButton add = new JButton("Add Friend");
-                suggestionPanel.add(Box.createRigidArea(new Dimension(55, 0)));
+                suggestionPanel.add(Box.createRigidArea(new Dimension(35, 0)));
                 suggestionPanel.add(add);
                 container2Panel.add(suggestionPanel);
                 add.addActionListener((java.awt.event.ActionEvent evt) -> {
