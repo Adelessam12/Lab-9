@@ -106,8 +106,10 @@ public class GroupPage extends javax.swing.JFrame {
     }
 
     public void loadGroup() {
+        
         ProfilePanel Groupimage = (ProfilePanel) groupPhoto;
-        Groupimage.setProfileImage(group.getGroupPhoto());
+        if(group.getGroupPhoto() != null)
+            Groupimage.setProfileImage(group.getGroupPhoto());
         String Description = group.getDescription();
 
         // Set the bio text into the JTextPane
@@ -284,7 +286,7 @@ public class GroupPage extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         createPost = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         membersPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         membersPanel.setLayout(new javax.swing.BoxLayout(membersPanel, javax.swing.BoxLayout.Y_AXIS));

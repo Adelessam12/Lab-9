@@ -1,70 +1,37 @@
 [
   {
-    "userId": "ID0f5026ba-299d-4308-804a-ee41ee708d39",
-    "email": "a",
-    "username": "a",
-    "hashedPassword": "a",
-    "dateOfBirth": "Dec 13, 2024, 2:14:13 AM",
-    "isOnline": false,
+    "userId": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
+    "email": "1",
+    "username": "1",
+    "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+    "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
+    "isOnline": true,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "groups": {
-      "GroupIDd4c2e17c-f1bb-4782-8350-7eabe2d9b460": {
-        "memberID": "ID0f5026ba-299d-4308-804a-ee41ee708d39",
+      "GroupIDc32b55d6-b805-4d10-aae3-cf00b4185a3a": {
+        "memberID": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
         "group": {
-          "groupId": "GroupIDd4c2e17c-f1bb-4782-8350-7eabe2d9b460",
-          "name": "ahmed",
-          "description": "a7a",
-          "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\OIP.jpeg",
-          "AdminId": "ID0f5026ba-299d-4308-804a-ee41ee708d39",
-          "users": {
-            "IDeab0001a-6427-48eb-af29-d43ef6451c98": "Member"
-          },
+          "groupId": "GroupIDc32b55d6-b805-4d10-aae3-cf00b4185a3a",
+          "name": "mihos",
+          "description": "moooooooooooooooo",
+          "AdminId": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
+          "users": {},
           "posts": [],
           "groupRequests": []
         }
-      }
-    },
-    "friendManager": {
-      "friendList": [],
-      "blockedList": [],
-      "friendRequestManager": {
-        "sentFriendRequests": {},
-        "receivedFriendRequests": {}
-      }
-    },
-    "postManager": {
-      "contents": []
-    },
-    "storyManager": {
-      "contents": []
-    }
-  },
-  {
-    "userId": "IDeab0001a-6427-48eb-af29-d43ef6451c98",
-    "email": "b",
-    "username": "b",
-    "hashedPassword": "b",
-    "dateOfBirth": "Dec 13, 2024, 2:14:13 AM",
-    "isOnline": false,
-    "profile": {
-      "profilePhotoPath": "R (1).jpg",
-      "coverPhotoPath": "image-3@2x.jpg"
-    },
-    "groups": {
-      "GroupIDd4c2e17c-f1bb-4782-8350-7eabe2d9b460": {
-        "memberID": "IDeab0001a-6427-48eb-af29-d43ef6451c98",
+      },
+      "GroupIDeb14cf6d-55b9-4245-bc01-39e24124759f": {
+        "memberID": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
         "group": {
-          "groupId": "GroupIDd4c2e17c-f1bb-4782-8350-7eabe2d9b460",
-          "name": "ahmed",
-          "description": "a7a",
-          "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\OIP.jpeg",
-          "AdminId": "ID0f5026ba-299d-4308-804a-ee41ee708d39",
-          "users": {
-            "IDeab0001a-6427-48eb-af29-d43ef6451c98": "Member"
-          },
+          "groupId": "GroupIDeb14cf6d-55b9-4245-bc01-39e24124759f",
+          "name": "hiiiiii",
+          "description": "byee",
+          "groupPhoto": "C:\\Users\\DELL\\Pictures\\Screenshot 2023-01-31 051554.png",
+          "AdminId": "IDcc04f48a-6e45-4c86-b2d9-ab2a9986f5e9",
+          "users": {},
           "posts": [],
           "groupRequests": []
         }

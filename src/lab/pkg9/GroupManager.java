@@ -21,7 +21,7 @@ public class GroupManager {
         groupDatabase.saveGroupstofile();
         addGroup(group);
         UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group));
-        groupDatabase.saveGroupstofile();
+        saveAll();
         return group;
     }
 
