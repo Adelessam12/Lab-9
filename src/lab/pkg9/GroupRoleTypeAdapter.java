@@ -24,12 +24,13 @@ public class GroupRoleTypeAdapter extends TypeAdapter<GroupRole> {
     public void write(JsonWriter out, GroupRole value) throws IOException {
         // Serialize the object with a type field
         JsonObject jsonObject = gson.toJsonTree(value).getAsJsonObject();
-        if (value instanceof GroupMember) {
-            jsonObject.addProperty("type", "GroupMember");
-        } else if (value instanceof GroupAdmin) {
+        System.out.println("Serializing: " + value.getClass().getSimpleName());
+        if (value instanceof GroupAdmin) {
             jsonObject.addProperty("type", "GroupAdmin");
         } else if (value instanceof GroupCoAdmin) {
             jsonObject.addProperty("type", "GroupCoAdmin");
+        } else if (value instanceof GroupMember) {
+            jsonObject.addProperty("type", "GroupMember");
         }
         gson.toJson(jsonObject, out);
     }
@@ -41,14 +42,15 @@ public class GroupRoleTypeAdapter extends TypeAdapter<GroupRole> {
 
         // Deserialize based on the type field
         switch (type) {
-            case "GroupMember" -> {
-                return gson.fromJson(jsonObject, GroupMember.class);
-            }
+            
             case "GroupAdmin" -> {
                 return gson.fromJson(jsonObject, GroupAdmin.class);
             }
             case "GroupCoAdmin" -> {
                 return gson.fromJson(jsonObject, GroupCoAdmin.class);
+            }
+            case "GroupMember" -> {
+                return gson.fromJson(jsonObject, GroupMember.class);
             }
             default -> throw new JsonIOException("Unknown GroupRole type: " + type);
         }

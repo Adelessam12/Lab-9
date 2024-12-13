@@ -1,6 +1,6 @@
 [
   {
-    "userId": "IDbf24369c-fe74-4e9b-89db-cba5a1081dc3",
+    "userId": "ID9200b600-f793-4aba-991e-294ae2522986",
     "email": "1",
     "username": "1",
     "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
@@ -10,7 +10,13 @@
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
-    "groups": {},
+    "groups": {
+      "GroupID5cbb55fe-4a24-4cd5-9cff-feff931770ed": {
+        "memberID": "ID9200b600-f793-4aba-991e-294ae2522986",
+        "groupId": "GroupID5cbb55fe-4a24-4cd5-9cff-feff931770ed",
+        "type": "GroupAdmin"
+      }
+    },
     "friendManager": {
       "friendList": [],
       "blockedList": [],

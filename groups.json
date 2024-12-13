@@ -1,1 +1,11 @@
-[]
+[
+  {
+    "groupId": "GroupID5cbb55fe-4a24-4cd5-9cff-feff931770ed",
+    "name": "n",
+    "description": "m",
+    "AdminId": "ID9200b600-f793-4aba-991e-294ae2522986",
+    "users": {},
+    "posts": [],
+    "groupRequests": []
+  }
+]

@@ -12,21 +12,23 @@ package lab.pkg9;
 
 
        protected final String memberID; 
-       protected final Group group;
+       protected final String groupId;
 
-    public GroupMember(String memberID, Group group) {
+    public GroupMember(String memberID, String groupId) {
         this.memberID = memberID;
-        this.group = group;
+        this.groupId = groupId;
     }
 
     @Override
     public void addPost(Post content) {
+                Group group = GroupManager.findGroupById(groupId);
                 group.getPosts().add(content);
                 GroupManager.saveAll();
     }
     
     @Override
     public void leaveGroup() {
+        Group group = GroupManager.findGroupById(groupId);
          if(!memberID.equals(group.getAdminId())){
              UserManager.findUser(memberID).getGroups().remove(group.getGroupId());
              group.getUsers().remove(memberID);
