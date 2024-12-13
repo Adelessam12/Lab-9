@@ -33,7 +33,7 @@ public class Main {
 
 //         Create a GroupPage for the admin user
       
-            GroupPage page= new GroupPage(group, adminUser);
+            GroupPage page= new GroupPage(group, coadmin);
             page.setVisible(true);
      
     }

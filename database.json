@@ -1,20 +1,53 @@
 [
   {
-    "userId": "ID9200b600-f793-4aba-991e-294ae2522986",
-    "email": "1",
-    "username": "1",
-    "hashedPassword": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
-    "dateOfBirth": "Jan 1, 1, 12:00:00 AM",
+    "userId": "ID5f997317-3da0-49f2-8a9c-72cc438134ab",
+    "email": "a",
+    "username": "a",
+    "hashedPassword": "ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb",
+    "dateOfBirth": "Dec 13, 2024, 10:52:18 AM",
     "isOnline": false,
     "profile": {
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
     "groups": {
-      "GroupID5cbb55fe-4a24-4cd5-9cff-feff931770ed": {
-        "memberID": "ID9200b600-f793-4aba-991e-294ae2522986",
-        "groupId": "GroupID5cbb55fe-4a24-4cd5-9cff-feff931770ed",
+      "GroupIDea1b7c88-5918-4104-a4f3-37595ecdaf1f": {
+        "memberID": "ID5f997317-3da0-49f2-8a9c-72cc438134ab",
+        "groupId": "GroupIDea1b7c88-5918-4104-a4f3-37595ecdaf1f",
         "type": "GroupAdmin"
+      }
+    },
+    "friendManager": {
+      "friendList": [],
+      "blockedList": [],
+      "friendRequestManager": {
+        "sentFriendRequests": {},
+        "receivedFriendRequests": {}
+      }
+    },
+    "postManager": {
+      "contents": []
+    },
+    "storyManager": {
+      "contents": []
+    }
+  },
+  {
+    "userId": "ID738fd630-e082-45dd-9414-591f227c336d",
+    "email": "b",
+    "username": "b",
+    "hashedPassword": "3e23e8160039594a33894f6564e1b1348bbd7a0088d42c4acb73eeaed59c009d",
+    "dateOfBirth": "Dec 13, 2024, 10:52:18 AM",
+    "isOnline": false,
+    "profile": {
+      "profilePhotoPath": "R (1).jpg",
+      "coverPhotoPath": "image-3@2x.jpg"
+    },
+    "groups": {
+      "GroupIDea1b7c88-5918-4104-a4f3-37595ecdaf1f": {
+        "memberID": "ID738fd630-e082-45dd-9414-591f227c336d",
+        "groupId": "GroupIDea1b7c88-5918-4104-a4f3-37595ecdaf1f",
+        "type": "GroupMember"
       }
     },
     "friendManager": {

@@ -899,6 +899,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         loadFriends();
         loadPosts();
         loadfriendstories();
+        
         searchContainer.removeAll();
         searchContainer.revalidate();
         searchContainer.repaint();
@@ -1074,12 +1075,17 @@ public final class NewsFeed extends javax.swing.JFrame {
 
     private void loadGroups() {
         ContainerPanel1.removeAll();
+                    System.out.println(user.getGroups());
+
         if (user.getGroups() != null) {
             ArrayList<String> keys = new ArrayList<>(user.getGroups().keySet());
-
             for (String groupid : keys) {
+                            System.out.println(groupid);
+
                 for (Group group : groupDatabase.loadGroups()) {
+                    System.out.println(group);
                     if (group.getGroupId().equals(groupid)) {
+                        System.out.println(group);
                         ContainerPanel1.add(new GroupPanel(group, user));
 
                     }
@@ -1087,6 +1093,8 @@ public final class NewsFeed extends javax.swing.JFrame {
 
             }
         }
+         ContainerPanel1.revalidate();
+        ContainerPanel1.repaint();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ContainerPanel1;

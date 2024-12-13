@@ -28,6 +28,8 @@ public class SHA256PasswordHasher implements PasswordHasher {
     }
     @Override
     public boolean verifyPassword(String rawPassword, String hashedPassword) {
+        System.out.println(hashPassword(rawPassword));
+        System.out.println(hashedPassword);
         return hashPassword(rawPassword).equals(hashedPassword);
     }
 }

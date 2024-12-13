@@ -21,7 +21,7 @@ public class GroupManager {
         addGroup(group);
         UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group.getGroupId()));
         saveAll();
-        System.out.println(UserManager.findUser(adminId).getGroups().get(group.getGroupId()).getClass().getSimpleName());
+        //System.out.println(UserManager.findUser(adminId).getGroups().get(group.getGroupId()).getClass().getSimpleName());
         return group;
     }
 

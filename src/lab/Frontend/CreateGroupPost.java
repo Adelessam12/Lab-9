@@ -9,6 +9,9 @@ import java.io.File;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import lab.pkg9.ContentCreator;
+import lab.pkg9.Post;
+import lab.pkg9.User;
 
 /**
  *
@@ -20,8 +23,10 @@ public class CreateGroupPost extends javax.swing.JFrame {
     /**
      * Creates new form CreateGroupPost
      */
-    public CreateGroupPost() {
+    User user;
+    public CreateGroupPost(User user) {
         initComponents();
+        this.user=user;
         imagePath =null;
     }
 

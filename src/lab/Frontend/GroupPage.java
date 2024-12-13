@@ -178,6 +178,8 @@ public class GroupPage extends javax.swing.JFrame {
 
     public void loadnobuttonmembers() {
         membersPanel.removeAll();
+     User admin= UserManager.findUser(group.getAdminId());
+       membersPanel.add(new EntryPanel(admin.getUsername(), admin.getProfile().getProfilePhotoPath()));
         for (String id : group.getUsers().keySet()) {
             User user1 = UserManager.findUser(id);
             if (!user.getUserId().equals(id)) {
@@ -196,32 +198,32 @@ public class GroupPage extends javax.swing.JFrame {
         for (String id : group.getUsers().keySet()) {
             if (!user.getUserId().equals(id)) {
                 User user1 = UserManager.findUser(id);
-                if (group.getUsers().get(id).equals("Member")) {
+                if (group.getUsers().get(id).equals("GroupMember")) {
                     memberUsers.add(user1);
-                } else if (group.getUsers().get(id).equals("CoAdmin")) {
+                } else if (group.getUsers().get(id).equals("GroupCoAdmin")) {
                     restUsers.add(user1);
                 }
             }
         }
-        for(User user1: restUsers){
+        for (User user1 : restUsers) {
             membersPanel.add(new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath()));
             JSeparator separator = new JSeparator();
             membersPanel.add(separator, BorderLayout.SOUTH);
         }
-        for(User user1: memberUsers){
+        for (User user1 : memberUsers) {
             EntryPanel entrypanel = new EntryPanel(user1.getUserId(), user1.getProfile().getProfilePhotoPath());
-             JButton removeButton = new JButton("Remove");
-             removeButton.addActionListener(e -> {
-                 coadmin.removeMember(user1.getUserId());
-                 entrypanel.remove(removeButton);
-                 entrypanel.add(new JLabel("Removed")).setFont(new Font("Arial", Font.PLAIN, 14));           
-              });
-             entrypanel.add(removeButton);                        
-             membersPanel.add(entrypanel);
-             JSeparator separator = new JSeparator();
+            JButton removeButton = new JButton("Remove");
+            removeButton.addActionListener(e -> {
+                coadmin.removeMember(user1.getUserId());
+                entrypanel.remove(removeButton);
+                entrypanel.add(new JLabel("Removed")).setFont(new Font("Arial", Font.PLAIN, 14));
+            });
+            entrypanel.add(removeButton);
+            membersPanel.add(entrypanel);
+            JSeparator separator = new JSeparator();
             membersPanel.add(separator, BorderLayout.SOUTH);
         }
-        
+
         membersPanel.revalidate();
         membersPanel.repaint();
         //JButton promoteButton = new JButton("Promote");
@@ -278,7 +280,11 @@ public class GroupPage extends javax.swing.JFrame {
                 JButton promoteButton = new JButton("Promote");
                 promoteButton.addActionListener(e -> {
                     // Handle promote logic
-
+                    GroupRole role = user1.getGroups().get(group.getGroupId());
+                    if (role instanceof GroupCoAdmin) {
+                        admin.promoteToCoAdmin(user1.getUserId());
+                        System.out.println(user1.getUsername() + " demoted to Member.");
+                    }
                     loadmembers(admin); // Refresh the members panel
                 });
 
@@ -366,6 +372,11 @@ public class GroupPage extends javax.swing.JFrame {
         jLabel1.setText("Description");
 
         createPost.setText("Create Post");
+        createPost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createPostActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -419,6 +430,12 @@ public class GroupPage extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void createPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPostActionPerformed
+                CreateGroupPost grouppost = new CreateGroupPost();
+                grouppost.setVisible(true);
+        
+    }//GEN-LAST:event_createPostActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

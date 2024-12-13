@@ -46,10 +46,10 @@ public class GroupStorage {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<Group>>() {}.getType();
         ArrayList<Group> loadedGroups = gson.fromJson(reader, type);
-        System.out.println("Loaded groups: " + loadedGroups); // Debugging output
+        //System.out.println("Loaded groups: " + loadedGroups); // Debugging output
         return loadedGroups != null ? loadedGroups : new ArrayList<>();
     } catch (IOException e) {
-        System.err.println("Error loading groups from file: " + e.getMessage());
+        //System.err.println("Error loading groups from file: " + e.getMessage());
         return new ArrayList<>();
     }
 }
