@@ -24,10 +24,10 @@ public class GroupManager {
 
     public static Group createGroup(String name, String description, String groupPhoto, String adminId) {
         Group group = new Group(name, description, groupPhoto, adminId);
-        groupDatabase.saveGroupstofile();
         addGroup(group);
-        UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group));
-        groupDatabase.saveGroupstofile();
+        UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group.getGroupId()));
+        saveAll();
+        //System.out.println(UserManager.findUser(adminId).getGroups().get(group.getGroupId()).getClass().getSimpleName());
         return group;
     }
 
@@ -64,7 +64,7 @@ public class GroupManager {
         }
         return null;
     }
-       public ArrayList<Group> suggestions() {
+       public  ArrayList<Group> suggestions() {
         ArrayList<Group> suggestions = new ArrayList<>();
 
         for (Group suggested : groupDatabase.loadGroups()) {

@@ -18,9 +18,8 @@ public class Main {
 
 
 
-       
-
-        GroupAdmin admin = new GroupAdmin(adminUser.getUserId(), group);
+//         Assign roles to users
+        GroupAdmin admin = new GroupAdmin(adminUser.getUserId(), group.getGroupId());
         GroupManager.requestToJoin(coadmin, group);
         System.out.println(group);
         admin.approveRequest(coadmin.getUserId());
@@ -33,7 +32,7 @@ public class Main {
 
 //         Create a GroupPage for the admin user
       
-            GroupPage page= new GroupPage(group, adminUser);
+            GroupPage page= new GroupPage(group, coadmin);
             page.setVisible(true);
      
     }

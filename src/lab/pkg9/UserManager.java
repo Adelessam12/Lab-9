@@ -19,7 +19,7 @@ public class UserManager {
     }
 
     // Static method to register a user
-    public static boolean registerUser(String userId, String email, String username, String password, Date dateOfBirth) {
+    public static boolean registerUser(String email, String username, String password, Date dateOfBirth) {
         
         String hashedPassword = passwordHasher.hashPassword(password);
         User newUser = UserFactory.createUser(email, username, hashedPassword, dateOfBirth);

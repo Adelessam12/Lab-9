@@ -1,6 +1,5 @@
 package lab.pkg9;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ public class User {
     private Profile profile;
     
     //private final ArrayList<String> groups;
-    private  Map<String, GroupMember> groups;
+    private  Map<String, GroupRole> groups;
     
     private final FriendManagable friendManager;
     private final ContentManagable postManager;
@@ -45,11 +44,11 @@ public class User {
         groups = new HashMap<>();
     }
 
-    public void setGroups(Map<String, GroupMember> groups) {
+    public void setGroups(Map<String, GroupRole> groups) {
         this.groups = groups;
     }
 
-    public Map<String, GroupMember> getGroups() {
+    public Map<String, GroupRole> getGroups() {
         if(groups == null)
             return new HashMap<>();
         return groups;

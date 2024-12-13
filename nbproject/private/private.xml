@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/programming%202/connectHub/src/lab/pkg9/FriendManagableDeserializer.java</file>
             <file>file:/C:/programming%202/connectHub/src/lab/pkg9/Database.java</file>
             <file>file:/C:/programming%202/connectHub/src/lab/pkg9/Main.java</file>
@@ -60,6 +61,65 @@
             <file>file:/C:/programming%202/connectHub/src/lab/pkg9/Group.java</file>
             <file>file:/C:/programming%202/connectHub/src/lab/pkg9/StoryManager.java</file>
             <file>file:/C:/programming%202/connectHub/src/lab/pkg9/PostManagableDeserializer.java</file>
+=======
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupMember.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/CreateStory.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendshipService.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/memberGroupFeaturesInterface.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/UpdateProfile.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/DatabaseUserRepository.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManagableCreator.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/FriendsPage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FileUserStorage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/ImagePanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Content.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManagableDeserializer.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/FriendPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/EntryPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/Login.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendshipServiceInterface.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupManagable.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserStorage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserRepository.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupAdmin.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/Register.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/CreateGroup.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/PostPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManagableCreator.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Group.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupDatabase.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/CreatePost.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManagable.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserFactory.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Main.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/GroupPage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/GroupPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentCreator.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupCoAdmin.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/ProfilePanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/UserManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/PostManager.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupRole.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupStorage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupCreator.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Database.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManagable.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/Post.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/coAdminGroupFeatures.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendRequestManagableDeserializer.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/NewsFeed.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/DatabaseFactory.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/FriendManagable.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/StartupPage.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/ContentManagableDeserializer.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/GroupRoleTypeAdapter.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/Frontend/NotificationsPanel.java</file>
+            <file>file:/C:/Users/DELL/Documents/NetBeansProjects/Lab-9/src/lab/pkg9/User.java</file>
+>>>>>>> 037e3dcc7478f8d46f371204af230e23a3ae9d0e
         </group>
     </open-files>
 </project-private>

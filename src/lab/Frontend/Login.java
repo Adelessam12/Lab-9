@@ -19,13 +19,11 @@ import lab.pkg9.UserManager;
  */
 public class Login extends javax.swing.JFrame {
 
+
     /**
      * Creates new form Login
      */
-    ContentCreator CM;
-
-    public Login(ContentCreator CM) {
-        this.CM = CM;
+    public Login() {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
         initComponents();
     }
@@ -112,7 +110,7 @@ public class Login extends javax.swing.JFrame {
 
             User u1 = UserManager.login(E, P);
             if (u1 != null) {
-                NewsFeed N1 = new NewsFeed(u1, CM);
+                NewsFeed N1 = new NewsFeed(u1);
                 this.dispose();
                 N1.setVisible(true);
             } else {

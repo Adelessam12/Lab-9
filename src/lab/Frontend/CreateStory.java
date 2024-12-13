@@ -20,19 +20,16 @@ public class CreateStory extends javax.swing.JFrame {
 
     private final User user;
     private String imagePath;
-    private final ContentCreator contentManager;
 
     /**
      * Creates new form CreateStory
      *
      * @param userId
-     * @param contentManager
      */
 
-    public CreateStory(User user, ContentCreator contentManager) {
+    public CreateStory(User user) {
         this.user = user;
         imagePath = null;
-        this.contentManager = contentManager;
         initComponents();
         
     }
@@ -142,7 +139,7 @@ public class CreateStory extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
-        contentManager.createStory(user, content, imagePath);
+        ContentCreator.createStory(user, content, imagePath);
         
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed

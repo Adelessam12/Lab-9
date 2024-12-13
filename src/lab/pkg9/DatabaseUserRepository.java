@@ -37,6 +37,7 @@ public class DatabaseUserRepository implements UserRepository {
     @Override
     public boolean addUser(User user) {   
         database.addUser(user);
+        database.saveUsersToFile();
         return true;
     }
 
