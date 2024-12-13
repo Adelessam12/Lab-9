@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import lab.pkg9.ContentCreator;
+import lab.pkg9.GroupRole;
 import lab.pkg9.Post;
 import lab.pkg9.User;
 
@@ -23,10 +24,10 @@ public class CreateGroupPost extends javax.swing.JFrame {
     /**
      * Creates new form CreateGroupPost
      */
-    User user;
-    public CreateGroupPost(User user) {
+    GroupRole role;
+    public CreateGroupPost(GroupRole role) {
         initComponents();
-        this.user=user;
+        this.role=role;
         imagePath =null;
     }
 
@@ -135,8 +136,8 @@ public class CreateGroupPost extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String content = jTextArea2.getText();
-        
-        //ContentCreator.createPost(user, content, imagePath);
+        Post post = new Post(role.getMemberID(), content, imagePath,  new java.util.Date());
+        role.addPost(post);
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 

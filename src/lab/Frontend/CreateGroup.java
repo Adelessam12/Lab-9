@@ -20,7 +20,7 @@ public class CreateGroup extends javax.swing.JFrame {
     /**
      * Creates new form CreateGroup
      */
-    private String userId;
+    private final String userId;
     private String imagePath;
     public CreateGroup(String userId) {
         initComponents();

@@ -35,4 +35,17 @@ package lab.pkg9;
              GroupManager.saveAll();
          }
     }
+
+       @Override
+    public String getMemberID() {
+        return memberID;
+    }
+
+
+       @Override
+    public String getGroupId() {
+        return groupId;
+    }
+    
+
 }
