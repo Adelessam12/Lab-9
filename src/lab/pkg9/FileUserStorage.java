@@ -48,11 +48,11 @@ public class FileUserStorage implements UserStorage {
             ArrayList<User> users = gson.fromJson(reader, userListType);
 
             if (users == null) {
-                //System.out.println("No users found in the JSON file.");
-                users = new ArrayList<>();
-            }
+              users = new ArrayList<>();
+
             return users;
-        } catch (FileNotFoundException e) {
+        }
+        }catch (FileNotFoundException e) {
             //System.out.println("File not found: " + filename);
         } catch (IOException e) {
             //  System.out.println("Error loading users: " + e.getMessage());

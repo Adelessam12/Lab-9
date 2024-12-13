@@ -1,14 +1,13 @@
 [
   {
-    "groupId": "GroupIDea1b7c88-5918-4104-a4f3-37595ecdaf1f",
-    "name": "ahmed",
-    "description": "a7a",
-    "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\OIP.jpeg",
-    "AdminId": "ID5f997317-3da0-49f2-8a9c-72cc438134ab",
-    "users": {
-      "ID738fd630-e082-45dd-9414-591f227c336d": "Member"
-    },
+    "groupId": "GroupID8c4a89c2-2a0f-497b-af66-2e473f53cbcd",
+    "name": "patrice",
+    "description": "carteron",
+    "AdminId": "ID5367f47c-a3c6-4dab-820c-7073528f5b2f",
+    "users": {},
     "posts": [],
-    "groupRequests": []
+    "groupRequests": [
+      "ID00b2f485-1bda-47c1-8eb4-17cd52ffb973"
+    ]
   }
 ]

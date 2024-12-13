@@ -429,6 +429,7 @@ public class GroupPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void createPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createPostActionPerformed
+
         CreateGroupPost grouppost = new CreateGroupPost(role);
         grouppost.setVisible(true);
 

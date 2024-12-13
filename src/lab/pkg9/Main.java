@@ -18,7 +18,6 @@ public class Main {
 
 
 
-       
 //         Assign roles to users
         GroupAdmin admin = new GroupAdmin(adminUser.getUserId(), group.getGroupId());
         GroupManager.requestToJoin(coadmin, group);

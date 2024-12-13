@@ -50,6 +50,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     GroupDatabase groupDatabase;
     User user;
     FriendshipService friendService;
+    GroupManager groupManager;
 
     public NewsFeed(User user) {
         setContentPane(new JLabel(new ImageIcon("R (2).jpg")));
@@ -61,6 +62,7 @@ public final class NewsFeed extends javax.swing.JFrame {
         this.groupDatabase = GroupDatabaseFactory.createDatabase();
         this.user = user;
         friendService = new FriendshipService(user);
+        groupManager = new GroupManager(user);
 
         loadnewsfeed();
     }
@@ -680,7 +682,7 @@ public final class NewsFeed extends javax.swing.JFrame {
     private void viewGroupSuggestionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewGroupSuggestionsActionPerformed
         TitledBorder title = BorderFactory.createTitledBorder("Groups Suggestions");
         container2Panel.setBorder(title);
-
+        loadGroupSuggestions();
     }//GEN-LAST:event_viewGroupSuggestionsActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -1013,24 +1015,23 @@ public final class NewsFeed extends javax.swing.JFrame {
     public void loadGroupSuggestions() {
         container2Panel.removeAll();
 
-        ArrayList<User> suggestions = null;
+        ArrayList<Group> suggestions = groupManager.suggestions();
 
-        for (User suggestion : suggestions) {
-            if (!user.getFriendRequestManagable().getSentFriendRequests().containsKey(suggestion.getUserId()) && !user.getFriendRequestManagable().getReceivedFriendRequests().containsKey(suggestion.getUserId())) {
-                String profileImagePath = (suggestion.getProfile() != null) ? suggestion.getProfile().getProfilePhotoPath() : null;
-                EntryPanel suggestionPanel = new EntryPanel(suggestion.getUsername(), profileImagePath);
+        for (Group suggestion : suggestions) {
+            if (!suggestion.getGroupRequests().contains(user.getUserId())&& !user.getGroups().containsKey(suggestion.getGroupId())) {
+                String groupImagePath = (suggestion.getGroupPhoto() != null) ? suggestion.getGroupPhoto() : null;
+                EntryPanel suggestionPanel = new EntryPanel(suggestion.getName(), groupImagePath);
 
                 suggestionPanel.setPreferredSize(new Dimension(200, 100));
                 container2Panel.add(suggestionPanel);
-                JButton add = new JButton("Add Friend");
-                suggestionPanel.add(add);
+                JButton join = new JButton("Join");
+                suggestionPanel.add(join);
                 container2Panel.add(suggestionPanel);
-                add.addActionListener((java.awt.event.ActionEvent evt) -> {
-                    friendService.sendFriendRequest(suggestion);
-                    System.out.println(user.getFriendRequestManagable().getSentFriendRequests());
-                    suggestionPanel.remove(add);
-                    database.saveUsersToFile();
-                    //ArrayList<User> users = database.getUsers();
+                join.addActionListener((java.awt.event.ActionEvent evt) -> {
+                    GroupManager.requestToJoin(user, suggestion);
+                    System.out.println(suggestion.getGroupRequests());
+                    suggestionPanel.remove(join);
+                    GroupManager.saveAll();
                     suggestionPanel.add(new JLabel("   sent")).setFont(new Font("Arial", Font.PLAIN, 14));
                     container2Panel.revalidate();
                     container2Panel.repaint();
