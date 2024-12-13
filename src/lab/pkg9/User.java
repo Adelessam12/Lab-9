@@ -50,6 +50,8 @@ public class User {
     }
 
     public Map<String, GroupMember> getGroups() {
+        if(groups == null)
+            return new HashMap<>();
         return groups;
     }
 

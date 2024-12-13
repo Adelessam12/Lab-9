@@ -1,1 +1,14 @@
-[{"groupId":"g2","name":"ahmed","description":"a7a","AdminId":"IDcfc29e3b-a0ce-4be4-9ba4-7f673e06f644","users":{},"posts":[],"groupRequests":["IDcd754062-b7a0-4507-abc7-3a568ffbaea0"]},{"groupId":"g2","name":"ahmed","description":"a7a","groupPhoto":"C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\OIP.jpeg","AdminId":"IDcfc29e3b-a0ce-4be4-9ba4-7f673e06f644","users":{},"posts":[],"groupRequests":["IDcd754062-b7a0-4507-abc7-3a568ffbaea0"]}]
+[
+  {
+    "groupId": "GroupIDd4c2e17c-f1bb-4782-8350-7eabe2d9b460",
+    "name": "ahmed",
+    "description": "a7a",
+    "groupPhoto": "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\OIP.jpeg",
+    "AdminId": "ID0f5026ba-299d-4308-804a-ee41ee708d39",
+    "users": {
+      "IDeab0001a-6427-48eb-af29-d43ef6451c98": "Member"
+    },
+    "posts": [],
+    "groupRequests": []
+  }
+]

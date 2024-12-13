@@ -11,14 +11,9 @@ import java.util.ArrayList;
  * @author DELL
  */
 public class GroupCoAdmin extends GroupMember implements coAdminGroupFeatures, GroupRole {
-
-   private String coAdminID;
-   private Group group;
     
-    public GroupCoAdmin(String coAdminID, Group group) {
-       super(coAdminID,group);  
-       this.coAdminID=coAdminID;
-       this.group=group;
+    public GroupCoAdmin(String memberID, Group group) {
+       super(memberID,group);
     }
 
     @Override

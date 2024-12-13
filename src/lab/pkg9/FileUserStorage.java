@@ -45,11 +45,7 @@ public class FileUserStorage implements UserStorage {
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             ArrayList<User> users = gson.fromJson(reader, userListType);
 
-            if (users != null) {
-                for (User user : users) {
-                   // System.out.println("Loaded User: " + user);
-                }
-            } else {
+            if (users == null) {
                 //System.out.println("No users found in the JSON file.");
                 users = new ArrayList<>();
             }

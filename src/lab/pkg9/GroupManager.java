@@ -5,8 +5,6 @@
 package lab.pkg9;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 /**
  *
@@ -20,14 +18,8 @@ public class GroupManager {
 
     public static Group createGroup(String name, String description, String groupPhoto, String adminId) {
         Group group = new Group(name, description, groupPhoto, adminId);
+        groupDatabase.saveGroupstofile();
         addGroup(group);
-        if(UserManager.findUser(adminId).getGroups()==null)
-        {
-            HashMap<String,GroupMember> newmap= new HashMap<>();
-            newmap.put(adminId, new GroupAdmin(adminId, group));
-                    UserManager.findUser(adminId).setGroups(newmap);
-
-        }
         UserManager.findUser(adminId).getGroups().put(group.getGroupId(), new GroupAdmin(adminId, group));
         groupDatabase.saveGroupstofile();
         return group;

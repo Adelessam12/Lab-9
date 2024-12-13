@@ -1,6 +1,7 @@
 package lab.pkg9;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -27,7 +28,7 @@ public class GroupStorage {
      */
     public boolean saveToFile(ArrayList<Group> groups) {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(groups, writer);
             return true;
         } catch (IOException e) {
