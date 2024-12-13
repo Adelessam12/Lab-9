@@ -28,7 +28,7 @@ public class Group {
         this.groupId = generateUniqueId("Group");
         this.name = name;
         this.description = description;
-        this.groupPhoto = "C:\\Users\\Dell\\Documents\\GitHub\\Lab-9\\default_group_photo.png";
+        this.groupPhoto = "default_group_photo.png";
         this.AdminId = AdminId;
         this.users = new HashMap<>();
         this.posts = new ArrayList<>();

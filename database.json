@@ -20,6 +20,11 @@
         "memberID": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
         "groupId": "GroupID1c71c106-12f4-4706-ab20-f61c9773d8fb",
         "type": "GroupAdmin"
+      },
+      "GroupID7a029f13-0c9d-4a7f-af4c-69cee7c812e3": {
+        "memberID": "IDd770a17f-fbe0-421d-81d8-8e3aa731658e",
+        "groupId": "GroupID7a029f13-0c9d-4a7f-af4c-69cee7c812e3",
+        "type": "GroupAdmin"
       }
     },
     "friendManager": {
@@ -52,7 +57,7 @@
       "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326": {
         "memberID": "ID594132ef-79bf-4112-bf6a-e890b7c0bd56",
         "groupId": "GroupID163bddbf-a020-4d8c-bf3c-4c362cd82326",
-        "type": "GroupMember"
+        "type": "GroupCoAdmin"
       }
     },
     "friendManager": {
@@ -81,7 +86,13 @@
       "profilePhotoPath": "R (1).jpg",
       "coverPhotoPath": "image-3@2x.jpg"
     },
-    "groups": {},
+    "groups": {
+      "GroupID6803fd74-a3a6-42eb-a864-51166d5a9791": {
+        "memberID": "IDbd13df0c-d566-474d-8966-06b204019c83",
+        "groupId": "GroupID6803fd74-a3a6-42eb-a864-51166d5a9791",
+        "type": "GroupAdmin"
+      }
+    },
     "friendManager": {
       "friendList": [],
       "blockedList": [],
